@@ -1,0 +1,17 @@
+#card-quick-action {
+    border-width: 0.0625rem;
+    border-radius: 0.5rem;
+    border-color: color-mix(in oklch, var(--border) 45%, transparent);
+    background-color: var(--background);
+}
+
+#card-quick-action .card-quick-action-title {
+    padding: 1rem 2rem;
+}
+
+#card-quick-action .card-quick-action-title h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.015em;
+}

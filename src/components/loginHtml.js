@@ -19,13 +19,13 @@ export function loginHtml() {
                             Administra usuarios, planes de entrenamiento, sesiones y pagos en una sola plataforma.
                         </div>
                     </div>
-                    <div class="login-info-footer">© 2025 FitCode. Sistema de gestión profesional para gimnasios o
-                        entrenadores personales.</div>
+                    <div class="login-info-footer">
+                        <p>© 2025 FitCode. Sistema de gestión profesional para gimnasios o entrenadores personales.</p>
+                    </div>
                 </div>
             </div>
             <div class="flex-1">
                 <div class="flex flex-col h-screen">
-
                     <div class="flex-1 flex items-center justify-center p-8 bg-background">
                         <div class="login-card">
                             <div class="login-card-content">

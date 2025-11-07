@@ -29,6 +29,7 @@
 #login-info .login-info-msg-1 {
     font-size: 2.5rem;
     font-weight: 900;
+    line-height: 1;
 }
 
 #login-info .login-info-msg-2 {
@@ -38,7 +39,9 @@
 }
 
 #login-info .login-info-footer {
+    width: 50%;
     position: absolute;
+    text-align: center;
     bottom: 0;
     padding: 1rem 2rem;
 }

@@ -1,0 +1,45 @@
+#sidebar {
+    width: 16rem;
+    background-color: var(--sidebar-bg);
+}
+
+#sidebar .title {
+    height: 6rem;
+    margin: 0rem 0.5rem;
+    background-color: var(--sidebar-title-bg);
+    border-bottom-color: var(--border);
+    border-bottom-width: 0.125rem;
+}
+
+#sidebar .title h1 {
+    font-size: 2rem;
+}
+
+#main-menu {
+    padding-top: 1rem;
+}
+
+#sidebar .sidebar-item {
+    margin-top: 0.5rem;
+    transition: background-color 0.3s;
+}
+
+#sidebar .sidebar-item:hover {
+    background-color: var(--primary-dark);
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+
+#sidebar .sidebar-item.active {
+    background-color: var(--primary);
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+#sidebar .footer {
+    padding: 0.5rem;
+    width: 16rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}

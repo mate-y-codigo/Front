@@ -46,14 +46,36 @@
     font-style: italic;
 }
 
+@font-face {
+    font-family: 'Material Symbols Outlined';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../../fonts/Material-Symbols-Outlined.woff2') format('woff2');
+}
+
+.material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+}
+
 :root {
     /* === Colores base === */
-    --background: oklch(0.968 0.007 247.896);
+    --background: oklch(0.984 0.003 247.858);
     --header-bg: oklch(0.929 0.013 255.508);
     --sidebar-bg: oklch(0.869 0.022 252.894);
     --sidebar-title-bg: oklch(0.869 0.022 252.894);
     --card-bg: #ffffff;
-    --border: oklch(0.929 0.013 255.508);
+    --border: oklch(0.704 0.04 256.788);
 
     /* === Tipografía === */
     --text-primary: oklch(0.21 0.034 264.665);
@@ -63,19 +85,45 @@
     --primary: oklch(0.609 0.126 221.723);
     --primary-dark: oklch(0.45 0.085 224.283);
     /* === Acentos === */
-    --accent: oklch(0.723 0.219 149.579);
-    --accent-hover: oklch(0.527 0.154 150.069);
+    --accent: oklch(0.627 0.194 149.214);
+    --accent-hover: oklch(0.448 0.119 151.328);
     /* === Estados === */
     --success: oklch(0.765 0.177 163.223);
     --warning: oklch(0.75 0.183 55.934);
     --destructive: oklch(0.577 0.245 27.325);
+
     /* === Extras === */
-    --shadow-color: rgba(0, 0, 0, 0.05);
+    --shadow-color: rgba(0, 0, 0, 0.3);
     --input-bg: #ffffff;
     --input-border: oklch(0.872 0.01 258.338);
     --hover-bg: oklch(0.928 0.006 264.531);
     --scrollbar-thumb: oklch(0.872 0.01 258.338);
     --scrollbar-track: oklch(0.551 0.027 264.364);
+
+    /* === Cards === */
+    --card-info-border-student: oklch(0.446 0.043 257.281);
+    --card-info-bg-student: oklch(0.968 0.007 247.896);
+    --card-info-border-plans: oklch(0.705 0.213 47.604);
+    --card-info-bg-plans: oklch(0.98 0.016 73.684);
+    --card-info-border-income: oklch(0.596 0.145 163.225);
+    --card-info-bg-income: oklch(0.979 0.021 166.113);
+    --card-info-border-session: oklch(0.5 0.134 242.749);
+    --card-info-bg-session: oklch(0.977 0.013 236.62);
+    --card-info-student-icon-color: oklch(0.446 0.043 257.281);
+    --card-info-student-icon-bg: oklch(0.929 0.013 255.508);
+    --card-info-plans-icon-color: oklch(0.705 0.213 47.604);
+    --card-info-plans-icon-bg: oklch(0.954 0.038 75.164);
+    --card-info-income-icon-color: oklch(0.596 0.145 163.225);
+    --card-info-income-icon-bg: oklch(0.95 0.052 163.051);
+    --card-info-session-icon-color: oklch(0.5 0.134 242.749);
+    --card-info-session-icon-bg: oklch(0.951 0.026 236.824);
+
+    --card-activity-detail-bg: oklch(0.968 0.007 247.896);
+    --card-activity-detail-hover: oklch(0.929 0.013 255.508);
+    --card-activity-detail-icon-bg: oklch(0.869 0.022 252.894);
+
+    --card-next-session-info-bg: oklch(0.968 0.007 247.896);
+    --card-next-session-info-border: oklch(0.446 0.043 257.281);
 }
 
 .dark {
@@ -89,24 +137,49 @@
     /* === Tipografía === */
     --text-primary: oklch(0.985 0.002 247.839);
     --text-secondary: oklch(0.967 0.003 264.542);
-    --text-muted: oklch(0.707 0.022 261.325);
+    --text-muted: oklch(0.872 0.01 258.338);
     /* === Colores principales === */
     --primary: oklch(0.438 0.218 303.724);
     --primary-dark: oklch(0.291 0.149 302.717);
     /* === Acentos === */
-    --accent: oklch(0.62 0.13 30);
+    --accent: oklch(0.855 0.138 181.071);
     --accent-hover: oklch(0.52 0.13 30);
     /* === Estados === */
     --success: oklch(0.765 0.177 163.223);
     --warning: oklch(0.75 0.183 55.934);
     --destructive: oklch(0.577 0.245 27.325);
     /* === Extras === */
-    --shadow-color: rgba(255, 255, 255, 0.7);
+    --shadow-color: rgba(255, 255, 255, 0.1);
     --input-bg: #0f172a;
     --input-border: var(--color-gray-500);
     --hover-bg: #1e293b;
     --scrollbar-thumb: oklch(0.208 0.042 265.755);
     --scrollbar-track: oklch(0.446 0.03 256.802);
+
+    /* === Cards === */
+    --card-info-border-student: oklch(0.446 0.043 257.281);
+    --card-info-bg-student: oklch(0.968 0.007 247.896);
+    --card-info-border-plans: oklch(0.705 0.213 47.604);
+    --card-info-bg-plans: oklch(0.98 0.016 73.684);
+    --card-info-border-income: oklch(0.596 0.145 163.225);
+    --card-info-bg-income: oklch(0.979 0.021 166.113);
+    --card-info-border-session: oklch(0.5 0.134 242.749);
+    --card-info-bg-session: oklch(0.977 0.013 236.62);
+    --card-info-student-icon-color: oklch(0.446 0.043 257.281);
+    --card-info-student-icon-bg: oklch(0.929 0.013 255.508);
+    --card-info-plans-icon-color: oklch(0.705 0.213 47.604);
+    --card-info-plans-icon-bg: oklch(0.954 0.038 75.164);
+    --card-info-income-icon-color: oklch(0.596 0.145 163.225);
+    --card-info-income-icon-bg: oklch(0.95 0.052 163.051);
+    --card-info-session-icon-color: oklch(0.5 0.134 242.749);
+    --card-info-session-icon-bg: oklch(0.951 0.026 236.824);
+
+    --card-activity-detail-bg: oklch(0.554 0.046 257.417);
+    --card-activity-detail-hover: oklch(0.372 0.044 257.287);
+    --card-activity-detail-icon-bg: oklch(0.279 0.041 260.031);
+
+    --card-next-session-info-bg: oklch(0.554 0.046 257.417);
+    --card-next-session-info-border: oklch(0.279 0.041 260.031);
 }
 
 html,
@@ -139,59 +212,16 @@ body {
     background-color: var(--primary);
     color: oklch(0.985 0.002 247.839);
     box-shadow: 0 0 0 1px var(--shadow-color);
-    transition: color 0.2s ease, background-color 0.2s ease;
+    transition: color 0.3s ease, background-color 0.3s ease;
     outline: none;
+    cursor: pointer;
 }
 
 .button:hover {
     background-color: var(--primary-dark);
 }
 
-/* sidebar */
-#sidebar {
-    width: 16rem;
-    background-color: var(--sidebar-bg);
-}
 
-#sidebar .title {
-    height: 6rem;
-    margin: 0rem 0.5rem;
-    background-color: var(--sidebar-title-bg);
-    border-bottom-color: var(--border);
-    border-bottom-width: 0.125rem;
-}
-
-#sidebar .title h1 {
-    font-size: 2rem;
-}
-
-#main-menu {
-    padding-top: 1rem;
-}
-
-#sidebar .sidebar-item {
-    margin-top: 0.5rem;
-    transition: background-color 0.3s;
-}
-
-#sidebar .sidebar-item:hover {
-    background-color: var(--primary-dark);
-    color: var(--text-secondary);
-}
-
-#sidebar .sidebar-item.active {
-    background-color: var(--primary);
-    color: var(--text-secondary);
-    font-weight: 500;
-}
-
-#sidebar .footer {
-    padding: 0.5rem;
-    width: 16rem;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-}
 
 /* header */
 .header {
@@ -236,8 +266,4 @@ body {
 .content {
     height: calc(100vh - 6rem);
     overflow-y: auto;
-}
-
-#container {
-    padding: 2rem;
 }
