@@ -1,4 +1,4 @@
-export function mainContentHtml(headerH1, headerP, conteiner) {
+export function mainContentHtml(headerH1, headerP) {
     return `        
         <div class="flex-1 overflow-auto flex flex-col">
             <!-- Header -->
@@ -16,7 +16,7 @@ export function mainContentHtml(headerH1, headerP, conteiner) {
 
             <!-- Content -->
             <div class="content">
-                <div id="container">${conteiner}</div>
+                <div id="container-main"></div>
             </div>
         </div>`;
 }

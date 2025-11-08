@@ -1,0 +1,98 @@
+#card-info-student {
+    border-width: 0.0625rem;
+    border-radius: 0.5rem;
+    border-color: color-mix(in oklch, var(--card-info-border-student) 30%, transparent);
+    background-color: var(--card-info-bg-student);
+    box-shadow: 0 -1px -1px 0 var(--shadow-color);
+    transition: box-shadow 0.3s ease;
+}
+
+#card-info-plans {    
+    border-width: 0.0625rem;
+    border-radius: 0.5rem;
+    border-color: color-mix(in oklch, var(--card-info-border-plans) 30%, transparent);
+    background-color: var(--card-info-bg-plans);
+    box-shadow: 0 -1px -1px 0 var(--shadow-color);
+    transition: box-shadow 0.3s ease;
+}
+
+#card-info-income {
+    border-width: 0.0625rem;
+    border-radius: 0.5rem;
+    border-color: color-mix(in oklch, var(--card-info-border-income) 30%, transparent);
+    background-color: var(--card-info-bg-income);
+    box-shadow: 0 -1px -1px 0 var(--shadow-color);
+    transition: box-shadow 0.3s ease;
+}
+
+#card-info-session {
+    border-width: 0.0625rem;
+    border-radius: 0.5rem;
+    border-color: color-mix(in oklch, var(--card-info-border-session) 30%, transparent);
+    background-color: var(--card-info-bg-session);
+    box-shadow: 0 -1px -1px 0 var(--shadow-color);
+    transition: box-shadow 0.3s ease;
+}
+
+#card-info-student:hover,
+#card-info-plans:hover,
+#card-info-income:hover,
+#card-info-session:hover {
+    box-shadow: 0 4px 6px -1px var(--shadow-color);
+}
+
+
+#card-info-student .title,
+#card-info-plans .title,
+#card-info-income .title,
+#card-info-session .title {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: oklch(0.551 0.027 264.364);
+}
+
+#card-info-student .number,
+#card-info-plans .number,
+#card-info-income .number,
+#card-info-session .number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: oklch(0.21 0.034 264.665);
+}
+
+#card-info-student .percentage,
+#card-info-plans .percentage,
+#card-info-income .percentage,
+#card-info-session .percentage {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--success);
+}
+
+#card-info-student .icon {
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    color: var(--card-info-student-icon-color);
+    background-color: var(--card-info-student-icon-bg);
+}
+
+#card-info-plans .icon {
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    color: var(--card-info-plans-icon-color);
+    background-color: var(--card-info-plans-icon-bg);
+}
+
+#card-info-income .icon {
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    color: var(--card-info-income-icon-color);
+    background-color: var(--card-info-income-icon-bg);
+}
+
+#card-info-session .icon {
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    color: var(--card-info-session-icon-color);
+    background-color: var(--card-info-session-icon-bg);
+}
