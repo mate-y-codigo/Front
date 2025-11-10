@@ -41,9 +41,9 @@ export function sidebarHtml() {
                     </div>
                 </li>
                 <li>
-                    <div id="page-registries" class="sidebar-item flex items-center gap-2 p-2 rounded">
-                        <span class="material-symbols-outlined">checklist_rtl</span>
-                        <span>Registro</span>
+                    <div id="page-calendars" class="sidebar-item flex items-center gap-2 p-2 rounded">
+                        <span class="material-symbols-outlined">calendar_today</span>
+                        <span>Calendario</span>
                     </div>
                 </li>
                 <li>

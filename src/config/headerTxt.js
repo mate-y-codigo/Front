@@ -19,9 +19,9 @@ export const headerTxt = {
     h1: 'Asignación de Planes',
     p: 'Asigna planes de entrenamiento a tus alumnos'
   },
-  registries: {
-    h1: 'Registro de Sesión',
-    p: 'Registra tus ejercicios completados'
+  calendars: {
+    h1: 'Calendario',
+    p: 'Agenda sesiones programadas para tus alumnos'
   },
   statistics: {
     h1: 'Estadísticas y Progreso',
