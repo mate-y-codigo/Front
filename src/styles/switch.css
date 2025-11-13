@@ -1,0 +1,37 @@
+.switch {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.switch button {
+    position: relative;
+    width: 3rem;
+    height: 1.5rem;
+    border-radius: 9999px;
+    background-color: var(--switch-off-bg);
+    transition-property: var(--background);
+    transition-duration: 300ms;
+    outline: none;
+}
+
+.switch button:focus {
+    outline: none;
+}
+
+.switch span {
+    position: absolute;
+    top: 0.125rem;
+    left: 0.125rem;
+    width: 1.25rem;
+    height: 1.25rem;
+    background-color: var(--switch-circle);
+    border-radius: 9999px;
+    transition: transform 300ms;
+}
+
+.switch label {
+    color: var(--text-primary);
+    font-weight: 500;
+    cursor: pointer;
+}

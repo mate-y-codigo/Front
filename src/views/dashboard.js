@@ -26,7 +26,8 @@ const cardNextSession = [
     { name: 'Laura Díaz', hour: '14:00', type: 'Hipertrofia Inicial' },
     { name: 'Pedro Sánchez', hour: '16:30', type: 'CrossFit Básico' }
 ];
-/** render index */
+
+/** render */
 export function dashboardRender() {
     const containerMain = document.getElementById("container-main");
     containerMain.innerHTML = dashboardHtml(cardInfo, cardActivity, cardNextSession);

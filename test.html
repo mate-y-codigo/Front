@@ -12,6 +12,11 @@
     <link rel="stylesheet" href="./src/styles/cardActivity.css" />
     <link rel="stylesheet" href="./src/styles/cardQuickAction.css" />
     <link rel="stylesheet" href="./src/styles/cardNextSession.css" />
+    <link rel="stylesheet" href="./src/styles/cardPlan.css" />
+    <link rel="stylesheet" href="./src/styles/modalPlanDetail.css" />
+    <link rel="stylesheet" href="./src/styles/modalPlanNew.css" />
+    <link rel="stylesheet" href="./src/styles/comboBox.css" />
+    <link rel="stylesheet" href="./src/styles/switch.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -22,9 +27,30 @@
 
 <body>
     <div id="fitcode1">
-
+        <button onclick="openPlanNewModal()">Ver Detalle del Plan</button>
     </div>
 
+    <script>
+        function openPlanNewModal() {
+            //modalPlansDetailRender(plan);
+            const overlay = document.getElementById('modal-overlay-plan-new');
+            const modal = document.getElementById('modal-plan-new');
+
+            overlay.style.display = 'flex';
+            modal.classList.remove('modal-plan-exit');
+            modal.classList.add('modal-plan-enter');
+
+        }
+
+        function closePlanNewModal() {
+            const overlay = document.getElementById('modal-overlay-plan-new');
+            const modal = document.getElementById('modal-plan-new');
+
+            modal.classList.remove('modal-plan-enter');
+            modal.classList.add('modal-plan-exit');
+            setTimeout(() => { overlay.style.display = 'none'; }, 250);
+        }
+    </script>
     <script src="./src/views/login.js" type="module"></script>
     <script src="./src/views/index.js" type="module"></script>
     <script src="./src/views/sidebar.js" type="module"></script>

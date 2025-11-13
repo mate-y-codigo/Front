@@ -1,0 +1,55 @@
+.combobox {
+    height: 2.5rem;
+    position: relative;
+    display: inline-block;
+    text-align: left;
+    width: 100%;
+}
+
+.combobox #dropdown-button {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    background-color: var(--input-bg);
+    border: 1px solid var(--border);
+    border-radius: 0.375rem;    
+    color: var(--text-primary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.combobox1 #dropdown-button:hover {
+    cursor: pointer;
+}
+
+.combobox #dropdown-menu {
+    position: absolute;
+    z-index: 10;
+    margin-top: 0.125rem;
+    width: 100%;
+    background-color: var(--input-bg);
+    border: 1px solid var(--border);
+    border-radius: 0.375rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+        0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.combobox #dropdown-menu ul {
+    font-size: 0.875rem;
+    color: var(--text-primary);
+    max-height: 8rem;
+    overflow-y: auto;
+}
+
+.combobox #dropdown-menu li {
+    padding: 0.5rem 0.5rem;
+    cursor: pointer;
+}
+
+.combobox #dropdown-menu li:hover {
+    border-radius: 0.375rem;
+    color: var(--text-secondary);
+    background-color: var(--primary-dark);
+}

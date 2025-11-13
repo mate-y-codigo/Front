@@ -1,0 +1,83 @@
+.card-plan {
+    border-radius: 0.5rem;
+    background-color: var(--card-bg);
+    color: var(--text-primary);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    border-width: 0.125rem;
+    border-color: color-mix(in oklch, var(--border) 30%, transparent);
+    transition: all 300ms ease;
+}
+
+.card-plan:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+        0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.card-plan .plan-name {
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.card-plan .plan-coach {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+.card-plan .plan-type {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 9999px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: transparent;
+    padding: 0.125rem 0.625rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    outline: none;
+    background-color: color-mix(in oklch, var(--accent) 20%, transparent);
+    color: var(--accent);
+}
+
+.card-plan .plan-detail {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+    background-color: var(--background);
+    border-radius: 0.5rem;
+}
+
+.card-plan .plan-detail .plan-detail-number-session,
+.card-plan .plan-detail .plan-detail-number-exercise,
+.card-plan .plan-detail .plan-detail-number-student {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 700;
+}
+
+.card-plan .plan-detail .plan-detail-number-session {
+    color: var(--session-color);
+}
+
+.card-plan .plan-detail .plan-detail-number-exercise {
+    color: var(--exercise-color);
+}
+
+.card-plan .plan-detail .plan-detail-number-student {
+    color: var(--student-color);
+}
+
+.card-plan .plan-detail .plan-detail-txt {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    color: var(--text-muted);
+}
+
+.card-plan .plan-detail-date,
+.card-plan .plan-detail-assigned,
+.card-plan .plan-detail-date span,
+.card-plan .plan-detail-assigned span{
+    font-size: 1rem;
+}
