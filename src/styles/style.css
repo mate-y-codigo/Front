@@ -74,7 +74,7 @@
     --header-bg: oklch(0.929 0.013 255.508);
     --sidebar-bg: oklch(0.869 0.022 252.894);
     --sidebar-title-bg: oklch(0.869 0.022 252.894);
-    --card-bg: #ffffff;    
+    --card-bg: #ffffff;
     --border: oklch(0.704 0.04 256.788);
     --border-focus: oklch(0.45 0.085 224.283);
 
@@ -323,8 +323,10 @@ body {
 /* input -------------------------------------- */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
-  background-color: transparent; /* elimina fondo gris */
-  appearance: none;               /* remueve estilo nativo */
+    background-color: transparent;
+    /* elimina fondo gris */
+    appearance: none;
+    /* remueve estilo nativo */
 }
 
 .input {
@@ -341,8 +343,8 @@ input[type="number"]::-webkit-outer-spin-button {
     transition: box-shadow 0.3s ease;
 }
 
-input:focus-visible {
-    box-shadow: 0 0 0 2px oklch(0.45 0.085 224.283);
+.input:focus-visible {
+    box-shadow: 0 0 0 2px var(--primary-dark);
     outline-offset: 1px;
 }
 
@@ -364,12 +366,11 @@ input:focus-visible {
 }
 
 .input-with-icon:focus-visible {
-    box-shadow: 0 0 0 2px oklch(0.45 0.085 224.283);
+    box-shadow: 0 0 0 2px var(--primary-dark);
     outline-offset: 1px;
 }
 
 .input-icon {
-    font-size: 1.5rem;
     position: absolute;
     padding: 0.5rem;
     font-weight: 400;
@@ -391,7 +392,7 @@ input:focus-visible {
 }
 
 textarea:focus-visible {
-    box-shadow: 0 0 0 2px oklch(0.45 0.085 224.283);
+    box-shadow: 0 0 0 2px var(--primary-dark);
     outline-offset: 1px;
 }
 

@@ -1,0 +1,74 @@
+.card-assignment {
+    margin: 2rem 0rem;
+    border-radius: 0.375rem;
+    background-color: var(--card-bg);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    border: 2px solid color-mix(in oklch, var(--border) 40%, transparent);
+    transition: box-shadow 0.3s ease;
+}
+
+.card-assignment:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+        0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.card-assignment-student h3 {
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.card-assignment-student p {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+.card-assignment-student-icon {
+    height: 3rem;
+    width: 3rem;
+    border-radius: 9999px;
+    background-color: color-mix(in oklch, var(--primary) 20%, transparent);
+}
+
+.card-assignment-coach span {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+.card-assignment-coach p {
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.card-assignment-date-title,
+.card-assignment-progress-title {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+.card-assignment-date-info,
+.card-assignment-progress-info {
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.card-assignment-date-icon {
+    font-size: 1rem;
+}
+
+.card-assignment-status {
+    width: 10rem;
+    border-radius: 9999px;
+    border: 1px solid transparent;
+    padding: 0.125rem 0.875rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: color-mix(in oklch, var(--accent) 20%, transparent);
+    color: var(--accent);
+    outline: none;
+}

@@ -41,11 +41,11 @@ export function loginHtml() {
                                     <div class="space-y-6">
                                         <div class="email space-y-2">
                                             <label for="email">Email</label>
-                                            <input class="input" type="email" id="email" placeholder="tu@email.com" required="" value="">
+                                            <input class="input" type="email" id="email" placeholder="tu@email.com" autocomplete="off" required="" value="">
                                         </div>
                                         <div class="pass space-y-2">
                                             <label for="password">Contraseña</label>
-                                            <input class="input" type="password" id="password" placeholder="••••••••" required="" value="">
+                                            <input class="input" type="password" id="password" placeholder="••••••••" autocomplete="off" required="" value="">
                                         </div>
                                         <div class="flex items-center justify-between">
                                             <label class="remember-me flex items-center">

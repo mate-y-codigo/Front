@@ -89,7 +89,7 @@ function cardNextSessionInfo(name, hour, type) {
 
 export function dashboardHtml(cardInfo, cardActivity, cardNextSession) {
     return `
-        <div class="flex flex-col p-6">
+        <div class="flex flex-col pt-6 pb-6 pl-20 pr-20">
             <div class="flex justify-center gap-6 m-2">
                 ${cardInfoStudent(cardInfo[0].number, cardInfo[0].percentage)}
                 ${cardInfoPlans(cardInfo[1].number, cardInfo[1].percentage)}

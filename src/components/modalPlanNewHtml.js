@@ -14,15 +14,15 @@ export function modalPlanNewExcerciseHtml(number) {
                 <div class="grid grid-cols-3 gap-4 pt-1">
                     <div class="flex flex-col gap-2">
                         <label class="text-sm font-medium">Series *</label>
-                        <input type="number" class="input" maxlength="2" placeholder="3" />
+                        <input type="number" class="input" maxlength="2" placeholder="3" autocomplete="off"/>
                     </div>
                     <div class="flex flex-col gap-2">
                         <label class="text-sm font-medium">Repeticiones *</label>
-                        <input type="number" class="input" min="1" max="100" maxlength="2" placeholder="12" />
+                        <input type="number" class="input" min="1" max="100" maxlength="2" placeholder="12" autocomplete="off"/>
                     </div>
                     <div class="flex flex-col gap-2">
                         <label class="text-sm font-medium">Peso objetivo (Kg) *</label>
-                        <input type="number" class="input" min="0" step="0.5" maxlength="2" placeholder="0" />
+                        <input type="number" class="input" min="0" step="0.5" maxlength="2" placeholder="0" autocomplete="off"/>
                     </div>
                 </div>
             </div>
@@ -49,11 +49,11 @@ export function modalPlanNewSessionHtml(sessionNumber) {
                 <div class="grid grid-cols-2 gap-4 pt-2 pl-4 pr-4">
                     <div class="session-accordion-content-name space-y-2">
                         <label class="label">Nombre de la Sesión *</label>
-                        <input class="input" maxlength="25" placeholder="Ej: Día de Piernas" />
+                        <input class="input" maxlength="25" placeholder="Ej: Día de Piernas" autocomplete="off"/>
                     </div>
                     <div class="session-accordion-content-order space-y-2">
                         <label class="label">Orden *</label>
-                        <input type="number" class="input" min="1" value="${sessionNumber}" />
+                        <input type="number" class="input" min="1" value="${sessionNumber}" autocomplete="off"/>
                     </div>
                 </div>
 
@@ -88,7 +88,7 @@ export function modalPlanNewHtml() {
                                 <h3 class="subtitle">Datos Generales</h3>
                                 <div class="space-y-2">
                                     <label class="label">Nombre del Plan *</label>
-                                    <input id="name" class="input" maxlength="25" placeholder="Plan de Hipertrofia 12 sesiones">
+                                    <input id="name" class="input" maxlength="25" placeholder="Plan de Hipertrofia 12 sesiones" autocomplete="off"/>
                                 </div>
                                 <div class="space-y-2">
                                     <label class="label">Descripción *</label>

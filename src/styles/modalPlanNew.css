@@ -30,7 +30,6 @@
     animation-fill-mode: forwards;
 }
 
-
 .modal-plan-new-enter {
     animation-name: modalIn;
 }

@@ -2,6 +2,7 @@ import { sidebarHtml } from "../components/sidebarHtml.js"
 import { headerTxt } from "../config/headerTxt.js"
 import { dashboardRender } from "../views/dashboard.js"
 import { plansRender } from "../views/plans.js"
+import { assignmentRender } from '../views/assignment.js'
 
 // switch page
 function switchPage(selectedPage, headerH1Txt, headerPTxt, page) {
@@ -35,7 +36,7 @@ function itemsAddListener() {
     document.getElementById('page-users').addEventListener('click', () => switchPage('page-users', headerTxt['users']['h1'], headerTxt['users']['p'], console.log('Usuarios')));
     document.getElementById('page-exercises').addEventListener('click', () => switchPage('page-exercises', headerTxt['exercises']['h1'], headerTxt['exercises']['p'], console.log('Ejercicios')));
     document.getElementById('page-plans').addEventListener('click', () => switchPage('page-plans', headerTxt['plans']['h1'], headerTxt['plans']['p'], plansRender()));
-    document.getElementById('page-assignments').addEventListener('click', () => switchPage('page-assignments', headerTxt['assignments']['h1'], headerTxt['assignments']['p'], console.log('Asignaciones')));
+    document.getElementById('page-assignments').addEventListener('click', () => switchPage('page-assignments', headerTxt['assignments']['h1'], headerTxt['assignments']['p'], assignmentRender()));
     document.getElementById('page-calendars').addEventListener('click', () => switchPage('page-calendars', headerTxt['calendars']['h1'], headerTxt['calendars']['p'], console.log('Calendario')));
     document.getElementById('page-statistics').addEventListener('click', () => switchPage('page-statistics', headerTxt['statistics']['h1'], headerTxt['statistics']['p'], console.log('Estadisticas')));
     document.getElementById('page-payments').addEventListener('click', () => switchPage('page-payments', headerTxt['payments']['h1'], headerTxt['payments']['p'], console.log('Pagos')));

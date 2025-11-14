@@ -56,7 +56,7 @@ function planCardHtml(plan) {
 
 export function plansHtml(plansList) {
     return `
-        <div class="flex flex-col p-6">
+        <div class="flex flex-col pt-6 pb-6 pl-20 pr-20">
             <div class="flex justify-between items-center gap-6 pb-4">
                 <div>
                     <h2 class="text-2xl font-semibold">Planes Activos: ${plansList.plans.length}</h2>
@@ -71,12 +71,12 @@ export function plansHtml(plansList) {
             <div class="grid grid-cols-2 gap-4 mb-8">
                 <div class="relative">
                     <span class="material-symbols-outlined input-icon">search</span>
-                    <input class="input-with-icon" placeholder="Buscar plan por nombre..." value="">
+                    <input class="input-with-icon" placeholder="Buscar plan por nombre..." value="" autocomplete="off"/>
                 </div>
                 <div id="plan-type-combobox"></div>                
             </div>
-            <div>
-                <h3 class="text-xl font-bold mb-4">Todos los Planes</h3>
+            <div class="space-y-4">
+                <h2 id="plans-title" class="text-xl font-bold mb-4">Todos los Planes</h2>
                 <div class="grid md:grid-cols-3 gap-6 mb-6"> 
                     ${plansList.plans.map((plan) => planCardHtml(plan)).join('')}                   
                 </div>

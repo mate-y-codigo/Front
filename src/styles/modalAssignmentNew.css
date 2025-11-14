@@ -1,0 +1,86 @@
+.modal-overlay-assignment-new {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    animation-duration: 0.25s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+#modal-assignment-new {
+    background: var(--background);
+    width: 100%;
+    max-width: 40%;
+    height: 90vh;
+    overflow-y: auto;
+    border-width: 2px;
+    border-radius: 0.75rem;
+    border-style: solid;
+    border-color: color-mix(in oklch, var(--border) 30%, transparent);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    padding: 1.5rem;
+
+    animation-duration: 0.25s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+
+.modal-assignment-new-enter {
+    animation-name: modalInAssignment;
+}
+
+.modal-assignment-new-exit {
+    animation-name: modalOutAssignment;
+}
+
+@keyframes modalInAssignment {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes modalOutAssignment {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+}
+
+#modal-assignment-new .title {
+    padding-bottom: 1rem;
+    color: var(--text-tertiary);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    font-size: 1.5rem;
+    line-height: 2rem;
+}
+
+#modal-assignment-new .subtitle {
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+#modal-assignment-new .label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1;
+    opacity: 0.8;
+    color: var(--text-primary);
+}

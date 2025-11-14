@@ -1,0 +1,9 @@
+#assignment-type-combobox{
+    width: 15rem;
+}
+
+#assignment-title {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    font-weight: 600;    
+}
