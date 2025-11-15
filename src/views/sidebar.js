@@ -3,6 +3,7 @@ import { headerTxt } from "../config/headerTxt.js"
 import { dashboardRender } from "../views/dashboard.js"
 import { plansRender } from "../views/plans.js"
 import { assignmentRender } from '../views/assignment.js'
+import { statiticsRender } from '../views/statistics.js'
 
 // switch page
 function switchPage(selectedPage, headerH1Txt, headerPTxt, page) {
@@ -38,7 +39,7 @@ function itemsAddListener() {
     document.getElementById('page-plans').addEventListener('click', () => switchPage('page-plans', headerTxt['plans']['h1'], headerTxt['plans']['p'], plansRender()));
     document.getElementById('page-assignments').addEventListener('click', () => switchPage('page-assignments', headerTxt['assignments']['h1'], headerTxt['assignments']['p'], assignmentRender()));
     document.getElementById('page-calendars').addEventListener('click', () => switchPage('page-calendars', headerTxt['calendars']['h1'], headerTxt['calendars']['p'], console.log('Calendario')));
-    document.getElementById('page-statistics').addEventListener('click', () => switchPage('page-statistics', headerTxt['statistics']['h1'], headerTxt['statistics']['p'], console.log('Estadisticas')));
+    document.getElementById('page-statistics').addEventListener('click', () => switchPage('page-statistics', headerTxt['statistics']['h1'], headerTxt['statistics']['p'], statiticsRender()));
     document.getElementById('page-payments').addEventListener('click', () => switchPage('page-payments', headerTxt['payments']['h1'], headerTxt['payments']['p'], console.log('Pagos')));
 }
 

@@ -1,0 +1,155 @@
+.modal-overlay-statistics {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background-color: rgba(0, 0, 0, 0.5);
+    /*display: none;*/
+    align-items: center;
+    justify-content: center;
+
+    animation-duration: 0.25s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+#modal-statistics {
+    background: var(--background);
+    width: 100%;
+    max-width: 50%;
+    height: 90vh;
+    overflow-y: auto;
+    border-width: 2px;
+    border-radius: 0.375rem;
+    border-style: solid;
+    border-color: color-mix(in oklch, var(--border) 30%, transparent);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    padding: 1.5rem;
+
+    animation-duration: 0.25s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+
+.modal-statistics-enter {
+    animation-name: modalInStatistics;
+}
+
+.modal-statistics-exit {
+    animation-name: modalOutStatistics;
+}
+
+@keyframes modalInStatistics {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes modalOutStatistics {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+}
+
+#modal-statistics .title {    
+    color: var(--text-primary);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    font-size: 1.5rem;
+    line-height: 2rem;
+}
+
+#modal-statistics .card {
+    padding: 1rem;
+    background-color: var(--card-bg);
+    border-radius: 0.375rem;
+}
+
+#modal-statistics .card-text {
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+}
+
+#modal-statistics .card-detail {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+#modal-statistics .card-weight {
+    border: 1px solid color-mix(in oklch, var(--weight) 30%, transparent);
+    background-color: color-mix(in oklch, var(--weight) 15%, transparent);
+}
+
+.card-weight .card-text,
+.card-weight .card-detail {
+    color: var(--weight);
+}
+
+#modal-statistics .card-reps {
+    border: 1px solid color-mix(in oklch, var(--reps) 30%, transparent);
+    background-color: color-mix(in oklch, var(--reps) 5%, transparent);
+}
+
+.card-reps .card-text,
+.card-reps .card-detail {
+    color: var(--reps);
+}
+
+#modal-statistics .card-sets {
+    border: 1px solid color-mix(in oklch, var(--sets) 30%, transparent);
+    background-color: color-mix(in oklch, var(--sets) 5%, transparent);
+}
+
+.card-sets .card-text,
+.card-sets .card-detail {
+    color: var(--sets);
+}
+
+#modal-statistics .card-progress {
+    border: 1px solid color-mix(in oklch, var(--progress) 30%, transparent);
+    background-color: color-mix(in oklch, var(--progress) 5%, transparent);
+}
+
+.card-progress .card-text,
+.card-progress .card-detail {
+    color: var(--progress);
+}
+
+#modal-statistics .chart {
+    padding: 1rem;
+    background-color: var(--chart-bg);
+    border-radius: 0.375rem;
+    border: 1px solid color-mix(in oklch, var(--border) 30%, transparent);
+}
+
+#modal-statistics .table {
+    width: 100%;
+    border-radius: 0.375rem;
+    background-color: var(--chart-bg);
+    color: var(--text-primary);
+    border: 1px solid color-mix(in oklch, var(--border) 30%, transparent);
+}
+
+#modal-statistics .table h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+}
+
+#modal-statistics .table tr {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: var(--border);
+}

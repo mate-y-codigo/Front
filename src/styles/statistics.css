@@ -1,0 +1,74 @@
+.container-statistics {
+    color: var(--text-primary);
+}
+
+.statistics-student {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid color-mix(in oklch, var(--border) 45%, transparent);
+}
+
+.statistics-excercise h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.015em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.statistics-excercise-card {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: var(--card-bg);
+    border-radius: 0.375rem;
+    border: 1px solid color-mix(in oklch, var(--border) 45%, transparent);
+}
+
+.statistics-excercise-card .execercise-name {
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.statistics-excercise-card .execercise-detail {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+.statistics-excercise-card .execercise-percentage {
+    border-radius: 9999px;
+    border-width: 1px;
+    border-color: transparent;
+    padding: 0.125rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    outline: none;
+    background-color: color-mix(in oklch, var(--accent) 20%, transparent);
+    color: var(--accent);
+}
+
+.statistics-excercise-card .execercise-percentage span{
+    font-size: 1rem;
+}
+
+.statistics-excercise-card {
+    overflow: hidden;
+    transition: all 0.20s ease-in-out;
+}
+
+.statistics-excercise-card-show {
+    opacity: 1;
+    max-height: 300px;
+    transform: translateY(0);
+}
+
+.statistics-excercise-card-hiding {
+    opacity: 0;
+    max-height: 0;
+    transform: translateY(-10px);
+}

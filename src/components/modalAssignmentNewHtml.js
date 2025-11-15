@@ -25,7 +25,7 @@ export function modalAssignmentNewHtml(){
                                         <div id="assignment-new-date-range"></div>
                                     </div>
                                     <div class="basis-1/4 space-y-2">
-                                        <label class="label">Descanso</label>
+                                        <label class="label">Descanso *</label>
                                         <input id="name" class="input" type="number" />
                                     </div>                                
                                 </div>

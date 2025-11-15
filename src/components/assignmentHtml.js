@@ -64,7 +64,7 @@ export function assignmentHtml(assignmentList) {
             <div class="space-y-4 pt-4">
                 <h2 id="assignment-title" class="text-2xl font-semibold">Ultimas Asignaciones</h2>
                 <div id="assignment-cards">
-                    ${assignmentList.assignment.map((assignment) => assignmentCardHtml(assignment)).join('')}  
+                    ${assignmentList.map((assignment) => assignmentCardHtml(assignment)).join('')}  
                 </div>
             </div>
         </div>

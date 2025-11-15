@@ -140,6 +140,13 @@
     --switch-off-bg: oklch(0.707 0.022 261.325);
     --switch-on-bg: oklch(0.609 0.126 221.723);
     --switch-circle: oklch(0.928 0.006 264.531);
+
+    /* === Statistics === */
+    --weight: oklch(0.546 0.245 262.881);
+    --progress: oklch(0.723 0.219 149.579);
+    --reps: oklch(0.75 0.183 55.934);
+    --sets: oklch(0.627 0.265 303.9);
+    --chart-bg: #ffffff;
 }
 
 .dark {
@@ -211,6 +218,13 @@
     --switch-off-bg: oklch(0.707 0.022 261.325);
     --switch-on-bg: oklch(0.438 0.218 303.724);
     --switch-circle: oklch(0.928 0.006 264.531);
+
+    /* === Statistics === */
+    --weight: oklch(0.546 0.245 262.881);
+    --progress: oklch(0.723 0.219 149.579);
+    --reps: oklch(0.75 0.183 55.934);
+    --sets: oklch(0.627 0.265 303.9);
+    --chart-bg: #343A3F;
 }
 
 html,

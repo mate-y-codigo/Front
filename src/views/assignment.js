@@ -6,110 +6,109 @@ import { assignmentNewRender } from '../views/modalAssignmentNew.js'
 
 const assignmentTypeList = ['Activo', 'Completado'];
 
-const jsonTestAssignment = {
-    "assignment": [
-        {
-            id: "a3f1c2b4-9e8d-4f6a-8c1e-2d7f9b1e2a3c",
-            name: "Maria Gonzalez",
-            planName: "Fuerza Avanzada",
-            coachName: "Lucas Pérez",
-            dateStart: "29/2/2024",
-            dateEnd: "29/3/2024",
-            progress: 70,
-            status: "Completado"
-        },
-        {
-            id: "b7d2e9a1-4c3f-4b2a-9d6e-1f8c3e7a9b2d",
-            name: "Javier Torres",
-            planName: "Cardio Express",
-            coachName: "Sofía Ramírez",
-            dateStart: "5/3/2024",
-            dateEnd: "5/4/2024",
-            progress: 45,
-            status: "Activo"
-        },
-        {
-            id: "c9a4f3e2-7b1d-4e6f-8a2c-3d9f1b2e4c7a",
-            name: "Lucía Fernández",
-            planName: "Flexibilidad Total",
-            coachName: "Martín Gómez",
-            dateStart: "10/1/2024",
-            dateEnd: "10/2/2024",
-            progress: 100,
-            status: "Completado"
-        },
-        {
-            id: "d2e7a9b3-6f4c-4a1d-9e2f-7c3b1f9a8d2e",
-            name: "Carlos Méndez",
-            planName: "Resistencia Base",
-            coachName: "Valentina Ruiz",
-            dateStart: "20/2/2024",
-            dateEnd: "20/3/2024",
-            progress: 20,
-            status: "Activo"
-        },
-        {
-            id: "e1f9b2c3-8a7d-4e2f-9c1b-6d3f2a7e1c9a",
-            name: "Ana López",
-            planName: "Tonificación Pro",
-            coachName: "Diego Herrera",
-            dateStart: "1/4/2024",
-            dateEnd: "1/5/2024",
-            progress: 0,
-            status: "Activo"
-        },
-        {
-            id: "f4c2d1e3-9a8b-4f7c-8d2e-3b1f9a7c2e4d",
-            name: "Santiago Rivas",
-            planName: "HIIT Intensivo",
-            coachName: "Laura Benítez",
-            dateStart: "15/3/2024",
-            dateEnd: "15/4/2024",
-            progress: 85,
-            status: "Activo"
-        },
-        {
-            id: "g7e3b2c1-5d9f-4a2e-9c8b-1f2d3e7a4c9f",
-            name: "Camila Duarte",
-            planName: "Core Estable",
-            coachName: "Fernando Silva",
-            dateStart: "2/2/2024",
-            dateEnd: "2/3/2024",
-            progress: 60,
-            status: "Activo"
-        },
-        {
-            id: "h1a9c3e2-6f8d-4b2a-9e1c-3d7f2a9b5c4e",
-            name: "Tomás Navarro",
-            planName: "Movilidad Funcional",
-            coachName: "Cecilia Torres",
-            dateStart: "10/4/2024",
-            dateEnd: "10/5/2024",
-            progress: 30,
-            status: "Activo"
-        },
-        {
-            id: "i2b7d3f4-8c1e-4a9f-9d2b-7e3a1c5f6d8e",
-            name: "Valeria Ponce",
-            planName: "Postura Correctiva",
-            coachName: "Andrés Molina",
-            dateStart: "25/1/2024",
-            dateEnd: "25/2/2024",
-            progress: 100,
-            status: "Completado"
-        },
-        {
-            id: "j3c8e1d2-7f9a-4b2c-8d1e-2a3f9b7c6e5d",
-            name: "Federico Salas",
-            planName: "Potencia Explosiva",
-            coachName: "Natalia Castro",
-            dateStart: "12/3/2024",
-            dateEnd: "12/4/2024",
-            progress: 10,
-            status: "Activo"
-        }
-    ]
-};
+const jsonTestAssignment = [
+
+    {
+        id: "a3f1c2b4-9e8d-4f6a-8c1e-2d7f9b1e2a3c",
+        name: "Maria Gonzalez",
+        planName: "Fuerza Avanzada",
+        coachName: "Lucas Pérez",
+        dateStart: "29/2/2024",
+        dateEnd: "29/3/2024",
+        progress: 70,
+        status: "Completado"
+    },
+    {
+        id: "b7d2e9a1-4c3f-4b2a-9d6e-1f8c3e7a9b2d",
+        name: "Javier Torres",
+        planName: "Cardio Express",
+        coachName: "Sofía Ramírez",
+        dateStart: "5/3/2024",
+        dateEnd: "5/4/2024",
+        progress: 45,
+        status: "Activo"
+    },
+    {
+        id: "c9a4f3e2-7b1d-4e6f-8a2c-3d9f1b2e4c7a",
+        name: "Lucía Fernández",
+        planName: "Flexibilidad Total",
+        coachName: "Martín Gómez",
+        dateStart: "10/1/2024",
+        dateEnd: "10/2/2024",
+        progress: 100,
+        status: "Completado"
+    },
+    {
+        id: "d2e7a9b3-6f4c-4a1d-9e2f-7c3b1f9a8d2e",
+        name: "Carlos Méndez",
+        planName: "Resistencia Base",
+        coachName: "Valentina Ruiz",
+        dateStart: "20/2/2024",
+        dateEnd: "20/3/2024",
+        progress: 20,
+        status: "Activo"
+    },
+    {
+        id: "e1f9b2c3-8a7d-4e2f-9c1b-6d3f2a7e1c9a",
+        name: "Ana López",
+        planName: "Tonificación Pro",
+        coachName: "Diego Herrera",
+        dateStart: "1/4/2024",
+        dateEnd: "1/5/2024",
+        progress: 0,
+        status: "Activo"
+    },
+    {
+        id: "f4c2d1e3-9a8b-4f7c-8d2e-3b1f9a7c2e4d",
+        name: "Santiago Rivas",
+        planName: "HIIT Intensivo",
+        coachName: "Laura Benítez",
+        dateStart: "15/3/2024",
+        dateEnd: "15/4/2024",
+        progress: 85,
+        status: "Activo"
+    },
+    {
+        id: "g7e3b2c1-5d9f-4a2e-9c8b-1f2d3e7a4c9f",
+        name: "Camila Duarte",
+        planName: "Core Estable",
+        coachName: "Fernando Silva",
+        dateStart: "2/2/2024",
+        dateEnd: "2/3/2024",
+        progress: 60,
+        status: "Activo"
+    },
+    {
+        id: "h1a9c3e2-6f8d-4b2a-9e1c-3d7f2a9b5c4e",
+        name: "Tomás Navarro",
+        planName: "Movilidad Funcional",
+        coachName: "Cecilia Torres",
+        dateStart: "10/4/2024",
+        dateEnd: "10/5/2024",
+        progress: 30,
+        status: "Activo"
+    },
+    {
+        id: "i2b7d3f4-8c1e-4a9f-9d2b-7e3a1c5f6d8e",
+        name: "Valeria Ponce",
+        planName: "Postura Correctiva",
+        coachName: "Andrés Molina",
+        dateStart: "25/1/2024",
+        dateEnd: "25/2/2024",
+        progress: 100,
+        status: "Completado"
+    },
+    {
+        id: "j3c8e1d2-7f9a-4b2c-8d1e-2a3f9b7c6e5d",
+        name: "Federico Salas",
+        planName: "Potencia Explosiva",
+        coachName: "Natalia Castro",
+        dateStart: "12/3/2024",
+        dateEnd: "12/4/2024",
+        progress: 10,
+        status: "Activo"
+    }
+]
 
 const jsonTestStudent = [
     { "uuid": "c6b7c9ab-8a7e-42cb-9c44-2b96a1b0d9f0", "name": "Lucía Fernández" },
