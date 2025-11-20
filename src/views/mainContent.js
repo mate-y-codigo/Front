@@ -3,6 +3,7 @@ import { headerTxt } from "../config/headerTxt.js"
 import { themeAddListener, themeLoad } from "../utils/theme.js"
 import {dashboardRender} from "../views/dashboard.js"
 
+
 /** render sidebar */
 export function renderMainContent() {
     const sidebar = document.getElementById("main-content");

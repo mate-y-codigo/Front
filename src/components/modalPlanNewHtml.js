@@ -123,8 +123,8 @@ export function modalPlanNewHtml() {
                 </div>
                 <div class="mt-auto">
                     <div class="flex gap-8 ">
-                        <button class="button-small-cancel" onclick="closePlanNewModal()">Cancelar</button>
-                        <button class="button-small" onclick="closePlanNewModal()">Guardar</button>
+                        <button class="button-small-cancel" onclick="closeModalNewPlan()">Cancelar</button>
+                        <button class="button-small" onclick="closeModalNewPlan()">Guardar</button>
                     </div>
                 </div>
             </div>

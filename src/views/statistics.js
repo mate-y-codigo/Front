@@ -168,41 +168,41 @@ const jsonTestExcercise = [
     }
 ]
 
-const jsonTestExerciseProgress = 
-    {
-        "name": "Press en Banco",
-        "sessions": [
-            { "date": "15/11/2024", "weight": 40, "sets": 3, "reps": 12 },
-            { "date": "22/11/2024", "weight": 42, "sets": 3, "reps": 12 },
-            { "date": "29/11/2024", "weight": 44, "sets": 3, "reps": 10 },
-            { "date": "06/12/2024", "weight": 46, "sets": 3, "reps": 10 },
-            { "date": "13/12/2024", "weight": 48, "sets": 3, "reps": 10 },
-            { "date": "20/12/2024", "weight": 50, "sets": 4, "reps": 8 },
-            { "date": "27/12/2024", "weight": 52, "sets": 4, "reps": 8 },
-            { "date": "03/01/2025", "weight": 54, "sets": 4, "reps": 8 },
-            { "date": "10/01/2025", "weight": 56, "sets": 4, "reps": 8 },
-            { "date": "17/01/2025", "weight": 58, "sets": 4, "reps": 6 },
-            { "date": "24/01/2025", "weight": 60, "sets": 4, "reps": 6 },
-            { "date": "31/01/2025", "weight": 61, "sets": 4, "reps": 6 },
-            { "date": "07/02/2025", "weight": 62, "sets": 4, "reps": 6 },
-            { "date": "14/02/2025", "weight": 63, "sets": 4, "reps": 6 },
-            { "date": "21/02/2025", "weight": 64, "sets": 5, "reps": 5 },
-            { "date": "28/02/2025", "weight": 65, "sets": 5, "reps": 5 },
-            { "date": "07/03/2025", "weight": 66, "sets": 5, "reps": 5 },
-            { "date": "14/03/2025", "weight": 66, "sets": 5, "reps": 5 },
-            { "date": "21/03/2025", "weight": 67, "sets": 5, "reps": 5 },
-            { "date": "28/03/2025", "weight": 68, "sets": 5, "reps": 4 },
-            { "date": "04/04/2025", "weight": 68, "sets": 5, "reps": 4 },
-            { "date": "11/04/2025", "weight": 69, "sets": 5, "reps": 4 },
-            { "date": "18/04/2025", "weight": 70, "sets": 5, "reps": 4 },
-            { "date": "25/04/2025", "weight": 70, "sets": 5, "reps": 4 },
-            { "date": "02/05/2025", "weight": 71, "sets": 5, "reps": 4 },
-            { "date": "09/05/2025", "weight": 72, "sets": 5, "reps": 4 },
-            { "date": "16/05/2025", "weight": 72, "sets": 5, "reps": 4 },
-            { "date": "23/05/2025", "weight": 73, "sets": 5, "reps": 3 },
-            { "date": "30/05/2025", "weight": 74, "sets": 5, "reps": 3 }
-        ]
-    };
+const jsonTestExerciseProgress =
+{
+    "name": "Press en Banco",
+    "sessions": [
+        { "date": "15/11/2024", "weight": 40, "sets": 3, "reps": 12 },
+        { "date": "22/11/2024", "weight": 42, "sets": 3, "reps": 12 },
+        { "date": "29/11/2024", "weight": 44, "sets": 3, "reps": 10 },
+        { "date": "06/12/2024", "weight": 46, "sets": 3, "reps": 10 },
+        { "date": "13/12/2024", "weight": 48, "sets": 3, "reps": 10 },
+        { "date": "20/12/2024", "weight": 50, "sets": 4, "reps": 8 },
+        { "date": "27/12/2024", "weight": 52, "sets": 4, "reps": 8 },
+        { "date": "03/01/2025", "weight": 54, "sets": 4, "reps": 8 },
+        { "date": "10/01/2025", "weight": 56, "sets": 4, "reps": 8 },
+        { "date": "17/01/2025", "weight": 58, "sets": 4, "reps": 6 },
+        { "date": "24/01/2025", "weight": 60, "sets": 4, "reps": 6 },
+        { "date": "31/01/2025", "weight": 61, "sets": 4, "reps": 6 },
+        { "date": "07/02/2025", "weight": 62, "sets": 4, "reps": 6 },
+        { "date": "14/02/2025", "weight": 63, "sets": 4, "reps": 6 },
+        { "date": "21/02/2025", "weight": 64, "sets": 5, "reps": 5 },
+        { "date": "28/02/2025", "weight": 65, "sets": 5, "reps": 5 },
+        { "date": "07/03/2025", "weight": 66, "sets": 5, "reps": 5 },
+        { "date": "14/03/2025", "weight": 66, "sets": 5, "reps": 5 },
+        { "date": "21/03/2025", "weight": 67, "sets": 5, "reps": 5 },
+        { "date": "28/03/2025", "weight": 68, "sets": 5, "reps": 4 },
+        { "date": "04/04/2025", "weight": 68, "sets": 5, "reps": 4 },
+        { "date": "11/04/2025", "weight": 69, "sets": 5, "reps": 4 },
+        { "date": "18/04/2025", "weight": 70, "sets": 5, "reps": 4 },
+        { "date": "25/04/2025", "weight": 70, "sets": 5, "reps": 4 },
+        { "date": "02/05/2025", "weight": 71, "sets": 5, "reps": 4 },
+        { "date": "09/05/2025", "weight": 72, "sets": 5, "reps": 4 },
+        { "date": "16/05/2025", "weight": 72, "sets": 5, "reps": 4 },
+        { "date": "23/05/2025", "weight": 73, "sets": 5, "reps": 3 },
+        { "date": "30/05/2025", "weight": 74, "sets": 5, "reps": 3 }
+    ]
+};
 
 function statisticsCardFilter() {
     const searchExerciseInput = document.querySelector(
@@ -241,7 +241,7 @@ function statisticsCardFilter() {
     });
 }
 
-function openStatisticsModal() {
+function openModalStatistics() {
     modalStatisticsRender(jsonTestExerciseProgress);
     const overlay = document.getElementById('modal-overlay-statistics');
     const modal = document.getElementById('modal-statistics');
@@ -251,7 +251,7 @@ function openStatisticsModal() {
     modal.classList.add('modal-statistics-enter');
 }
 
-function closeStatisticsModal() {
+function closeModalStatistics() {
     const overlay = document.getElementById('modal-overlay-statistics');
     const modal = document.getElementById('modal-statistics');
 
@@ -263,11 +263,28 @@ function closeStatisticsModal() {
 /** statitics render */
 export function statiticsRender() {
     const containerMain = document.getElementById('container-main');
-    containerMain.innerHTML = statisticsHtml(jsonTestExcercise);
+    /*containerMain.innerHTML = statisticsHtml(jsonTestExcercise);
 
     inputSuggestionIcon('statistics-input-search-student', 'search', 'Buscar alumno...', jsonTestStudent);
     statisticsCardFilter();
 
-    window.closeStatisticsModal = closeStatisticsModal;
-    window.openStatisticsModal = openStatisticsModal;
+    window.closeModalStatistics = closeModalStatistics;
+    window.openModalStatistics = openModalStatistics;*/
+
+    // transicion suave
+    containerMain.classList.add('opacity-0', 'scale-95', 'transition-all', 'duration-300');
+    containerMain.classList.remove('opacity-100', 'scale-100');
+    setTimeout(() => {
+        containerMain.innerHTML = statisticsHtml(jsonTestExcercise);
+
+        inputSuggestionIcon('statistics-input-search-student', 'search', 'Buscar alumno...', jsonTestStudent);
+        statisticsCardFilter();
+
+        window.closeModalStatistics = closeModalStatistics;
+        window.openModalStatistics = openModalStatistics;
+
+        // Aplicar clases de entrada
+        containerMain.classList.remove('opacity-0', 'scale-95');
+        containerMain.classList.add('opacity-100', 'scale-100');
+    }, 100); // duración igual a la transición
 }

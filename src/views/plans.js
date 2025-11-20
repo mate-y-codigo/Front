@@ -1,6 +1,9 @@
 import { plansHtml } from '../components/plansHtml.js'
 import { modalPlansDetailRender } from "../views/modalPlanDetail.js"
 import { modalPlanNewRender } from '../views/modalPlanNew.js'
+
+import { planCreateRender } from './planCreate.js'
+
 import { comboBoxRender } from '../views/comboBox.js'
 
 const plansTypeList = ['Todos los planes', 'Plantillas', 'Personalizados'];
@@ -156,7 +159,7 @@ const jsonTestPlans = {
     ]
 };
 
-function openPlanModal(plan) {
+function openModalPlan(plan) {
     modalPlansDetailRender(plan);
     const overlay = document.getElementById('modal-overlay-plan');
     const modal = document.getElementById('modal-plan-detail');
@@ -167,7 +170,7 @@ function openPlanModal(plan) {
 
 }
 
-function closePlanModal() {
+function closeModalPlan() {
     const overlay = document.getElementById('modal-overlay-plan');
     const modal = document.getElementById('modal-plan-detail');
 
@@ -176,7 +179,7 @@ function closePlanModal() {
     setTimeout(() => { overlay.style.display = 'none'; }, 250);
 }
 
-function openPlanNewModal() {
+function openModalNewPlan() {
     modalPlanNewRender();
     const overlay = document.getElementById('modal-overlay-plan-new');
     const modal = document.getElementById('modal-plan-new');
@@ -187,7 +190,7 @@ function openPlanNewModal() {
 
 }
 
-function closePlanNewModal() {
+function closeModalNewPlan() {
     const overlay = document.getElementById('modal-overlay-plan-new');
     const modal = document.getElementById('modal-plan-new');
 
@@ -196,22 +199,37 @@ function closePlanNewModal() {
     setTimeout(() => { overlay.style.display = 'none'; }, 250);
 }
 
+function openPlanCreate() {
+    planCreateRender();
+}
+
 /** render */
 export function plansRender() {
     const containerMain = document.getElementById("container-main");
-    containerMain.innerHTML = plansHtml(jsonTestPlans);
+    // transicion suave
+    containerMain.classList.add('opacity-0', 'scale-95', 'transition-all', 'duration-300');
+    containerMain.classList.remove('opacity-100', 'scale-100');    
+    setTimeout(() => {
+        containerMain.innerHTML = plansHtml(jsonTestPlans);
 
-    comboBoxRender('plan-type-combobox', plansTypeList);
+        comboBoxRender('plan-type-combobox', plansTypeList);
 
-    containerMain.querySelectorAll(".btn-plan-detail").forEach(btn => {
-        btn.addEventListener("click", e => {
-            const planData = JSON.parse(e.currentTarget.dataset.plan);
-            openPlanModal(planData);
+        containerMain.querySelectorAll(".btn-plan-detail").forEach(btn => {
+            btn.addEventListener("click", e => {
+                const planData = JSON.parse(e.currentTarget.dataset.plan);
+                openModalPlan(planData);
+            });
         });
-    });
 
 
-    window.closePlanModal = closePlanModal;
-    window.openPlanNewModal = openPlanNewModal;
-    window.closePlanNewModal = closePlanNewModal;
+        window.closeModalPlan = closeModalPlan;
+        window.openModalNewPlan = openModalNewPlan;
+        window.closeModalNewPlan = closeModalNewPlan;
+
+        window.openPlanCreate = openPlanCreate;
+
+        // Aplicar clases de entrada
+        containerMain.classList.remove('opacity-0', 'scale-95');
+        containerMain.classList.add('opacity-100', 'scale-100');
+    }, 100); // duración igual a la transición
 }

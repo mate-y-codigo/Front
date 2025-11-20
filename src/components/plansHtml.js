@@ -62,7 +62,7 @@ export function plansHtml(plansList) {
                     <h2 class="text-2xl font-semibold">Planes Activos: ${plansList.plans.length}</h2>
                 </div>
                 <div>
-                    <button class="button inline-flex items-center justify-center gap-2" onclick="openPlanNewModal()">
+                    <button class="button inline-flex items-center justify-center gap-2" onclick="openPlanCreate()">
                         <span class="material-symbols-outlined">add</span>
                         Crear Plan
                     </button>

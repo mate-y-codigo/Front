@@ -41,8 +41,8 @@ export function modalAssignmentNewHtml(){
                 </div>
                 <div class="mt-auto">
                     <div class="flex gap-8 ">
-                        <button class="button-small-cancel" onclick="closeAssignmentNewModal()">Cancelar</button>
-                        <button class="button-small" onclick="closeAssignmentNewModal()">Guardar</button>
+                        <button class="button-small-cancel" onclick="closeModalNewAssignment()">Cancelar</button>
+                        <button class="button-small" onclick="closeModalNewAssignment()">Guardar</button>
                     </div>
                 </div>
             </div>

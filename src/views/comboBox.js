@@ -24,8 +24,16 @@ function comboBoxAddListener(container) {
 
     dropdownMenu.querySelectorAll('li').forEach(item => {
         item.addEventListener('click', () => {
-            selectedOption.textContent = item.dataset.value;
+            //selectedOption.textContent = item.dataset.value;
+            //toggleDropdown();
+            const value = item.dataset.value;
+            selectedOption.textContent = value;
             toggleDropdown();
+
+            container.dispatchEvent(new CustomEvent('combo:change', {
+                detail: { value }
+            }));
+
         });
     });
 
@@ -36,6 +44,16 @@ function comboBoxAddListener(container) {
             arrowIcon.classList.remove('rotate-180');
         }
     });
+
+    /*item.addEventListener('click', () => {
+        selectedOption.textContent = item.dataset.value;
+        toggleDropdown();
+
+        container.dispatchEvent(new CustomEvent('combo:change', {
+            detail: { value: item.dataset.value }
+        }));
+    });*/
+
 }
 
 /** render combobox */

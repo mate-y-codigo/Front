@@ -106,7 +106,7 @@ export function modalPlanDetailHtml(plan){
                         </div>
                     </div>
                     <div class="grid h-18 grid-cols-1 content-end gap-4">
-                        <button class="button" onclick="closePlanModal()">Cerrar</button>
+                        <button class="button" onclick="closeModalPlan()">Cerrar</button>
                     </div>
                 </div>
             </div>

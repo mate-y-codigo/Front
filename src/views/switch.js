@@ -1,6 +1,6 @@
 import { switchHtml } from '../components/switchHtml.js'
 
-function switchAddListener() {
+function switchAddListener(container) {
     const switchButton = document.getElementById("switch-button");
     const switchCircle = document.getElementById("switch-circle");
 
@@ -17,15 +17,22 @@ function switchAddListener() {
             switchButtonBg.style.backgroundColor = 'var(--switch-on-bg)';
             switchCircle.style.transform = "translateX(1.5rem)";
         }
+
+        // Emitir evento personalizado
+        container.dispatchEvent(new CustomEvent("switch:change", {
+            detail: { isOn: !isOff }
+        }));
+
     });
 }
 
 
 /** render switch */
 export function switchRender(id, txt) {
-    console.log(id);
     const switchBtn = document.getElementById(id);
     switchBtn.innerHTML = switchHtml(txt);
 
-    switchAddListener();
+    //switchAddListener();
+    const container = switchBtn.querySelector(".switch");
+    switchAddListener(container);
 }

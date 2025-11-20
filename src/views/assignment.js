@@ -187,7 +187,7 @@ const jsonTestPlan = [
 ]
 
 
-function openAssignmentNewModal() {
+function openModalNewAssignment() {
     //modalPlansDetailRender(plan);
     const overlay = document.getElementById('modal-overlay-assignment-new');
     const modal = document.getElementById('modal-assignment-new');
@@ -198,7 +198,7 @@ function openAssignmentNewModal() {
 
 }
 
-function closeAssignmentNewModal() {
+function closeModalNewAssignment() {
     const overlay = document.getElementById('modal-overlay-assignment-new');
     const modal = document.getElementById('modal-assignment-new');
 
@@ -211,7 +211,7 @@ function closeAssignmentNewModal() {
 /** assignment reder */
 export function assignmentRender() {
     const containerMain = document.getElementById('container-main');
-    containerMain.innerHTML = assignmentHtml(jsonTestAssignment);
+    /*containerMain.innerHTML = assignmentHtml(jsonTestAssignment);
     inputSuggestionIcon('assignment-input-search', 'search', 'Buscar alumno...', jsonTestStudent);
     comboBoxRender('assignment-type-combobox', assignmentTypeList);
     progressBarSetAll();
@@ -220,7 +220,30 @@ export function assignmentRender() {
     inputSuggestion('assignment-new-student-name', 'Nombre del Alumno...', jsonTestStudent);
     inputSuggestion('assignment-new-coach-name', 'Nombre del Plan de Entrenamiento...', jsonTestPlan);
 
-    window.closeAssignmentNewModal = closeAssignmentNewModal;
-    window.openAssignmentNewModal = openAssignmentNewModal;
+    window.closeModalNewAssignment = closeModalNewAssignment;
+    window.openModalNewAssignment = openModalNewAssignment;*/
+
+
+    // transicion suave
+    containerMain.classList.add('opacity-0', 'scale-95', 'transition-all', 'duration-300');
+    containerMain.classList.remove('opacity-100', 'scale-100');
+    setTimeout(() => {
+        containerMain.innerHTML = assignmentHtml(jsonTestAssignment);
+
+        inputSuggestionIcon('assignment-input-search', 'search', 'Buscar alumno...', jsonTestStudent);
+        comboBoxRender('assignment-type-combobox', assignmentTypeList);
+        progressBarSetAll();
+
+        assignmentNewRender();
+        inputSuggestion('assignment-new-student-name', 'Nombre del Alumno...', jsonTestStudent);
+        inputSuggestion('assignment-new-coach-name', 'Nombre del Plan de Entrenamiento...', jsonTestPlan);
+
+        window.closeModalNewAssignment = closeModalNewAssignment;
+        window.openModalNewAssignment = openModalNewAssignment;
+
+        // Aplicar clases de entrada
+        containerMain.classList.remove('opacity-0', 'scale-95');
+        containerMain.classList.add('opacity-100', 'scale-100');
+    }, 100); // duración igual a la transición
 }
 

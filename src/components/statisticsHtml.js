@@ -15,7 +15,7 @@ function statisticsExcerciseCardHtml(excercise) {
                     <span class="material-symbols-outlined">${excercise.percentage > 0 ? 'trending_up' : 'trending_down'}</span>
                     ${excercise.percentage > 0 ? '+' : ''}${excercise.percentage}
                 </div>
-                <button class="button-small p-2" aria-label="Ver progreso detallado" onclick="openStatisticsModal()"><span class="material-symbols-outlined">chart_data</span></button>
+                <button class="button-small p-2" aria-label="Ver progreso detallado" onclick="openModalStatistics()"><span class="material-symbols-outlined">chart_data</span></button>
             </div>
         </div>
     `;

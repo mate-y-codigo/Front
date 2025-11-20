@@ -50,7 +50,7 @@ export function assignmentHtml(assignmentList) {
         <div class="flex flex-col w-full pt-6 pb-6 pl-20 pr-20">
             <div class="flex flex-row-reverse items-center gap-6 pb-10">
                 <div>
-                    <button class="button inline-flex items-center justify-center gap-2" onclick="openAssignmentNewModal()">
+                    <button class="button inline-flex items-center justify-center gap-2" onclick="openModalNewAssignment()">
                         <span class="material-symbols-outlined">add</span>
                         Nueva Asignación
                     </button>

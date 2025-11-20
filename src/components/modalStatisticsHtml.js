@@ -46,7 +46,7 @@ export function modalStatisticsHtml(exerciseProgress) {
                     <div class="flex flex-row items-center justify-between pb-6">
                         <h2 class="title">Progreso Detallado - ${exerciseProgress.name}</h2>
                         <div>
-                            <button class="button-small p-2" onclick="closeStatisticsModal()"><span class="material-symbols-outlined">close</span></button>
+                            <button class="button-small p-2" onclick="closeModalStatistics()"><span class="material-symbols-outlined">close</span></button>
                         </div>                        
                     </div>
                     <div class="w-full">
@@ -84,7 +84,7 @@ export function modalStatisticsHtml(exerciseProgress) {
                 </div>
                 <div class="mt-auto">
                     <div class="flex gap-8 ">
-                        <button class="button-small" onclick="closeStatisticsModal()">Cerrar</button>
+                        <button class="button-small" onclick="closeModalStatistics()">Cerrar</button>
                     </div>
                 </div>
 
