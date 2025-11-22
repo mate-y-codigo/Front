@@ -4,6 +4,7 @@ import { dashboardRender } from "../views/dashboard.js"
 import { plansRender } from "../views/plans.js"
 import { assignmentRender } from '../views/assignment.js'
 import { statiticsRender } from '../views/statistics.js'
+import { usersRender } from "../views/users.js"
 
 // switch page
 function switchPage(selectedPage, headerH1Txt, headerPTxt, page) {
@@ -34,7 +35,7 @@ function switchPage(selectedPage, headerH1Txt, headerPTxt, page) {
 
 function itemsAddListener() {
     document.getElementById('page-home').addEventListener('click', () => switchPage('page-home', headerTxt['home']['h1'], headerTxt['home']['p'], dashboardRender()));
-    document.getElementById('page-users').addEventListener('click', () => switchPage('page-users', headerTxt['users']['h1'], headerTxt['users']['p'], console.log('Usuarios')));
+    document.getElementById('page-users').addEventListener('click', () => switchPage('page-users', headerTxt['users']['h1'], headerTxt['users']['p'], usersRender()));
     document.getElementById('page-exercises').addEventListener('click', () => switchPage('page-exercises', headerTxt['exercises']['h1'], headerTxt['exercises']['p'], console.log('Ejercicios')));
     document.getElementById('page-plans').addEventListener('click', () => switchPage('page-plans', headerTxt['plans']['h1'], headerTxt['plans']['p'], plansRender()));
     document.getElementById('page-assignments').addEventListener('click', () => switchPage('page-assignments', headerTxt['assignments']['h1'], headerTxt['assignments']['p'], assignmentRender()));
