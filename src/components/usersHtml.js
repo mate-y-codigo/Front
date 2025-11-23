@@ -84,7 +84,7 @@ export function usersHtml(usersList) {
         <div class="flex flex-col pt-6 pb-6 pl-20 pr-20">
             
             <!-- Bloque de filtros + botón Nuevo alumno -->
-            <div class="card-plan mb-8">
+            <div>
                 <div class="flex flex-col gap-4 p-6">
 
                     <div class="flex flex-col gap-4 md:flex-row md:items-center">
@@ -165,7 +165,7 @@ export function usersHtml(usersList) {
             </div>
         </div>
 
-        <!-- Contenedores para modales, igual que en plansHtml -->
+        <!-- Contenedores para modales -->
         <div id="modal-open-user-detail"></div>
         <div id="modal-open-user-new"></div>
     `;

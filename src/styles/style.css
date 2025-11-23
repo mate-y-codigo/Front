@@ -563,3 +563,8 @@ textarea:focus-visible {
     box-shadow: 0 4px 10px var(--shadow-color);
     padding: 1rem 1.5rem;
 }
+
+    #container-main {
+        position: relative;
+        min-height: calc(100vh - 80px);
+    }

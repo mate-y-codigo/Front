@@ -31,3 +31,112 @@
 .hidden {
     display: none !important;
 }
+
+/* Cubre solo el área de contenido: el contenedor que inyecta el modal
+   tiene que ser relativo. Si no lo es, poné position: relative; en #container-main */
+.modal-user-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  background-color: rgba(0, 0, 0, 0.45);
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 3rem;
+
+  animation-duration: 0.25s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+/* Card del modal */
+.modal-user {
+  width: min(900px, 100% - 3rem);
+  max-height: calc(100% - 4rem);
+  background-color: var(--card-bg);
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 40px var(--shadow-color);
+  padding: 1.75rem 2rem 2rem;
+  overflow-y: auto;
+
+  animation-duration: 0.25s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+/* Animaciones */
+.modal-user-enter {
+  animation-name: modalUserIn;
+}
+
+.modal-user-exit {
+  animation-name: modalUserOut;
+}
+
+@keyframes modalUserIn {
+  from {
+    transform: translateY(24px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes modalUserOut {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(24px);
+    opacity: 0;
+  }
+}
+
+/* Botones de abajo, mitad y mitad */
+.modal-user-actions {
+  display: flex;
+  gap: 2rem;
+}
+
+.modal-user-actions .button-small,
+.modal-user-actions .button-small-cancel {
+  width: 100%;
+}
+
+.modal-overlay-student-new {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    background-color: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-student-new {
+    width: min(900px, 96vw);
+    max-height: 90vh;
+    background-color: var(--card-bg);
+    border-radius: 0.75rem;
+    border: 1px solid var(--border);
+    box-shadow: 0 20px 40px var(--shadow-color);
+    padding: 1.75rem 2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.modal-student-actions {
+    display: flex;
+    gap: 2rem;
+}
+
+.modal-student-actions .button-small,
+.modal-student-actions .button-small-cancel {
+    width: 100%;
+}
