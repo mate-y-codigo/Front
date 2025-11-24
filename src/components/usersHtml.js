@@ -35,7 +35,7 @@ function userRowHtml(user) {
 
             <!-- Teléfono -->
             <td class="px-6 py-4">
-                ${user.telefono ?? "-"}
+                ${user.telefono ?? user.celular ?? "-"}
             </td>
 
             <!-- Estado -->
@@ -50,7 +50,7 @@ function userRowHtml(user) {
                 <div class="flex gap-2">
                     <!-- Editar -->
                     <button
-                        class="button-small"
+                        class="button-small btn-edit-student"
                         style="width:2.25rem; padding-inline:0;"
                         title="Editar alumno"
                         data-user='${JSON.stringify(user)}'
@@ -60,10 +60,11 @@ function userRowHtml(user) {
 
                     <!-- Eliminar -->
                     <button
-                        class="button-small-icon-red"
+                        class="button-small-icon-red btn-delete-student"
                         style="width:2.25rem; padding-inline:0;"
                         title="Eliminar alumno"
                         data-user-id="${user.id ?? ""}"
+                        data-user-name="${(user.nombre ?? "")} ${(user.apellido ?? "")}"
                     >
                         <span class="material-symbols-outlined" style="font-size:18px;">delete</span>
                     </button>
