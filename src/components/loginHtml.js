@@ -41,20 +41,16 @@ export function loginHtml() {
                                     <div class="space-y-6">
                                         <div class="email space-y-2">
                                             <label for="email">Email</label>
-                                            <input class="input" type="email" id="email" placeholder="tu@email.com" autocomplete="off" required="" value="">
+                                            <input class="input" type="email" id="login-email" placeholder="tu@email.com" autocomplete="off" required="" value="">
                                         </div>
                                         <div class="pass space-y-2">
                                             <label for="password">Contraseña</label>
-                                            <input class="input" type="password" id="password" placeholder="••••••••" autocomplete="off" required="" value="">
+                                            <input class="input" type="password" id="login-password" placeholder="••••••••" autocomplete="off" required="" value="">
+                                        </div>                                                                            
+                                        <div class="pt-4">
+                                            <button id="login-button" class="button inline-flex items-center justify-center" disabled>Ingresar</button>
                                         </div>
-                                        <div class="flex items-center justify-between">
-                                            <label class="remember-me flex items-center">
-                                                <input type="checkbox">
-                                                <span class="text-muted-foreground">Recordarme</span>
-                                            </label>
-                                            <a href="#">¿Olvidaste tu contraseña?</a>
-                                        </div>
-                                        <button id="login-button" class="button inline-flex items-center justify-center">Ingresar</button>
+                                        <div id="login-error" class="text-sm text-red-600 text-center hidden"></div>
                                     </div>
                                 </div>
                             </div>
