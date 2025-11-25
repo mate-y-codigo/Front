@@ -296,6 +296,14 @@ body {
     background-color: var(--primary-dark);
 }
 
+.button:disabled,
+.button-small:disabled {
+  background-color: color-mix(in oklch, var(--primary) 50%, transparent);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+
 .button-small-icon-red {
     display: flex;
     align-items: center;
@@ -564,7 +572,7 @@ textarea:focus-visible {
     padding: 1rem 1.5rem;
 }
 
-    #container-main {
-        position: relative;
-        min-height: calc(100vh - 80px);
-    }
+#container-main {
+    position: relative;
+    min-height: calc(100vh - 100px);
+}
