@@ -1,0 +1,84 @@
+.modal-exercise-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  background-color: rgba(0, 0, 0, 0.45);
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 3rem;
+
+  animation-duration: 0.25s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+.modal-exercise {
+  width: min(900px, 100% - 3rem);
+  max-height: calc(100% - 4rem);
+  background-color: var(--card-bg, var(--background));
+  border-radius: 0.75rem;
+  border: 1px solid var(--border, rgba(148, 163, 184, 0.4));
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.45);
+  padding: 1.75rem 2rem 2rem;
+  overflow-y: auto;
+
+  animation-duration: 0.25s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+.modal-exercise-enter {
+  animation-name: modalExerciseIn;
+}
+
+.modal-exercise-exit {
+  animation-name: modalExerciseOut;
+}
+
+@keyframes modalExerciseIn {
+  from {
+    transform: translateY(24px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes modalExerciseOut {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(24px);
+    opacity: 0;
+  }
+}
+
+.modal-exercise-actions {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.modal-exercise-actions .button-small,
+.modal-exercise-actions .button-small-cancel {
+  width: 100%;
+}
+
+.modal-exercise textarea.input {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.modal-exercise .checkbox {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 1px solid var(--border, rgba(148, 163, 184, 0.6));
+  accent-color: var(--primary, #7c3aed);
+}

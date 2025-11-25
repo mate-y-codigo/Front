@@ -1,0 +1,206 @@
+.page-exercises {
+  width: 100%;
+}
+
+.page-exercises .exercise-filters {
+  margin-bottom: 1rem;
+}
+
+.page-exercises .exercise-filters-row-1 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: flex-end;
+}
+
+.page-exercises .search-input-container {
+  position: relative;
+  flex: 1 1 260px;
+  min-width: 260px;
+}
+
+.page-exercises .search-input-container .search-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: var(--muted-foreground);
+}
+
+.page-exercises .search-input-container .input {
+  padding-left: 2.2rem;
+}
+
+.page-exercises .filter-select {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 150px;
+}
+
+.page-exercises .filter-label {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}
+
+.page-exercises #btn-new-exercise {
+  margin-left: auto;
+  min-width: 170px;
+}
+
+/* GRUPOS Y CARDS */
+.page-exercises .exercise-groups-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.page-exercises .exercise-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.page-exercises .exercise-group-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-left: 0.25rem;
+}
+
+.page-exercises .exercise-cards-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.page-exercises .exercise-card {
+  flex: 1 1 280px;
+  max-width: 360px;
+
+  border-radius: 1rem;
+  background: linear-gradient(
+    135deg,
+    rgba(15, 23, 42, 0.96),
+    rgba(15, 23, 42, 0.9)
+  );
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  padding: 0.9rem 1rem 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.5);
+}
+
+.page-exercises .exercise-card-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.page-exercises .exercise-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.page-exercises .exercise-name {
+  font-size: 0.98rem;
+  font-weight: 600;
+}
+
+.page-exercises .exercise-muscle-text {
+  font-size: 0.8rem;
+  color: var(--muted-foreground);
+}
+
+.page-exercises .exercise-card-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+}
+
+.page-exercises .exercise-pill {
+  border-radius: 999px;
+  padding: 0.1rem 0.7rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.page-exercises .exercise-pill--state-active {
+  background-color: rgba(16, 185, 129, 0.18);
+  color: #6ee7b7;
+}
+
+.page-exercises .exercise-pill--state-inactive {
+  background-color: rgba(248, 113, 113, 0.16);
+  color: #fecaca;
+}
+
+.page-exercises .exercise-pill--category {
+  background-color: rgba(148, 163, 184, 0.18);
+  color: #e5e7eb;
+}
+
+.page-exercises .exercise-card-actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.page-exercises .button-small-secondary {
+  background-color: transparent;
+  border: 1px solid rgba(148, 163, 184, 0.65);
+}
+
+.page-exercises .exercise-no-data {
+  padding: 2rem 0.5rem;
+  text-align: center;
+}
+
+#exercise-toast-container {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 60;
+}
+
+.exercise-toast {
+  background-color: rgba(15, 23, 42, 0.95);
+  border-radius: 0.5rem;
+  padding: 0.7rem 1rem;
+  color: #f9fafb;
+  font-size: 0.85rem;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  animation: exerciseToastIn 0.2s ease-out forwards;
+}
+
+@keyframes exerciseToastIn {
+  from {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.btn-primary {
+    background-color: #6a0dad;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.15s ease;
+}
+
+.btn-primary:hover {
+    background-color: #7d17c8;
+}

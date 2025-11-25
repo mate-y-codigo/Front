@@ -19,7 +19,7 @@ export function sidebarHtml() {
                 <li>
                     <div id="page-users" class="sidebar-item flex items-center gap-2 p-2 rounded">
                         <span class="material-symbols-outlined">people</span>
-                        <span>Usuarios</span>
+                        <span>Alumnos</span>
                     </div>
                 </li>
                 <li>

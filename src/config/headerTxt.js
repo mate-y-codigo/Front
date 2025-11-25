@@ -4,12 +4,12 @@ export const headerTxt = {
     p: 'Aquí está el resumen de hoy'
   },
   users: {
-    h1: 'Gestión de Usuarios',
-    p: 'Administra entrenadores y alumnos del gimnasio'
+    h1: 'Gestión de Alumnos',
+    p: 'Administrá tus alumnos'
   },
   exercises: {
     h1: 'Catálogo de Ejercicios',
-    p: 'Gestiona el catálogo completo de ejercicios del gimnasio'
+    p: 'Gestiona el catálogo completo de ejercicios'
   },
   plans: {
     h1: 'Planes de Entrenamiento',
