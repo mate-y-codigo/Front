@@ -3,20 +3,27 @@ function statisticsExcerciseCardHtml(excercise) {
     return `
         <div class="statistics-excercise-card flex items-center justify-between">
             <div class="flex-1">
-                <p class="execercise-name">${excercise.name}</p>
-                <div class="execercise-detail grid grid-cols-3 gap-2">
+                <div class="statistics-excercise-card-header flex flex-row justify-between items-center p-2">
+                    <div>
+                        <p class="execercise-name">${excercise.name}</p>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-3">
+                            <div class="execercise-percentage flex items-center">
+                                <span class="material-symbols-outlined">${excercise.percentage > 0 ? 'trending_up' : 'trending_down'}</span>
+                                ${excercise.percentage > 0 ? '+' : ''}${excercise.percentage}
+                            </div>
+                            <button class="button-small p-2" aria-label="Ver progreso detallado" onclick="openModalStatistics()"><span class="material-symbols-outlined">chart_data</span></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="execercise-detail grid grid-cols-1 gap-2 pt-2">
                     <div><span class="font-medium">Peso máximo: </span><span class="font-bold">${excercise.maxWeight}</span></div>
                     <div><span class="font-medium">Repticiones maximas: </span><span class="font-bold">${excercise.maxRepetition}</span></div>
                     <div><span class="font-medium">Realizado por última vez: </span><span class="font-bold">${excercise.lastDate}</span></div>
                 </div>
             </div>
-            <div class="flex items-center gap-3 ml-4">
-                <div class="execercise-percentage flex items-center gap-1">
-                    <span class="material-symbols-outlined">${excercise.percentage > 0 ? 'trending_up' : 'trending_down'}</span>
-                    ${excercise.percentage > 0 ? '+' : ''}${excercise.percentage}
-                </div>
-                <button class="button-small p-2" aria-label="Ver progreso detallado" onclick="openModalStatistics()"><span class="material-symbols-outlined">chart_data</span></button>
-            </div>
+            
         </div>
     `;
 }
@@ -48,7 +55,9 @@ export function statisticsHtml(excerciseList) {
                             </div>
                         </div>
                     </div>
-                    ${excerciseList.map((excercise) => statisticsExcerciseCardHtml(excercise)).join('')} 
+                    <div class="grid grid-cols-3 gap-4">
+                        ${excerciseList.map((excercise) => statisticsExcerciseCardHtml(excercise)).join('')} 
+                    </div>
                 </div>
             </div>
         </div>

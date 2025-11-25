@@ -21,18 +21,22 @@
 }
 
 .statistics-excercise-card {
-    margin-bottom: 1rem;
     padding: 1rem;
     background-color: var(--card-bg);
     border-radius: 0.375rem;
     border: 1px solid color-mix(in oklch, var(--border) 45%, transparent);
 }
 
+.statistics-excercise-card-header{
+    background-color: color-mix(in oklch, var(--background) 45%, transparent);
+    border-radius: 0.375rem;
+    border: 1px solid color-mix(in oklch, var(--border) 45%, transparent);
+}
+
 .statistics-excercise-card .execercise-name {
-    color: var(--text-primary);
-    font-size: 1rem;
+    color: var(--text-primary);    
+    font-size: 1.125rem;
     font-weight: 600;
-    margin-bottom: 0.25rem;
 }
 
 .statistics-excercise-card .execercise-detail {
