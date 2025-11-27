@@ -31,9 +31,9 @@ class AuthHelper {
   async fetchWithAuth(url, options = {}) {
     let token = this.getAccessToken();
 
-   /* if (!token || this.isTokenExpired(token)) {
-      token = await this.refreshAccessToken();
-    }*/
+    /* if (!token || this.isTokenExpired(token)) {
+       token = await this.refreshAccessToken();
+     }*/
 
     const headers = {
       ...options.headers,

@@ -3,7 +3,7 @@ import { headerTxt } from "../config/headerTxt.js"
 import { dashboardRender } from "../views/dashboard.js"
 import { plansRender } from "../views/plans.js"
 import { assignmentRender } from '../views/assignment.js'
-import { statiticsRender } from '../views/statistics.js'
+import { renderMetricas } from '../views/statistics.js'
 import { usersRender } from "../views/users.js"
 import { exercisesRender } from "../views/exercises.js"
 import { loginRender } from '../views/login.js'
@@ -44,7 +44,7 @@ function itemsAddListener() {
     document.getElementById('page-plans').addEventListener('click', () => switchPage('page-plans', headerTxt['plans']['h1'], headerTxt['plans']['p'], plansRender()));
     document.getElementById('page-assignments').addEventListener('click', () => switchPage('page-assignments', headerTxt['assignments']['h1'], headerTxt['assignments']['p'], assignmentRender()));
     document.getElementById('page-calendars').addEventListener('click', () => switchPage('page-calendars', headerTxt['calendars']['h1'], headerTxt['calendars']['p'], console.log('Calendario')));
-    document.getElementById('page-statistics').addEventListener('click', () => switchPage('page-statistics', headerTxt['statistics']['h1'], headerTxt['statistics']['p'], statiticsRender()));
+    document.getElementById('page-statistics').addEventListener('click', () => switchPage('page-statistics', headerTxt['statistics']['h1'], headerTxt['statistics']['p'], renderMetricas()));
     document.getElementById('page-payments').addEventListener('click', () => switchPage('page-payments', headerTxt['payments']['h1'], headerTxt['payments']['p'], console.log('Pagos')));
 
     document.getElementById('logout-btn').addEventListener('click', () => { authHelper.clearTokens(); loginRender(); });
