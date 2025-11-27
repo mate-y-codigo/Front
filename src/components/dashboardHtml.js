@@ -1,10 +1,10 @@
-function cardInfoStudent(number, percentage) {
+function cardInfoStudent(usuario) {
     return `
         <div id="card-info-student" class="flex-auto p-6">
             <div class="flex items-start justify-between">
                 <div class="space-y-1">
                     <p class="title">Alumnos Activos</p>
-                    <p class="number">${number}</p>
+                    <p class="number">${usuario.activo}</p>
                     <p class="percentage">${percentage}%</p>
                 </div>
                 <div class="icon material-symbols-outlined">group</div>

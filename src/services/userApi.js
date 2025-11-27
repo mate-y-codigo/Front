@@ -1,6 +1,6 @@
 async function getUserAll() {
     try {
-        const usuarios = await authHelper.fetchWithAuth("https://localhost:7211/api/Usuarios"); console.log(usuarios);
+        const usuarios = await authHelper.fetchWithAuth("https://localhost:7211/api/Usuarios"); 
     } catch (err) {
         console.error("Error accediendo a la API:", err.message);
     }
