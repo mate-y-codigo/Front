@@ -207,7 +207,7 @@ function datePickerRangeBulid() {
             }
         }
 
-        // ----- Actualizar inputs -----
+        // ----- Actualizar inputs ----- 
         function updateInputs() {
             const format = (d) =>
                 `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;

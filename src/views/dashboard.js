@@ -27,6 +27,11 @@ const cardNextSession = [
     { name: 'Pedro Sánchez', hour: '16:30', type: 'CrossFit Básico' }
 ];
 
+async function fetchUsers(){
+
+
+}
+
 /** render */
 export function dashboardRender() {
     const containerMain = document.getElementById("container-main");

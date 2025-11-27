@@ -31,4 +31,5 @@ export const headerTxt = {
     h1: 'Gestión de Pagos',
     p: 'Administra los pagos y estado de cuenta de tus alumnos'
   }
+  
 };
