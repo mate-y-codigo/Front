@@ -3,6 +3,7 @@ import { getUserAll } from '../services/userApi.js';
 import { planCreateHtml } from '../components/planCreateHtml.js';
 import { getAllAlumnoPlan } from '../services/asignacionApi.js';
 import { getAllSesionesRealizadas } from '../services/asignacionApi.js';
+import { getAllSesionesEntrenamiento } from '../services/planApi.js';
 
 function dashboardButtonAddListener() {
     document.getElementById('quick-action-add-student').addEventListener('click', () => console.log('agregar nuevo alumno'));
@@ -70,15 +71,17 @@ export async function dashboardRender() {
 
     const usuarios = await getUserAll();
     const planesAsignados = await getAllAlumnoPlan();
-   // const sesionesRealizadas = await getAllSesionesRealizadas();
+    const sesionesRealizadas = await getAllSesionesRealizadas();
+    const sesionesEntrenamiento = await getAllSesionesEntrenamiento();
 
 
     const statsUser = porcentajeActivos(usuarios);
     const statsPlanes = porcentajeAsignados(planesAsignados);
-    //const statsSesiones = porcentajeSesionesRealizadas(sesionesRealizadas,);
+    const statsSesiones = porcentajeSesionesRealizadas(sesionesRealizadas,sesionesEntrenamiento);
 
     cardInfo.push({number: statsUser.activos, percentage : statsUser.porcentaje});
-    cardInfo.push({number: statsPlanes.asignados, percentage : statsPlanes.porcentaje}) 
+    cardInfo.push({number: statsPlanes.asignados, percentage : statsPlanes.porcentaje})
+    cardInfo.push({number: statsSesiones.realizadas, percentage : statsSesiones.porcentaje }) 
           
     containerMain.innerHTML = dashboardHtml(cardInfo, cardActivity, cardNextSession);
     

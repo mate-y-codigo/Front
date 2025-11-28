@@ -94,7 +94,7 @@ export function dashboardHtml(cardInfo, cardActivity, cardNextSession) {
                 ${cardInfoStudent(cardInfo[0])}
                 ${cardInfoPlans(cardInfo[1])}
                 ${cardInfoIncome(cardInfo[0].number, cardInfo[0].percentage)} 
-                ${cardInfoSession(cardInfo[0].number, cardInfo[0].percentage)}
+                ${cardInfoSession(cardInfo[2])}
             </div>
             
             <div class="flex justify-center gap-6 m-2">

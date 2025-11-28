@@ -7,11 +7,20 @@ export async function getPlanAll() {
         return plans;
     } catch (err) {
         console.error("Error accediendo a la API:", err.message);
+        return [];
     }
 }
 
-export async function getSesionesEntrenamiento(filter = {}) {
+export async function getAllSesionesEntrenamiento() {
     try{
-        const sesiones = 
+        const sesiones = await fetch(getUrlPlanApi()+'/api/TrainingSession');
+        
+        var data = await sesiones.json();
+
+        return data;
+    }
+    catch(err){
+       console.error("Error accediendo a la API:", err.message);
+       return []; 
     }
 }
