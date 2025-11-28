@@ -9,7 +9,11 @@ export async function getAllAlumnoPlan(filter = {}) {
         const url = query ? `${getUrlAsignacionApi()}/api/AlumnoPlan?${query}`
         : `${getUrlAsignacionApi()}/api/AlumnoPlan`;
 
-        return await authHelper.fetchWithAuth(url, { method: "GET" });
+        const planes =  await authHelper.fetchWithAuth(url, { method: "GET" });
+
+        const response = await planes.json();
+
+        return response;
        
     }
    catch(err){
@@ -26,7 +30,11 @@ export async function getAllSesionesRealizadas(filter = {}) {
       const url = query ? `${getUrlAsignacionApi()}/api/SesionRealizada?${query}`
         : `${getUrlAsignacionApi()}/api/SesionRealizada`;
 
-        return await authHelper.fetchWithAuth(url,{method:"GET"});
+        const sesiones =  await authHelper.fetchWithAuth(url,{method:"GET"});
+
+        const response = await sesiones.json();
+
+        return response;
   }
   catch(err){
     console.error("Error accediendo a la api"+ err.message);

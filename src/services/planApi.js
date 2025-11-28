@@ -3,8 +3,12 @@ import { authHelper } from '../helpers/authHelper.js'
 
 export async function getPlanAll() {
     try {
-        const response = await authHelper.fetchWithAuth(getUrlPlanApi() + `/api/TrainingPlan`);
-        return response.json();
+        const planes = await authHelper.fetchWithAuth(getUrlPlanApi() + `/api/TrainingPlan`);
+
+        const response = await planes.json();
+
+        return response;
+
     } catch (err) {
         console.error("Error accediendo a la API:", err.message);
         return [];

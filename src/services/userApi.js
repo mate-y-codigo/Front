@@ -5,7 +5,10 @@ import { authHelper } from "../helpers/authHelper.js";
 export async function getUserAll() {
     try {
         const usuarios = await authHelper.fetchWithAuth( getUrlUserApi() + "/api/Usuarios");
-        return usuarios; 
+        
+        const response = await usuarios.json();
+
+        return response;
     } catch (err) {
         console.error("Error accediendo a la API:", err.message);
         return[];

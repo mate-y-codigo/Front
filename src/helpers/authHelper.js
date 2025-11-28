@@ -64,6 +64,8 @@ class AuthHelper {
     // no se parsea la respuesta
     return response;
   }
+
+  
 }
 
 export const authHelper = new AuthHelper();
