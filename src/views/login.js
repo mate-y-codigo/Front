@@ -1,7 +1,7 @@
 import { loginHtml } from '../components/loginHtml.js'
 import { indexRender } from '../views/index.js'
-import { authHelper } from "../helpers/authHelper.js";
 import { validationHelper } from "../helpers/validationHelper.js";
+import { loginUser } from '../services/loginApi.js'
 
 function showLoginError(message) {
     const errorDiv = document.getElementById("login-error");
@@ -15,43 +15,24 @@ function clearLoginError() {
     errorDiv.classList.add("hidden");
 }
 
+/** login */
 async function login(email, password) {
-    try {
-        const response = await fetch("https://localhost:7211/api/Auth/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password })
-        });
-
-        if (!response.ok) {
-            if (response.status === 401) {
-                console.warn("Credenciales inválidas (401)");
-                throw new Error("Usuario o contraseña incorrectos");
-            } else {
-                console.error(`Error HTTP ${response.status}`);
-                throw new Error("Error inesperado al iniciar sesión");
-            }
-        }
-
-        const data = await response.json();
-        authHelper.setTokens(data.token);
-        indexRender();
-    } catch (err) {
-        console.error("Error en login:", err.message);
-        showLoginError("Email o contraseña incorrectos.");
-    }
+    if (loginUser(email, password)) { indexRender(); }
+    else { showLoginError("Email o contraseña incorrectos.") };
 }
 
 /** inicia el login en la pagina */
 function loginButtonAddListener() {
-    document.getElementById('login-button').addEventListener('click', () => {
+    document.getElementById('login-button').addEventListener('click', async () => {
         const email = document.getElementById('login-email').value;
         const pass = document.getElementById('login-password').value;
-        login(email, pass);
+        //login(email, pass);
+        if (await loginUser(email, pass)) { indexRender(); }
+        else { showLoginError("Email o contraseña incorrectos.") };
     });
 }
 
-/** verificar si hay una sesion activa y redirigir al dashboard al pulsar F5 o ingresar a la pagina */
+/** verificar si hay una sesion activa y redirigir al dashboard al pulsar F5 */
 function isTokenExpired(token) {
     try {
         const payload = JSON.parse(atob(token.split(".")[1]));
@@ -133,6 +114,9 @@ export function loginRender() {
     clearLoginError();
     themeLoad();
     loginBtnCtrl();
+    
+    
+    //indexRender();
 }
 
 window.onload = loginRender();
