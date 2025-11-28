@@ -1,13 +1,29 @@
-export function exerciseCreateHtml({ muscles, muscleGroups, categories }) {
+// src/components/exerciseEditHtml.js
+
+function escapeHtml(val) {
+  if (val == null) return "";
+  return String(val)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+export function exerciseEditHtml({ exercise, muscles, muscleGroups, categories, selectedGroupId }) {
+  const nombre = escapeHtml(exercise.nombre ?? "");
+  const urlDemo = escapeHtml(exercise.urlDemostracion ?? exercise.urlDemo ?? "");
+  const selectedMuscleId = exercise.musculoId ?? null;
+  const selectedCategoryId = exercise.categoriaId ?? null;
+
   return `
     <div class="exercise-create-page">
       <div class="exercise-create-card">
         <div class="exercise-create-header">
-          <h2>Nuevo Ejercicio</h2>
-          <p>Ingresá los datos del ejercicio que querés agregar.</p>
+          <h2>Editar Ejercicio</h2>
+          <p>Modificá los datos del ejercicio seleccionado.</p>
         </div>
 
-        <form id="exercise-create-form" class="exercise-form">
+        <form id="exercise-edit-form" class="exercise-form">
           <div class="exercise-form-row">
             <div class="exercise-form-field">
               <label for="exercise-name">Nombre *</label>
@@ -17,6 +33,7 @@ export function exerciseCreateHtml({ muscles, muscleGroups, categories }) {
                 type="text"
                 class="input"
                 placeholder="Nombre del ejercicio..."
+                value="${nombre}"
                 required
               />
             </div>
@@ -34,7 +51,12 @@ export function exerciseCreateHtml({ muscles, muscleGroups, categories }) {
                 ${muscleGroups
                   .map(
                     (g) => `
-                      <option value="${g.id}">${g.nombre}</option>
+                      <option
+                        value="${g.id}"
+                        ${g.id === selectedGroupId ? "selected" : ""}
+                      >
+                        ${escapeHtml(g.nombre)}
+                      </option>
                     `
                   )
                   .join("")}
@@ -53,10 +75,14 @@ export function exerciseCreateHtml({ muscles, muscleGroups, categories }) {
                 ${muscles
                   .map(
                     (m) => `
-                      <option value="${m.id}" data-group-id="${m.grupoMuscularId}">
-                        ${m.nombre} ${
+                      <option
+                        value="${m.id}"
+                        data-group-id="${m.grupoMuscularId ?? ""}"
+                        ${m.id === selectedMuscleId ? "selected" : ""}
+                      >
+                        ${escapeHtml(m.nombre)} ${
                           m.grupoMuscularNombre
-                            ? `(${m.grupoMuscularNombre})`
+                            ? `(${escapeHtml(m.grupoMuscularNombre)})`
                             : ""
                         }
                       </option>
@@ -80,7 +106,12 @@ export function exerciseCreateHtml({ muscles, muscleGroups, categories }) {
                 ${categories
                   .map(
                     (c) => `
-                      <option value="${c.id}">${c.nombre}</option>
+                      <option
+                        value="${c.id}"
+                        ${c.id === selectedCategoryId ? "selected" : ""}
+                      >
+                        ${escapeHtml(c.nombre)}
+                      </option>
                     `
                   )
                   .join("")}
@@ -95,14 +126,32 @@ export function exerciseCreateHtml({ muscles, muscleGroups, categories }) {
                 type="url"
                 class="input"
                 placeholder="https://..."
+                value="${urlDemo}"
               />
+            </div>
+          </div>
+
+          <div class="exercise-form-row">
+            <div class="exercise-form-field">
+              <label for="exercise-active">Estado</label>
+              <div class="flex items-center gap-2">
+                <input
+                  id="exercise-active"
+                  name="activo"
+                  type="checkbox"
+                  ${exercise.activo ? "checked" : ""}
+                />
+                <span class="text-sm">
+                  ${exercise.activo ? "Ejercicio activo" : "Ejercicio inactivo"}
+                </span>
+              </div>
             </div>
           </div>
 
           <div class="exercise-form-actions">
             <button
               type="button"
-              id="exercise-create-cancel"
+              id="exercise-edit-cancel"
               class="button button-cancel"
             >
               Cancelar
@@ -112,8 +161,8 @@ export function exerciseCreateHtml({ muscles, muscleGroups, categories }) {
               type="submit"
               class="button inline-flex items-center justify-center gap-2"
             >
-              <span class="material-symbols-outlined">add</span>
-              <span>Guardar ejercicio</span>
+              <span class="material-symbols-outlined">edit_square</span>
+              <span>Guardar cambios</span>
             </button>
           </div>
         </form>

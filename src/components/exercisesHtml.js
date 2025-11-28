@@ -27,9 +27,40 @@ function groupExercisesByGroup(exercises, muscles) {
     groups.get(groupName).push(ex);
   });
 
-  return Array.from(groups.entries()).sort(([a], [b]) =>
-    a.localeCompare(b)
-  );
+  return Array.from(groups.entries()).sort(([a], [b]) => a.localeCompare(b));
+}
+
+function buildGroupChips(muscleGroups) {
+  if (!muscleGroups || !muscleGroups.length) return "";
+
+  const chips = muscleGroups
+    .map((g) => {
+      const name = escapeHtml(g.nombre ?? "Otros");
+      const value = name.toLowerCase();
+      return `
+        <button
+          type="button"
+          class="group-chip"
+          data-group="${value}"
+        >
+          ${name}
+        </button>
+      `;
+    })
+    .join("");
+
+  return `
+    <div class="exercise-group-filter">
+      <button
+        type="button"
+        class="group-chip active"
+        data-group=""
+      >
+        Todos
+      </button>
+      ${chips}
+    </div>
+  `;
 }
 
 function buildGroupSections(exercises, muscles) {
@@ -50,19 +81,15 @@ function buildGroupSections(exercises, muscles) {
       const cards = groupExercises
         .map((ex) => {
           const nombre = escapeHtml(ex.nombre ?? ex.name ?? "");
-          const musculo = escapeHtml(
-            ex.musculoPrincipal ?? ex.musculo ?? ""
-          );
+          const musculo = escapeHtml(ex.musculoPrincipal ?? ex.musculo ?? "");
           const categoria = escapeHtml(ex.categoria ?? "");
-          const urlDemo = escapeHtml(
-            ex.urlDemostracion ?? ex.urlDemo ?? ""
-          );
-          const activo = ex.activo !== false;
+          const urlDemo = escapeHtml(ex.urlDemostracion ?? ex.urlDemo ?? "");
+          const activo = ex.activo === true;
 
           const dataName = nombre.toLowerCase();
           const dataMuscle = musculo.toLowerCase();
           const dataCategory = categoria;
-          const dataState = activo ? "activo" : "inactivo";
+          const dataState = activo ? "true" : "false";
           const dataGroup = groupName.toLowerCase();
 
           return `
@@ -100,8 +127,7 @@ function buildGroupSections(exercises, muscles) {
                   data-url="${urlDemo}"
                   title="Ver demostración"
                 >
-                <span class="material-symbols-outlined">visibility</span>
-                  Demostración
+                  <span class="material-symbols-outlined">visibility</span>
                 </button>
                 <button
                   type="button"
@@ -141,7 +167,9 @@ function buildGroupSections(exercises, muscles) {
 export function exercisesHtml(data) {
   const exercises = data?.exercises ?? [];
   const muscles = data?.muscles ?? [];
+  const muscleGroups = data?.muscleGroups ?? [];
 
+  const groupChipsHtml = buildGroupChips(muscleGroups);
   const groupSectionsHtml = buildGroupSections(exercises, muscles);
 
   return `
@@ -191,19 +219,19 @@ export function exercisesHtml(data) {
               id="exercise-status-filter"
               class="input select-input"
             >
-              <option value="">Todos</option>
-              <option value="activo">Activo</option>
-              <option value="inactivo">Inactivo</option>
+              <option value="true" selected>Activos</option>
+              <option value="false">Inactivos</option>
             </select>
           </div>
 
           <button id="btn-new-exercise" class="button inline-flex items-center justify-center gap-2">
             <span class="material-symbols-outlined">add</span>
-            <span>Nuevo ejercicio</span>
+            <span>Nuevo Ejercicio</span>
           </button>
-
         </div>
       </section>
+
+      ${groupChipsHtml}
 
       <!-- Grupos musculares y cartas -->
       <section class="exercise-groups-wrapper">

@@ -1,5 +1,6 @@
 .page-exercises {
   width: 100%;
+  animation: pageEnter 0.25s ease-out;
 }
 
 .page-exercises .exercise-filters {
@@ -40,7 +41,7 @@
 }
 
 .page-exercises .filter-label {
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   color: var(--muted-foreground);
 }
 
@@ -208,7 +209,37 @@
     background-color: #7d17c8;
 }
 
+.exercise-group-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.group-chip {
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid var(--border, #374151);
+  background: transparent;
+  color: var(--text-secondary, #9ca3af);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+
+.group-chip:hover {
+  border-color: #6a0dad;
+  color: #e5e7eb;
+}
+
+.group-chip.active {
+  background-color: #6a0dad;
+  border-color: #6a0dad;
+  color: #ffffff;
+}
+
 .button {
   width: auto;
 }
+
 

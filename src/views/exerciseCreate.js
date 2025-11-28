@@ -6,6 +6,7 @@ import {
   createExercise,
 } from "../services/exerciseApi.js";
 import { exercisesRender } from "./exercises.js";
+import { headerTxt } from "../config/headerTxt.js";
 
 export async function exerciseCreateRender() {
   const container = document.getElementById("container-main");
@@ -14,9 +15,9 @@ export async function exerciseCreateRender() {
   // Actualizar header
   const headerH1 = document.getElementById("header-h1");
   const headerP = document.getElementById("header-p");
-  if (headerH1 && headerP) {
-    headerH1.textContent = "Nuevo Ejercicio";
-    headerP.textContent = "Agregá un nuevo ejercicio al catálogo.";
+  if (headerH1 && headerP && headerTxt.exercisesCreate){
+    headerH1.textContent = headerTxt.exercisesCreate.h1;
+    headerP.textContent = headerTxt.exercisesCreate.p;
   }
 
   try {

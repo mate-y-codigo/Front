@@ -1,12 +1,14 @@
 import { exercisesHtml } from "../components/exercisesHtml.js";
 import { exerciseCreateRender } from "./exerciseCreate.js";
-import { modalExerciseEditHtml } from "../components/modalExerciseEditHtml.js";
+import { exerciseEditRender } from "./exerciseEdit.js";
 import { modalExerciseDeleteHtml } from "../components/modalExerciseDeleteHtml.js";
+import { headerTxt } from "../config/headerTxt.js";
 
 import {
   getExercises,
   getMuscles,
   getCategories,
+  getMuscleGroups,
   createExercise,
   updateExercise,
   deleteExercise,
@@ -16,23 +18,32 @@ const exerciseState = {
   exercises: [],
   muscles: [],
   categories: [],
+  muscleGroups: []
 };
 
 export async function exercisesRender() {
   const container = document.getElementById("container-main");
   if (!container) return;
 
+  const headerH1 = document.getElementById("header-h1");
+  const headerP = document.getElementById("header-p");
+  if (headerH1 && headerP && headerTxt.exercises){
+    headerH1.textContent = headerTxt.exercises.h1;
+    headerP.textContent = headerTxt.exercises.p;
+  }
+
   try {
-    // Podés ajustar filtros si querés traer también los inactivos
-    const [apiExercises, apiMuscles, apiCategories] = await Promise.all([
-      getExercises({}),        // GET /api/Exercise
-      getMuscles({}),          // GET /api/Muscle
-      getCategories(),         // GET /api/CategoryExercise
+    const [apiExercises, apiMuscles, apiCategories, apiMuscleGroups] = await Promise.all([
+      getExercises({}),
+      getMuscles({}),
+      getCategories(),
+      getMuscleGroups()
     ]);
 
     exerciseState.muscles = mapFromApiMuscles(apiMuscles);
     exerciseState.categories = mapFromApiCategories(apiCategories);
     exerciseState.exercises = mapFromApiExercises(apiExercises);
+    exerciseState.muscleGroups = mapFromApiMuscleGroups(apiMuscleGroups);
 
     renderExercisesView();
   } catch (err) {
@@ -50,6 +61,7 @@ function renderExercisesView() {
     exercises: exerciseState.exercises,
     muscles: exerciseState.muscles,
     categories: exerciseState.categories,
+    muscleGroups: exerciseState.muscleGroups
   });
 
   initExercisesEvents();
@@ -92,6 +104,13 @@ function mapFromApiCategories(apiCategories) {
   }));
 }
 
+function mapFromApiMuscleGroups(apiMuscleGroups) {
+  return apiMuscleGroups.map((mg) => ({
+    id: mg.id,
+    nombre: mg.nombre
+  }))
+}
+
 function mapToApiCreate(rawForm) {
   return {
     nombre: rawForm.nombre?.trim() ?? "",
@@ -123,6 +142,13 @@ function initExercisesEvents() {
   const modalHost = document.getElementById("modal-open-exercise");
 
   const cards = Array.from(document.querySelectorAll(".exercise-card"));
+  const groupChips = Array.from(document.querySelectorAll(".group-chip"));
+
+  let selectedGroupId = "";
+
+  if (statusSelect && !statusSelect.value) {
+    statusSelect.value = "true";
+  }
 
   function applyFilters() {
     const nameFilter = (searchInput?.value || "").trim().toLowerCase();
@@ -134,16 +160,23 @@ function initExercisesEvents() {
       const name = (card.dataset.name || "").toLowerCase();
       const muscle = (card.dataset.muscle || "").toLowerCase();
       const category = card.dataset.category || "";
-      const state = card.dataset.state || "";
+      const state = (card.dataset.state || "").toLowerCase();
+      const group = card.dataset.group || "";
 
       const matchesName = !nameFilter || name.includes(nameFilter);
       const matchesMuscle = !muscleFilter || muscle.includes(muscleFilter);
       const matchesCategory = !categoryFilter || category === categoryFilter;
-      const matchesStatus = !statusFilter || state === statusFilter;
+      //const matchesStatus = !statusFilter || state === statusFilter;
+      let matchesStatus = true;
+      if (statusFilter === "true") {
+        matchesStatus = state === "true";
+      }
+      else if (statusFilter === "false") {
+        matchesStatus = state === "false";
+      }
+      const matchesGroup = !selectedGroupId || group === selectedGroupId;
 
-      const visible =
-        matchesName && matchesMuscle && matchesCategory && matchesStatus;
-
+      const visible = matchesName && matchesMuscle && matchesCategory && matchesStatus && matchesGroup;
       card.classList.toggle("hidden", !visible);
     });
 
@@ -159,6 +192,18 @@ function initExercisesEvents() {
   muscleInput?.addEventListener("input", applyFilters);
   categorySelect?.addEventListener("change", applyFilters);
   statusSelect?.addEventListener("change", applyFilters);
+  groupChips.forEach((chip) => {
+  chip.addEventListener("click", () => {
+    const value = chip.dataset.group || "";
+
+    selectedGroupId = value;
+    groupChips.forEach((c) => c.classList.remove("active"));
+    chip.classList.add("active");
+
+    applyFilters();
+  });
+});
+
   applyFilters();
 
   // Nuevo ejercicio
@@ -184,12 +229,13 @@ function initExercisesEvents() {
   // Editar
   document.querySelectorAll(".btn-edit-exercise").forEach((btn) => {
     btn.addEventListener("click", () => {
-      const id = btn.getAttribute("data-exercise-id");
-      const ex = exerciseState.exercises.find((e) => String(e.id) === String(id));
-      if (!ex || !modalHost) return;
-      openEditExerciseModal(modalHost, ex);
+      const exJson = btn.getAttribute("data-exercise");
+      if (!exJson) return;
+      const ex = JSON.parse(exJson);
+      exerciseEditRender(ex);
     });
   });
+
 
   // Eliminar
   document.querySelectorAll(".btn-delete-exercise").forEach((btn) => {
