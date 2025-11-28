@@ -628,19 +628,12 @@ export function addPlanListener() {
     const containerPlanTemplate = document.getElementById("plan-template-combobox");
     const combo = containerPlanTemplate.querySelector(".combobox");
     combo.addEventListener("combo:change", async () => {
-
         const template = await getPlanTemplateById(combo.dataset.selectedId);
-
-        console.log(template);
-
         loadPlanFromTamplate(template);
     });
 
     document.getElementById("btn-save-plan").addEventListener("click", async () => {
         const res = validateAndBuildPlanJson();
-
-        console.log(res);
-
         if (res.valid) {
             const answer = await setPlanNew(res.payload);
             if (!answer.success) {
@@ -656,9 +649,6 @@ export function addPlanListener() {
 
             // render global widgets
             const listTemplate = await getListTemplate();
-
-            console.log(listTemplate);
-
             if (listTemplate.length) {
                 const combo = document.querySelector("#plan-template-combobox .combobox");
                 comboBoxReset(combo);

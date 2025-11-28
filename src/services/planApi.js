@@ -41,9 +41,6 @@ export async function getPlanByFilter(name, type) {
         if (name?.length) params.append("Name", name);
         if (type != null) params.append("IsTemplate", type);
         params.append("Active", true);
-
-        console.log(params.toString());
-
         const response = await authHelper.fetchWithAuth(getUrlPlanApi() + `/api/TrainingPlan?${params.toString()}`);
         return response.json();
     } catch (err) {
