@@ -27,6 +27,9 @@ export async function renderCardsPlans(plans) {
         // Replace content
         containerPlansCards.innerHTML = listPlans.map((plan) => planCardHtml(plan)).join('');
 
+        // add listener again
+        addPlanListener();
+
         // Reset output classes
         containerPlansCards.classList.remove("plans-cards-fade-exit", "plans-cards-fade-exit-active");
 
@@ -77,7 +80,7 @@ export function initPlanFilters() {
             titleFilter.textContent = `Rsultados de la búsqueda: ${plansFilter.length}`;
         }
 
-        renderCardsPlans(plansFilter);
+        renderCardsPlans(plansFilter);        
     }
 
     // Evento del input buscar
