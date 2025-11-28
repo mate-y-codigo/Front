@@ -3,7 +3,7 @@ import { inputSuggestionIcon, inputSuggestion } from '../views/inputSuggestion.j
 import { modalStatisticsRender } from '../views/modalStatistics.js'
 
 
-//                                MOCK (para pruebas)
+// MOCK (para pruebas)
 
 const mockMetricas = {
     grafiquitos: [
@@ -128,7 +128,7 @@ function renderSpinner(container) {
 
 
 
-//                         HTML PRINCIPAL (todo dinámico)
+
 
 export function metricasHtml(data) {
 
@@ -332,9 +332,6 @@ export function metricasHtml(data) {
 }
 
 
-// ============================================================================
-//                       EJECUTAR <script data-dynamic>
-// ============================================================================
 export function executeDynamicScripts(container) {
     const scripts = container.querySelectorAll("script[data-dynamic-script='true']");
 
@@ -347,9 +344,7 @@ export function executeDynamicScripts(container) {
 }
 
 
-// ============================================================================
-//                     ESCUCHAR FILTROS PARA RELOAD DINÁMICO
-// ============================================================================
+
 function attachFilterListeners() {
     const alumno = document.getElementById("select-alumno");
     const rango = document.getElementById("select-rango");
@@ -359,15 +354,12 @@ function attachFilterListeners() {
 }
 
 
-// ============================================================================
-//                               RENDER PRINCIPAL
-// ============================================================================
 export async function renderMetricas() {
     const containerMain = document.getElementById("container-main");
 
     renderSpinner(containerMain);
 
-    const USE_MOCK = true; // cambiar a false cuando tengas backend
+    const USE_MOCK = true;
 
     let data;
 
