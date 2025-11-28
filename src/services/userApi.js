@@ -1,8 +1,14 @@
-async function getUserAll() {
+import { getUrlUserApi } from "../config/urlApi.js";
+import { authHelper } from "../helpers/authHelper.js";
+
+
+export async function getUserAll() {
     try {
-        const usuarios = await authHelper.fetchWithAuth("https://localhost:7211/api/Usuarios"); console.log(usuarios);
+        const usuarios = await authHelper.fetchWithAuth( getUrlUserApi() + "/api/Usuarios");
+        return usuarios; 
     } catch (err) {
         console.error("Error accediendo a la API:", err.message);
+        return[];
     }
 }
 
@@ -14,9 +20,9 @@ const userId = "9a3ffd2c-1384-4574-b0ec-0b18e4c1d0be";
 getUsuarioById(userId);
 
 */
-async function getUserById(id) {
+export async function getUserById(id) {
     try {
-        const usuario = await authHelper.fetchWithAuth(`https://localhost:7211/api/Usuarios/${id}`);
+        const usuario = await authHelper.fetchWithAuth(getUrlUserApi() + `/api/Usuarios/${id}`);
         console.log(usuario);
         return usuario;
     } catch (err) {
@@ -31,9 +37,9 @@ Ejemplo:
     "activo": true
     }
  */
-async function getUserByFilter(filter) {
+export async function getUserByFilter(filter) {
     try {
-        const usuarios = await authHelper.fetchWithAuth("https://localhost:7211/api/Usuarios/search", {
+        const usuarios = await authHelper.fetchWithAuth( getUrlUserApi() + '/api/Usuarios/search', {
             method: "POST",
             body: JSON.stringify(filter),
             headers: {

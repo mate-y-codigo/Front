@@ -7,6 +7,21 @@ export async function getPlanAll() {
         return response.json();
     } catch (err) {
         console.error("Error accediendo a la API:", err.message);
+        return [];
+    }
+}
+
+export async function getAllSesionesEntrenamiento() {
+    try{
+        const sesiones = await fetch(getUrlPlanApi()+'/api/TrainingSession');
+        
+        var data = await sesiones.json();
+
+        return data;
+    }
+    catch(err){
+       console.error("Error accediendo a la API:", err.message);
+       return []; 
     }
 }
 

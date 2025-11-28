@@ -1,25 +1,25 @@
-function cardInfoStudent(number, percentage) {
+function cardInfoStudent(data) {
     return `
         <div id="card-info-student" class="flex-auto p-6">
             <div class="flex items-start justify-between">
                 <div class="space-y-1">
                     <p class="title">Alumnos Activos</p>
-                    <p class="number">${number}</p>
-                    <p class="percentage">${percentage}%</p>
+                    <p class="number">${data.number}</p>
+                    <p class="percentage">${data.percentage}%</p>
                 </div>
                 <div class="icon material-symbols-outlined">group</div>
             </div>
         </div>`;
 }
 
-function cardInfoPlans(number, percentage) {
+function cardInfoPlans(data) {
     return `
         <div id="card-info-plans" class="flex-auto p-6">
             <div class="flex items-start justify-between">
                 <div class="space-y-1">
                     <p class="title">Planes Asignados</p>
-                    <p class="number">${number}</p>
-                    <p class="percentage">${percentage}%</p>
+                    <p class="number">${data.number}</p>
+                    <p class="percentage">${data.percentage}%</p>
                 </div>
                 <div class="icon material-symbols-outlined">assignment</div>
             </div>
@@ -40,14 +40,14 @@ function cardInfoIncome(number, percentage) {
         </div>`;
 }
 
-function cardInfoSession(number, percentage) {
+function cardInfoSession(data) {
     return `
         <div id="card-info-session" class="flex-auto p-6">
             <div class="flex items-start justify-between">
                 <div class="space-y-1">
                     <p class="title">Sesiones Completadas</p>
-                    <p class="number">${number}</p>
-                    <p class="percentage">${percentage}%</p>
+                    <p class="number">${data.number}</p>
+                    <p class="percentage">${data.percentage}%</p>
                 </div>
                 <div class="icon material-symbols-outlined">moving</div>
             </div>
@@ -91,10 +91,10 @@ export function dashboardHtml(cardInfo, cardActivity, cardNextSession) {
     return `
         <div class="flex flex-col pt-6 pb-6 pl-20 pr-20">
             <div class="flex justify-center gap-6 m-2">
-                ${cardInfoStudent(cardInfo[0].number, cardInfo[0].percentage)}
-                ${cardInfoPlans(cardInfo[1].number, cardInfo[1].percentage)}
-                ${cardInfoIncome(cardInfo[2].number, cardInfo[2].percentage)}
-                ${cardInfoSession(cardInfo[3].number, cardInfo[3].percentage)}
+                ${cardInfoStudent(cardInfo[0])}
+                ${cardInfoPlans(cardInfo[1])}
+                ${cardInfoIncome(cardInfo[0].number, cardInfo[0].percentage)} 
+                ${cardInfoSession(cardInfo[2])}
             </div>
             
             <div class="flex justify-center gap-6 m-2">

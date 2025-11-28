@@ -2,289 +2,387 @@ import { statisticsHtml } from '../components/statisticsHtml.js'
 import { inputSuggestionIcon, inputSuggestion } from '../views/inputSuggestion.js'
 import { modalStatisticsRender } from '../views/modalStatistics.js'
 
-const jsonTestStudent = [
-    { "uuid": "c6b7c9ab-8a7e-42cb-9c44-2b96a1b0d9f0", "name": "Lucía Fernández" },
-    { "uuid": "7f3f2456-2f70-4b34-8c91-8bb9e6ce1dc5", "name": "Mateo Rodríguez" },
-    { "uuid": "4c6e2a3d-f629-4bf2-8f54-0fdb94c7ec21", "name": "Valentina Gómez" },
-    { "uuid": "f7d6bb78-1b2b-4aba-878e-7365bc6ad7fa", "name": "Santiago Martínez" },
-    { "uuid": "b0d53c94-e904-4f85-8ab3-441b97c06ebc", "name": "Camila López" },
-    { "uuid": "8dfba579-d01c-4f0c-a7fa-3deb0d3b31e5", "name": "Benjamín Pérez" },
-    { "uuid": "3a0df5a2-2a60-4cd6-9f38-778bfb0d2d63", "name": "Sofía Torres" },
-    { "uuid": "a9b5d9d8-493e-4c79-89a5-cc5fb02fbca1", "name": "Tomás Ramírez" },
-    { "uuid": "19c9a85a-2100-4c75-bc27-308ee3c2e2ae", "name": "Martina Sánchez" },
-    { "uuid": "f7c61b83-52bc-4efb-a573-e86dd13f9695", "name": "Julián Herrera" },
-    { "uuid": "b8e4c822-d5d4-47ad-98ea-852fb0a1ed85", "name": "Isabella Castro" },
-    { "uuid": "e86a50fe-c987-45d3-b0ef-750e70e5780c", "name": "Agustín Morales" },
-    { "uuid": "d5fc81be-16fc-4b54-aab5-e3b895feff8e", "name": "Emma Rivas" },
-    { "uuid": "5a6f2dbb-9b53-44b8-8b7a-0db2eb6e446b", "name": "Dylan Navarro" },
-    { "uuid": "58c53c27-fb47-4140-a744-6ddee83bd11c", "name": "Renata Aguirre" },
-    { "uuid": "bc9668dc-8b63-4a69-8a3e-7b2f2f8d59e2", "name": "Thiago Domínguez" },
-    { "uuid": "db534ab7-0c64-4d12-a587-010950f3d6ef", "name": "Mía Vargas" },
-    { "uuid": "aaf4c7ce-08e4-45ac-9d39-3fdc7d8ed137", "name": "Facundo Molina" },
-    { "uuid": "f759cbb1-e59b-4a42-810d-459503ff0f59", "name": "Antonella Paredes" },
-    { "uuid": "81f2639f-ddea-4abf-bb0c-069a3f83d3d5", "name": "Bruno Carrizo" },
-    { "uuid": "3d8af460-b8b7-4d54-bb88-e741e92b65df", "name": "Catalina Ibáñez" },
-    { "uuid": "5451a1d7-944b-4893-907d-0ca1f537a8bc", "name": "Lautaro Godoy" },
-    { "uuid": "b94f2dbc-4c41-4180-857e-56eae4f95734", "name": "Abril Medina" },
-    { "uuid": "a04c1979-2a03-4206-a5bb-29af37eb301f", "name": "Simón Escobar" },
-    { "uuid": "c3d7b257-86bc-400d-8ed2-71800ac2c32a", "name": "Paula Salinas" },
-    { "uuid": "fa960502-95c3-4c4d-ba71-80e03fd9f0cf", "name": "Iván Duarte" },
-    { "uuid": "114b94b1-476f-4f13-a7cd-db547d01641b", "name": "Malena Figueroa" },
-    { "uuid": "eab752e4-d312-4f64-b941-3e399f0d434b", "name": "Elías Correa" },
-    { "uuid": "cf7d5dc6-2781-4db7-9f73-aa8bd9a5e2fa", "name": "Julia Barrios" },
-    { "uuid": "ef247fa4-0b83-4221-85c4-bcaa4e2a0a1c", "name": "Gabriel Varela" },
-    { "uuid": "77fdc4d7-e82e-432e-a8e8-42f4f4b8453a", "name": "Florencia Peña" },
-    { "uuid": "6609fcda-b838-412a-85d0-a7935427979b", "name": "Nicolás Acosta" },
-    { "uuid": "aad9e7c4-8b86-4bd0-8382-8c03198e79d1", "name": "Carla Bustos" },
-    { "uuid": "ca6f184c-2a25-4850-9ec2-74a6fcaaf3c4", "name": "Ramiro Rojas" },
-    { "uuid": "01876c23-f4c0-4d43-87f2-eb6c9ac9798d", "name": "Milagros Luna" },
-    { "uuid": "edaa71e5-953b-4679-83b5-cf198f9c6c45", "name": "Franco Sosa" },
-    { "uuid": "57c42eab-7199-4a8c-a452-85f5e3e413b5", "name": "Ariana Leiva" },
-    { "uuid": "4f1ff8c0-0f1c-4f58-a343-7fd731d2af9d", "name": "Lucas Quiroga" },
-    { "uuid": "1e3e0bb2-3881-47d3-a96d-bca3da591a57", "name": "Victoria Reynoso" },
-    { "uuid": "bf7a39c0-e7da-46c2-af59-445918a0cce3", "name": "Matías Cordero" }
-];
 
-const jsonTestExcercise = [
-    {
-        "uuid": "1a2b3c4d-1111-aaaa-bbbb-000000000001",
-        "name": "Bench Press",
-        "maxWeight": 100,
-        "maxRepetition": 8,
-        "lastDate": "14/11/2025",
-        "percentage": -10
-    },
-    {
-        "uuid": "1a2b3c4d-1111-aaaa-bbbb-000000000002",
-        "name": "Deadlift",
-        "maxWeight": 140,
-        "maxRepetition": 5,
-        "lastDate": "12/11/2025",
-        "percentage": 90
-    },
-    {
-        "uuid": "1a2b3c4d-1111-aaaa-bbbb-000000000003",
-        "name": "Squat",
-        "maxWeight": 120,
-        "maxRepetition": 6,
-        "lastDate": "10/11/2025",
-        "percentage": 88
-    },
-    {
-        "uuid": "1a2b3c4d-1111-aaaa-bbbb-000000000004",
-        "name": "Overhead Press",
-        "maxWeight": 60,
-        "maxRepetition": 10,
-        "lastDate": "08/11/2025",
-        "percentage": 80
-    },
-    {
-        "uuid": "1a2b3c4d-1111-aaaa-bbbb-000000000005",
-        "name": "Barbell Row",
-        "maxWeight": 70,
-        "maxRepetition": 8,
-        "lastDate": "06/11/2025",
-        "percentage": 82
-    },
-    {
-        "uuid": "1a2b3c4d-1111-aaaa-bbbb-000000000006",
-        "name": "Incline Bench Press",
-        "maxWeight": 90,
-        "maxRepetition": 7,
-        "lastDate": "05/11/2025",
-        "percentage": 83
-    },
-    {
-        "uuid": "1a2b3c4d-1111-aaaa-bbbb-000000000007",
-        "name": "Lat Pulldown",
-        "maxWeight": 65,
-        "maxRepetition": 12,
-        "lastDate": "04/11/2025",
-        "percentage": 78
-    },
-    {
-        "uuid": "1a2b3c4d-1111-aaaa-bbbb-000000000008",
-        "name": "Leg Press",
-        "maxWeight": 180,
-        "maxRepetition": 10,
-        "lastDate": "03/11/2025",
-        "percentage": 87
-    },
-    {
-        "uuid": "1a2b3c4d-1111-aaaa-bbbb-000000000009",
-        "name": "Cable Fly",
-        "maxWeight": 40,
-        "maxRepetition": 15,
-        "lastDate": "02/11/2025",
-        "percentage": 75
-    },
-    {
-        "uuid": "1a2b3c4d-1111-aaaa-bbbb-000000000010",
-        "name": "Seated Row",
-        "maxWeight": 60,
-        "maxRepetition": 10,
-        "lastDate": "01/11/2025",
-        "percentage": 80
-    },
-    {
-        "uuid": "1a2b3c4d-1111-aaaa-bbbb-000000000011",
-        "name": "Dumbbell Shoulder Press",
-        "maxWeight": 30,
-        "maxRepetition": 12,
-        "lastDate": "31/10/2025",
-        "percentage": 77
-    },
-    {
-        "uuid": "1a2b3c4d-1111-aaaa-bbbb-000000000012",
-        "name": "Hammer Curl",
-        "maxWeight": 25,
-        "maxRepetition": 15,
-        "lastDate": "30/10/2025",
-        "percentage": 72
-    },
-    {
-        "uuid": "1a2b3c4d-1111-aaaa-bbbb-000000000013",
-        "name": "Triceps Pushdown",
-        "maxWeight": 35,
-        "maxRepetition": 12,
-        "lastDate": "29/10/2025",
-        "percentage": 74
-    },
-    {
-        "uuid": "1a2b3c4d-1111-aaaa-bbbb-000000000014",
-        "name": "Bulgarian Split Squat",
-        "maxWeight": 50,
-        "maxRepetition": 10,
-        "lastDate": "28/10/2025",
-        "percentage": 79
-    },
-    {
-        "uuid": "1a2b3c4d-1111-aaaa-bbbb-000000000015",
-        "name": "Hip Thrust",
-        "maxWeight": 100,
-        "maxRepetition": 8,
-        "lastDate": "27/10/2025",
-        "percentage": 85
-    }
-]
+// MOCK (para pruebas)
 
-const jsonTestExerciseProgress =
-{
-    "name": "Press en Banco",
-    "sessions": [
-        { "date": "15/11/2024", "weight": 40, "sets": 3, "reps": 12 },
-        { "date": "22/11/2024", "weight": 42, "sets": 3, "reps": 12 },
-        { "date": "29/11/2024", "weight": 44, "sets": 3, "reps": 10 },
-        { "date": "06/12/2024", "weight": 46, "sets": 3, "reps": 10 },
-        { "date": "13/12/2024", "weight": 48, "sets": 3, "reps": 10 },
-        { "date": "20/12/2024", "weight": 50, "sets": 4, "reps": 8 },
-        { "date": "27/12/2024", "weight": 52, "sets": 4, "reps": 8 },
-        { "date": "03/01/2025", "weight": 54, "sets": 4, "reps": 8 },
-        { "date": "10/01/2025", "weight": 56, "sets": 4, "reps": 8 },
-        { "date": "17/01/2025", "weight": 58, "sets": 4, "reps": 6 },
-        { "date": "24/01/2025", "weight": 60, "sets": 4, "reps": 6 },
-        { "date": "31/01/2025", "weight": 61, "sets": 4, "reps": 6 },
-        { "date": "07/02/2025", "weight": 62, "sets": 4, "reps": 6 },
-        { "date": "14/02/2025", "weight": 63, "sets": 4, "reps": 6 },
-        { "date": "21/02/2025", "weight": 64, "sets": 5, "reps": 5 },
-        { "date": "28/02/2025", "weight": 65, "sets": 5, "reps": 5 },
-        { "date": "07/03/2025", "weight": 66, "sets": 5, "reps": 5 },
-        { "date": "14/03/2025", "weight": 66, "sets": 5, "reps": 5 },
-        { "date": "21/03/2025", "weight": 67, "sets": 5, "reps": 5 },
-        { "date": "28/03/2025", "weight": 68, "sets": 5, "reps": 4 },
-        { "date": "04/04/2025", "weight": 68, "sets": 5, "reps": 4 },
-        { "date": "11/04/2025", "weight": 69, "sets": 5, "reps": 4 },
-        { "date": "18/04/2025", "weight": 70, "sets": 5, "reps": 4 },
-        { "date": "25/04/2025", "weight": 70, "sets": 5, "reps": 4 },
-        { "date": "02/05/2025", "weight": 71, "sets": 5, "reps": 4 },
-        { "date": "09/05/2025", "weight": 72, "sets": 5, "reps": 4 },
-        { "date": "16/05/2025", "weight": 72, "sets": 5, "reps": 4 },
-        { "date": "23/05/2025", "weight": 73, "sets": 5, "reps": 3 },
-        { "date": "30/05/2025", "weight": 74, "sets": 5, "reps": 3 }
+const mockMetricas = {
+    grafiquitos: [
+        { icon: "🎯", title: "Cumplimiento Global", value: "87%", delta: "+5% vs anterior", color: "#4f46e5" },
+        { icon: "📊", title: "Carga Total Semanal", value: "17.2k kg", delta: "+4.2% vs anterior", color: "#06b6d4" },
+        { icon: "⏱️", title: "Tiempo Entre Sesiones", value: "2.5 días", delta: "-0.3 vs anterior", color: "#f43f5e" },
+        { icon: "📈", title: "Alumnos con Progreso", value: "78%", delta: "+3% fuerza", color: "#10b981" }
+    ],
+
+    complianceHistory: [
+        { date: "Sem 1", compliance: 75 },
+        { date: "Sem 2", compliance: 82 },
+        { date: "Sem 3", compliance: 78 },
+        { date: "Sem 4", compliance: 88 },
+        { date: "Sem 5", compliance: 85 },
+        { date: "Sem 6", compliance: 90 },
+        { date: "Sem 7", compliance: 87 },
+        { date: "Sem 8", compliance: 92 }
+    ],
+
+    strengthData: [
+        { week: "Sem 1", avg1rm: 85 },
+        { week: "Sem 2", avg1rm: 87 },
+        { week: "Sem 3", avg1rm: 89 },
+        { week: "Sem 4", avg1rm: 88 },
+        { week: "Sem 5", avg1rm: 91 },
+        { week: "Sem 6", avg1rm: 93 },
+        { week: "Sem 7", avg1rm: 95 },
+        { week: "Sem 8", avg1rm: 97 }
+    ],
+
+    loadData: [
+        { week: "Sem 1", load: 12500 },
+        { week: "Sem 2", load: 13200 },
+        { week: "Sem 3", load: 14100 },
+        { week: "Sem 4", load: 13800 },
+        { week: "Sem 5", load: 15200 },
+        { week: "Sem 6", load: 15800 },
+        { week: "Sem 7", load: 16500 },
+        { week: "Sem 8", load: 17200 }
+    ],
+
+    weeklyCompliance: [
+        { day: "L", value: 85 },
+        { day: "M", value: 92 },
+        { day: "X", value: 78 },
+        { day: "J", value: 95 },
+        { day: "V", value: 88 },
+        { day: "S", value: 65 },
+        { day: "D", value: 45 }
+    ],
+
+    sessionGapData: [
+        { week: "Sem 1", days: 3.2 },
+        { week: "Sem 2", days: 2.8 },
+        { week: "Sem 3", days: 3.0 },
+        { week: "Sem 4", days: 2.9 },
+        { week: "Sem 5", days: 2.7 },
+        { week: "Sem 6", days: 2.6 },
+        { week: "Sem 7", days: 2.8 },
+        { week: "Sem 8", days: 2.5 }
+    ],
+
+    prs: [
+        { name: "Sentadilla", prs: 8 },
+        { name: "Press Banca", prs: 6 },
+        { name: "Peso Muerto", prs: 7 },
+        { name: "Press Militar", prs: 5 },
+        { name: "Dominadas", prs: 4 }
     ]
 };
 
-function statisticsCardFilter() {
-    const searchExerciseInput = document.querySelector(
-        '.statistics-excercise input.input-with-icon'
-    );
-    const exerciseCards = document.querySelectorAll('.statistics-excercise-card');
 
-    searchExerciseInput.addEventListener('input', () => {
-        const query = searchExerciseInput.value.trim().toLowerCase();
 
-        exerciseCards.forEach(card => {
-            const name = card.querySelector('.execercise-name')
-                .textContent.trim().toLowerCase();
+//                           SPINNER DE CARGA (animado)
 
-            const match = name.includes(query);
+function renderSpinner(container) {
+    container.innerHTML = `
+        <div style="
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:300px;
+            color:#e5e7eb;
+            font-size:20px;
+        ">
+            <div class="lds-ring">
+                <div></div><div></div><div></div><div></div>
+            </div>
+            <span style="margin-left:12px;">Cargando métricas...</span>
+        </div>
 
-            if (match) {
-                // Quitar display:none si lo tiene
-                card.style.display = "";
+        <style>
+        .lds-ring {
+            display: inline-block;
+            position: relative;
+            width: 64px;
+            height: 64px;
+        }
+        .lds-ring div {
+            box-sizing: border-box;
+            display: block;
+            position: absolute;
+            width: 46px;
+            height: 46px;
+            margin: 6px;
+            border: 6px solid #06b6d4;
+            border-radius: 50%;
+            animation: lds-ring 1.2s linear infinite;
+            border-color: #06b6d4 transparent transparent transparent;
+        }
+        .lds-ring div:nth-child(1) { animation-delay: -0.45s; }
+        .lds-ring div:nth-child(2) { animation-delay: -0.3s; }
+        .lds-ring div:nth-child(3) { animation-delay: -0.15s; }
+        @keyframes lds-ring {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        </style>
+    `;
+}
 
-                // Mostrar con animación
-                card.classList.remove("statistics-excercise-card-hiding");
-                card.classList.add("statistics-excercise-card-show");
-            } else {
-                // Animación de salida
-                card.classList.remove("statistics-excercise-card-show");
-                card.classList.add("statistics-excercise-card-hiding");
 
-                // Cuando termina la animación → aplicar display:none
-                card.addEventListener("transitionend", function handler() {
-                    card.style.display = "none";
-                    card.removeEventListener("transitionend", handler);
-                });
-            }
-        });
+
+
+
+export function metricasHtml(data) {
+
+    const {
+        grafiquitos,
+        complianceHistory,
+        strengthData,
+        loadData,
+        weeklyCompliance,
+        sessionGapData,
+        prs
+    } = data;
+
+    return `
+<div style="padding:30px;background:#0a0f1c;min-height:100vh;color:#e5e7eb;font-family:Arial;">
+
+    <!-- TÍTULO -->
+    <h1 style="
+        font-size:3rem;font-weight:bold;
+        background:linear-gradient(to right,#4f46e5,#06b6d4,#10b981);
+        -webkit-background-clip:text;color:transparent;
+        margin-bottom:5px;
+    ">Métricas Grupales</h1>
+
+    <p style="color:#9ca3af;margin-bottom:25px;font-size:15px;">
+        Dashboard de rendimiento del equipo
+    </p>
+
+    <!-- SELECTORES -->
+    <div style="display:flex;gap:10px;margin-bottom:25px;">
+        <select id="select-alumno" style="
+            padding:10px 14px;border-radius:8px;
+            background:#111827;border:1px solid #374151;
+            color:#e5e7eb;cursor:pointer;min-width:160px;
+        ">
+            <option value="">Todos los alumnos</option>
+            <option value="1">Alumno 1</option>
+            <option value="2">Alumno 2</option>
+        </select>
+
+        <select id="select-rango" style="
+            padding:10px 14px;border-radius:8px;
+            background:#111827;border:1px solid #374151;
+            color:#e5e7eb;cursor:pointer;min-width:150px;
+        ">
+            <option value="7">7 días</option>
+            <option value="14">14 días</option>
+            <option value="30">30 días</option>
+            <option value="56">8 semanas</option>
+        </select>
+    </div>
+
+    <!-- KPIs -->
+    <div style="
+        display:grid;grid-template-columns:repeat(4,1fr);
+        gap:20px;margin-bottom:35px;
+    ">
+        ${grafiquitos.map(k => `
+            <div style="
+                background:#111827;border:1px solid #1e2536;
+                border-radius:14px;padding:20px;
+            ">
+                <span style="font-size:15px;color:#9ca3af;">${k.title}</span>
+                <div style="font-size:30px;font-weight:bold;margin-top:5px;">${k.value}</div>
+                <div style="font-size:13px;color:${k.color};margin-top:4px;">${k.delta}</div>
+            </div>
+        `).join("")}
+    </div>
+
+    <!-- GRID PRINCIPAL -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:25px;">
+
+        <!-- IZQUIERDA -->
+        <div style="display:flex;flex-direction:column;gap:25px;">
+
+            <div style="background:#111827;border:1px solid #1e2536;padding:20px;border-radius:12px;">
+                <h2>Cumplimiento Semanal</h2>
+                <canvas id="weeklyComplianceChart"></canvas>
+            </div>
+
+            <div style="background:#111827;border:1px solid #1e2536;padding:20px;border-radius:12px;">
+                <h2>Histórico de Cumplimiento</h2>
+                <canvas id="complianceChart"></canvas>
+            </div>
+
+            <!-- PRs (dinámico) -->
+            <div style="background:#111827;border:1px solid #1e2536;padding:20px;border-radius:12px;">
+                <h2>PRs Últimos 42 Días</h2>
+
+                ${prs.map(e => `
+                    <div style="margin-bottom:16px;">
+                        <div style="display:flex;justify-content:space-between;">
+                            <span>${e.name}</span>
+                            <span style="color:#ec4899;font-weight:bold">${e.prs} PRs</span>
+                        </div>
+                        <div style="height:8px;background:#1f2937;border-radius:6px;margin-top:4px;">
+                            <div style="
+                                height:100%;
+                                width:${(e.prs / Math.max(...prs.map(x => x.prs))) * 100}%;
+                                background:linear-gradient(90deg,#ec4899,#8b5cf6);
+                                border-radius:6px;
+                            "></div>
+                        </div>
+                    </div>
+                `).join("")}
+
+                <div style="
+                    background:#0f172a;border:1px solid #1e2536;
+                    padding:12px;border-radius:8px;margin-top:15px;
+                    font-size:22px;font-weight:bold;color:#ec4899;text-align:center;
+                ">Total PRs: ${prs.reduce((acc, x) => acc + x.prs, 0)}</div>
+            </div>
+
+        </div>
+
+        <!-- DERECHA -->
+        <div style="display:flex;flex-direction:column;gap:25px;">
+
+            <div style="background:#111827;border:1px solid #1e2536;padding:20px;border-radius:12px;">
+                <h2>Progreso de Fuerza (1RM Promedio)</h2>
+                <canvas id="strengthChart"></canvas>
+            </div>
+
+            <div style="background:#111827;border:1px solid #1e2536;padding:20px;border-radius:12px;">
+                <h2>Tiempo Entre Sesiones</h2>
+                <canvas id="sessionGapChart"></canvas>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- CARGA TOTAL -->
+    <div style="
+        background:#111827;border:1px solid #1e2536;
+        padding:20px;border-radius:12px;margin-top:35px;
+    ">
+        <h2>Carga Total Semanal (Volumen)</h2>
+        <canvas id="loadChart"></canvas>
+    </div>
+
+    <!-- SCRIPTS DE GRÁFICOS -->
+    <script data-dynamic-script="true">
+        const complianceHistory = ${JSON.stringify(complianceHistory)};
+        const strengthData = ${JSON.stringify(strengthData)};
+        const loadData = ${JSON.stringify(loadData)};
+        const weeklyCompliance = ${JSON.stringify(weeklyCompliance)};
+        const sessionGapData = ${JSON.stringify(sessionGapData)};
+
+        function initCharts() {
+            new Chart(document.getElementById("complianceChart"), {
+                type:"bar",
+                data:{
+                    labels:complianceHistory.map(x=>x.date),
+                    datasets:[{ data:complianceHistory.map(x=>x.compliance), backgroundColor:"#8b5cf6" }]
+                },
+                options:{ plugins:{legend:{display:false}} }
+            });
+
+            new Chart(document.getElementById("weeklyComplianceChart"), {
+                type:"bar",
+                data:{
+                    labels:weeklyCompliance.map(x=>x.day),
+                    datasets:[{ data:weeklyCompliance.map(x=>x.value), backgroundColor:"#06b6d4", borderRadius:6 }]
+                },
+                options:{ plugins:{legend:{display:false}} }
+            });
+
+            new Chart(document.getElementById("strengthChart"), {
+                type:"line",
+                data:{
+                    labels:strengthData.map(x=>x.week),
+                    datasets:[{ data:strengthData.map(x=>x.avg1rm), borderColor:"#3b82f6", borderWidth:3, tension:0.3 }]
+                },
+                options:{ plugins:{legend:{display:false}} }
+            });
+
+            new Chart(document.getElementById("sessionGapChart"), {
+                type:"line",
+                data:{
+                    labels:sessionGapData.map(x=>x.week),
+                    datasets:[{ data:sessionGapData.map(x=>x.days), borderColor:"#a855f7", borderWidth:3, tension:0.3 }]
+                },
+                options:{ plugins:{legend:{display:false}} }
+            });
+
+            new Chart(document.getElementById("loadChart"), {
+                type:"bar",
+                data:{
+                    labels:loadData.map(x=>x.week),
+                    datasets:[{ data:loadData.map(x=>x.load), backgroundColor:"#00e387" }]
+                },
+                options:{ plugins:{legend:{display:false}} }
+            });
+        }
+
+        initCharts();
+    </script>
+
+</div>
+`;
+}
+
+
+export function executeDynamicScripts(container) {
+    const scripts = container.querySelectorAll("script[data-dynamic-script='true']");
+
+    scripts.forEach(oldScript => {
+        const s = document.createElement("script");
+        s.textContent = oldScript.textContent;
+        document.body.appendChild(s);
+        oldScript.remove();
     });
 }
 
-function openModalStatistics() {
-    modalStatisticsRender(jsonTestExerciseProgress);
-    const overlay = document.getElementById('modal-overlay-statistics');
-    const modal = document.getElementById('modal-statistics');
 
-    overlay.style.display = 'flex';
-    modal.classList.remove('modal-statistics-exit');
-    modal.classList.add('modal-statistics-enter');
+
+function attachFilterListeners() {
+    const alumno = document.getElementById("select-alumno");
+    const rango = document.getElementById("select-rango");
+
+    alumno?.addEventListener("change", renderMetricas);
+    rango?.addEventListener("change", renderMetricas);
 }
 
-function closeModalStatistics() {
-    const overlay = document.getElementById('modal-overlay-statistics');
-    const modal = document.getElementById('modal-statistics');
 
-    modal.classList.remove('modal-statistics-enter');
-    modal.classList.add('modal-statistics-exit');
-    setTimeout(() => { overlay.style.display = 'none'; }, 250);
-}
+export async function renderMetricas() {
+    const containerMain = document.getElementById("container-main");
 
-/** statitics render */
-export function statiticsRender() {
-    const containerMain = document.getElementById('container-main');
-    /*containerMain.innerHTML = statisticsHtml(jsonTestExcercise);
+    renderSpinner(containerMain);
 
-    inputSuggestionIcon('statistics-input-search-student', 'search', 'Buscar alumno...', jsonTestStudent);
-    statisticsCardFilter();
+    const USE_MOCK = true;
 
-    window.closeModalStatistics = closeModalStatistics;
-    window.openModalStatistics = openModalStatistics;*/
+    let data;
 
-    // transicion suave
-    containerMain.classList.add('opacity-0', 'scale-95', 'transition-all', 'duration-300');
-    containerMain.classList.remove('opacity-100', 'scale-100');
-    setTimeout(() => {
-        containerMain.innerHTML = statisticsHtml(jsonTestExcercise);
+    if (USE_MOCK) {
+        await new Promise(r => setTimeout(r, 500));
+        data = mockMetricas;
 
-        inputSuggestionIcon('statistics-input-search-student', 'search', 'Buscar alumno...', jsonTestStudent);
-        statisticsCardFilter();
+    } else {
 
-        window.closeModalStatistics = closeModalStatistics;
-        window.openModalStatistics = openModalStatistics;
+        const alumno = document.getElementById("select-alumno")?.value;
+        const rango = document.getElementById("select-rango")?.value;
 
-        // Aplicar clases de entrada
-        containerMain.classList.remove('opacity-0', 'scale-95');
-        containerMain.classList.add('opacity-100', 'scale-100');
-    }, 100); // duración igual a la transición
+        const params = new URLSearchParams();
+        if (alumno) params.append("alumno", alumno);
+        if (rango) params.append("rango", rango);
+
+        const res = await fetch("/api/metricas?" + params.toString());
+        data = await res.json();
+    }
+
+    containerMain.innerHTML = metricasHtml(data);
+
+    executeDynamicScripts(containerMain);
+
+    attachFilterListeners();
 }
