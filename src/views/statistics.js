@@ -2,17 +2,154 @@ import { statisticsHtml } from '../components/statisticsHtml.js'
 import { inputSuggestionIcon, inputSuggestion } from '../views/inputSuggestion.js'
 import { modalStatisticsRender } from '../views/modalStatistics.js'
 
-export function metricasHtml() {
+
+// MOCK (para pruebas)
+
+const mockMetricas = {
+    grafiquitos: [
+        { icon: "🎯", title: "Cumplimiento Global", value: "87%", delta: "+5% vs anterior", color: "#4f46e5" },
+        { icon: "📊", title: "Carga Total Semanal", value: "17.2k kg", delta: "+4.2% vs anterior", color: "#06b6d4" },
+        { icon: "⏱️", title: "Tiempo Entre Sesiones", value: "2.5 días", delta: "-0.3 vs anterior", color: "#f43f5e" },
+        { icon: "📈", title: "Alumnos con Progreso", value: "78%", delta: "+3% fuerza", color: "#10b981" }
+    ],
+
+    complianceHistory: [
+        { date: "Sem 1", compliance: 75 },
+        { date: "Sem 2", compliance: 82 },
+        { date: "Sem 3", compliance: 78 },
+        { date: "Sem 4", compliance: 88 },
+        { date: "Sem 5", compliance: 85 },
+        { date: "Sem 6", compliance: 90 },
+        { date: "Sem 7", compliance: 87 },
+        { date: "Sem 8", compliance: 92 }
+    ],
+
+    strengthData: [
+        { week: "Sem 1", avg1rm: 85 },
+        { week: "Sem 2", avg1rm: 87 },
+        { week: "Sem 3", avg1rm: 89 },
+        { week: "Sem 4", avg1rm: 88 },
+        { week: "Sem 5", avg1rm: 91 },
+        { week: "Sem 6", avg1rm: 93 },
+        { week: "Sem 7", avg1rm: 95 },
+        { week: "Sem 8", avg1rm: 97 }
+    ],
+
+    loadData: [
+        { week: "Sem 1", load: 12500 },
+        { week: "Sem 2", load: 13200 },
+        { week: "Sem 3", load: 14100 },
+        { week: "Sem 4", load: 13800 },
+        { week: "Sem 5", load: 15200 },
+        { week: "Sem 6", load: 15800 },
+        { week: "Sem 7", load: 16500 },
+        { week: "Sem 8", load: 17200 }
+    ],
+
+    weeklyCompliance: [
+        { day: "L", value: 85 },
+        { day: "M", value: 92 },
+        { day: "X", value: 78 },
+        { day: "J", value: 95 },
+        { day: "V", value: 88 },
+        { day: "S", value: 65 },
+        { day: "D", value: 45 }
+    ],
+
+    sessionGapData: [
+        { week: "Sem 1", days: 3.2 },
+        { week: "Sem 2", days: 2.8 },
+        { week: "Sem 3", days: 3.0 },
+        { week: "Sem 4", days: 2.9 },
+        { week: "Sem 5", days: 2.7 },
+        { week: "Sem 6", days: 2.6 },
+        { week: "Sem 7", days: 2.8 },
+        { week: "Sem 8", days: 2.5 }
+    ],
+
+    prs: [
+        { name: "Sentadilla", prs: 8 },
+        { name: "Press Banca", prs: 6 },
+        { name: "Peso Muerto", prs: 7 },
+        { name: "Press Militar", prs: 5 },
+        { name: "Dominadas", prs: 4 }
+    ]
+};
+
+
+
+//                           SPINNER DE CARGA (animado)
+
+function renderSpinner(container) {
+    container.innerHTML = `
+        <div style="
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:300px;
+            color:#e5e7eb;
+            font-size:20px;
+        ">
+            <div class="lds-ring">
+                <div></div><div></div><div></div><div></div>
+            </div>
+            <span style="margin-left:12px;">Cargando métricas...</span>
+        </div>
+
+        <style>
+        .lds-ring {
+            display: inline-block;
+            position: relative;
+            width: 64px;
+            height: 64px;
+        }
+        .lds-ring div {
+            box-sizing: border-box;
+            display: block;
+            position: absolute;
+            width: 46px;
+            height: 46px;
+            margin: 6px;
+            border: 6px solid #06b6d4;
+            border-radius: 50%;
+            animation: lds-ring 1.2s linear infinite;
+            border-color: #06b6d4 transparent transparent transparent;
+        }
+        .lds-ring div:nth-child(1) { animation-delay: -0.45s; }
+        .lds-ring div:nth-child(2) { animation-delay: -0.3s; }
+        .lds-ring div:nth-child(3) { animation-delay: -0.15s; }
+        @keyframes lds-ring {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        </style>
+    `;
+}
+
+
+
+
+
+export function metricasHtml(data) {
+
+    const {
+        grafiquitos,
+        complianceHistory,
+        strengthData,
+        loadData,
+        weeklyCompliance,
+        sessionGapData,
+        prs
+    } = data;
+
     return `
 <div style="padding:30px;background:#0a0f1c;min-height:100vh;color:#e5e7eb;font-family:Arial;">
 
     <!-- TÍTULO -->
     <h1 style="
-        font-size:3rem;
-        font-weight:bold;
+        font-size:3rem;font-weight:bold;
         background:linear-gradient(to right,#4f46e5,#06b6d4,#10b981);
-        -webkit-background-clip:text;
-        color:transparent;
+        -webkit-background-clip:text;color:transparent;
         margin-bottom:5px;
     ">Métricas Grupales</h1>
 
@@ -22,94 +159,66 @@ export function metricasHtml() {
 
     <!-- SELECTORES -->
     <div style="display:flex;gap:10px;margin-bottom:25px;">
-        <select style="
-            padding:10px 14px;
-            border-radius:8px;
-            background:#111827;
-            border:1px solid #374151;
-            color:#e5e7eb;
-            cursor:pointer;
-            min-width:160px;
+        <select id="select-alumno" style="
+            padding:10px 14px;border-radius:8px;
+            background:#111827;border:1px solid #374151;
+            color:#e5e7eb;cursor:pointer;min-width:160px;
         ">
-            <option>Todos los alumnos</option>
-            <option>Alumno 1</option>
-            <option>Alumno 2</option>
+            <option value="">Todos los alumnos</option>
+            <option value="1">Alumno 1</option>
+            <option value="2">Alumno 2</option>
         </select>
 
-        <select style="
-            padding:10px 14px;
-            border-radius:8px;
-            background:#111827;
-            border:1px solid #374151;
-            color:#e5e7eb;
-            cursor:pointer;
-            min-width:150px;
+        <select id="select-rango" style="
+            padding:10px 14px;border-radius:8px;
+            background:#111827;border:1px solid #374151;
+            color:#e5e7eb;cursor:pointer;min-width:150px;
         ">
-            <option>7 días</option>
-            <option>14 días</option>
-            <option>30 días</option>
-            <option>8 semanas</option>
+            <option value="7">7 días</option>
+            <option value="14">14 días</option>
+            <option value="30">30 días</option>
+            <option value="56">8 semanas</option>
         </select>
     </div>
 
-    <!-- KPIs (fila completa) -->
+    <!-- KPIs -->
     <div style="
-        display:grid;
-        grid-template-columns:repeat(4,1fr);
-        gap:20px;
-        margin-bottom:35px;
+        display:grid;grid-template-columns:repeat(4,1fr);
+        gap:20px;margin-bottom:35px;
     ">
-        ${[
-            { icon: "🎯", title: "Cumplimiento Global", value: "87%", delta: "+5% vs anterior", color: "#4f46e5" },
-            { icon: "📊", title: "Carga Total Semanal", value: "17.2k kg", delta: "+4.2% vs anterior", color: "#06b6d4" },
-            { icon: "⏱️", title: "Tiempo Entre Sesiones", value: "2.5 días", delta: "-0.3 vs anterior", color: "#f43f5e" },
-            { icon: "📈", title: "Alumnos con Progreso", value: "78%", delta: "+3% fuerza", color: "#10b981" },
-        ].map(k => `
-        <div style="
-            background:#111827;
-            border:1px solid #1e2536;
-            border-radius:14px;
-            padding:20px;
-        ">
-            <div style="display:flex;justify-content:space-between;">
+        ${grafiquitos.map(k => `
+            <div style="
+                background:#111827;border:1px solid #1e2536;
+                border-radius:14px;padding:20px;
+            ">
                 <span style="font-size:15px;color:#9ca3af;">${k.title}</span>
+                <div style="font-size:30px;font-weight:bold;margin-top:5px;">${k.value}</div>
+                <div style="font-size:13px;color:${k.color};margin-top:4px;">${k.delta}</div>
             </div>
-            <div style="font-size:30px;font-weight:bold;margin-top:5px;">${k.value}</div>
-            <div style="font-size:13px;color:${k.color};margin-top:4px;">${k.delta}</div>
-        </div>
         `).join("")}
     </div>
 
-    <!-- GRID PRINCIPAL 2 COLUMNAS -->
+    <!-- GRID PRINCIPAL -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:25px;">
 
-        <!-- COLUMNA IZQUIERDA -->
+        <!-- IZQUIERDA -->
         <div style="display:flex;flex-direction:column;gap:25px;">
 
-         <!-- CUMPLIMIENTO SEMANAL (BARRAS) -->
-<div style="background:#111827;border:1px solid #1e2536;padding:20px;border-radius:12px;">
-    <h2 style="font-size:18px;margin-bottom:15px;">Cumplimiento Semanal</h2>
-    <canvas id="weeklyComplianceChart" height="140"></canvas>
-</div>
-
-
-            <!-- HISTÓRICO CUMPLIMIENTO -->
             <div style="background:#111827;border:1px solid #1e2536;padding:20px;border-radius:12px;">
-                <h2 style="font-size:18px;margin-bottom:15px;">Histórico de Cumplimiento</h2>
-                <canvas id="complianceChart" height="140"></canvas>
+                <h2>Cumplimiento Semanal</h2>
+                <canvas id="weeklyComplianceChart"></canvas>
             </div>
 
-            <!-- PRs -->
             <div style="background:#111827;border:1px solid #1e2536;padding:20px;border-radius:12px;">
-                <h2 style="font-size:18px;margin-bottom:15px;">PRs Últimos 42 Días</h2>
+                <h2>Histórico de Cumplimiento</h2>
+                <canvas id="complianceChart"></canvas>
+            </div>
 
-                ${[
-            { name: "Sentadilla", prs: 8 },
-            { name: "Press Banca", prs: 6 },
-            { name: "Peso Muerto", prs: 7 },
-            { name: "Press Militar", prs: 5 },
-            { name: "Dominadas", prs: 4 }
-        ].map(e => `
+            <!-- PRs (dinámico) -->
+            <div style="background:#111827;border:1px solid #1e2536;padding:20px;border-radius:12px;">
+                <h2>PRs Últimos 42 Días</h2>
+
+                ${prs.map(e => `
                     <div style="margin-bottom:16px;">
                         <div style="display:flex;justify-content:space-between;">
                             <span>${e.name}</span>
@@ -118,7 +227,7 @@ export function metricasHtml() {
                         <div style="height:8px;background:#1f2937;border-radius:6px;margin-top:4px;">
                             <div style="
                                 height:100%;
-                                width:${(e.prs / 8) * 100}%;
+                                width:${(e.prs / Math.max(...prs.map(x => x.prs))) * 100}%;
                                 background:linear-gradient(90deg,#ec4899,#8b5cf6);
                                 border-radius:6px;
                             "></div>
@@ -127,234 +236,92 @@ export function metricasHtml() {
                 `).join("")}
 
                 <div style="
-                    background:#0f172a;
-                    border:1px solid #1e2536;
-                    padding:12px;
-                    border-radius:8px;
-                    margin-top:15px;
-                    font-size:22px;
-                    font-weight:bold;
-                    color:#ec4899;
-                    text-align:center;
-                ">Total PRs: 30</div>
-
+                    background:#0f172a;border:1px solid #1e2536;
+                    padding:12px;border-radius:8px;margin-top:15px;
+                    font-size:22px;font-weight:bold;color:#ec4899;text-align:center;
+                ">Total PRs: ${prs.reduce((acc, x) => acc + x.prs, 0)}</div>
             </div>
 
         </div>
 
-        <!-- COLUMNA DERECHA -->
+        <!-- DERECHA -->
         <div style="display:flex;flex-direction:column;gap:25px;">
 
-            <!-- PROGRESO DE FUERZA -->
             <div style="background:#111827;border:1px solid #1e2536;padding:20px;border-radius:12px;">
-                <h2 style="font-size:18px;margin-bottom:15px;">Progreso de Fuerza (1RM Promedio)</h2>
-                <canvas id="strengthChart" height="140"></canvas>
-
-                <div style="
-                    background:#0f172a;
-                    border:1px solid #1e2536;
-                    margin-top:15px;
-                    padding:12px;
-                    border-radius:8px;
-                    font-size:20px;
-                    font-weight:bold;
-                    color:#60a5fa;
-                    text-align:center;
-                ">Δ Total: +14.1%</div>
+                <h2>Progreso de Fuerza (1RM Promedio)</h2>
+                <canvas id="strengthChart"></canvas>
             </div>
 
-            <!-- TIEMPO ENTRE SESIONES -->
             <div style="background:#111827;border:1px solid #1e2536;padding:20px;border-radius:12px;">
-                <h2 style="font-size:18px;margin-bottom:15px;">Tiempo Entre Sesiones (Evolución)</h2>
-                <canvas id="sessionGapChart" height="140"></canvas>
-
-                <div style="
-                    background:#0f172a;
-                    border:1px solid #1e2536;
-                    margin-top:15px;
-                    padding:12px;
-                    border-radius:8px;
-                    font-size:20px;
-                    font-weight:bold;
-                    color:#a855f7;
-                    text-align:center;
-                ">Mejora: -21.9%</div>
+                <h2>Tiempo Entre Sesiones</h2>
+                <canvas id="sessionGapChart"></canvas>
             </div>
 
         </div>
-
     </div>
 
-    <!-- CARGA TOTAL (FILA COMPLETA) -->
+    <!-- CARGA TOTAL -->
     <div style="
-        background:#111827;
-        border:1px solid #1e2536;
-        padding:20px;
-        border-radius:12px;
-        margin-top:35px;
+        background:#111827;border:1px solid #1e2536;
+        padding:20px;border-radius:12px;margin-top:35px;
     ">
-        <h2 style="font-size:18px;margin-bottom:15px;">Carga Total Semanal (Volumen)</h2>
-        <canvas id="loadChart" height="160"></canvas>
+        <h2>Carga Total Semanal (Volumen)</h2>
+        <canvas id="loadChart"></canvas>
     </div>
 
-
-    <!-- SCRIPTS -->
+    <!-- SCRIPTS DE GRÁFICOS -->
     <script data-dynamic-script="true">
-
-        const complianceHistory = [
-            { date:"Sem 1", compliance:75 },
-            { date:"Sem 2", compliance:82 },
-            { date:"Sem 3", compliance:78 },
-            { date:"Sem 4", compliance:88 },
-            { date:"Sem 5", compliance:85 },
-            { date:"Sem 6", compliance:90 },
-            { date:"Sem 7", compliance:87 },
-            { date:"Sem 8", compliance:92 }
-        ];
-
-        const strengthData = [
-            { week:"Sem 1", avg1rm:85 },
-            { week:"Sem 2", avg1rm:87 },
-            { week:"Sem 3", avg1rm:89 },
-            { week:"Sem 4", avg1rm:88 },
-            { week:"Sem 5", avg1rm:91 },
-            { week:"Sem 6", avg1rm:93 },
-            { week:"Sem 7", avg1rm:95 },
-            { week:"Sem 8", avg1rm:97 }
-        ];
-
-        const loadData = [
-            { week:"Sem 1", load:12500 },
-            { week:"Sem 2", load:13200 },
-            { week:"Sem 3", load:14100 },
-            { week:"Sem 4", load:13800 },
-            { week:"Sem 5", load:15200 },
-            { week:"Sem 6", load:15800 },
-            { week:"Sem 7", load:16500 },
-            { week:"Sem 8", load:17200 }
-        ];
-const weeklyCompliance = [
-    { day: "L", value: 85 },
-    { day: "M", value: 92 },
-    { day: "X", value: 78 },
-    { day: "J", value: 95 },
-    { day: "V", value: 88 },
-    { day: "S", value: 65 },
-    { day: "D", value: 45 },
-];
-
-        const sessionGapData = [
-            { week:"Sem 1", days:3.2 },
-            { week:"Sem 2", days:2.8 },
-            { week:"Sem 3", days:3.0 },
-            { week:"Sem 4", days:2.9 },
-            { week:"Sem 5", days:2.7 },
-            { week:"Sem 6", days:2.6 },
-            { week:"Sem 7", days:2.8 },
-            { week:"Sem 8", days:2.5 }
-        ];
+        const complianceHistory = ${JSON.stringify(complianceHistory)};
+        const strengthData = ${JSON.stringify(strengthData)};
+        const loadData = ${JSON.stringify(loadData)};
+        const weeklyCompliance = ${JSON.stringify(weeklyCompliance)};
+        const sessionGapData = ${JSON.stringify(sessionGapData)};
 
         function initCharts() {
-
-            // Cumplimiento
             new Chart(document.getElementById("complianceChart"), {
                 type:"bar",
                 data:{
                     labels:complianceHistory.map(x=>x.date),
-                    datasets:[{
-                        data:complianceHistory.map(x=>x.compliance),
-                        backgroundColor:"#8b5cf6"
-                    }]
+                    datasets:[{ data:complianceHistory.map(x=>x.compliance), backgroundColor:"#8b5cf6" }]
                 },
-                options:{
-                    plugins:{ legend:{display:false} },
-                    scales:{
-                        x:{ticks:{color:"#9ca3af"}},
-                        y:{ticks:{color:"#9ca3af"}}
-                    }
-                }
-            });
-            // Cumplimiento Semanal (nuevo gráfico de barras)
-            new Chart(document.getElementById("weeklyComplianceChart"), {
-                type: "bar",
-                data: {
-                    labels: weeklyCompliance.map(x => x.day),
-                    datasets: [{
-                        data: weeklyCompliance.map(x => x.value),
-                        backgroundColor: "#8b5cf6",
-                        borderRadius: 6,
-                    }]
-                },
-                options: {
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        x: { ticks: { color: "#9ca3af" } },
-                        y: { ticks: { color: "#9ca3af" }, suggestedMax: 100 }
-                    }
-                }
+                options:{ plugins:{legend:{display:false}} }
             });
 
-            // Fuerza
+            new Chart(document.getElementById("weeklyComplianceChart"), {
+                type:"bar",
+                data:{
+                    labels:weeklyCompliance.map(x=>x.day),
+                    datasets:[{ data:weeklyCompliance.map(x=>x.value), backgroundColor:"#06b6d4", borderRadius:6 }]
+                },
+                options:{ plugins:{legend:{display:false}} }
+            });
+
             new Chart(document.getElementById("strengthChart"), {
                 type:"line",
                 data:{
                     labels:strengthData.map(x=>x.week),
-                    datasets:[{
-                        data:strengthData.map(x=>x.avg1rm),
-                        borderColor:"#3b82f6",
-                        borderWidth:3,
-                        tension:0.3
-                    }]
+                    datasets:[{ data:strengthData.map(x=>x.avg1rm), borderColor:"#3b82f6", borderWidth:3, tension:0.3 }]
                 },
-                options:{
-                    plugins:{ legend:{display:false} },
-                    scales:{
-                        x:{ticks:{color:"#9ca3af"}},
-                        y:{ticks:{color:"#9ca3af"}}
-                    }
-                }
+                options:{ plugins:{legend:{display:false}} }
             });
 
-            // Gap entre sesiones
             new Chart(document.getElementById("sessionGapChart"), {
                 type:"line",
                 data:{
                     labels:sessionGapData.map(x=>x.week),
-                    datasets:[{
-                        data:sessionGapData.map(x=>x.days),
-                        borderColor:"#a855f7",
-                        borderWidth:3,
-                        tension:0.3
-                    }]
+                    datasets:[{ data:sessionGapData.map(x=>x.days), borderColor:"#a855f7", borderWidth:3, tension:0.3 }]
                 },
-                options:{
-                    plugins:{ legend:{display:false} },
-                    scales:{
-                        x:{ticks:{color:"#9ca3af"}},
-                        y:{ticks:{color:"#9ca3af"}}
-                    }
-                }
+                options:{ plugins:{legend:{display:false}} }
             });
 
-            // Carga total
             new Chart(document.getElementById("loadChart"), {
                 type:"bar",
                 data:{
                     labels:loadData.map(x=>x.week),
-                    datasets:[{
-                        data:loadData.map(x=>x.load),
-                        backgroundColor:"#3b82f6"
-                    }]
+                    datasets:[{ data:loadData.map(x=>x.load), backgroundColor:"#00e387" }]
                 },
-                options:{
-                    plugins:{ legend:{display:false} },
-                    scales:{
-                        x:{ticks:{color:"#9ca3af"}},
-                        y:{ticks:{color:"#9ca3af"}}
-                    }
-                }
+                options:{ plugins:{legend:{display:false}} }
             });
-
         }
 
         initCharts();
@@ -364,22 +331,58 @@ const weeklyCompliance = [
 `;
 }
 
+
 export function executeDynamicScripts(container) {
     const scripts = container.querySelectorAll("script[data-dynamic-script='true']");
 
     scripts.forEach(oldScript => {
-        const newScript = document.createElement("script");
-        newScript.textContent = oldScript.textContent;
-        document.body.appendChild(newScript);
+        const s = document.createElement("script");
+        s.textContent = oldScript.textContent;
+        document.body.appendChild(s);
         oldScript.remove();
     });
 }
 
 
-export function renderMetricas() {
+
+function attachFilterListeners() {
+    const alumno = document.getElementById("select-alumno");
+    const rango = document.getElementById("select-rango");
+
+    alumno?.addEventListener("change", renderMetricas);
+    rango?.addEventListener("change", renderMetricas);
+}
+
+
+export async function renderMetricas() {
     const containerMain = document.getElementById("container-main");
 
-    containerMain.innerHTML = metricasHtml();
+    renderSpinner(containerMain);
+
+    const USE_MOCK = true;
+
+    let data;
+
+    if (USE_MOCK) {
+        await new Promise(r => setTimeout(r, 500));
+        data = mockMetricas;
+
+    } else {
+
+        const alumno = document.getElementById("select-alumno")?.value;
+        const rango = document.getElementById("select-rango")?.value;
+
+        const params = new URLSearchParams();
+        if (alumno) params.append("alumno", alumno);
+        if (rango) params.append("rango", rango);
+
+        const res = await fetch("/api/metricas?" + params.toString());
+        data = await res.json();
+    }
+
+    containerMain.innerHTML = metricasHtml(data);
 
     executeDynamicScripts(containerMain);
+
+    attachFilterListeners();
 }
