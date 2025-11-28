@@ -1,8 +1,6 @@
-// authHelper.js
 class AuthHelper {
   constructor() {
     this.accessKey = "access_token";
-    this.refreshKey = "refresh_token";
   }
 
   setTokens(accessToken) {
@@ -17,6 +15,23 @@ class AuthHelper {
     sessionStorage.removeItem(this.accessKey);
   }
 
+  parseTokens(token) {
+    try {
+      const base64Url = token.split('.')[1]; // el payload
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(
+        atob(base64)
+          .split('')
+          .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+          .join('')
+      );
+      return JSON.parse(jsonPayload);
+    } catch (e) {
+      console.error("Token inválido", e);
+      return null;
+    }
+  }
+
   // Verificar expiración del JWT
   isTokenExpired(token) {
     try {
@@ -28,12 +43,9 @@ class AuthHelper {
     }
   }
 
+
   async fetchWithAuth(url, options = {}) {
     let token = this.getAccessToken();
-
-   /* if (!token || this.isTokenExpired(token)) {
-      token = await this.refreshAccessToken();
-    }*/
 
     const headers = {
       ...options.headers,
@@ -43,12 +55,14 @@ class AuthHelper {
 
     const response = await fetch(url, { ...options, headers });
 
+    // Manejo de token vencido
     if (response.status === 401) {
       this.clearTokens();
       throw new Error("Unauthorized");
     }
 
-    return response.json();
+    // no se parsea la respuesta
+    return response;
   }
 }
 
