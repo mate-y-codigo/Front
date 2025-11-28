@@ -11,10 +11,7 @@ export function modalNoticeHtml(){
                 </div>
 
                 <div class="text-right mt-6">
-                    <button id="app-modal-close"
-                            class="button">
-                        Cerrar
-                    </button>
+                    <button id="app-modal-close" class="button w-full">Cerrar</button>
                 </div>
             </div>
         </div>

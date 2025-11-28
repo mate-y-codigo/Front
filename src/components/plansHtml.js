@@ -41,7 +41,7 @@ export function planCardHtml(plan) {
                 </div>
 
                 <div class="flex">
-                    <button class="button inline-flex items-center justify-center btn-plan-detail" data-plan='${JSON.stringify(plan)}'>
+                    <button class="button inline-flex items-center justify-center btn-plan-detail w-full" data-plan='${JSON.stringify(plan)}'>
                         <span class="material-symbols-outlined">visibility</span>
                         Ver Detalle
                     </button>

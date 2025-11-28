@@ -48,7 +48,7 @@ export function loginHtml() {
                                             <input class="input" type="password" id="login-password" placeholder="••••••••" autocomplete="off" required="" value="">
                                         </div>                                                                            
                                         <div class="pt-4">
-                                            <button id="login-button" class="button inline-flex items-center justify-center" disabled>Ingresar</button>
+                                            <button id="login-button" class="button inline-flex items-center justify-center w-full" disabled>Ingresar</button>
                                         </div>
                                         <div id="login-error" class="text-sm text-red-600 text-center hidden"></div>
                                     </div>
