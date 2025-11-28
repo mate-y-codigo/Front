@@ -96,10 +96,12 @@ function buildGroupSections(exercises, muscles) {
               <div class="exercise-card-actions">
                 <button
                   type="button"
-                  class="button-small button-small-secondary btn-view-demo"
+                  class="button-small button-small btn-view-demo"
                   data-url="${urlDemo}"
+                  title="Ver demostración"
                 >
-                  Ver demostración
+                <span class="material-symbols-outlined">visibility</span>
+                  Demostración
                 </button>
                 <button
                   type="button"
@@ -111,7 +113,7 @@ function buildGroupSections(exercises, muscles) {
                 </button>
                 <button
                   type="button"
-                  class="button-small-icon-red btn-delete-exercise"
+                  class="button-small-cancel btn-delete-exercise"
                   data-exercise-id="${escapeHtml(ex.id ?? "")}"
                   data-exercise-name="${nombre}"
                   title="Eliminar ejercicio"
@@ -145,7 +147,6 @@ export function exercisesHtml(data) {
   return `
     <div class="flex flex-col pt-6 pb-6 pl-20 pr-20 page-exercises">
 
-      <!-- Filtros arriba, sin recuadro gris -->
       <section class="exercise-filters">
         <div class="exercise-filters-row-1">
           <div class="search-input-container flex-1">
@@ -196,11 +197,11 @@ export function exercisesHtml(data) {
             </select>
           </div>
 
-          <button id="btn-new-exercise" class="btn-primary flex items-center gap-2 px-4 py-2">
-            <i class="fa-solid fa-dumbbell"></i>
-            <span class="material-symbols-outlined">fitness_center</span>
-            Agregar Ejercicio
+          <button id="btn-new-exercise" class="button inline-flex items-center justify-center gap-2">
+            <span class="material-symbols-outlined">add</span>
+            <span>Nuevo ejercicio</span>
           </button>
+
         </div>
       </section>
 

@@ -1,74 +1,45 @@
-// src/views/exercises.js
-
 import { exercisesHtml } from "../components/exercisesHtml.js";
-import { modalExerciseNewHtml } from "../components/modalExerciseNewHtml.js";
+import { exerciseCreateRender } from "./exerciseCreate.js";
 import { modalExerciseEditHtml } from "../components/modalExerciseEditHtml.js";
 import { modalExerciseDeleteHtml } from "../components/modalExerciseDeleteHtml.js";
+
+import {
+  getExercises,
+  getMuscles,
+  getCategories,
+  createExercise,
+  updateExercise,
+  deleteExercise,
+} from "../services/exerciseApi.js";
 
 const exerciseState = {
   exercises: [],
   muscles: [],
+  categories: [],
 };
 
-const fakeExercises = [
-  {
-    id: 1,
-    nombre: "Press de banco",
-    musculoPrincipal: "Pectoral mayor",
-    categoria: "Fuerza",
-    activo: true,
-    urlDemostracion: "https://ejemplo.com/press-banca",
-    musculoId: 1,
-    grupoMuscularNombre: "Pecho",
-  },
-  {
-    id: 2,
-    nombre: "Sillón de cuádriceps",
-    musculoPrincipal: "Cuádriceps",
-    categoria: "Hipertrofia",
-    activo: true,
-    urlDemostracion: "",
-    musculoId: 2,
-    grupoMuscularNombre: "Piernas",
-  },
-  {
-    id: 3,
-    nombre: "Rotaciones de hombro con banda",
-    musculoPrincipal: "Manguito rotador",
-    categoria: "Movilidad",
-    activo: true,
-    urlDemostracion: "",
-    musculoId: 3,
-    grupoMuscularNombre: "Hombros",
-  },
-];
-
-const fakeMuscles = [
-  {
-    id: 1,
-    nombre: "Pectoral mayor",
-    grupoMuscular: { id: 1, nombre: "Pecho" },
-  },
-  {
-    id: 2,
-    nombre: "Cuádriceps",
-    grupoMuscular: { id: 2, nombre: "Piernas" },
-  },
-  {
-    id: 3,
-    nombre: "Manguito rotador",
-    grupoMuscular: { id: 3, nombre: "Hombros" },
-  },
-];
-
-export function exercisesRender(initialExercises, initialMuscles) {
+export async function exercisesRender() {
   const container = document.getElementById("container-main");
   if (!container) return;
 
-  exerciseState.exercises = initialExercises ?? fakeExercises;
-  exerciseState.muscles = initialMuscles ?? fakeMuscles;
+  try {
+    // Podés ajustar filtros si querés traer también los inactivos
+    const [apiExercises, apiMuscles, apiCategories] = await Promise.all([
+      getExercises({}),        // GET /api/Exercise
+      getMuscles({}),          // GET /api/Muscle
+      getCategories(),         // GET /api/CategoryExercise
+    ]);
 
-  renderExercisesView();
+    exerciseState.muscles = mapFromApiMuscles(apiMuscles);
+    exerciseState.categories = mapFromApiCategories(apiCategories);
+    exerciseState.exercises = mapFromApiExercises(apiExercises);
+
+    renderExercisesView();
+  } catch (err) {
+    console.error(err);
+    container.innerHTML =
+      "<p style='color: #fff; padding: 1rem;'>Error cargando ejercicios. Revisá la consola.</p>";
+  }
 }
 
 function renderExercisesView() {
@@ -78,12 +49,69 @@ function renderExercisesView() {
   container.innerHTML = exercisesHtml({
     exercises: exerciseState.exercises,
     muscles: exerciseState.muscles,
+    categories: exerciseState.categories,
   });
 
   initExercisesEvents();
 }
 
-/* Vistas */
+
+function mapFromApiExercises(apiExercises) {
+  return apiExercises.map((e) => {
+    const mus = e.musculo;
+    const cat = e.categoria;
+
+    return {
+      id: e.id,
+      nombre: e.nombre,
+      musculoId: mus?.id ?? null,
+      musculoPrincipal: mus?.nombre ?? "",
+      grupoMuscularNombre: mus?.grupoMuscular?.nombre ?? "",
+      categoriaId: cat?.id ?? null,
+      categoriaNombre: cat?.nombre ?? "",
+      categoria: cat?.nombre ?? "",
+      activo: e.activo,
+      urlDemostracion: e.urlDemo ?? "",
+    };
+  });
+}
+
+function mapFromApiMuscles(apiMuscles) {
+  return apiMuscles.map((m) => ({
+    id: m.id,
+    nombre: m.nombre,
+    grupoMuscularId: m.grupoMuscular?.id ?? null,
+    grupoMuscularNombre: m.grupoMuscular?.nombre ?? "",
+  }));
+}
+
+function mapFromApiCategories(apiCategories) {
+  return apiCategories.map((c) => ({
+    id: c.id,
+    nombre: c.nombre,
+  }));
+}
+
+function mapToApiCreate(rawForm) {
+  return {
+    nombre: rawForm.nombre?.trim() ?? "",
+    musculo: rawForm.musculoId ? Number(rawForm.musculoId) : 0,
+    urlDemo: rawForm.urlDemostracion?.trim() || "",
+    categoria: rawForm.categoriaId ? Number(rawForm.categoriaId) : 0,
+  };
+}
+
+function mapToApiUpdate(rawForm, original) {
+  return {
+    nombre: rawForm.nombre?.trim() ?? "",
+    musculo: rawForm.musculoId ? Number(rawForm.musculoId) : 0,
+    urlDemo: rawForm.urlDemostracion?.trim() || "",
+    categoria: rawForm.categoriaId ? Number(rawForm.categoriaId) : 0,
+    activo: rawForm.activo === "on" || rawForm.activo === true || !!original.activo,
+  };
+}
+
+/* =====================  EVENTOS / FILTROS  ===================== */
 
 function initExercisesEvents() {
   const searchInput = document.getElementById("exercise-search-input");
@@ -96,7 +124,6 @@ function initExercisesEvents() {
 
   const cards = Array.from(document.querySelectorAll(".exercise-card"));
 
-  /* Filtros */
   function applyFilters() {
     const nameFilter = (searchInput?.value || "").trim().toLowerCase();
     const muscleFilter = (muscleInput?.value || "").trim().toLowerCase();
@@ -132,16 +159,14 @@ function initExercisesEvents() {
   muscleInput?.addEventListener("input", applyFilters);
   categorySelect?.addEventListener("change", applyFilters);
   statusSelect?.addEventListener("change", applyFilters);
-
   applyFilters();
 
-  /* Botón Nuevo ejercicio */
+  // Nuevo ejercicio
   btnNewExercise?.addEventListener("click", () => {
-    if (!modalHost) return;
-    openNewExerciseModal(modalHost);
+    exerciseCreateRender();
   });
 
-  /* Botones Ver demostración */
+  // Ver demo
   document.querySelectorAll(".btn-view-demo").forEach((btn) => {
     btn.addEventListener("click", () => {
       const url = btn.getAttribute("data-url");
@@ -156,29 +181,29 @@ function initExercisesEvents() {
     });
   });
 
-  /* Botones Editar */
+  // Editar
   document.querySelectorAll(".btn-edit-exercise").forEach((btn) => {
     btn.addEventListener("click", () => {
-      const raw = btn.getAttribute("data-exercise");
-      if (!raw || !modalHost) return;
-      const exercise = JSON.parse(raw);
-      openEditExerciseModal(modalHost, exercise);
+      const id = btn.getAttribute("data-exercise-id");
+      const ex = exerciseState.exercises.find((e) => String(e.id) === String(id));
+      if (!ex || !modalHost) return;
+      openEditExerciseModal(modalHost, ex);
     });
   });
 
-  /* Botones Eliminar */
+  // Eliminar
   document.querySelectorAll(".btn-delete-exercise").forEach((btn) => {
     btn.addEventListener("click", () => {
       const id = btn.getAttribute("data-exercise-id");
-      const name = btn.getAttribute("data-exercise-name") || "";
-      if (!id || !modalHost) return;
-      openDeleteExerciseModal(modalHost, { id, nombre: name });
+      const ex = exerciseState.exercises.find((e) => String(e.id) === String(id));
+      if (!ex || !modalHost) return;
+      openDeleteExerciseModal(modalHost, ex);
     });
   });
 }
 
-/* TOAST */
-// toast para cuando el ejercicio no tiene video
+/* =====================  TOAST  ===================== */
+
 function showExerciseToast(message, container) {
   if (!container) return;
 
@@ -196,72 +221,14 @@ function showExerciseToast(message, container) {
   }, 2000);
 }
 
-/* MODAL: NUEVO EJERCICIO */
-
-function openNewExerciseModal(modalHost) {
-  modalHost.innerHTML = modalExerciseNewHtml();
-
-  const overlay = document.getElementById("modal-overlay-exercise-new");
-  const modal = document.getElementById("modal-exercise-new");
-  const form = document.getElementById("exercise-new-form");
-  const btnCancel = document.getElementById("exercise-new-cancel");
-
-  if (!overlay || !modal || !form || !btnCancel) return;
-
-  // acá iría la carga de músculos para seleccionarlo
-
-  function close() {
-    modalHost.innerHTML = "";
-  }
-
-  overlay.addEventListener("click", (e) => {
-    if (e.target === overlay) close();
-  });
-
-  btnCancel.addEventListener("click", close);
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const raw = Object.fromEntries(new FormData(form).entries());
-
-    const newExercisePayload = mapNewExercisePayload(raw);
-
-    // la carga de ejercicio va acá
-
-    const created = {
-      id: crypto.randomUUID ? crypto.randomUUID() : Date.now(),
-      ...newExercisePayload,
-    };
-
-    exerciseState.exercises.push(created);
-    close();
-    renderExercisesView();
-  });
-}
-
-/**
- * Mapea los valores crudos del formulario de "nuevo ejercicio"
- *
- *  - name="nombre"
- *  - name="musculoId"
- *  - name="categoria"
- *  - name="urlDemostracion"
- *  - name="activo"
- */
-function mapNewExercisePayload(raw) {
-  return {
-    nombre: raw.nombre?.trim() ?? "",
-    musculoId: raw.musculoId ? raw.musculoId : null,
-    categoria: raw.categoria || "",
-    urlDemostracion: raw.urlDemostracion?.trim() || "",
-    activo: raw.activo === "on",
-  };
-}
-
-/* MODAL: EDITAR EJERCICIO */
+/* =====================  MODAL: EDITAR  ===================== */
 
 function openEditExerciseModal(modalHost, exercise) {
-  modalHost.innerHTML = modalExerciseEditHtml(exercise);
+  modalHost.innerHTML = modalExerciseEditHtml({
+    exercise,
+    muscles: exerciseState.muscles,
+    categories: exerciseState.categories,
+  });
 
   const overlay = document.getElementById("modal-overlay-exercise-edit");
   const modal = document.getElementById("modal-exercise-edit");
@@ -270,18 +237,6 @@ function openEditExerciseModal(modalHost, exercise) {
 
   if (!overlay || !modal || !form || !btnCancel) return;
 
-  form.elements["nombre"].value = exercise.nombre ?? "";
-  form.elements["urlDemostracion"].value =
-    exercise.urlDemostracion ?? exercise.urlDemo ?? "";
-  form.elements["categoria"].value = exercise.categoria ?? "";
-
-  // acá va lo de musculos
-
-  if (exercise.activo !== undefined) {
-    const chk = form.elements["activo"];
-    if (chk) chk.checked = !!exercise.activo;
-  }
-
   function close() {
     modalHost.innerHTML = "";
   }
@@ -295,25 +250,31 @@ function openEditExerciseModal(modalHost, exercise) {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const raw = Object.fromEntries(new FormData(form).entries());
-    const updatePayload = mapNewExercisePayload(raw);
+    const dto = mapToApiUpdate(raw, exercise);
 
-    // Back real acá
+    try {
+      const updatedApi = await updateExercise(exercise.id, dto);
+      const mapped = mapFromApiExercises([updatedApi])[0];
 
-    const updated = { ...exercise, ...updatePayload };
+      const idx = exerciseState.exercises.findIndex(
+        (ex) => String(ex.id) === String(exercise.id)
+      );
+      if (idx >= 0) exerciseState.exercises[idx] = mapped;
 
-    const idx = exerciseState.exercises.findIndex((x) => x.id === exercise.id);
-    if (idx >= 0) {
-      exerciseState.exercises[idx] = updated;
+      close();
+      renderExercisesView();
+    } catch (err) {
+      console.error(err);
     }
-    close();
-    renderExercisesView();
   });
 }
 
-/* MODAL: ELIMINAR EJERCICIO */
+/* =====================  MODAL: ELIMINAR  ===================== */
 
-function openDeleteExerciseModal(modalHost, { id, nombre }) {
-  modalHost.innerHTML = modalExerciseDeleteHtml({ id, nombre });
+function openDeleteExerciseModal(modalHost, exercise) {
+  modalHost.innerHTML = modalExerciseDeleteHtml({
+    exercise,
+  });
 
   const overlay = document.getElementById("modal-overlay-exercise-delete");
   const modal = document.getElementById("modal-exercise-delete");
@@ -333,12 +294,17 @@ function openDeleteExerciseModal(modalHost, { id, nombre }) {
   btnCancel.addEventListener("click", close);
 
   btnConfirm.addEventListener("click", async () => {
+    try {
+      await deleteExercise(exercise.id);
 
-    exerciseState.exercises = exerciseState.exercises.filter(
-      (ex) => String(ex.id) !== String(id)
-    );
+      exerciseState.exercises = exerciseState.exercises.filter(
+        (ex) => String(ex.id) !== String(exercise.id)
+      );
 
-    close();
-    renderExercisesView();
+      close();
+      renderExercisesView();
+    } catch (err) {
+      console.error(err);
+    }
   });
 }

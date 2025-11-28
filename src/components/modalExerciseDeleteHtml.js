@@ -8,7 +8,7 @@ function esc(val) {
 }
 
 export function modalExerciseDeleteHtml(exercise) {
-  const nombre = esc(exercise?.nombre ?? "este ejercicio");
+  const nombre = esc(exercise?.nombre ?? "");
 
   return `
     <div id="modal-overlay-exercise-delete"
@@ -26,9 +26,6 @@ export function modalExerciseDeleteHtml(exercise) {
           <p class="ubuntu-regular text-sm text-muted-foreground">
             ¿Seguro que querés eliminar el ejercicio <b>${nombre}</b>?
           </p>
-          <p class="ubuntu-regular text-xs text-muted-foreground">
-            Más adelante esto se implementará como un <i>soft delete</i>.
-          </p>
         </div>
 
         <!-- Footer -->
@@ -36,14 +33,14 @@ export function modalExerciseDeleteHtml(exercise) {
           <button
             id="exercise-delete-cancel"
             type="button"
-            class="button-small-cancel"
+            class="button-small"
           >
             Cancelar
           </button>
           <button
             id="exercise-delete-confirm"
             type="button"
-            class="button-small"
+            class="button-cancel"
           >
             Eliminar
           </button>

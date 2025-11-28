@@ -82,3 +82,68 @@
   border: 1px solid var(--border, rgba(148, 163, 184, 0.6));
   accent-color: var(--primary, #7c3aed);
 }
+
+.exercise-create-page {
+  padding: 2rem 0 3rem;
+  display: flex;
+  justify-content: center;
+}
+
+.exercise-create-card {
+  width: 100%;
+  max-width: 900px;
+  background-color: var(--card-bg, #111827);
+  border-radius: 0.75rem;
+  border: 1px solid var(--border, #1f2937);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+  padding: 1.75rem 2rem 2rem;
+}
+
+.exercise-create-header h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary, #f9fafb);
+  margin-bottom: 0.25rem;
+}
+
+.exercise-create-header p {
+  font-size: 0.875rem;
+  color: var(--text-secondary, #9ca3af);
+  margin-bottom: 1.5rem;
+}
+
+.exercise-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.exercise-form-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.exercise-form-field {
+  flex: 1;
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.exercise-form-field label {
+  font-size: 0.875rem;
+  color: var(--text-secondary, #9ca3af);
+}
+
+.exercise-form-field .input {
+  width: 100%;
+}
+
+.exercise-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+}
