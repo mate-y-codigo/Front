@@ -2,309 +2,357 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FITCODE</title>
-    <link rel="icon" href="/logo_color.ico" type="image/x-icon">
-    <link rel="stylesheet" href="./src/styles/style.css" />
-    <link rel="stylesheet" href="./src/styles/loginStyle.css" />
-    <link rel="stylesheet" href="./src/styles/user.css" />
-    <link rel="stylesheet" href="./src/styles/cardInfoStyle.css" />
-    <link rel="stylesheet" href="./src/styles/cardActivity.css" />
-    <link rel="stylesheet" href="./src/styles/cardQuickAction.css" />
-    <link rel="stylesheet" href="./src/styles/cardNextSession.css" />
-    <link rel="stylesheet" href="./src/styles/cardPlan.css" />
-    <link rel="stylesheet" href="./src/styles/cardAssignment.css" />
-    <link rel="stylesheet" href="./src/styles/plan.css" />
-    <link rel="stylesheet" href="./src/styles/planCreate.css" />
-    <link rel="stylesheet" href="./src/styles/assignment.css" />
-    <link rel="stylesheet" href="./src/styles/modalPlanDetail.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FITCODE</title>
+  <link rel="icon" href="/logo_color.ico" type="image/x-icon">
+  <link rel="stylesheet" href="./src/styles/style.css" />
+  <link rel="stylesheet" href="./src/styles/loginStyle.css" />
+  <link rel="stylesheet" href="./src/styles/user.css" />
+  <link rel="stylesheet" href="./src/styles/cardInfoStyle.css" />
+  <link rel="stylesheet" href="./src/styles/cardActivity.css" />
+  <link rel="stylesheet" href="./src/styles/cardQuickAction.css" />
+  <link rel="stylesheet" href="./src/styles/cardNextSession.css" />
+  <link rel="stylesheet" href="./src/styles/cardPlan.css" />
+  <link rel="stylesheet" href="./src/styles/cardAssignment.css" />
+  <link rel="stylesheet" href="./src/styles/plan.css" />
+  <link rel="stylesheet" href="./src/styles/planCreate.css" />
+  <link rel="stylesheet" href="./src/styles/assignment.css" />
+  <link rel="stylesheet" href="./src/styles/modalPlanDetail.css" />
 
-    <link rel="stylesheet" href="./src/styles/modalAssignmentNew.css" />
-    <link rel="stylesheet" href="./src/styles/modalStatics.css" />
-    <link rel="stylesheet" href="./src/styles/statistics.css" />
-    <link rel="stylesheet" href="./src/styles/comboBox.css" />
-    <link rel="stylesheet" href="./src/styles/switch.css" />
-    <link rel="stylesheet" href="./src/styles/datePicker.css" />
-    <link rel="stylesheet" href="./fonts/Material-Symbols-Outlined.woff2" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <link rel="stylesheet" href="./src/styles/modalAssignmentNew.css" />
+  <link rel="stylesheet" href="./src/styles/modalStatics.css" />
+  <link rel="stylesheet" href="./src/styles/statistics.css" />
+  <link rel="stylesheet" href="./src/styles/comboBox.css" />
+  <link rel="stylesheet" href="./src/styles/switch.css" />
+  <link rel="stylesheet" href="./src/styles/datePicker.css" />
+  <link rel="stylesheet" href="./fonts/Material-Symbols-Outlined.woff2" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
 
-    <style>
+  <style>
 
-    </style>
+  </style>
 
 </head>
 
 
 <body>
-    <div class="w-full h-full flex flex-col gap-6">
+  <div class="w-full h-full flex flex-col gap-6">
 
-      <section class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
-        <div class="flex flex-col gap-2">
-          <h2 class="text-2xl font-semibold leading-none tracking-tight">
-            Gestión de Alumnos
-          </h2>
-          <p class="text-sm text-muted-foreground">
-            Administra los alumnos del gimnasio: alta, edición y estado.
-          </p>
-        </div>
-      </section>
-
-      <!-- Filtros + botón Nuevo Alumno -->
-      <section class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
-        <div class="flex flex-col md:flex-row gap-4 md:items-center md:justify-between">
-          <div class="flex flex-col sm:flex-row gap-3 flex-1">
-            <div class="relative flex-1">
-              <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-base">
-                search
-              </span>
-              <input
-                id="input-buscar-alumno"
-                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm pl-9
-                       ring-offset-background placeholder:text-muted-foreground
-                       focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
-                       disabled:cursor-not-allowed disabled:opacity-50"
-                placeholder="Buscar por nombre o email"
-              />
-            </div>
-
-            <button
-              id="btn-filtro-alumno"
-              type="button"
-              class="flex h-10 items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm
-                     ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2
-                     disabled:cursor-not-allowed disabled:opacity-50"
-            >
-              <span class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-base">filter_alt</span>
-                <span>Todos</span>
-              </span>
-              <span class="material-symbols-outlined text-base opacity-60">expand_more</span>
-            </button>
-          </div>
-
-          <button
-            id="btn-nuevo-alumno"
-            type="button"
-            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium
-                   ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2
-                   focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50
-                   bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 shadow-sm"
-          >
-            <span class="material-symbols-outlined text-base">person_add</span>
-            <span>Nuevo alumno</span>
-          </button>
-        </div>
-      </section>
-
-      <!-- Tabla de alumnos -->
-      <section class="rounded-lg border bg-card text-card-foreground shadow-sm flex-1 flex flex-col">
-        <div class="flex flex-col space-y-1.5 p-6">
-          <h3 class="text-xl font-semibold leading-none tracking-tight">
-            Alumnos
-          </h3>
-          <p class="text-sm text-muted-foreground">
-            Listado de alumnos registrados en el sistema.
-          </p>
-        </div>
-
-        <div class="px-6 pb-6 flex-1 overflow-auto">
-          <div class="overflow-x-auto rounded-md border bg-background">
-            <table class="w-full text-sm">
-              <thead>
-                <tr class="border-b bg-muted/40">
-                  <th class="text-left p-3 font-semibold text-muted-foreground">Nombre</th>
-                  <th class="text-left p-3 font-semibold text-muted-foreground">Email</th>
-                  <th class="text-left p-3 font-semibold text-muted-foreground">Teléfono</th>
-                  <th class="text-left p-3 font-semibold text-muted-foreground">Estado</th>
-                  <th class="text-left p-3 font-semibold text-muted-foreground">Acciones</th>
-                </tr>
-              </thead>
-              <tbody id="tabla-alumnos-body">
-                <tr class="border-b hover:bg-muted/40 transition-colors">
-                  <td class="p-3">
-                    <div class="flex items-center gap-3">
-                      <div class="h-9 w-9 rounded-full bg-accent flex items-center justify-center text-primary-foreground font-semibold uppercase">
-                        sp
-                      </div>
-                      <div>
-                        <div class="font-medium">Santiago Peter</div>
-                        <div class="text-xs text-muted-foreground">Alumno</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td class="p-3">santiago@example.com</td>
-                  <td class="p-3">+54 11 5555-5555</td>
-                  <td class="p-3">
-                    <span class="inline-flex items-center rounded-full px-2 py-1 text-[11px] font-medium bg-emerald-100 text-emerald-800">
-                      Activo
-                    </span>
-                  </td>
-                  <td class="p-3">
-                    <button class="text-xs text-primary hover:underline mr-2">Ver</button>
-                    <button class="text-xs text-primary hover:underline mr-2">Editar</button>
-                    <button class="text-xs text-destructive hover:underline">Eliminar</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+    <div class="plan-new-header flex gap-4 items-center pl-20 pr-20">
+      <div class="w-64 flex-auto">
+        <div class="flex flex-col flex-auto w-full">
+          <div>
+            <h1>Detalles de un Plan de Entrenamiento</h1>
           </div>
         </div>
-      </section>
-
-      <div
-        id="modal-nuevo-usuario-backdrop"
-        class="fixed inset-0 z-40 hidden items-center justify-center bg-black/40"
-      >
-        <div
-          id="modal-nuevo-usuario"
-          class="z-50 grid w-full max-w-3xl max-h-[90vh] translate-x-[-50%] translate-y-[-50%]
-                 gap-4 border bg-background p-6 shadow-lg sm:rounded-lg overflow-y-auto
-                 fixed left-1/2 top-1/2"
-          role="dialog"
-          aria-modal="true"
-        >
-          <div class="flex flex-col space-y-1.5 text-center sm:text-left">
-            <h2 class="text-lg font-semibold leading-none tracking-tight">Nuevo Usuario</h2>
-          </div>
-          <div class="w-full">
-            <form class="space-y-6" id="form-nuevo-usuario">
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="space-y-2">
-                  <label class="text-sm font-medium leading-none" for="nombre">Nombre *</label>
-                  <input
-                    class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm
-                           ring-offset-background placeholder:text-muted-foreground
-                           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                    id="nombre"
-                    placeholder="Juan"
-                    name="nombre"
-                    required
-                  />
-                </div>
-                <div class="space-y-2">
-                  <label class="text-sm font-medium leading-none" for="apellido">Apellido *</label>
-                  <input
-                    class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm
-                           ring-offset-background placeholder:text-muted-foreground
-                           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                    id="apellido"
-                    placeholder="Pérez"
-                    name="apellido"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div class="space-y-2">
-                <label class="text-sm font-medium leading-none" for="email">Email *</label>
-                <input
-                  type="email"
-                  class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm
-                         ring-offset-background placeholder:text-muted-foreground
-                         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                  id="email"
-                  placeholder="juan.perez@ejemplo.com"
-                  name="email"
-                  required
-                />
-              </div>
-
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="space-y-2">
-                  <label class="text-sm font-medium leading-none" for="telefono">Teléfono *</label>
-                  <input
-                    class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm
-                           ring-offset-background placeholder:text-muted-foreground
-                           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                    id="telefono"
-                    placeholder="+54 9 11 1234 5678"
-                    name="telefono"
-                    required
-                  />
-                </div>
-                <div class="space-y-2">
-                  <label class="text-sm font-medium leading-none" for="fechaNacimiento">
-                    Fecha de Nacimiento *
-                  </label>
-                  <input
-                    type="date"
-                    class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm
-                           ring-offset-background placeholder:text-muted-foreground
-                           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                    id="fechaNacimiento"
-                    name="fechaNacimiento"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div class="flex items-center space-x-2">
-                <button
-                  id="toggle-activo"
-                  type="button"
-                  role="switch"
-                  aria-checked="true"
-                  data-state="checked"
-                  class="peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent
-                         transition-colors data-[state=checked]:bg-primary data-[state=unchecked]:bg-input
-                         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                >
-                  <span
-                    class="pointer-events-none block h-5 w-5 rounded-full bg-background shadow-lg ring-0 transition-transform
-                           translate-x-5"
-                    data-switch-thumb
-                  ></span>
-                </button>
-                <label class="text-sm font-medium leading-none" for="toggle-activo">
-                  Usuario Activo
-                </label>
-              </div>
-
-              <div class="flex justify-end space-x-4 pt-4">
-                <button
-                  id="btn-cancelar-nuevo-usuario"
-                  type="button"
-                  class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium
-                         border border-input bg-background hover:bg-accent hover:text-accent-foreground
-                         h-10 px-4 py-2"
-                >
-                  Cancelar
-                </button>
-                <button
-                  id="btn-guardar-nuevo-usuario"
-                  type="submit"
-                  class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium
-                         bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
-                >
-                  Guardar
-                </button>
-              </div>
-            </form>
-          </div>
-
-          <button
-            id="btn-cerrar-modal-nuevo-usuario"
-            type="button"
-            class="absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100
-                   focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-          >
-            <span class="material-symbols-outlined text-base">close</span>
-            <span class="sr-only">Cerrar</span>
-          </button>
+      </div>
+      <div>
+        <div class="flex flex-row gap-4 items-center">
+          <button class="button" id="btn-save-plan"><span
+              class="material-symbols-outlined">keyboard_arrow_left</span>Atras</button>
         </div>
       </div>
     </div>
-    <script src="./src/views/login.js" type="module"></script>
-    <script src="./src/views/index.js" type="module"></script>
-    <script src="./src/views/sidebar.js" type="module"></script>
-    <script src="./src/views/mainContent.js" type="module"></script>
+
+
+    <div id="plan-view-detail" class="plan-view-detail pl-20 pr-20" data-state="close">
+      <div class="space-y-6">
+        <div class="space-y-2">
+          <div class="flex items-start items-center justify-between">
+            <h2 class="plan-view-detail-name">Hipertrofia Inicial</h2>
+            <div class="plan-view-detail-type">Plantilla</div>
+          </div>
+        </div>
+        <div class="description">
+          <h3>Descripción</h3>
+          <p>Programa enfocado en ganancia de masa muscular para principiantes</p>
+        </div>
+        <div class="grid grid-cols-3 gap-12">
+          <div class="summary-session">
+            <div class="p-4 text-center">
+              <div class="summary-session-number">4</div>
+              <div class="summary-session-txt text-sm text-muted-foreground">Sesiones</div>
+            </div>
+          </div>
+          <div class="summary-exercise">
+            <div class="p-4 text-center">
+              <div class="summary-exercise-number">15</div>
+              <div class="summary-exercise-txt text-sm text-muted-foreground">Ejercicios</div>
+            </div>
+          </div>
+          <div class="summary-student">
+            <div class="p-4 text-center">
+              <div class="summary-student-number  text-2xl font-bold text-success">11/12/1977</div>
+              <div class="summary-student-txt text-sm text-muted-foreground">Ultima Modificación</div>
+            </div>
+          </div>
+        </div>
+        <div id="plan-view-sessions-details">
+
+
+
+
+          <div class="plan-view-session-detail pb-6">
+            <h3 class="text-lg font-semibold flex items-center gap-2 mb-6">
+              <span class="material-symbols-outlined">list_alt</span>Sesión 1: Calentamiento
+            </h3>
+            <div id="plan-view-sessions-cards" class="grid grid-cols-4 gap-4">
+
+              <div class="plan-view-excercise-detail">
+                <div class="flex flex-col">
+                  <div class="plan-view-excercise-detail-header p-2 pl-4 pr-4">
+                    <div class="flex flex-row justify-between items-center gap-2">
+                      <div class="plan-view-excercise-detail-name">Curl</div>
+                      <div class="index flex justify-center items-center">Orden: 1</div>
+                    </div>
+                  </div>
+                  <div class="plan-view-excercise-detail-body p-2 pl-4 pr-4">
+                    <div class="flex flex-row justify-between items-center pt-2">
+                      <div class="plan-view-excercise-detail-set">Series:</div>
+                      <div class="plan-view-excercise-detail-number">4</div>
+                    </div>
+                    <div class="flex flex-row justify-between items-center">
+                      <div class="plan-view-excercise-detail-rep">Repeticiones:</div>
+                      <div class="plan-view-excercise-detail-number">10</div>
+                    </div>
+                    <div class="flex flex-row justify-between items-center">
+                      <div class="plan-view-excercise-detail-weight">Peso:</div>
+                      <div class="plan-view-excercise-detail-number">40Kg</div>
+                    </div>
+                    <div class="flex flex-row justify-between items-center">
+                      <div class="plan-view-excercise-detail-rest">Descanso:</div>
+                      <div class="plan-view-excercise-detail-number">5min</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="plan-view-excercise-detail">
+                <div class="flex flex-col">
+                  <div class="plan-view-excercise-detail-header p-2">
+                    <div class="flex flex-row justify-between items-center gap-2">
+                      <div class="plan-view-excercise-detail-name">Curl</div>
+                      <div class="index flex justify-center items-center">Orden: 1</div>
+                    </div>
+                  </div>
+                  <div class="plan-view-excercise-detail-body p-2">
+                    <div class="flex flex-row justify-between items-center pt-2">
+                      <div class="plan-view-excercise-detail-set">Series:</div>
+                      <div class="plan-view-excercise-detail-number">4</div>
+                    </div>
+                    <div class="flex flex-row justify-between items-center">
+                      <div class="plan-view-excercise-detail-rep">Repeticiones:</div>
+                      <div class="plan-view-excercise-detail-number">10</div>
+                    </div>
+                    <div class="flex flex-row justify-between items-center">
+                      <div class="plan-view-excercise-detail-weight">Peso:</div>
+                      <div class="plan-view-excercise-detail-number">40Kg</div>
+                    </div>
+                    <div class="flex flex-row justify-between items-center">
+                      <div class="plan-view-excercise-detail-rest">Descanso:</div>
+                      <div class="plan-view-excercise-detail-number">5min</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="plan-view-excercise-detail">
+                <div class="flex flex-col">
+                  <div class="plan-view-excercise-detail-header p-2">
+                    <div class="flex flex-row justify-between items-center gap-2">
+                      <div class="plan-view-excercise-detail-name">Curl</div>
+                      <div class="index flex justify-center items-center">Orden: 1</div>
+                    </div>
+                  </div>
+                  <div class="plan-view-excercise-detail-body p-2">
+                    <div class="flex flex-row justify-between items-center pt-2">
+                      <div class="plan-view-excercise-detail-set">Series:</div>
+                      <div class="plan-view-excercise-detail-number">4</div>
+                    </div>
+                    <div class="flex flex-row justify-between items-center">
+                      <div class="plan-view-excercise-detail-rep">Repeticiones:</div>
+                      <div class="plan-view-excercise-detail-number">10</div>
+                    </div>
+                    <div class="flex flex-row justify-between items-center">
+                      <div class="plan-view-excercise-detail-weight">Peso:</div>
+                      <div class="plan-view-excercise-detail-number">40Kg</div>
+                    </div>
+                    <div class="flex flex-row justify-between items-center">
+                      <div class="plan-view-excercise-detail-rest">Descanso:</div>
+                      <div class="plan-view-excercise-detail-number">5min</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="plan-view-excercise-detail">
+                <div class="flex flex-col">
+                  <div class="plan-view-excercise-detail-header p-2">
+                    <div class="flex flex-row justify-between items-center gap-2">
+                      <div class="plan-view-excercise-detail-name">Curl</div>
+                      <div class="index flex justify-center items-center">Orden: 1</div>
+                    </div>
+                  </div>
+                  <div class="plan-view-excercise-detail-body p-2">
+                    <div class="flex flex-row justify-between items-center pt-2">
+                      <div class="plan-view-excercise-detail-set">Series:</div>
+                      <div class="plan-view-excercise-detail-number">4</div>
+                    </div>
+                    <div class="flex flex-row justify-between items-center">
+                      <div class="plan-view-excercise-detail-rep">Repeticiones:</div>
+                      <div class="plan-view-excercise-detail-number">10</div>
+                    </div>
+                    <div class="flex flex-row justify-between items-center">
+                      <div class="plan-view-excercise-detail-weight">Peso:</div>
+                      <div class="plan-view-excercise-detail-number">40Kg</div>
+                    </div>
+                    <div class="flex flex-row justify-between items-center">
+                      <div class="plan-view-excercise-detail-rest">Descanso:</div>
+                      <div class="plan-view-excercise-detail-number">5min</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="plan-view-excercise-detail">
+                <div class="flex flex-col">
+                  <div class="plan-view-excercise-detail-header p-2">
+                    <div class="flex flex-row justify-between items-center gap-2">
+                      <div class="plan-view-excercise-detail-name">Curl</div>
+                      <div class="index flex justify-center items-center">Orden: 1</div>
+                    </div>
+                  </div>
+                  <div class="plan-view-excercise-detail-body p-2">
+                    <div class="flex flex-row justify-between items-center pt-2">
+                      <div class="plan-view-excercise-detail-set">Series:</div>
+                      <div class="plan-view-excercise-detail-number">4</div>
+                    </div>
+                    <div class="flex flex-row justify-between items-center">
+                      <div class="plan-view-excercise-detail-rep">Repeticiones:</div>
+                      <div class="plan-view-excercise-detail-number">10</div>
+                    </div>
+                    <div class="flex flex-row justify-between items-center">
+                      <div class="plan-view-excercise-detail-weight">Peso:</div>
+                      <div class="plan-view-excercise-detail-number">40Kg</div>
+                    </div>
+                    <div class="flex flex-row justify-between items-center">
+                      <div class="plan-view-excercise-detail-rest">Descanso:</div>
+                      <div class="plan-view-excercise-detail-number">5min</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="plan-view-excercise-detail">
+                <div class="flex flex-col">
+                  <div class="plan-view-excercise-detail-header p-2">
+                    <div class="flex flex-row justify-between items-center gap-2">
+                      <div class="plan-view-excercise-detail-name">Curl</div>
+                      <div class="index flex justify-center items-center">Orden: 1</div>
+                    </div>
+                  </div>
+                  <div class="plan-view-excercise-detail-body p-2">
+                    <div class="flex flex-row justify-between items-center pt-2">
+                      <div class="plan-view-excercise-detail-set">Series:</div>
+                      <div class="plan-view-excercise-detail-number">4</div>
+                    </div>
+                    <div class="flex flex-row justify-between items-center">
+                      <div class="plan-view-excercise-detail-rep">Repeticiones:</div>
+                      <div class="plan-view-excercise-detail-number">10</div>
+                    </div>
+                    <div class="flex flex-row justify-between items-center">
+                      <div class="plan-view-excercise-detail-weight">Peso:</div>
+                      <div class="plan-view-excercise-detail-number">40Kg</div>
+                    </div>
+                    <div class="flex flex-row justify-between items-center">
+                      <div class="plan-view-excercise-detail-rest">Descanso:</div>
+                      <div class="plan-view-excercise-detail-number">5min</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+
+
+
+
+          
+
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+  </div>
+
+  <!-- Filtros + botón Nuevo Alumno -->
+  <script>
+
+    const testTemplateJson =
+    {
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "nombre": "Hipertrofia Inicial",
+      "descripcion": "Programa enfocado en ganancia de masa muscular para principiantes",
+      "esPlantilla": true,
+      "idEntrenador": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "fechaCreacion": "2025-11-11T17:47:47.553Z",
+      "fechaActualizacion": "2025-11-11T17:47:47.553Z",
+      "activo": true,
+      "sesionesEntrenamiento": [
+        {
+          "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "nombre": "Calentamiento",
+          "orden": 1,
+          "sesionesEjercicio": [
+            {
+              "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+              "idEjercicio": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+              "nombreEjercicio": "Abdominales 1",
+              "seriesObjetivo": 5,
+              "repeticionesObjetivo": 10,
+              "pesoObjetivo": 0
+            },
+            {
+              "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+              "idEjercicio": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+              "nombreEjercicio": "Abdominales 2",
+              "seriesObjetivo": 5,
+              "repeticionesObjetivo": 10,
+              "pesoObjetivo": 0
+            },
+            {
+              "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+              "idEjercicio": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+              "nombreEjercicio": "Abdominales 3",
+              "seriesObjetivo": 5,
+              "repeticionesObjetivo": 10,
+              "pesoObjetivo": 0
+            }
+          ]
+        }
+      ]
+    }
+
+  </script>
+
+  <script src="./src/views/login.js" type="module"></script>
+  <script src="./src/views/index.js" type="module"></script>
+  <script src="./src/views/sidebar.js" type="module"></script>
+  <script src="./src/views/mainContent.js" type="module"></script>
 </body>
 
 </html>

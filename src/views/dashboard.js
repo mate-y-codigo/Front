@@ -1,26 +1,18 @@
 import { dashboardHtml } from '../components/dashboardHtml.js'
 import { getUserAll } from '../services/userApi.js';
-import { planCreateHtml } from '../components/planCreateHtml.js';
+import { planCreateRender } from './planCreate.js'; 
 import { getAllAlumnoPlan } from '../services/asignacionApi.js';
 import { getAllSesionesRealizadas } from '../services/asignacionApi.js';
 import { getAllSesionesEntrenamiento } from '../services/planApi.js';
 
+
 function dashboardButtonAddListener() {
     document.getElementById('quick-action-add-student').addEventListener('click', () => console.log('agregar nuevo alumno'));
-    document.getElementById('quick-action-new-plan').addEventListener('click', () => planCreateHtml());
+    document.getElementById('quick-action-new-plan').addEventListener('click', () => planCreateRender());
     document.getElementById('quick-action-see-calendar').addEventListener('click', () => console.log('ver calendario'));
     document.getElementById('quick-action-add-payment').addEventListener('click', () => console.log('agregar nuevo pago'));
 }
 
-/** para test */
-/*
-const cardInfo = [
-    { number: 142, percentage: 12 },
-    { number: 98, percentage: 8 },
-    { number: 45230, percentage: 23 },
-    { number: 1234, percentage: 5 }
-];
-*/
 const cardActivity = [
     { name: "María González", activity: "se registró", time: "Hace 2 horas" },
     { name: "Juan Pérez", activity: "realizó un pago", time: "Hace 3 horas" },
@@ -44,7 +36,7 @@ function porcentajeActivos(usuarios){
     return {activos,porcentaje};
 }
 
-function porcentajeAsignados(planes){
+function porcentajeAsignados(planes){   
     const asignados = planes.filter(p => p.estado === 1 ).length;
     const total = planes.length;
 
@@ -55,6 +47,8 @@ function porcentajeAsignados(planes){
 }
 
 function porcentajeSesionesRealizadas(sesionesRealizadas,sesionesEntrenamiento){
+    
+
     const realizadas = sesionesRealizadas.length;
     const totalSesiones = sesionesEntrenamiento.length;
 

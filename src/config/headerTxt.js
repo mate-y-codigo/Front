@@ -30,6 +30,13 @@ export const headerTxt = {
   payments: {
     h1: 'Gestión de Pagos',
     p: 'Administra los pagos y estado de cuenta de tus alumnos'
+  },
+  exercisesCreate: {
+    h1: 'Nuevo Ejercicio',
+    p: 'Agregá un nuevo ejercicio a tu catálogo'
+  },
+  exercisesEdit: {
+    h1: 'Editar Ejercicio',
+    p: 'Modificá los datos del ejercicio seleccionado'
   }
-  
 };

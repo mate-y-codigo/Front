@@ -1,38 +1,45 @@
 import { switchHtml } from '../components/switchHtml.js'
 
-function switchAddListener(container) {
-    const switchButton = document.getElementById("switch-button");
-    const switchCircle = document.getElementById("switch-circle");
+let isOn = false;
 
-    const switchButtonBg = document.querySelector('.switch button');
-    let isOff = true;
+export function switchSetState(container, state) {
+    const switchButtonBg = container.querySelector("button");
+    const switchCircle = container.querySelector("#switch-circle");
 
-    switchButton.addEventListener("click", () => {
-        isOff = !isOff;
+    if (!switchButtonBg || !switchCircle) return;
 
-        if (isOff) {
-            switchButtonBg.style.backgroundColor = 'var(--switch-off-bg)';
-            switchCircle.style.transform = "translateX(0)";
-        } else {
-            switchButtonBg.style.backgroundColor = 'var(--switch-on-bg)';
-            switchCircle.style.transform = "translateX(1.5rem)";
-        }
+    isOn = state;
 
-        // Emitir evento personalizado
-        container.dispatchEvent(new CustomEvent("switch:change", {
-            detail: { isOn: !isOff }
-        }));
+    if (state) {
+        switchButtonBg.style.backgroundColor = 'var(--switch-on-bg)';
+        switchCircle.style.transform = "translateX(1.5rem)";
+    } else {
+        switchButtonBg.style.backgroundColor = 'var(--switch-off-bg)';
+        switchCircle.style.transform = "translateX(0)";
+    }
 
-    });
+    container.dataset.isOn = (isOn).toString();
+    container.dispatchEvent(new CustomEvent("switch:change", {
+        detail: { isOn }
+    }));
 }
 
+function switchAddListener(container) {
+    const switchButton = container.querySelector("#switch-button");
+    const switchCircle = container.querySelector("#switch-circle");
+    const switchButtonBg = container.querySelector("button");
+
+    switchButton.addEventListener("click", () => {
+        isOn = !isOn;
+        switchSetState(container, isOn);
+    });
+}
 
 /** render switch */
 export function switchRender(id, txt) {
     const switchBtn = document.getElementById(id);
     switchBtn.innerHTML = switchHtml(txt);
 
-    //switchAddListener();
     const container = switchBtn.querySelector(".switch");
     switchAddListener(container);
 }
