@@ -13,29 +13,32 @@ export function addPlanViewListener(plan) {
         plansRender();
     });
 
-    document.getElementById('btn-delete-plan').addEventListener('click', () => {
-        AppModalQuery.open({
-            id: planId,
-            iconHTML: '<span class="material-symbols-outlined text-red-600 text-5xl">warning</span>',
-            titleText: "Borrar Plan",
-            messageText: "¿Deseas eliminar este plan definitivamente?",
-            onConfirm: async (id) => {
-                console.log("Confirmado para el ID:", id);
-                const result = await deletePlanById(id);
-                if (result.success) {
-                    plansRender();
+    const btnDelete = document.getElementById('btn-delete-plan')
+    if (btnDelete) {
+        document.getElementById('btn-delete-plan').addEventListener('click', () => {
+            AppModalQuery.open({
+                id: planId,
+                iconHTML: '<span class="material-symbols-outlined text-red-600 text-5xl">warning</span>',
+                titleText: "Borrar Plan",
+                messageText: "¿Deseas eliminar este plan definitivamente?",
+                onConfirm: async (id) => {
+                    console.log("Confirmado para el ID:", id);
+                    const result = await deletePlanById(id);
+                    if (result.success) {
+                        plansRender();
+                    }
+                    else {
+                        AppModal.open({
+                            iconHTML: '<span class="material-symbols-outlined text-red-600 text-5xl">error</span>',
+                            titleText: "Ocurrio un error",
+                            messageText: answer.errors
+                        });
+                    }
+                },
+                onCancel: (id) => {
+                    /*console.log("Cancelado para el ID:", id);*/
                 }
-                else {
-                    AppModal.open({
-                        iconHTML: '<span class="material-symbols-outlined text-red-600 text-5xl">error</span>',
-                        titleText: "Ocurrio un error",
-                        messageText: answer.errors
-                    });
-                }
-            },
-            onCancel: (id) => {
-                /*console.log("Cancelado para el ID:", id);*/
-            }
+            });
         });
-    });
+    }
 }
