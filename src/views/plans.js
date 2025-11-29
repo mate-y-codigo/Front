@@ -1,6 +1,6 @@
 import { comboBoxRender } from '../views/comboBox.js'
 import { plansHtml } from '../components/plansHtml.js'
-import { getPlanActive } from '../services/planApi.js'
+import { getPlanActive, deletePlanById } from '../services/planApi.js'
 import { getPlansType, addPlanListener, initPlanFilters, openPlanCreate } from '../controllers/planController.js'
 
 /** render */
@@ -11,7 +11,7 @@ export function plansRender() {
     containerMain.classList.remove('opacity-100', 'scale-100');
     setTimeout(async () => {
         const listPlan = await getPlanActive();
-        containerMain.innerHTML = await plansHtml(listPlan);        
+        containerMain.innerHTML = await plansHtml(listPlan);
         // make comboBox
         comboBoxRender('plan-type-filter-combobox', getPlansType());
         // add listener

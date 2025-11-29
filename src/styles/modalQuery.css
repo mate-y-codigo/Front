@@ -1,0 +1,36 @@
+#app-modal-query {
+    background-color: var(--background);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+        0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    width: 380px;
+}
+
+#app-modal-query-title {
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+#app-modal-query-message{
+    color: color-mix(in oklch, var(--text-primary) 75%, transparent);
+}
+
+@keyframes modal-enter {
+    from {
+        opacity: 0;
+        transform: scale(.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.animate-modal-query-enter {
+    animation: modal-enter .15s ease-out;
+}

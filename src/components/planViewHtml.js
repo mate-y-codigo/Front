@@ -64,7 +64,7 @@ function planViewSessionHtml(session) {
     `;
 }
 
-export function planViewHtml(plan) {
+export function planViewHtml(plan, planIsInUse) {
     return `
         <div class="plan-new-header flex gap-4 items-center pl-20 pr-20">
             <div class="w-64 flex-auto">
@@ -72,10 +72,13 @@ export function planViewHtml(plan) {
                     <div><h1>Detalles de un Plan de Entrenamiento</h1></div>
                 </div>
             </div>
-            <div>
+            <div class="flex flex-row gap-4">
                 <div class="flex flex-row gap-4 items-center">
                     <button class="button" id="btn-back-plan"><span class="material-symbols-outlined">keyboard_arrow_left</span>Atras</button>
                 </div>
+                ${(!planIsInUse ? `<div class="flex flex-row gap-4 items-center">
+                    <button class="button-cancel" id="btn-delete-plan"><span class="material-symbols-outlined">delete</span>Borrar Plan</button>
+                </div>` : ``)}                
             </div>
         </div>
         <div id="plan-view-detail" class="plan-view-detail pl-20 pr-20 pt-6 pb-6" data-state="close">
