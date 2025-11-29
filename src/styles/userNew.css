@@ -1,0 +1,34 @@
+.page-user-new {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.user-new-header {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.user-new-back {
+    max-width: 220px;
+}
+
+.user-new-card {
+    margin-top: 0.5rem;
+}
+
+.button-cancel {
+    width: auto;
+}
+
+.page-user-new {
+    padding: 2rem 0 3rem;
+    display: flex;
+    justify-content: center;
+    animation: pageEnter 0.25s  ease-out;
+    align-items: center;
+}
+
+.modal-user-actions {
+    justify-content: flex-end;
+}

@@ -42,7 +42,7 @@
 
 .page-exercises .filter-label {
   font-size: 0.85rem;
-  color: var(--muted-foreground);
+  color: var(--text-muted);
 }
 
 .page-exercises #btn-new-exercise {

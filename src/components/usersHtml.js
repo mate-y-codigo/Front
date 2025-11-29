@@ -1,173 +1,186 @@
-function getUserInitials(user) {
-    const fullName = `${user.nombre ?? ""} ${user.apellido ?? ""}`.trim();
-    if (!fullName) return "?";
+// src/components/usersHtml.js
 
-    const parts = fullName.split(/\s+/);
-    if (parts.length === 1) return parts[0].charAt(0).toUpperCase();
+/* ===================== HELPERS ===================== */
 
-    return (parts[0].charAt(0) + parts[parts.length - 1].charAt(0)).toUpperCase();
+function escapeHtml(val) {
+  if (val == null) return "";
+  return String(val)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
 }
+
+function getUserInitials(user) {
+  const fullName = `${user.nombre ?? ""} ${user.apellido ?? ""}`.trim();
+  if (!fullName) return "?";
+
+  const parts = fullName.split(/\s+/);
+  if (parts.length === 1) return parts[0].charAt(0).toUpperCase();
+
+  return (parts[0].charAt(0) + parts[parts.length - 1].charAt(0)).toUpperCase();
+}
+
+/* ===================== ROW HTML ===================== */
 
 function userRowHtml(user) {
-    return `
-        <tr class="border-b border-border last:border-b-0">
-            <!-- Nombre -->
-            <td class="px-6 py-4">
-                <div class="flex items-center gap-3">
-                    <div class="h-9 w-9 rounded-full bg-accent flex items-center justify-center uppercase font-semibold text-primary-foreground">
-                        ${getUserInitials(user)}
-                    </div>
-                    <div>
-                        <div class="font-medium">
-                            ${(user.nombre ?? "")} ${(user.apellido ?? "")}
-                        </div>
-                        <div class="text-xs text-muted-foreground">
-                            Alumno
-                        </div>
-                    </div>
-                </div>
-            </td>
+  const nombre = `${user.nombre ?? ""} ${user.apellido ?? ""}`.trim();
+  const email = user.email ?? "";
+  const telefono = user.telefono ?? user.celular ?? "-";
+  const isActive = user.activo === false ? false : true;
 
-            <!-- Email -->
-            <td class="px-6 py-4">
-                ${user.email ?? "-"}
-            </td>
+  return `
+    <tr
+      class="student-row"
+      data-name="${escapeHtml(nombre.toLowerCase())}"
+      data-email="${escapeHtml(email.toLowerCase())}"
+      data-status="${isActive ? "active" : "inactive"}"
+    >
+      <!-- Nombre -->
+      <td class="user-cell user-cell-name">
+        <div class="user-name-wrapper">
+          <div class="user-avatar">
+            ${getUserInitials(user)}
+          </div>
+          <div class="user-name-text">
+            <div class="user-name-main">
+              ${escapeHtml(nombre)}
+            </div>
+            <div class="user-name-subtitle">
+              Alumno
+            </div>
+          </div>
+        </div>
+      </td>
 
-            <!-- Teléfono -->
-            <td class="px-6 py-4">
-                ${user.telefono ?? user.celular ?? "-"}
-            </td>
+      <!-- Email -->
+      <td class="user-cell">
+        ${escapeHtml(email || "-")}
+      </td>
 
-            <!-- Estado -->
-            <td class="px-6 py-4">
-                <span class="plan-type">
-                    ${user.activo === false ? "Inactivo" : "Activo"}
-                </span>
-            </td>
+      <!-- Teléfono -->
+      <td class="user-cell">
+        ${escapeHtml(telefono)}
+      </td>
 
-            <!-- Acciones -->
-            <td class="px-6 py-4">
-                <div class="flex gap-2">
-                    <!-- Editar -->
-                    <button
-                        class="button-small btn-edit-student"
-                        style="width:2.25rem; padding-inline:0;"
-                        title="Editar alumno"
-                        data-user='${JSON.stringify(user)}'
-                    >
-                        <span class="material-symbols-outlined" style="font-size:18px;">edit_square</span>
-                    </button>
+      <!-- Estado -->
+      <td class="user-cell">
+        <span class="user-status-pill ${
+          isActive ? "user-status-pill--active" : "user-status-pill--inactive"
+        }">
+          ${isActive ? "Activo" : "Inactivo"}
+        </span>
+      </td>
 
-                    <!-- Eliminar -->
-                    <button
-                        class="button-small-icon-red btn-delete-student"
-                        style="width:2.25rem; padding-inline:0;"
-                        title="Eliminar alumno"
-                        data-user-id="${user.id ?? ""}"
-                        data-user-name="${(user.nombre ?? "")} ${(user.apellido ?? "")}"
-                    >
-                        <span class="material-symbols-outlined" style="font-size:18px;">delete</span>
-                    </button>
-                </div>
-            </td>
-        </tr>
-    `;
+      <!-- Acciones -->
+      <td class="user-cell user-cell-actions">
+        <div class="user-actions">
+          <!-- Editar -->
+          <button
+            class="button-small user-action-button btn-edit-student"
+            title="Editar alumno"
+            data-user='${JSON.stringify(user)}'
+          >
+            <span class="material-symbols-outlined">edit_square</span>
+          </button>
+
+          <!-- Eliminar -->
+          <button
+            class="button-small-icon-red user-action-button btn-delete-student"
+            title="Eliminar alumno"
+            data-user-id="${user.id ?? ""}"
+            data-user-name="${escapeHtml(nombre)}"
+          >
+            <span class="material-symbols-outlined">delete</span>
+          </button>
+        </div>
+      </td>
+    </tr>
+  `;
 }
 
-/**
- * Componente HTML para la página de Usuarios/Alumnos
- * @param {{ users: any[] }} usersList
- */
+/* ===================== MAIN HTML ===================== */
+
 export function usersHtml(usersList) {
-    const list = usersList?.users ?? [];
+  const list = usersList?.users ?? [];
 
-    return `
-        <div class="flex flex-col pt-6 pb-6 pl-20 pr-20">
-            
-            <!-- Bloque de filtros + botón Nuevo alumno -->
-            <div>
-                <div class="flex flex-col gap-4 p-6">
+  return `
+    <div class="flex flex-col pt-6 pb-6 pl-20 pr-20 page-enter page-users">
 
-                    <div class="flex flex-col gap-4 md:flex-row md:items-center">
-                        <!-- Buscador: ocupa todo el espacio posible -->
-                        <div class="relative flex-1 min-w-[220px]">
-                            <span class="material-symbols-outlined input-icon">search</span>
-                            <input
-                                id="students-search"
-                                class="input-with-icon"
-                                placeholder="Buscar por nombre o email..."
-                                autocomplete="off"
-                            />
-                        </div>
+      <!-- Filtros -->
+      <section class="user-filters">
+        <div class="user-filters-row">
 
-                        <!-- Botones: filtro + nuevo alumno -->
-                        <div class="flex items-center justify-end gap-3 md:flex-none">
-                            <!-- Filtro de estado usando el mismo combobox -->
-                            <div class="combobox" id="students-status-combobox" style="max-width: 140px;">
-                                <button id="dropdown-button" type="button">
-                                    <span id="students-filter-label">Todos</span>
-                                    <span class="material-symbols-outlined" style="font-size:18px;">expand_more</span>
-                                </button>
+          <!-- Search -->
+          <div class="user-search-input-container">
+            <span class="material-symbols-outlined user-search-icon">search</span>
+            <input
+              id="students-search"
+              class="input user-search-input"
+              type="text"
+              placeholder="Buscar por nombre o email..."
+              autocomplete="off"
+            />
+          </div>
 
-                                <div id="dropdown-menu" style="display: none;">
-                                    <ul>
-                                        <li data-value="all">Todos</li>
-                                        <li data-value="active">Activo</li>
-                                        <li data-value="inactive">Inactivo</li>
-                                    </ul>
-                                </div>
-                            </div>
+          <!-- Estado -->
+          <div class="user-filter-select">
+            <label class="user-filter-label" for="students-status-filter">Estado</label>
+            <select
+              id="students-status-filter"
+              class="input user-status-select"
+            >
+              <option value="active" selected>Activos</option>
+              <option value="inactive">Inactivos</option>
+            </select>
+          </div>
 
-                            <!-- Nuevo alumno -->
-                            <button
-                                id="btn-new-student"
-                                type="button"
-                                class="button-small"
-                                style="width:auto; min-width:9rem; padding-inline:0.85rem;"
-                            >
-                                <span class="material-symbols-outlined" style="font-size:18px;">group_add</span>
-                                <span>Nuevo alumno</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          <!-- Botón nuevo -->
+          <button
+            id="btn-new-student"
+            class="button user-new-button"
+            type="button"
+          >
+            <span class="material-symbols-outlined">add</span>
+            Nuevo Alumno
+          </button>
 
-            <!-- Bloque tabla de alumnos -->
-            <div class="space-y-4">
-                <h2 class="text-xl font-bold mb-2">Alumnos</h2>
-
-                <div class="card-plan p-0 overflow-x-auto">
-                    <table class="min-w-full text-sm">
-                        <thead>
-                            <tr class="border-b border-border bg-muted/40">
-                                <th class="px-6 py-3 text-left font-semibold text-muted-foreground">Nombre</th>
-                                <th class="px-6 py-3 text-left font-semibold text-muted-foreground">Email</th>
-                                <th class="px-6 py-3 text-left font-semibold text-muted-foreground">Teléfono</th>
-                                <th class="px-6 py-3 text-left font-semibold text-muted-foreground">Estado</th>
-                                <th class="px-6 py-3 text-left font-semibold text-muted-foreground">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody id="students-table-body">
-                            ${
-                                list.length
-                                    ? list.map((u) => userRowHtml(u)).join("")
-                                    : `
-                                        <tr>
-                                            <td colspan="5" class="px-6 py-8 text-center text-muted-foreground">
-                                                No hay alumnos registrados todavía.
-                                            </td>
-                                        </tr>
-                                      `
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
         </div>
+      </section>
 
-        <!-- Contenedores para modales -->
-        <div id="modal-open-user-detail"></div>
-        <div id="modal-open-user-new"></div>
-    `;
+      <!-- Tabla -->
+      <section class="user-table-section">
+        <h2 class="user-title">Alumnos</h2>
+
+        <div class="user-list">
+          <table class="user-table">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="students-table-body">
+              ${
+                list.length
+                  ? list.map((u) => userRowHtml(u)).join("")
+                  : `
+                    <tr>
+                      <td colspan="5" class="user-empty-state">
+                        No hay alumnos registrados todavía.
+                      </td>
+                    </tr>
+                  `
+              }
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <div id="modal-open-user-new"></div>
+    </div>
+  `;
 }

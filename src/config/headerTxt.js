@@ -38,5 +38,13 @@ export const headerTxt = {
   exercisesEdit: {
     h1: 'Editar Ejercicio',
     p: 'Modificá los datos del ejercicio seleccionado'
+  },
+  userNew: {
+    h1: 'Nuevo Alumno',
+    p: 'Agregá un nuevo alumno'
+  },
+  userEdit: {
+    h1: 'Modificar Alumno',
+    p: 'Modificá los datos del alumno seleccionado'
   }
 };
