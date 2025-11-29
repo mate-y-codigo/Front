@@ -42,3 +42,23 @@ export async function getAllSesionesRealizadas(filter = {}) {
   }
 
 }
+
+
+export async function getEventosCalendario(filter={}){
+  try{
+      const query = new URLSearchParams(filter).toString();
+
+      const url = query ? `${getUrlAsignacionApi()}/api/EventoCalendario?${query}`
+        : `${getUrlAsignacionApi()}/api/EventoCalendario`;
+
+      const Eventos = await authHelper.fetchWithAuth(url,{method:"GET"});
+
+      const response = await Eventos.json();
+
+      return response;
+  }
+  catch(err){
+    console.error("Error accediendo a la api"+ err.message);
+    return [];
+  }
+}
