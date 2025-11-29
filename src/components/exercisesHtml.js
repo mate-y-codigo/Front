@@ -98,7 +98,7 @@ function buildGroupSections(exercises, muscles) {
               data-name="${dataName}"
               data-muscle="${dataMuscle}"
               data-category="${dataCategory}"
-              data-state="${dataState}"
+              data-active="${activo ? "true" : "false"}"
               data-group="${dataGroup}"
             >
               <div class="exercise-card-main">
@@ -219,8 +219,8 @@ export function exercisesHtml(data) {
               id="exercise-status-filter"
               class="input select-input"
             >
-              <option value="true" selected>Activos</option>
-              <option value="false">Inactivos</option>
+              <option value="activo" selected>Activos</option>
+              <option value="inactivo">Inactivos</option>
             </select>
           </div>
 

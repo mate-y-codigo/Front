@@ -33,12 +33,15 @@ export async function exercisesRender() {
   }
 
   try {
-    const [apiExercises, apiMuscles, apiCategories, apiMuscleGroups] = await Promise.all([
-      getExercises({}),
+    const [apiExercisesActivos, apiExercisesInactivos, apiMuscles, apiCategories, apiMuscleGroups] = await Promise.all([
+      getExercises({ activo: true}),
+      getExercises({ activo: false }),
       getMuscles({}),
       getCategories(),
       getMuscleGroups()
     ]);
+
+    const apiExercises = [...(apiExercisesActivos ?? []), ...(apiExercisesInactivos ?? [])];
 
     exerciseState.muscles = mapFromApiMuscles(apiMuscles);
     exerciseState.categories = mapFromApiCategories(apiCategories);
@@ -82,7 +85,7 @@ function mapFromApiExercises(apiExercises) {
       categoriaId: cat?.id ?? null,
       categoriaNombre: cat?.nombre ?? "",
       categoria: cat?.nombre ?? "",
-      activo: e.activo,
+      activo: e.activo === true,
       urlDemostracion: e.urlDemo ?? "",
     };
   });
@@ -147,33 +150,36 @@ function initExercisesEvents() {
   let selectedGroupId = "";
 
   if (statusSelect && !statusSelect.value) {
-    statusSelect.value = "true";
+    statusSelect.value = "activo";
   }
 
   function applyFilters() {
     const nameFilter = (searchInput?.value || "").trim().toLowerCase();
     const muscleFilter = (muscleInput?.value || "").trim().toLowerCase();
     const categoryFilter = categorySelect?.value || "";
-    const statusFilter = statusSelect?.value || "";
+    const statusFilter = statusSelect?.value || "activo";
 
     cards.forEach((card) => {
       const name = (card.dataset.name || "").toLowerCase();
       const muscle = (card.dataset.muscle || "").toLowerCase();
       const category = card.dataset.category || "";
-      const state = (card.dataset.state || "").toLowerCase();
       const group = card.dataset.group || "";
 
+      const isActive = card.dataset.active === "true";
+      
       const matchesName = !nameFilter || name.includes(nameFilter);
       const matchesMuscle = !muscleFilter || muscle.includes(muscleFilter);
       const matchesCategory = !categoryFilter || category === categoryFilter;
       //const matchesStatus = !statusFilter || state === statusFilter;
+
       let matchesStatus = true;
-      if (statusFilter === "true") {
-        matchesStatus = state === "true";
+      if (statusFilter === "activo") {
+        matchesStatus = isActive === true;
       }
-      else if (statusFilter === "false") {
-        matchesStatus = state === "false";
+      else if (statusFilter === "inactivo") {
+        matchesStatus = isActive === false;
       }
+
       const matchesGroup = !selectedGroupId || group === selectedGroupId;
 
       const visible = matchesName && matchesMuscle && matchesCategory && matchesStatus && matchesGroup;
@@ -192,6 +198,7 @@ function initExercisesEvents() {
   muscleInput?.addEventListener("input", applyFilters);
   categorySelect?.addEventListener("change", applyFilters);
   statusSelect?.addEventListener("change", applyFilters);
+  
   groupChips.forEach((chip) => {
   chip.addEventListener("click", () => {
     const value = chip.dataset.group || "";
