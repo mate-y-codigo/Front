@@ -129,9 +129,13 @@ export function dashboardHtml(cardInfo, cardActivity, cardNextSession) {
                             <span class="material-symbols-outlined">calendar_today</span>
                             Ver Agenda
                         </div>
+                        <div id="quick-action-add-exercise" class="button flex items-center justify-center">
+                            <span class="material-symbols-outlined">fitness_center</span>
+                            Crear Ejercicio
+                        </div>
                         <div id="quick-action-add-payment" class="button flex items-center justify-center">
                             <span class="material-symbols-outlined">attach_money</span>
-                            Registrar Pago
+                            Registrar pago
                         </div>
                     </div>
                 </div>
