@@ -1,4 +1,7 @@
-const BASE_URL = "https://localhost:7243"; 
+import { authHelper } from "../helpers/authHelper.js";
+import { getUrlPlanApi } from "../config/urlApi.js";
+
+const BASE_URL = getUrlPlanApi();
 
 function buildQuery(params = {}) {
   const qs = new URLSearchParams();
@@ -21,7 +24,7 @@ export async function getExercises(filters = {}) {
     Activo: filters.activo,
   });
 
-  const res = await fetch(`${BASE_URL}/api/Exercise${query}`);
+  const res = await authHelper.fetchWithAuth(`${BASE_URL}/api/Exercise${query}`);
   if (!res.ok) {
     throw new Error("No se pudieron obtener los ejercicios");
   }
@@ -39,7 +42,7 @@ export async function getMuscles(filters = {}) {
     grupoMuscular: filters.grupoMuscular,
   });
 
-  const res = await fetch(`${BASE_URL}/api/Muscle${query}`);
+  const res = await authHelper.fetchWithAuth(`${BASE_URL}/api/Muscle${query}`);
   if (!res.ok) {
     throw new Error("No se pudieron obtener los músculos");
   }
@@ -50,7 +53,7 @@ export async function getMuscles(filters = {}) {
 
 // GET /api/MuscleGroup
 export async function getMuscleGroups() {
-  const res = await fetch(`${BASE_URL}/api/MuscleGroup`);
+  const res = await authHelper.fetchWithAuth(`${BASE_URL}/api/MuscleGroup`);
 
   if (!res.ok) {
     throw new Error("No se pudieron obtener los grupos musculares");
@@ -62,7 +65,7 @@ export async function getMuscleGroups() {
 
 // GET /api/CategoryExercise
 export async function getCategories() {
-  const res = await fetch(`${BASE_URL}/api/CategoryExercise`);
+  const res = await authHelper.fetchWithAuth(`${BASE_URL}/api/CategoryExercise`);
 
   if (!res.ok) {
     throw new Error("No se pudieron obtener las categorías de ejercicio");
@@ -76,7 +79,7 @@ export async function getCategories() {
 
 // POST /api/Exercise
 export async function createExercise(createDto) {
-  const res = await fetch(`${BASE_URL}/api/Exercise`, {
+  const res = await authHelper.fetchWithAuth(`${BASE_URL}/api/Exercise`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -94,7 +97,7 @@ export async function createExercise(createDto) {
 
 // PUT /api/Exercise/{id}
 export async function updateExercise(id, updateDto) {
-  const res = await fetch(`${BASE_URL}/api/Exercise/${id}`, {
+  const res = await authHelper.fetchWithAuth(`${BASE_URL}/api/Exercise/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -112,7 +115,7 @@ export async function updateExercise(id, updateDto) {
 
 // DELETE /api/Exercise/{id}
 export async function deleteExercise(id) {
-  const res = await fetch(`${BASE_URL}/api/Exercise/${id}`, {
+  const res = await authHelper.fetchWithAuth(`${BASE_URL}/api/Exercise/${id}`, {
     method: "DELETE",
   });
 

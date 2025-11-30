@@ -12,7 +12,6 @@ export async function exerciseCreateRender() {
   const container = document.getElementById("container-main");
   if (!container) return;
 
-  // Actualizar header
   const headerH1 = document.getElementById("header-h1");
   const headerP = document.getElementById("header-p");
   if (headerH1 && headerP && headerTxt.exercisesCreate){
@@ -44,7 +43,6 @@ export async function exerciseCreateRender() {
       nombre: c.nombre,
     }));
 
-    // 👇 AHORA SÍ: llamamos al componente pasando el objeto con props
     container.innerHTML = exerciseCreateHtml({
       muscles,
       muscleGroups,

@@ -1,52 +1,116 @@
-// src/views/users.js
 import { usersHtml } from "../components/usersHtml.js";
-import { modalStudentNewHtml } from "../components/modalStudentNewHtml.js";
-import { modalStudentEditHtml } from "../components/modalStudentEditHtml.js";
-import { modalStudentDeleteHtml } from "../components/modalStudentDeleteHtml.js"
+import { userNewRender } from "./userNew.js";
+import { userEditRender } from "./userEdit.js";
+import { modalStudentDeleteHtml } from "../components/modalStudentDeleteHtml.js";
+import { getUserAll } from "../services/userApi.js";
+import { headerTxt } from "../config/headerTxt.js";
 
-export function usersRender(usersList) {
+const usersState = {
+  users: [],
+};
+
+function mapFromApiUsers(apiUsers) {
+  return (apiUsers || []).map((u) => ({
+    id: u.id,
+    nombre: u.nombre ?? u.firstName ?? "",
+    apellido: u.apellido ?? u.lastName ?? "",
+    email: u.email ?? "",
+    telefono: u.telefono ?? u.celular ?? "",
+    activo: u.activo === false ? false : true,
+  }));
+}
+
+export async function usersRender() {
   const container = document.getElementById("container-main");
   if (!container) return;
 
-  const data = usersList ?? {
-    users: [
-      {
-        id: 1,
-        nombre: "Santiago",
-        apellido: "Peter",
-        email: "santiago@example.com",
-        telefono: "+54 11 5555-5555",
-        activo: true,
-      },
-      {
-        id: 2,
-        nombre: "Ivan",
-        apellido: "Sierra",
-        email: "ivan@correo.com",
-        telefono: "+54 9 11 1234 5678",
-        activo: true,
-      },
-    ],
-  };
+  // Animación de entrada (igual que plansRender / exercisesRender)
+  container.classList.add("opacity-0", "scale-95", "transition-all", "duration-300");
+  container.classList.remove("opacity-100", "scale-100");
 
-  container.innerHTML = usersHtml(data);
-  initUsersEvents();
+  // Header
+  const headerH1 = document.getElementById("header-h1");
+  const headerP = document.getElementById("header-p");
+  if (headerH1 && headerP && headerTxt.users) {
+    headerH1.textContent = headerTxt.users.h1;
+    headerP.textContent = headerTxt.users.p;
+  }
+
+  setTimeout(async () => {
+    try {
+      const apiUsers = await getUserAll();
+      const onlyStudents = apiUsers.filter((u) => u.rolId === 3);
+      usersState.users = mapFromApiUsers(onlyStudents);
+
+      container.innerHTML = usersHtml({ users: usersState.users });
+      initUsersEvents();
+
+      // Fin de animación: mostrar contenido
+      container.classList.remove("opacity-0", "scale-95");
+      container.classList.add("opacity-100", "scale-100");
+    } catch (err) {
+      console.error("Error cargando usuarios:", err);
+      container.innerHTML =
+        "<p style='color:#fff; padding:1rem;'>Error cargando alumnos. Revisá la consola.</p>";
+
+      // Aunque haya error, sacamos el fade-out
+      container.classList.remove("opacity-0", "scale-95");
+      container.classList.add("opacity-100", "scale-100");
+    }
+  }, 100); // mismo delay que planes/ejercicios
 }
+
 
 function initUsersEvents() {
   const btnNewStudent = document.getElementById("btn-new-student");
   const modalHost = document.getElementById("modal-open-user-new");
+  const searchInput = document.getElementById("students-search");
+  const statusSelect = document.getElementById("students-status-filter");
 
-  if (!modalHost) return;
+  const rows = Array.from(document.querySelectorAll(".student-row"));
 
-  // ---------- NUEVO ALUMNO ----------
-  if (btnNewStudent) {
-    btnNewStudent.addEventListener("click", () => {
-      openNewStudentModal(modalHost);
+  /* ---------- FILTROS ---------- */
+
+  function applyFilters() {
+    const term = (searchInput?.value || "").trim().toLowerCase();
+    const statusFilter = statusSelect?.value || "all";
+
+    rows.forEach((row) => {
+      const name = (row.dataset.name || "").toLowerCase();
+      const email = (row.dataset.email || "").toLowerCase();
+      const status = row.dataset.status || "active";
+
+      const matchesTerm =
+        !term || name.includes(term) || email.includes(term);
+
+      let matchesStatus = true;
+      if (statusFilter === "active") {
+        matchesStatus = status === "active";
+      } else if (statusFilter === "inactive") {
+        matchesStatus = status === "inactive";
+      }
+
+      const visible = matchesTerm && matchesStatus;
+      row.classList.toggle("hidden", !visible);
     });
   }
 
-  // ---------- EDITAR ALUMNO ----------
+  searchInput?.addEventListener("input", applyFilters);
+  statusSelect?.addEventListener("change", applyFilters);
+
+  if (statusSelect && !statusSelect.value) {
+    statusSelect.value = "active";
+  }
+  applyFilters();
+
+  /* ---------- NUEVO ALUMNO ---------- */
+  if (btnNewStudent) {
+    btnNewStudent.addEventListener("click", async () => {
+      await userNewRender();
+    });
+  }
+
+  /* ---------- EDITAR ALUMNO ---------- */
   document.querySelectorAll(".btn-edit-student").forEach((btn) => {
     btn.addEventListener("click", () => {
       const raw = btn.getAttribute("data-user");
@@ -60,16 +124,19 @@ function initUsersEvents() {
         return;
       }
 
-      openEditStudentModal(modalHost, user);
+      userEditRender(user);
     });
   });
 
-    // ---------- ELIMINAR ALUMNO ----------
+
+  /* ---------- ELIMINAR ALUMNO ---------- */
   document.querySelectorAll(".btn-delete-student").forEach((btn) => {
     btn.addEventListener("click", () => {
       const userId = btn.getAttribute("data-user-id");
       const userName = btn.getAttribute("data-user-name") || "";
-      const userEmail = btn.closest("tr")?.querySelector("td:nth-child(2)")?.textContent?.trim() || "";
+      const userEmail =
+        btn.closest("tr")?.querySelector("td:nth-child(2)")?.textContent?.trim() ||
+        "";
 
       const user = {
         id: userId,
@@ -84,43 +151,6 @@ function initUsersEvents() {
 }
 
 // =================== HELPERS MODAL ===================
-
-function openNewStudentModal(modalHost) {
-  modalHost.innerHTML = modalStudentNewHtml();
-
-  const overlay = document.getElementById("modal-overlay-student-new");
-  const modal = document.getElementById("modal-student-new");
-  const form = document.getElementById("student-new-form");
-  const btnCancel = document.getElementById("student-new-cancel");
-
-  if (!overlay || !modal || !form || !btnCancel) return;
-
-  modal.classList.remove("modal-user-exit");
-  modal.classList.add("modal-user-enter");
-
-  function reallyClose() {
-    modalHost.innerHTML = "";
-  }
-
-  function closeWithAnimation() {
-    modal.classList.remove("modal-user-enter");
-    modal.classList.add("modal-user-exit");
-    setTimeout(reallyClose, 250);
-  }
-
-  overlay.addEventListener("click", (e) => {
-    if (e.target === overlay) closeWithAnimation();
-  });
-
-  btnCancel.addEventListener("click", closeWithAnimation);
-
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const data = Object.fromEntries(new FormData(form).entries());
-    console.log("Nuevo alumno (a enviar al backend):", data);
-    closeWithAnimation();
-  });
-}
 
 function openEditStudentModal(modalHost, user) {
   modalHost.innerHTML = modalStudentEditHtml(user);
@@ -162,6 +192,7 @@ function openEditStudentModal(modalHost, user) {
     };
 
     console.log("Alumno editado (a enviar al backend):", payload);
+    // TODO: cuando tengas endpoint de updateUser, lo llamás acá y refrescás la lista
     closeWithAnimation();
   });
 }
@@ -197,8 +228,7 @@ function openDeleteStudentModal(modalHost, user) {
 
   btnConfirm.addEventListener("click", () => {
     console.log("Soft delete (futuro) del alumno id:", user.id);
-    // TODO: cuando esté el backend, llamar al endpoint de softDelete
+    // TODO: cuando esté el backend de soft delete, llamarlo acá y refrescar lista
     closeWithAnimation();
   });
 }
-
