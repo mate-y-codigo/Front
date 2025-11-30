@@ -85,16 +85,16 @@ export async function getPlanIsInUse(id) {
 }
 
 export async function getAllSesionesEntrenamiento() {
-    try{
-        const sesiones = await fetch(getUrlPlanApi()+'/api/TrainingSession');
-        
+    try {
+        const sesiones = await fetch(getUrlPlanApi() + '/api/TrainingSession');
+        console.log(sesiones)
         var data = await sesiones.json();
 
         return data;
     }
-    catch(err){
-       console.error("Error accediendo a la API:", err.message);
-       return []; 
+    catch (err) {
+        console.error("Error accediendo a la API:", err.message);
+        return [];
     }
 }
 
