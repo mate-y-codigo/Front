@@ -1,5 +1,8 @@
 import { authHelper } from "../helpers/authHelper.js";
 
+/* ====================================================
+   SPINNER
+   ==================================================== */
 function spinnerHTML() {
     return `
         <div style="
@@ -46,7 +49,14 @@ function spinnerHTML() {
     `;
 }
 
-export function metricasHtml(data = null, usuarios = [], alumnoSeleccionado = "") {
+/* ====================================================
+   HTML PRINCIPAL
+   ==================================================== */
+export function metricasHtml(
+    data = null,
+    usuarios = [],
+    alumnoSeleccionado = ""
+) {
 
     if (!data) {
         return `
@@ -90,11 +100,17 @@ export function metricasHtml(data = null, usuarios = [], alumnoSeleccionado = ""
         cantidadRecordsPersonales,
         prs,
         totalPRs,
-        porcentajeRiesgo,
-        alumnosEnRiesgo,
-        totalAlumnos
+        fuerzaData,
+        fuerzaRelativaGlobal,
+        fuerzaRelativaAlumno,
+        alumnosSinEntrenar,        // ⬅️ NUEVO
+        porcentajeSinEntrenar,     // ⬅️ NUEVO
     } = data;
 
+
+    /* ========================================================
+       TEMPLATE COMPLETO
+    ======================================================== */
     return `
 <div style="padding:30px;background:#0a0f1c;min-height:100vh;color:#e5e7eb;font-family:Arial;">
 
@@ -124,8 +140,9 @@ export function metricasHtml(data = null, usuarios = [], alumnoSeleccionado = ""
     </div>
 
     <!-- KPIs -->
-    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:20px;margin-bottom:25px;">
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:20px;margin-bottom:25px;">
         
+        <!-- Progreso -->
         <div style="background:#111827;border:1px solid #1e2536;border-radius:14px;padding:20px;">
             <span style="font-size:14px;color:#9ca3af;">Progreso global</span>
             <div style="font-size:32px;font-weight:bold;margin-top:5px;color:#4f46e5;">
@@ -133,6 +150,7 @@ export function metricasHtml(data = null, usuarios = [], alumnoSeleccionado = ""
             </div>
         </div>
 
+        <!-- Adherencia -->
         <div style="background:#111827;border:1px solid #1e2536;border-radius:14px;padding:20px;">
             <span style="font-size:14px;color:#9ca3af;">Adherencia global</span>
             <div style="font-size:32px;font-weight:bold;margin-top:5px;color:#06b6d4;">
@@ -140,50 +158,74 @@ export function metricasHtml(data = null, usuarios = [], alumnoSeleccionado = ""
             </div>
         </div>
 
+        <!-- Records -->
         <div style="background:#111827;border:1px solid #1e2536;border-radius:14px;padding:20px;">
             <span style="font-size:14px;color:#9ca3af;">Records Personales</span>
             <div style="font-size:32px;font-weight:bold;margin-top:5px;color:#10b981;">
                 ${cantidadRecordsPersonales}
             </div>
         </div>
-       <div style="
-                background:#111827;
-                border:1px solid #1e2536;
-                border-radius:14px;
-                padding:20px;
-            ">
+
+        <!-- Cantidad de planes -->
+        <div style="
+            background:#111827;
+            border:1px solid #1e2536;
+            border-radius:14px;
+            padding:20px;">
             <span style="font-size:14px;color:#9ca3af;">Cantidad de planes</span>
             <div style="
                 font-size:32px;
                 font-weight:bold;
                 margin-top:5px;
-                color:#fbbf24; /* amarillo dorado */
-            ">
+                color:#fbbf24;">
                 ${planesFiltrados.length}
             </div>
         </div>
+
+        <!-- Fuerza Relativa -->
         <div style="
             background:#111827;
             border:1px solid #1e2536;
             border-radius:14px;
-            padding:20px;
-        ">
-            <span style="font-size:14px;color:#9ca3af;">Alumnos en riesgo</span>
+            padding:20px;">
+            <span style="font-size:14px;color:#9ca3af;">Fuerza Relativa</span>
+            <div style="
+                font-size:28px;
+                font-weight:bold;
+                margin-top:5px;
+                color:#8b5cf6;">
+                ${fuerzaRelativaGlobal.toFixed(2)}
+            </div>
+
+            <div style="color:#9ca3af;font-size:12px;margin-top:4px;">
+                Alumno: ${fuerzaRelativaAlumno !== null ? fuerzaRelativaAlumno.toFixed(2) : "-"}
+            </div>
+        </div>
+
+        <!-- 🔥 KPI NUEVO: Alumnos sin entrenar últimos 7 días -->
+        <div style="
+            background:#111827;
+            border:1px solid #1e2536;
+            border-radius:14px;
+            padding:20px;">
+            <span style="font-size:14px;color:#9ca3af;">Alumnos sin entrenar (7 días)</span>
+
             <div style="
                 font-size:32px;
                 font-weight:bold;
                 margin-top:5px;
-                color:#ef4444;
-            ">
-                ${porcentajeRiesgo.toFixed(1)}%
+                color:#ef4444;">
+                ${porcentajeSinEntrenar.toFixed(1)}%
             </div>
+
             <div style="color:#9ca3af;font-size:12px;margin-top:4px;">
-                ${alumnosEnRiesgo.size} de ${totalAlumnos}
+                ${alumnosSinEntrenar.length} de ${usuarios.length}
             </div>
         </div>
 
     </div>
- <!-- Tabla de planes -->
+
+    <!-- Tabla -->
     <div style="background:#111827;padding:20px;border-radius:12px;border:1px solid #1e2536;margin-bottom:20px">
         <h3 style="margin-bottom:15px;font-size:20px;">Planes (${planesFiltrados.length})</h3>
 
@@ -214,104 +256,128 @@ export function metricasHtml(data = null, usuarios = [], alumnoSeleccionado = ""
                 </table>
             `}
     </div>
-   <!-- 📊 Fuerza + PRs lado a lado -->
-<div style="display:flex; ${alumnoSeleccionado === "" ? "" : "gap:20px;"} margin-bottom:25px;">
 
-    <!-- 📌 Gráfico de Fuerza -->
-    ${alumnoSeleccionado === "" ? `<div></div>` : `<div style="
-        flex:1;
-        background:#111827;border-radius:12px;
-        border:1px solid #1e2536;padding:20px;">
-        
-        <h3 style="font-size:20px;margin-bottom:10px;">Progreso de Fuerza (1RM)</h3>
 
-        ${alumnoSeleccionado === "" ? `
-            <div style="
-                padding:20px;text-align:center;color:#9ca3af;
-                border:1px dashed #374151;border-radius:8px;">
-                Seleccioná un alumno para ver su curva de fuerza.
-            </div>
-        ` : `
-            <canvas id="chartFuerza"></canvas>
-        `}
-    </div>`}
-    
-
-    <!-- 🔥 PRs -->
+    <!-- 🔥 LISTADO DE ALUMNOS SIN ENTRENAR (7 días) -->
     <div style="
-        flex:1;
-        background:#111827;border-radius:12px;
-        border:1px solid #1e2536;padding:20px;">
-        
-        <h3 style="font-size:20px;margin-bottom:15px;">PRs por ejercicio</h3>
+        background:#111827;
+        border-radius:12px;
+        border:1px solid #1e2536;
+        padding:20px;
+        margin-bottom:25px;
+    ">
 
-        ${prs.length === 0 ? `
+        <h3 style="font-size:20px;margin-bottom:15px;">Alumnos sin entrenar (últimos 7 días)</h3>
+
+        ${alumnosSinEntrenar.length === 0 ? `
             <div style="
                 padding:20px;text-align:center;color:#9ca3af;
                 border:1px dashed #374151;border-radius:8px;">
-                No se registraron PRs en este período.
+                Todos entrenaron en los últimos 7 días 🎉
             </div>
-        ` : `
-            ${prs.map(e => `
-                <div style="margin-bottom:16px;">
-                    <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
-                        <span>${e.name}</span>
-                        <span style="color:#ec4899;font-weight:bold">${e.prs} PRs</span>
-                    </div>
+        ` :
+            alumnosSinEntrenar.map(a => `
+            <div style="margin-bottom:16px;">
+                <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                    <span>${a.nombre} ${a.apellido}</span>
+                    <span style="color:#ef4444;font-weight:bold">0 sesiones</span>
+                </div>
 
-                    <div style="height:8px;background:#1f2937;border-radius:6px;">
-                        <div style="
-                            height:100%;
-                            width:${(e.prs / Math.max(...prs.map(x => x.prs))) * 100}%;
-                            background:linear-gradient(90deg,#ec4899,#8b5cf6);
-                            border-radius:6px;">
-                        </div>
+                <div style="height:8px;background:#1f2937;border-radius:6px;">
+                    <div style="
+                        height:100%;
+                        width:0%;
+                        background:linear-gradient(90deg,#ef4444,#b91c1c);
+                        border-radius:6px;">
                     </div>
                 </div>
-            `).join("")}
-
-            <div style="
-                background:#0f172a;border:1px solid #1e2536;
-                padding:12px;border-radius:8px;margin-top:15px;
-                font-size:22px;font-weight:bold;color:#ec4899;text-align:center;">
-                Total PRs: ${totalPRs}
             </div>
-        `}
+        `).join("")}
     </div>
 
-</div>
 
+    <!-- Gráficos -->
+    <div style="display:flex; ${alumnoSeleccionado === "" ? "" : "gap:20px;"} margin-bottom:25px;">
 
-   
+        <!-- Fuerza -->
+        ${alumnoSeleccionado === "" ? `` : `
+        <div style="
+            flex:1;
+            background:#111827;border-radius:12px;
+            border:1px solid #1e2536;padding:20px;">
+            
+            <h3 style="font-size:20px;margin-bottom:10px;">Progreso de Fuerza (1RM)</h3>
+
+            <canvas id="chartFuerza"></canvas>
+        </div>`}
+
+        <!-- PRs -->
+        <div style="
+            flex:1;
+            background:#111827;border-radius:12px;
+            border:1px solid #1e2536;padding:20px;">
+            
+            <h3 style="font-size:20px;margin-bottom:15px;">PRs por ejercicio</h3>
+
+            ${prs.length === 0 ? `
+                <div style="
+                    padding:20px;text-align:center;color:#9ca3af;
+                    border:1px dashed #374151;border-radius:8px;">
+                    No se registraron PRs en este período.
+                </div>
+            ` : `
+                ${prs.map(e => `
+                    <div style="margin-bottom:16px;">
+                        <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                            <span>${e.name}</span>
+                            <span style="color:#ec4899;font-weight:bold">${e.prs} PRs</span>
+                        </div>
+
+                        <div style="height:8px;background:#1f2937;border-radius:6px;">
+                            <div style="
+                                height:100%;
+                                width:${(e.prs / Math.max(...prs.map(x => x.prs))) * 100}%;
+                                background:linear-gradient(90deg,#ec4899,#8b5cf6);
+                                border-radius:6px;">
+                            </div>
+                        </div>
+                    </div>
+                `).join("")}
+
+                <div style="
+                    background:#0f172a;border:1px solid #1e2536;
+                    padding:12px;border-radius:8px;margin-top:15px;
+                    font-size:22px;font-weight:bold;color:#ec4899;text-align:center;">
+                    Total PRs: ${totalPRs}
+                </div>
+            `}
+        </div>
+
+    </div>
 
 </div>`;
 }
-
-function attachListeners() {
-    const desde = document.getElementById("select-desde");
-    const hasta = document.getElementById("select-hasta");
-    const alumno = document.getElementById("select-alumno");
-
-    if (!desde || !hasta || !alumno) return;
-
-    desde.addEventListener("change", () => renderMetricas());
-    hasta.addEventListener("change", () => renderMetricas());
-    alumno.addEventListener("change", () => renderMetricas());
-}
-
+/* ====================================================
+   RENDER PRINCIPAL
+   ==================================================== */
 export async function renderMetricas() {
 
     const containerMain = document.getElementById("container-main");
 
+    /* === valores previos === */
     const prevDesde = document.getElementById("select-desde")?.value || null;
     const prevHasta = document.getElementById("select-hasta")?.value || null;
     const prevAlumno = document.getElementById("select-alumno")?.value || "";
 
+    /* === fetch usuarios === */
     const respUsers = await authHelper.fetchWithAuth("http://localhost:5099/api/Usuarios");
     let usuarios = await respUsers.json();
-    usuarios = usuarios.filter(n => n.rolId == 3)
+    usuarios = usuarios.filter(n => n.rolId == 3); // solo alumnos
+
+    /* === primer render === */
     containerMain.innerHTML = metricasHtml(null, usuarios);
 
+    /* === asignar inputs === */
     const inputDesde = document.getElementById("select-desde");
     const inputHasta = document.getElementById("select-hasta");
     const inputAlumno = document.getElementById("select-alumno");
@@ -323,6 +389,9 @@ export async function renderMetricas() {
     inputHasta.value = hasta;
     inputAlumno.value = prevAlumno;
 
+    /* ==========================================================
+       FETCH PLANES
+    ========================================================== */
     const params = new URLSearchParams();
     params.append("desde", desde + "Z");
     params.append("hasta", hasta + "Z");
@@ -333,18 +402,44 @@ export async function renderMetricas() {
     );
     const planes = await respPlanes.json();
 
+
+    /* ==========================================================
+       FETCH RECORD PERSONAL
+    ========================================================== */
     const paramsRP = new URLSearchParams();
     if (prevAlumno !== "") paramsRP.append("idAlumno", prevAlumno);
-    params.append("Desde", desde + "Z");
-    params.append("Hasta", hasta + "Z");
 
     const respRecords = await authHelper.fetchWithAuth(
         "http://localhost:5098/api/RecordPersonal/?" + paramsRP.toString()
     );
     const records = await respRecords.json();
 
+
+    /* ==========================================================
+       FETCH SESIONES REALIZADAS (últimos 7 días SIEMPRE)
+    ========================================================== */
+
+    // Hoy → Últimos 7 días
+    const hoy = new Date();
+    const hace7dias = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+
+    const paramsSR = new URLSearchParams();
+    paramsSR.append("Desde", hace7dias.toISOString().slice(0, 10) + "Z");
+    paramsSR.append("Hasta", hoy.toISOString().slice(0, 10) + "Z");
+
+    const respSesiones = await authHelper.fetchWithAuth(
+        "http://localhost:5098/api/SesionRealizada?" + paramsSR.toString()
+    );
+    const sesiones = await respSesiones.json();
+
+
+    /* =====================================================================
+       PROCESS DATA
+    ===================================================================== */
+
     const planesFiltrados = planes;
 
+    /* === Progreso / Adherencia === */
     const progresos = planesFiltrados.map(p => Number(p.progresoPorcentaje) || 0);
     const adherencias = planesFiltrados.map(p => Number(p.adherenciaPorcentaje) || 0);
 
@@ -354,10 +449,18 @@ export async function renderMetricas() {
     const promedioAdherenciaGlobal =
         adherencias.length ? adherencias.reduce((a, b) => a + b, 0) / adherencias.length : 0;
 
+
+    /* =====================================================================
+       Fuerza (1RM vs Fecha)
+    ===================================================================== */
     let fuerzaData = [];
     if (prevAlumno !== "") {
         fuerzaData = records
-            .filter(r => r.calculo1RM > 0 && r.fechaRegistro && r.fechaRegistro !== "0001-01-01T00:00:00")
+            .filter(r =>
+                r.calculo1RM > 0 &&
+                r.fechaRegistro &&
+                r.fechaRegistro !== "0001-01-01T00:00:00"
+            )
             .sort((a, b) => new Date(a.fechaRegistro) - new Date(b.fechaRegistro))
             .map(r => ({
                 fecha: r.fechaRegistro.slice(0, 10),
@@ -365,6 +468,10 @@ export async function renderMetricas() {
             }));
     }
 
+
+    /* =====================================================================
+       PRs por ejercicio
+    ===================================================================== */
     const prMap = {};
     records.forEach(r => {
         if (!r.nombreEjercicio) return;
@@ -377,23 +484,64 @@ export async function renderMetricas() {
         .sort((a, b) => b.prs - a.prs);
 
     const totalPRs = prs.reduce((acc, x) => acc + x.prs, 0);
-    const hace2Semanas = new Date(Date.now() - 14 * 24 * 60 * 60 * 1000);
 
-    const alumnosEnRiesgo = new Set(
-        planesFiltrados
-            .filter(p => {
-                const fecha = new Date(p.fechaInicio);
-                return p.progresoPorcentaje === 0 && fecha <= hace2Semanas;
-            })
-            .map(p => p.idAlumno)
+
+    /* =====================================================================
+       Fuerza Relativa (1RM / peso)
+    ===================================================================== */
+    let fuerzaRelativaGlobal = 0;
+    let fuerzaRelativaAlumno = null;
+
+    const recordsValidos = records.filter(
+        r => r.pesoMax > 0 && r.calculo1RM > 0
     );
 
-    const totalAlumnos = new Set(planesFiltrados.map(p => p.idAlumno)).size;
+    if (prevAlumno !== "") {
+        const recordsAlumno = recordsValidos.filter(
+            r => r.idAlumno === prevAlumno
+        );
 
-    const porcentajeRiesgo =
-        totalAlumnos > 0
-            ? (alumnosEnRiesgo.size / totalAlumnos) * 100
+        if (recordsAlumno.length > 0) {
+            fuerzaRelativaAlumno =
+                recordsAlumno.reduce(
+                    (acc, r) => acc + (r.calculo1RM / r.pesoMax),
+                    0
+                ) / recordsAlumno.length;
+        }
+    }
+
+    const alumnosConRecords = new Set(recordsValidos.map(r => r.idAlumno)).size;
+
+    if (alumnosConRecords > 0) {
+        const sumaRelativa = recordsValidos.reduce(
+            (acc, r) => acc + (r.calculo1RM / r.pesoMax),
+            0
+        );
+        fuerzaRelativaGlobal = sumaRelativa / alumnosConRecords;
+    }
+
+
+    /* =====================================================================
+       NUEVO KPI — Alumnos SIN ENTRENAR en 7 días
+    ===================================================================== */
+
+    // IDs que entrenaron
+    const alumnosQueEntrenaron = new Set(
+        sesiones.map(s => s.idAlumno)
+    );
+
+    // alumnos = lista completa (rolId=3)
+    const alumnosSinEntrenar = usuarios.filter(u => !alumnosQueEntrenaron.has(u.id));
+
+    const porcentajeSinEntrenar =
+        usuarios.length > 0
+            ? (alumnosSinEntrenar.length / usuarios.length) * 100
             : 0;
+
+
+    /* =====================================================================
+       RESULTADO
+    ===================================================================== */
     const result = {
         planesFiltrados,
         promedioProgresoGlobal,
@@ -402,18 +550,25 @@ export async function renderMetricas() {
         fuerzaData,
         prs,
         totalPRs,
-        porcentajeRiesgo,
-        alumnosEnRiesgo,
-        totalAlumnos
+        fuerzaRelativaGlobal,
+        fuerzaRelativaAlumno,
+        alumnosSinEntrenar,
+        porcentajeSinEntrenar
     };
 
+    /* =====================================================================
+       RENDER FINAL
+    ===================================================================== */
     containerMain.innerHTML = metricasHtml(result, usuarios, prevAlumno);
 
+    /* === restaurar valores === */
     document.getElementById("select-desde").value = desde;
     document.getElementById("select-hasta").value = hasta;
     document.getElementById("select-alumno").value = prevAlumno;
 
     attachListeners();
+
+    /* === Render gráfico === */
     if (prevAlumno !== "" && fuerzaData.length > 0) {
         const ctx = document.getElementById("chartFuerza");
         if (ctx) {
@@ -439,3 +594,35 @@ export async function renderMetricas() {
         }
     }
 }
+/* ====================================================
+   LISTENERS (se vuelven a conectar en cada render)
+   ==================================================== */
+function attachListeners() {
+    const desde = document.getElementById("select-desde");
+    const hasta = document.getElementById("select-hasta");
+    const alumno = document.getElementById("select-alumno");
+
+    if (!desde || !hasta || !alumno) return;
+
+    // Cada cambio vuelve a ejecutar renderMetricas()
+    desde.addEventListener("change", () => renderMetricas());
+    hasta.addEventListener("change", () => renderMetricas());
+    alumno.addEventListener("change", () => renderMetricas());
+}
+
+
+/* ====================================================
+   SCRIPT CLEANUP — elimina scripts viejos del gráfico
+   ==================================================== */
+function cleanupDynamicScripts() {
+    const oldScripts = document.querySelectorAll("script[data-dynamic-script]");
+    oldScripts.forEach(s => s.remove());
+}
+
+// Se ejecuta antes de cada render dinámico
+cleanupDynamicScripts();
+
+
+/* ====================================================
+   FIN DEL ARCHIVO
+   ==================================================== */
