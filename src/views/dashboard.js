@@ -6,9 +6,10 @@ import { getAllSesionesRealizadas } from '../services/asignacionApi.js';
 import { getAllSesionesEntrenamiento } from '../services/planApi.js';
 import { exerciseCreateRender } from './exerciseCreate.js';
 import { getEventosCalendario } from '../services/asignacionApi.js';
+import { userNewRender } from './userNew.js';
 
 function dashboardButtonAddListener() {
-    document.getElementById('quick-action-add-student').addEventListener('click', () => console.log('agregar nuevo alumno'));
+    document.getElementById('quick-action-add-student').addEventListener('click', () => userNewRender());
     document.getElementById('quick-action-new-plan').addEventListener('click', () => planCreateRender());
     document.getElementById('quick-action-see-calendar').addEventListener('click', () => console.log('ver calendario'));
     document.getElementById('quick-action-add-exercise').addEventListener('click', () => exerciseCreateRender());
@@ -21,6 +22,13 @@ const cardActivity = [
     { name: "Ana Silva", accactivityión: "se registró", time: "Hace 1 día" }
 ];
 
+
+
+const hoy = new Date();
+
+const startOfDay = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate(), 0, 0, 0);
+
+const endOfDay = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate(), 23, 59, 59);
 
 
 function formatFechaHora(isoString) {
@@ -78,14 +86,23 @@ export async function dashboardRender() {
     const planesAsignados = await getAllAlumnoPlan();
     const sesionesRealizadas = await getAllSesionesRealizadas();
     const sesionesEntrenamiento = await getAllSesionesEntrenamiento();
-    const EventosCalendarios = await getEventosCalendario();
+    const EventosCalendarios = (await getEventosCalendario({
+    Estado: 1,
+    Desde: startOfDay.toISOString(),
+    Hasta: endOfDay.toISOString()
+    })) || []; // si no trae nada devuelve vacio para renderice
 
    
-    for (let index = 0; index < 3; index++) {
-        let evento = EventosCalendarios[index];
-        const hora = formatFechaHora(evento.fechaProgramada);
-        cardNextSession.push({name: evento.nombreAlumno, hour: hora, type: evento.nombreSesion});
-    }
+    cardNextSession.length = 0; 
+
+    EventosCalendarios.slice(0, 3).forEach(evento => {
+    const hora = formatFechaHora(evento.fechaProgramada);
+    cardNextSession.push({
+        name: evento.nombreAlumno,
+        hour: hora,
+        type: evento.nombreSesion
+    });
+});
 
     const statsUser = porcentajeActivos(usuarios);
     const statsPlanes = porcentajeAsignados(planesAsignados);
