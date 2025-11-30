@@ -60,11 +60,6 @@ export function metricasHtml(data = null) {
 
             <!-- TÍTULO Y SELECTORES -->
 
-
-            <p style="color:#9ca3af;margin-bottom:25px;font-size:15px;">
-                Dashboard de rendimiento
-            </p>
-
             <div style="display:flex;gap:10px;margin-bottom:25px;">
                 <select id="select-alumno" style="
                     padding:10px 14px;border-radius:8px;
@@ -105,18 +100,10 @@ export function metricasHtml(data = null) {
     } = data;
 
     return `
-<div style="padding:30px;background:#0a0f1c;min-height:100vh;color:#e5e7eb;font-family:Arial;">
+<div style="padding:30px;background:#oklch;min-height:100vh;color:#e5e7eb;font-family:Arial;">
 
-    <!-- TÍTULO -->
-    <h1 style="
-        font-size:3rem;font-weight:bold;
-        background:linear-gradient(to right,#4f46e5,#06b6d4,#10b981);
-        -webkit-background-clip:text;color:transparent;
-        margin-bottom:5px;
-    ">Métricas Grupales</h1>
-
-    <p style="color:#9ca3af;margin-bottom:25px;font-size:15px;">
-        Dashboard de rendimiento del equipo
+    <p style="color:#9ca3af;margin-bottom:25px;font-size:25px;">
+        Dashboard de rendimiento
     </p>
 
     <!-- SELECTORES -->
