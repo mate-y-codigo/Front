@@ -1,7 +1,7 @@
-import { progressBarHtml } from '../components/progressBarHtml.js'
+import { progressBarHtml } from "../components/progressBarHtml.js";
 
 function assignmentCardHtml(assignment) {
-    return `
+  return `
         <div class="card-assignment">
             <div class="flex flex-row p-6">
                 <div class="flex-1">
@@ -16,16 +16,16 @@ function assignmentCardHtml(assignment) {
                                     <p>Plan: ${assignment.planName}</p>
                                 </div>
                             </div>
-                            <div class="grid grid-cols-3 gap-4 text-sm">
-                                <div class="card-assignment-coach">
-                                    <span>Entrenador:</span>
-                                    <p>${assignment.coachName}</p>
-                                </div>
+                            <div class="grid grid-cols-2 gap-4 text-sm">
                                 <div class="card-assignment-date">
                                     <span class="card-assignment-date-title">Período:</span>
-                                    <div class="card-assignment-date-info flex items-center gap-1"><span
-                                            class="card-assignment-date-icon material-symbols-outlined">calendar_today</span>${assignment.dateStart}
-                                        - ${assignment.dateEnd}</div>
+                                    <div class="card-assignment-date-info flex items-center gap-1">
+                                        <span class="card-assignment-date-icon material-symbols-outlined">calendar_today</span>
+                                        ${assignment.dateStart} - ${assignment.dateEnd}
+                                    </div>
+                                    <div class="card-assignment-date-duration">
+                                        ${assignment.duration}
+                                    </div>
                                 </div>
                                 <div class="card-assignment-progress">
                                     <span class="card-assignment-progress-title">Progreso:</span>
@@ -38,21 +38,22 @@ function assignmentCardHtml(assignment) {
                     </div>
                 </div>
                 <div class="flex-none">
-                    <div class="card-assignment-status inline-flex items-center">${assignment.status}</div>
+                    <div class="card-assignment-status inline-flex items-center">${
+                      assignment.status
+                    }</div>
                 </div>
             </div>
         </div>
     `;
 }
 
-export function assignmentHtml(assignmentList) {
-    return `
+function assignmentHtml(assignmentList) {
+  return `
         <div class="flex flex-col w-full pt-6 pb-6 pl-20 pr-20">
             <div class="flex flex-row-reverse items-center gap-6 pb-10">
                 <div>
-                    <button class="button inline-flex items-center justify-center gap-2" onclick="openModalNewAssignment()">
-                        <span class="material-symbols-outlined">add</span>
-                        Nueva Asignación
+                    <button class="button inline-flex items-center justify-center gap-2" onclick="openFullScreenAssignment()">
+                        <span class="material-symbols-outlined">add</span>Nueva Asignación
                     </button>
                 </div>
             </div>
@@ -64,10 +65,14 @@ export function assignmentHtml(assignmentList) {
             <div class="space-y-4 pt-4">
                 <h2 id="assignment-title" class="text-2xl font-semibold">Ultimas Asignaciones</h2>
                 <div id="assignment-cards">
-                    ${assignmentList.map((assignment) => assignmentCardHtml(assignment)).join('')}  
+                    ${assignmentList
+                      .map((assignment) => assignmentCardHtml(assignment))
+                      .join("")}  
                 </div>
             </div>
         </div>
         <div id="modal-open-assignment-new"></div>
     `;
 }
+
+export { assignmentHtml, assignmentCardHtml };
