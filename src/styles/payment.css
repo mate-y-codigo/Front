@@ -1,0 +1,217 @@
+.payment-card {
+    color: var(--text-primary);
+    background-color: var(--card-bg);
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 2px 0 var(--shadow-color);
+    border-width: 1px;
+    border-style: solid;
+}
+
+.payment-card-info-icon {
+    height: 3rem;
+    width: 3rem;
+    border-radius: 9999px;
+}
+
+.payment-card-info-title {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: var(--text-muted);
+}
+
+.payment-card-info-detail {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 700;
+}
+
+.payment-card-info-icon span {
+    font-size: 2rem;
+}
+
+.payment-card-info-total {
+    border-color: color-mix(in oklch, var(--total-payments) 50%, transparent);
+}
+
+.payment-card-info-icon-total {
+    color: var(--total-payments);
+    background-color: color-mix(in oklch, var(--total-payments) 15%, transparent);
+}
+
+.payment-card-info-cash {
+    border-color: color-mix(in oklch, var(--cash) 50%, transparent);
+}
+
+.payment-card-info-icon-cash {
+    color: var(--cash);
+    background-color: color-mix(in oklch, var(--cash) 15%, transparent);
+}
+
+.payment-card-info-credit-card {
+    border-color: color-mix(in oklch, var(--credit-card) 50%, transparent);
+}
+
+.payment-card-info-icon-credit-card {
+    color: var(--credit-card);
+    background-color: color-mix(in oklch, var(--credit-card) 15%, transparent);
+}
+
+.payment-card-info-transfer {
+    border-color: color-mix(in oklch, var(--transfer) 50%, transparent);
+}
+
+.payment-card-info-icon-transfer {
+    color: var(--transfer);
+    background-color: color-mix(in oklch, var(--transfer) 15%, transparent);
+}
+
+.payment-card-new-title {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    line-height: 1;
+    font-weight: 600;
+    letter-spacing: -0.01562em;
+}
+
+.payment-card-new label {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.payment-card-student-statement {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    line-height: 1;
+    font-weight: 600;
+    letter-spacing: -0.01562em;
+}
+
+.payment-card-student {
+    background-color: var(--background);
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+    gap: 1rem;
+}
+
+.payment-card-student:hover {
+    background-color: color-mix(in oklch, var(--hover-bg) 50%, transparent);
+}
+
+.payment-card-student-icon {
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 9999px;
+    background-color: color-mix(in oklch, var(--primary) 15%, transparent);
+}
+
+.payment-card-student-icon span {
+    color: var(--primary);
+}
+
+.payment-card-student-name {
+    font-weight: 600;
+}
+
+.payment-card-student-last-payment-date {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+.payment-card-student-last-payment {
+    font-weight: 700;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+}
+
+.payment-card-student-last-payment-method {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    color: var(--text-muted);
+}
+
+.payment-card-student-coverage-date {
+    font-weight: 700;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+}
+
+.payment-card-student-coverage-date span {
+    font-size: 1.25rem;
+}
+
+.payment-card-student-coverage-title {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    color: var(--text-muted);
+}
+
+.payment-card-student-status {
+    border-radius: 9999px;
+    border: 1px solid transparent;
+    padding: 0.125rem 0.625rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    transition: color 0.2s, background-color 0.2s;
+}
+
+.payment-card-student-status-ok {
+    color: var(--accent);
+    background-color: color-mix(in oklch, var(--success) 15%, transparent);
+}
+
+.payment-card-student-status-ok:hover {
+    background-color: color-mix(in oklch, var(--success) 30%, transparent);
+}
+
+.payment-card-student-status-debt {
+    color: var(--destructive);
+    background-color: color-mix(in oklch, var(--destructive) 15%, transparent);
+}
+
+.payment-card-student-status-debt:hover {
+    background-color: color-mix(in oklch, var(--destructive) 30%, transparent);
+}
+
+.payment-card-error-input {
+    border-color: var(--destructive) !important;
+}
+
+.input-error {
+    border: 1px solid red !important;
+}
+
+.custom-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 0.9rem;
+}
+
+.custom-checkbox input {
+  display: none;
+}
+
+.custom-checkbox span {
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.25s;
+}
+
+.custom-checkbox input:checked + span {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.custom-checkbox input:checked + span::after {
+  content: "✓";
+  color: white;
+  font-size: 14px;
+}
