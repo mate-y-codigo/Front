@@ -10,7 +10,7 @@ function spinnerHTML() {
             justify-content:center;
             align-items:center;
             height:300px;
-            color:#e5e7eb;
+            color:#oklch;
             font-size:20px;
         ">
             <div class="lds-ring">
@@ -60,9 +60,9 @@ export function metricasHtml(
 
     if (!data) {
         return `
-        <div style="padding:30px;background:#0a0f1c;min-height:100vh;color:#e5e7eb;font-family:Arial;">
+        <div style="padding:50px 70px;background:#oklch;min-height:100vh;color:#oklch;font-family:Arial;">
 
-            <h2 style="font-size:25px;margin-bottom:15px;color:#9ca3af">
+            <h2 style="font-size:25px;margin-bottom:15px;color:#oklch">
                 Dashboard de planes
             </h2>
 
@@ -70,8 +70,8 @@ export function metricasHtml(
 
                 <select id="select-alumno" style="
                     padding:10px 14px;border-radius:8px;
-                    background:#111827;border:1px solid #374151;
-                    color:#e5e7eb;min-width:180px;">
+                    background:#oklch;border:1px solid #374151;
+                    color:#oklch;min-width:180px;">
                     <option value="">Todos los alumnos</option>
                     ${usuarios.map(u => `
                         <option value="${u.id}">${u.nombre} ${u.apellido}</option>
@@ -80,13 +80,13 @@ export function metricasHtml(
 
                 <input type="date" id="select-desde" style="
                     padding:10px 14px;border-radius:8px;
-                    background:#111827;border:1px solid #374151;
-                    color:#e5e7eb;">
+                    background:#oklch;border:none;
+                    color:#oklch;">
 
                 <input type="date" id="select-hasta" style="
                     padding:10px 14px;border-radius:8px;
-                    background:#111827;border:1px solid #374151;
-                    color:#e5e7eb;">
+                    background:#oklch;border:none;
+                    color:#oklch;">
             </div>
 
             ${spinnerHTML()}
@@ -112,18 +112,23 @@ export function metricasHtml(
        TEMPLATE COMPLETO
     ======================================================== */
     return `
-<div style="padding:30px;background:#0a0f1c;min-height:100vh;color:#e5e7eb;font-family:Arial;">
+<div style="padding:50px 70px;background:#oklch;min-height:100vh;color:#oklch;font-family:Arial;">
 
-    <h2 style="font-size:25px;margin-bottom:15px;color:#9ca3af">
+    <h2 style="font-size:25px;margin-bottom:15px;color:#oklch">
         Dashboard de planes
     </h2>
 
     <!-- Selectores -->
     <div style="display:flex;gap:10px;margin-bottom:25px;">
         <select id="select-alumno" style="
-            padding:10px 14px;border-radius:8px;
-            background:#111827;border:1px solid #374151;
-            color:#e5e7eb;min-width:180px;">
+            padding:10px 14px;
+            border-radius:10px;
+            border:1px solid var(--oklch-border);
+            background:var(--oklch-bg);
+            color:var(--oklch-text);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            font-weight:500;
+        ">
             <option value="">Todos los alumnos</option>
             ${usuarios.map(u => `
                 <option value="${u.id}">${u.nombre} ${u.apellido}</option>
@@ -132,83 +137,79 @@ export function metricasHtml(
 
         <input type="date" id="select-desde" style="
             padding:10px 14px;border-radius:8px;
-            background:#111827;border:1px solid #374151;color:#e5e7eb;">
+            background:var(--oklch-bg);border:1px solid var(--oklch-border);color:var(--oklch-text);box-shadow: 0 4px 12px rgba(0,0,0,0.25);">
 
         <input type="date" id="select-hasta" style="
             padding:10px 14px;border-radius:8px;
-            background:#111827;border:1px solid #374151;color:#e5e7eb;">
+            background:var(--oklch-bg);border:1px solid var(--oklch-border);color:var(--oklch-text);box-shadow: 0 4px 12px rgba(0,0,0,0.25);">
     </div>
 
     <!-- KPIs -->
     <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:20px;margin-bottom:25px;">
         
         <!-- Progreso -->
-        <div style="background:#111827;border:1px solid #1e2536;border-radius:14px;padding:20px;">
-            <span style="font-size:14px;color:#9ca3af;">Progreso global</span>
-            <div style="font-size:32px;font-weight:bold;margin-top:5px;color:#4f46e5;">
+        <div style="background:#oklch;border:none;border-radius:14px;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.25);">
+            <span style="font-size:14px;color:#oklch;">Progreso global</span>
+            <div style="font-size:32px;font-weight:bold;margin-top:5px;color:#3b82f6;">
                 ${promedioProgresoGlobal.toFixed(1)}%
             </div>
         </div>
 
         <!-- Adherencia -->
-        <div style="background:#111827;border:1px solid #1e2536;border-radius:14px;padding:20px;">
-            <span style="font-size:14px;color:#9ca3af;">Adherencia global</span>
-            <div style="font-size:32px;font-weight:bold;margin-top:5px;color:#06b6d4;">
+        <div style="background:#oklch;border:1px solid #oklch;border-radius:14px;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.25);">
+            <span style="font-size:14px;color:#oklch;">Adherencia global</span>
+            <div style="font-size:32px;font-weight:bold;margin-top:5px;color:#bc4ed8;">
                 ${promedioAdherenciaGlobal.toFixed(1)}%
             </div>
         </div>
 
         <!-- Records -->
-        <div style="background:#111827;border:1px solid #1e2536;border-radius:14px;padding:20px;">
-            <span style="font-size:14px;color:#9ca3af;">Records Personales</span>
-            <div style="font-size:32px;font-weight:bold;margin-top:5px;color:#10b981;">
+        <div style="background:#oklch;border:1px solid #oklch;border-radius:14px;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.25);">
+            <span style="font-size:14px;color:#oklch;">Records Personales</span>
+            <div style="font-size:32px;font-weight:bold;margin-top:5px;color:#ec4899;">
                 ${cantidadRecordsPersonales}
             </div>
         </div>
 
         <!-- Cantidad de planes -->
         <div style="
-            background:#111827;
-            border:1px solid #1e2536;
+            background:#oklch;
+            border:1px solid #oklch;
             border-radius:14px;
-            padding:20px;">
-            <span style="font-size:14px;color:#9ca3af;">Cantidad de planes</span>
-            <div style="
-                font-size:32px;
-                font-weight:bold;
-                margin-top:5px;
-                color:#fbbf24;">
-                ${planesFiltrados.length}
-            </div>
+            padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.25);">
+        <span style="font-size:14px;color:#oklch;">Cantidad de planes</span>
+        <div style="font-size:32px;font-weight:600;margin-top:5px;color:#fb923c;">
+            ${planesFiltrados.length}
+        </div>
         </div>
 
         <!-- Fuerza Relativa -->
         <div style="
-            background:#111827;
-            border:1px solid #1e2536;
+            background:#oklch;
+            border:1px solid #oklch;
             border-radius:14px;
-            padding:20px;">
-            <span style="font-size:14px;color:#9ca3af;">Fuerza Relativa</span>
+            padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.25);">
+            <span style="font-size:14px;color:#oklch;">Fuerza Relativa</span>
             <div style="
                 font-size:28px;
                 font-weight:bold;
                 margin-top:5px;
-                color:#8b5cf6;">
+                color:#06b6d4;">
                 ${fuerzaRelativaGlobal.toFixed(2)}
             </div>
 
-            <div style="color:#9ca3af;font-size:12px;margin-top:4px;">
+            <div style="color:#oklch;font-size:12px;margin-top:4px;">
                 Alumno: ${fuerzaRelativaAlumno !== null ? fuerzaRelativaAlumno.toFixed(2) : "-"}
             </div>
         </div>
 
-        <!-- 🔥 KPI NUEVO: Alumnos sin entrenar últimos 7 días -->
+        <!--  KPI NUEVO: Alumnos sin entrenar últimos 7 días -->
         <div style="
-            background:#111827;
-            border:1px solid #1e2536;
+            background:#oklch;
+            border:1px solid #oklch;
             border-radius:14px;
-            padding:20px;">
-            <span style="font-size:14px;color:#9ca3af;">Alumnos sin entrenar (7 días)</span>
+            padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.25);">
+            <span style="font-size:14px;color:#oklch;">Alumnos sin entrenar (7 días)</span>
 
             <div style="
                 font-size:32px;
@@ -218,82 +219,94 @@ export function metricasHtml(
                 ${porcentajeSinEntrenar.toFixed(1)}%
             </div>
 
-            <div style="color:#9ca3af;font-size:12px;margin-top:4px;">
+            <div style="color:#oklch;font-size:12px;margin-top:4px;">
                 ${alumnosSinEntrenar.length} de ${usuarios.length}
             </div>
         </div>
 
     </div>
 
-    <!-- Tabla -->
-    <div style="background:#111827;padding:20px;border-radius:12px;border:1px solid #1e2536;margin-bottom:20px">
-        <h3 style="margin-bottom:15px;font-size:20px;">Planes (${planesFiltrados.length})</h3>
+<!-- Zona de informes rápidos: PLANES + SIN ENTRENAR -->
+<div style="display:grid; grid-template-columns: 2fr 1fr; gap:25px; margin-bottom:30px;">
 
-        ${planesFiltrados.length === 0
-            ? `<div style="padding:20px;text-align:center;color:#9ca3af;border:1px dashed #374151;border-radius:8px;">
-                   No se encontraron planes.
-               </div>`
-            : `
-                <table style="width:100%;border-collapse:collapse;">
-                    <thead>
-                        <tr style="color:#9ca3af;text-align:left;">
-                            <th>Alumno</th>
-                            <th>Inicio</th>
-                            <th>Progreso</th>
-                            <th>Adherencia</th>
+    <!-- 📌 PLANES -->
+        <div style="
+            background:#oklch;
+            padding:24px;
+            border-radius:14px;
+            box-shadow:0 2px 6px rgba(0,0,0,0.25);
+        ">
+
+            <h3 style="margin-bottom:20px;font-size:22px;font-weight:600;color:#oklch;">
+                Planes Encontrados (${planesFiltrados.length})
+            </h3>
+
+            <table style="width:100%;border-collapse:collapse;">
+                
+                <thead>
+                    <tr>
+                        <th style="text-align:left;padding:10px 0;color:#oklch;font-weight:500;font-size:14px;">Alumno</th>
+                        <th style="text-align:left;padding:10px 0;color:#oklch;font-weight:500;font-size:14px;">Inicio</th>
+                        <th style="text-align:left;padding:10px 0;color:#oklch;font-weight:500;font-size:14px;">Progreso</th>
+                        <th style="text-align:left;padding:10px 0;color:#oklch;font-weight:500;font-size:14px;">Adherencia</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    ${planesFiltrados.map((p, i) => `
+                        <tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
+                            <td style="padding:10px 0;color:#oklch;">${p.nombreAlumno}</td>
+                            <td style="padding:10px 0;color:#oklch;">${p.fechaInicio?.slice(0, 10)}</td>
+                            <td style="padding:10px 0;color:#3b82f6;font-weight:500;">${p.progresoPorcentaje}%</td>
+                            <td style="padding:10px 0;color:#bc4ed8;font-weight:500;">${p.adherenciaPorcentaje}%</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        ${planesFiltrados.map(p => `
-                            <tr>
-                                <td>${p.nombreAlumno}</td>
-                                <td>${p.fechaInicio?.slice(0, 10)}</td>
-                                <td>${p.progresoPorcentaje}%</td>
-                                <td>${p.adherenciaPorcentaje}%</td>
-                            </tr>
-                        `).join("")}
-                    </tbody>
-                </table>
-            `}
-    </div>
+                    `).join("")}
+                </tbody>
+
+            </table>
+
+        </div>
 
 
-    <!-- 🔥 LISTADO DE ALUMNOS SIN ENTRENAR (7 días) -->
-    <div style="
-        background:#111827;
-        border-radius:12px;
-        border:1px solid #1e2536;
-        padding:20px;
-        margin-bottom:25px;
-    ">
+        <!-- 📌 ALUMNOS SIN ENTRENAR -->
+        <div style="
+            background:#oklch;
+            border-radius:10px;
+            border:1px solid #oklch;
+            padding:20px;
+            max-height:400px;
+            overflow-y:auto;box-shadow:0 4px 12px rgba(0,0,0,0.25);
+        ">
+            <h3 style="font-size:20px;margin-bottom:15px;">Alumnos sin entrenar (últimos 7 días)</h3>
 
-        <h3 style="font-size:20px;margin-bottom:15px;">Alumnos sin entrenar (últimos 7 días)</h3>
-
-        ${alumnosSinEntrenar.length === 0 ? `
-            <div style="
-                padding:20px;text-align:center;color:#9ca3af;
-                border:1px dashed #374151;border-radius:8px;">
-                Todos entrenaron en los últimos 7 días 🎉
-            </div>
-        ` :
-            alumnosSinEntrenar.map(a => `
-            <div style="margin-bottom:16px;">
-                <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
-                    <span>${a.nombre} ${a.apellido}</span>
-                    <span style="color:#ef4444;font-weight:bold">0 sesiones</span>
+            ${alumnosSinEntrenar.length === 0 ? `
+                <div style="
+                    padding:20px;text-align:center;color:#oklch;
+                    border:1px dashed #374151;border-radius:8px;">
+                    Todos entrenaron 🎉
                 </div>
+            ` :
+            alumnosSinEntrenar.map(a => `
+                <div style="margin-bottom:16px;">
+                    <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                        <span>${a.nombre} ${a.apellido}</span>
+                        <span style="color:#ef4444;font-weight:bold">0 sesiones</span>
+                    </div>
 
-                <div style="height:8px;background:#1f2937;border-radius:6px;">
-                    <div style="
-                        height:100%;
-                        width:0%;
-                        background:linear-gradient(90deg,#ef4444,#b91c1c);
-                        border-radius:6px;">
+                    <div style="height:8px;background:#4a536b;;border-radius:6px;">
+                        <div style="
+                            height:100%;
+                            width:0%;
+                            background:linear-gradient(90deg,#ef4444,#b91c1c);
+                            border-radius:6px;">
+                        </div>
                     </div>
                 </div>
-            </div>
-        `).join("")}
+            `).join("")}
+        </div>
+
     </div>
+
 
 
     <!-- Gráficos -->
@@ -303,8 +316,8 @@ export function metricasHtml(
         ${alumnoSeleccionado === "" ? `` : `
         <div style="
             flex:1;
-            background:#111827;border-radius:12px;
-            border:1px solid #1e2536;padding:20px;">
+            background:#oklch;border-radius:10px;
+            border:1px solid #oklch;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.25);">
             
             <h3 style="font-size:20px;margin-bottom:10px;">Progreso de Fuerza (1RM)</h3>
 
@@ -314,14 +327,14 @@ export function metricasHtml(
         <!-- PRs -->
         <div style="
             flex:1;
-            background:#111827;border-radius:12px;
-            border:1px solid #1e2536;padding:20px;">
+            background:#oklch;border-radius:10px;
+            border:1px solid #oklch;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.25);">
             
             <h3 style="font-size:20px;margin-bottom:15px;">PRs por ejercicio</h3>
 
             ${prs.length === 0 ? `
                 <div style="
-                    padding:20px;text-align:center;color:#9ca3af;
+                    padding:20px;text-align:center;color:#oklch;
                     border:1px dashed #374151;border-radius:8px;">
                     No se registraron PRs en este período.
                 </div>
@@ -333,7 +346,7 @@ export function metricasHtml(
                             <span style="color:#ec4899;font-weight:bold">${e.prs} PRs</span>
                         </div>
 
-                        <div style="height:8px;background:#1f2937;border-radius:6px;">
+                        <div style="height:8px;background:#4a536b;;border-radius:6px;">
                             <div style="
                                 height:100%;
                                 width:${(e.prs / Math.max(...prs.map(x => x.prs))) * 100}%;
@@ -345,9 +358,20 @@ export function metricasHtml(
                 `).join("")}
 
                 <div style="
-                    background:#0f172a;border:1px solid #1e2536;
-                    padding:12px;border-radius:8px;margin-top:15px;
-                    font-size:22px;font-weight:bold;color:#ec4899;text-align:center;">
+                    padding:12px;
+                    margin-top:15px;
+                    font-size:22px;
+                    font-weight:bold;
+                    text-align:center;
+                    color:#ec4899;
+
+                    background: 
+                        linear-gradient(#oklch, #oklch) padding-box, 
+                        linear-gradient(90deg,#ec4899,#8b5cf6) border-box;
+
+                    border-radius:8px;
+                    border:2px solid transparent;
+                ">
                     Total PRs: ${totalPRs}
                 </div>
             `}
@@ -586,8 +610,8 @@ export async function renderMetricas() {
                 options: {
                     plugins: { legend: { display: false } },
                     scales: {
-                        x: { ticks: { color: "#e5e7eb" } },
-                        y: { ticks: { color: "#e5e7eb" } }
+                        x: { ticks: { color: "#oklch" } },
+                        y: { ticks: { color: "#oklch" } }
                     }
                 }
             });
