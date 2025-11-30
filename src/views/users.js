@@ -24,26 +24,42 @@ export async function usersRender() {
   const container = document.getElementById("container-main");
   if (!container) return;
 
+  // Animación de entrada (igual que plansRender / exercisesRender)
+  container.classList.add("opacity-0", "scale-95", "transition-all", "duration-300");
+  container.classList.remove("opacity-100", "scale-100");
+
+  // Header
   const headerH1 = document.getElementById("header-h1");
   const headerP = document.getElementById("header-p");
-  if (headerH1 && headerP && headerTxt.users){
+  if (headerH1 && headerP && headerTxt.users) {
     headerH1.textContent = headerTxt.users.h1;
     headerP.textContent = headerTxt.users.p;
   }
 
-  try {
-    const apiUsers = await getUserAll();
-    const onlyStudents = apiUsers.filter((u) => u.rolId === 3);
-    usersState.users = mapFromApiUsers(onlyStudents);
+  setTimeout(async () => {
+    try {
+      const apiUsers = await getUserAll();
+      const onlyStudents = apiUsers.filter((u) => u.rolId === 3);
+      usersState.users = mapFromApiUsers(onlyStudents);
 
-    container.innerHTML = usersHtml({ users: usersState.users });
-    initUsersEvents();
-  } catch (err) {
-    console.error("Error cargando usuarios:", err);
-    container.innerHTML =
-      "<p style='color:#fff; padding:1rem;'>Error cargando alumnos. Revisá la consola.</p>";
-  }
+      container.innerHTML = usersHtml({ users: usersState.users });
+      initUsersEvents();
+
+      // Fin de animación: mostrar contenido
+      container.classList.remove("opacity-0", "scale-95");
+      container.classList.add("opacity-100", "scale-100");
+    } catch (err) {
+      console.error("Error cargando usuarios:", err);
+      container.innerHTML =
+        "<p style='color:#fff; padding:1rem;'>Error cargando alumnos. Revisá la consola.</p>";
+
+      // Aunque haya error, sacamos el fade-out
+      container.classList.remove("opacity-0", "scale-95");
+      container.classList.add("opacity-100", "scale-100");
+    }
+  }, 100); // mismo delay que planes/ejercicios
 }
+
 
 function initUsersEvents() {
   const btnNewStudent = document.getElementById("btn-new-student");
