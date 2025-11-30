@@ -34,12 +34,12 @@ export function modalStudentDeleteHtml(user) {
         <div class="mt-6 modal-user-actions">
           <button id="student-delete-cancel"
                   type="button"
-                  class="button-small-cancel">
+                  class="button">
             Cancelar
           </button>
           <button id="student-delete-confirm"
                   type="button"
-                  class="button-small">
+                  class="button-cancel">
             Eliminar
           </button>
         </div>

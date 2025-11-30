@@ -7,7 +7,7 @@ export async function userEditRender(user) {
   const container = document.getElementById("container-main");
   if (!container) return;
 
-  // Header para "Editar alumno"
+  // Header
   const headerH1 = document.getElementById("header-h1");
   const headerP = document.getElementById("header-p");
   if (headerH1 && headerP && headerTxt.userEdit) {
@@ -15,12 +15,10 @@ export async function userEditRender(user) {
     headerP.textContent = headerTxt.userEdit.p;
   }
 
-  // Animación de entrada como en otras pantallas
   container.classList.add("opacity-0", "scale-95", "transition-all", "duration-300");
   container.classList.remove("opacity-100", "scale-100");
 
   setTimeout(() => {
-    // Render de la vista
     container.innerHTML = userEditHtml(user);
 
     const form = document.getElementById("student-edit-form");
@@ -43,7 +41,6 @@ export async function userEditRender(user) {
       goBack();
     });
 
-    // Toggle "mostrar contraseña" (solo cambia el tipo, sigue siendo ilustrativa)
     if (pwdInput && pwdToggleBtn && pwdToggleIcon) {
       pwdToggleBtn.addEventListener("click", () => {
         if (pwdInput.type === "password") {
@@ -56,7 +53,6 @@ export async function userEditRender(user) {
       });
     }
 
-    // Actualizar texto del estado (UI + se usará para dto.activo)
     if (activeCheckbox && activeLabel) {
       const updateActiveLabel = () => {
         activeLabel.textContent = activeCheckbox.checked
@@ -79,20 +75,19 @@ export async function userEditRender(user) {
         const formData = new FormData(form);
         const raw = Object.fromEntries(formData.entries());
 
-        // Armamos DTO según UsuarioUpdateDto
         const dto = {
           nombre: raw.nombre?.trim() || null,
           apellido: raw.apellido?.trim() || null,
           celular: raw.celular?.trim() || null,
           peso: raw.peso ? Number(raw.peso) : null,
           altura: raw.altura ? Number(raw.altura) : null,
-          activo: activeCheckbox ? !!activeCheckbox.checked : user.activo,
+          activo: activeCheckbox ? !!activeCheckbox.checked : undefined,
         };
 
-        // Llamada al backend
+        console.log("DTO a enviar en updateUser:", dto);
+
         await updateUser(user.id, dto);
 
-        // Volver al listado de alumnos
         goBack();
       } catch (err) {
         console.error("Error actualizando usuario:", err);
@@ -102,7 +97,6 @@ export async function userEditRender(user) {
       }
     });
 
-    // fin animación
     container.classList.remove("opacity-0", "scale-95");
     container.classList.add("opacity-100", "scale-100");
   }, 100);

@@ -26,7 +26,9 @@ function getUserInitials(user) {
 function userRowHtml(user) {
   const nombre = `${user.nombre ?? ""} ${user.apellido ?? ""}`.trim();
   const email = user.email ?? "";
-  const telefono = user.telefono ?? user.celular ?? "-";
+  const telefono = user.celular ?? "-";
+  const peso = user.peso ?? "-";
+  const altura = user.altura ?? "-";
   const isActive = user.activo === false ? false : true;
 
   return `
@@ -61,6 +63,16 @@ function userRowHtml(user) {
       <!-- Teléfono -->
       <td class="user-cell">
         ${escapeHtml(telefono)}
+      </td>
+
+      <!-- Peso -->
+      <td class="user-cell">
+        ${escapeHtml(peso)}
+      </td>
+
+      <!-- Altura -->
+      <td class="user-cell">
+        ${escapeHtml(altura)}
       </td>
 
       <!-- Estado -->
@@ -157,6 +169,8 @@ export function usersHtml(usersList) {
                 <th>Nombre</th>
                 <th>Email</th>
                 <th>Teléfono</th>
+                <th>Peso</th>
+                <th>Altura</th>
                 <th>Estado</th>
                 <th>Acciones</th>
               </tr>

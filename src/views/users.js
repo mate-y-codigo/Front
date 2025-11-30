@@ -14,8 +14,10 @@ function mapFromApiUsers(apiUsers) {
     id: u.id,
     nombre: u.nombre ?? u.firstName ?? "",
     apellido: u.apellido ?? u.lastName ?? "",
-    email: u.email ?? "",
-    telefono: u.telefono ?? u.celular ?? "",
+    email: u.email ?? "-",
+    celular: u.celular ?? "-",
+    peso: u.peso ?? null,
+    altura: u.altura ?? null,
     activo: u.activo === false ? false : true,
   }));
 }

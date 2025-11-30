@@ -140,3 +140,7 @@
 .modal-student-actions .button-small-cancel {
     width: 100%;
 }
+
+#modal-student-delete {
+  width: auto;
+}

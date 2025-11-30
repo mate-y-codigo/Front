@@ -142,7 +142,7 @@ export function exerciseEditHtml({ exercise, muscles, muscleGroups, categories, 
                   ${exercise.activo ? "checked" : ""}
                 />
                 <span class="text-sm">
-                  ${exercise.activo ? "Ejercicio activo" : "Ejercicio inactivo"}
+                  Ejercicio activo
                 </span>
               </div>
             </div>

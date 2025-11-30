@@ -94,7 +94,7 @@
 }
 
 .user-table th {
-    text-align: left;
+    text-align: center;
     padding: 0.75rem 0.75rem;
     font-weight: 600;
     color: var(--text-muted);
@@ -115,6 +115,7 @@
 .user-cell {
     padding: 0.75rem 0.75rem;
     vertical-align: middle;
+    text-align: center;
 }
 
 .user-cell-name {
@@ -162,6 +163,7 @@
 .user-name-subtitle {
     font-size: 0.75rem;
     color: var(--text-muted);
+    text-align: start;
 }
 
 /* Estado (pill) */

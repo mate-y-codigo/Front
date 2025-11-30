@@ -22,7 +22,7 @@ export function modalExerciseDeleteHtml(exercise) {
 
         <!-- Header -->
         <div class="flex flex-col space-y-1.5 mb-4">
-          <h2 class="ubuntu-medium text-xl">Eliminar ejercicio</h2>
+          <h2 class="ubuntu-medium text-xl">Eliminar Ejercicio</h2>
           <p class="ubuntu-regular text-sm text-muted-foreground">
             ¿Seguro que querés eliminar el ejercicio <b>${nombre}</b>?
           </p>
@@ -33,7 +33,7 @@ export function modalExerciseDeleteHtml(exercise) {
           <button
             id="exercise-delete-cancel"
             type="button"
-            class="button-small"
+            class="button"
           >
             Cancelar
           </button>

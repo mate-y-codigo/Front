@@ -347,9 +347,7 @@ function openEditExerciseModal(modalHost, exercise) {
 /* =====================  MODAL: ELIMINAR  ===================== */
 
 function openDeleteExerciseModal(modalHost, exercise) {
-  modalHost.innerHTML = modalExerciseDeleteHtml({
-    exercise,
-  });
+  modalHost.innerHTML = modalExerciseDeleteHtml(exercise);
 
   const overlay = document.getElementById("modal-overlay-exercise-delete");
   const modal = document.getElementById("modal-exercise-delete");

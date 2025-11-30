@@ -15,8 +15,8 @@ export function userEditHtml(user) {
   const nombre = escapeHtml(user.nombre ?? "");
   const apellido = escapeHtml(user.apellido ?? "");
   const celular = escapeHtml(user.celular ?? "");
-  const peso = user.peso != null ? String(user.peso) : "";
-  const altura = user.altura != null ? String(user.altura) : "";
+  const peso = user.peso != null ? user.peso : "";
+  const altura = user.altura != null ? user.altura : "";
   const isActive = user.activo !== false;
 
   return `
@@ -25,17 +25,13 @@ export function userEditHtml(user) {
 
         <!-- Título -->
         <div class="flex flex-col space-y-1.5 mb-4">
-          <h1 class="ubuntu-medium text-xl">Editar alumno</h1>
+          <h1 class="ubuntu-medium text-xl">Editar Alumno</h1>
           <p class="ubuntu-regular text-sm text-muted-foreground">
-            Modificá los datos del alumno. El correo y la contraseña no pueden editarse desde esta pantalla.
+            Modificá los datos del alumno.
           </p>
         </div>
 
-        <!-- Datos de acceso (solo lectura) -->
         <section class="space-y-4 mb-4">
-          <h2 class="ubuntu-medium text-sm text-muted-foreground">
-            Datos de acceso
-          </h2>
 
           <div class="flex flex-col md:flex-row gap-4">
             <!-- Email readonly -->
@@ -49,32 +45,6 @@ export function userEditHtml(user) {
                 readonly
                 disabled
               />
-            </div>
-
-            <!-- Password readonly + toggle mostrar -->
-            <div class="flex-1 space-y-2">
-              <label class="ubuntu-regular text-sm" for="student-password-readonly">Contraseña</label>
-              <div class="flex gap-2 items-stretch">
-                <input
-                  id="student-password-readonly"
-                  type="password"
-                  class="input flex-1"
-                  value="********"
-                  readonly
-                  disabled
-                />
-                <button
-                  id="student-password-toggle"
-                  type="button"
-                  class="button-small"
-                  title="Mostrar / ocultar contraseña"
-                >
-                  <span class="material-symbols-outlined" id="student-password-toggle-icon">visibility</span>
-                </button>
-              </div>
-              <p class="text-xs text-muted-foreground">
-                Por seguridad, la contraseña real no se recupera desde el servidor. Este campo es solo ilustrativo.
-              </p>
             </div>
           </div>
         </section>
@@ -161,9 +131,6 @@ export function userEditHtml(user) {
                     ${isActive ? "Usuario activo" : "Usuario inactivo"}
                   </span>
                 </div>
-                <p class="text-xs text-muted-foreground">
-                  Este switch todavía no está conectado al backend. Se usará cuando se implemente el cambio de estado.
-                </p>
               </div>
             </div>
 
