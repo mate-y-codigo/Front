@@ -30,6 +30,27 @@ function userRowHtml(user) {
   const peso = user.peso ?? "-";
   const altura = user.altura ?? "-";
   const isActive = user.activo === false ? false : true;
+  const actionsHtml = isActive
+    ? `
+      <!-- Botón eliminar / desactivar -->
+      <button
+        class="button-small-icon-red user-action-button btn-disable-student"
+        title="Desactivar alumno"
+        data-user='${JSON.stringify(user)}'
+      >
+        <span class="material-symbols-outlined">delete</span>
+      </button>
+    `
+    : `
+      <!-- Botón reactivar -->
+      <button
+        class="button-small user-action-button btn-reactivate-student"
+        title="Reactivar alumno"
+        data-user='${JSON.stringify(user)}'
+      >
+        <span class="material-symbols-outlined">restart_alt</span>
+      </button>
+    `;
 
   return `
     <tr
@@ -96,15 +117,7 @@ function userRowHtml(user) {
             <span class="material-symbols-outlined">edit_square</span>
           </button>
 
-          <!-- Eliminar -->
-          <button
-            class="button-small-icon-red user-action-button btn-delete-student"
-            title="Eliminar alumno"
-            data-user-id="${user.id ?? ""}"
-            data-user-name="${escapeHtml(nombre)}"
-          >
-            <span class="material-symbols-outlined">delete</span>
-          </button>
+          ${actionsHtml}
         </div>
       </td>
     </tr>
