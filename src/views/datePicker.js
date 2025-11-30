@@ -261,7 +261,7 @@ export function datePickerRender(id) {
 export function datePickerRangeRender(id, onChangeCallback = null){
     const datePickerRange = document.getElementById(id);
     if (!datePickerRange) {
-        console.error('❌ No se encontró el date picker range con id:', id);
+        console.error('No se encontró el date picker range con id:', id);
         return;
     }
     

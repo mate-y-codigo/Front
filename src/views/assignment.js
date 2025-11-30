@@ -55,8 +55,6 @@ export async function assignmentRender(initialFilters = {}) {
       }
     }
 
-    console.log("Filtros al entrar a la vista:", currentFilters);
-
     // 1. OBTENER USUARIOS PRIMERO
     const users = await getStudentsActivesAll();
     currentUsers = users;
@@ -149,11 +147,9 @@ function buildBackendFilters() {
         "No se encontró el ID para el alumno:",
         currentFilters.student
       );
-      // Si no encontramos el ID, no filtramos por alumno
     }
   }
 
-  console.log("Filtros para backend:", filters);
   return filters;
 }
 
@@ -171,29 +167,22 @@ function findAlumnoIdByName(studentName) {
   });
 
   if (alumno) {
-    console.log(
-      `Encontrado: ${alumno.nombre} ${alumno.apellido} -> ID: ${alumno.id}`
-    );
     return alumno.id;
   }
 
-  console.warn(`No se encontró alumno con nombre: ${studentName}`);
   return null;
 }
 
 // Configurar listeners para los filtros
 function setupFilterListeners() {
-  console.log("Configurando listeners de filtros...");
 
   // Listener para el combobox de estado
   const statusCombobox = document.querySelector(
     "#assignment-type-combobox .combobox"
   );
   if (statusCombobox) {
-    console.log("Combobox encontrado");
     registerListener(statusCombobox, "combo:change", function (event) {
       const selectedId = event.detail.id;
-      console.log("Combobox cambiado:", selectedId);
       handleStatusFilterChange(selectedId);
     });
   } else {
@@ -203,7 +192,6 @@ function setupFilterListeners() {
   // Listener para el input de búsqueda
   const searchInput = document.querySelector("#assignment-input-search input");
   if (searchInput) {
-    console.log("Input de búsqueda encontrado");
     registerListener(searchInput, "input", function (event) {
       clearTimeout(this.searchTimeout);
       this.searchTimeout = setTimeout(() => {
@@ -249,12 +237,7 @@ function handleStudentFilterChange(studentName) {
 
 async function applyFilters() {
   try {
-    console.log("=== DEBUG APPLY FILTERS ===");
-    console.log("Filtros actuales:", currentFilters);
-    console.log("Filtros para backend:", buildBackendFilters());
-
     const filteredAssignments = await getAllAlumnoPlan(buildBackendFilters());
-    console.log(`Resultados: ${filteredAssignments.length} asignaciones`);
 
     const formattedAssignments = formatAssignments(filteredAssignments);
     renderFilteredAssignments(formattedAssignments);
@@ -391,7 +374,6 @@ function resetStatusCombobox() {
       dropdown.classList.add('hidden');
     }
     
-    console.log("✅ Combobox reseteado a 'Todos'");
   } else {
     console.warn("No se encontró el combobox de estado");
   }

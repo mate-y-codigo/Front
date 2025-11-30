@@ -198,13 +198,9 @@ async function saveAssignment() {
       return;
     }
 
-    console.log("Enviando asignación a la API:", assignmentData);
-
     // LLAMADA REAL A LA API
-    const result = await createAlumnoPlan(assignmentData);
-    
-    console.log("Asignación creada exitosamente:", result);
-    
+    await createAlumnoPlan(assignmentData);
+      
     // Mostrar mensaje de éxito
     showSuccessMessage("Asignación guardada exitosamente");
     
@@ -341,7 +337,6 @@ function formatDateForBackend(dateString) {
     ));
     
     const isoDateTime = date.toISOString();
-    console.log("Fecha formateada para backend:", isoDateTime);
     return isoDateTime;
     
   } catch (error) {
@@ -367,7 +362,6 @@ function getSelectedId(comboboxElement) {
   try {
     // Si el ID no es un GUID válido, retornar null
     if (!isValidGuid(selectedId)) {
-      console.warn("ID no es un GUID válido:", selectedId);
       return null;
     }
     return selectedId;
