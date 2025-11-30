@@ -8,6 +8,7 @@ import { usersRender } from "../views/users.js"
 import { exercisesRender } from "../views/exercises.js"
 import { loginRender } from '../views/login.js'
 import { authHelper } from "../helpers/authHelper.js"
+import { paymentRender } from "../views/payment.js"
 
 
 // switch page
@@ -45,7 +46,7 @@ function itemsAddListener() {
     document.getElementById('page-assignments').addEventListener('click', () => switchPage('page-assignments', headerTxt['assignments']['h1'], headerTxt['assignments']['p'], assignmentRender()));
     document.getElementById('page-calendars').addEventListener('click', () => switchPage('page-calendars', headerTxt['calendars']['h1'], headerTxt['calendars']['p'], console.log('Calendario')));
     document.getElementById('page-statistics').addEventListener('click', () => switchPage('page-statistics', headerTxt['statistics']['h1'], headerTxt['statistics']['p'], renderMetricas()));
-    document.getElementById('page-payments').addEventListener('click', () => switchPage('page-payments', headerTxt['payments']['h1'], headerTxt['payments']['p'], console.log('Pagos')));
+    document.getElementById('page-payments').addEventListener('click', () => switchPage('page-payments', headerTxt['payments']['h1'], headerTxt['payments']['p'], paymentRender()));
 
     document.getElementById('logout-btn').addEventListener('click', () => { authHelper.clearTokens(); loginRender(); });
 }
