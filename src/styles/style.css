@@ -241,9 +241,9 @@
     --chart-bg: #343A3F;
 
     /* === Card payment === */
-    --total-payments:oklch(0.588 0.158 241.966);
-    --credit-card: oklch(0.592 0.249 0.584);
-    --cash: oklch(0.715 0.143 215.221);
+    --total-payments:oklch(0.546 0.245 262.881);
+    --credit-card: oklch(0.705 0.213 47.604);
+    --cash: oklch(0.723 0.219 149.579);
     --transfer: oklch(0.558 0.288 302.321);
 }
 
