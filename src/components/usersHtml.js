@@ -99,8 +99,6 @@ function userRowHtml(user) {
   `;
 }
 
-/* ===================== MAIN HTML ===================== */
-
 export function usersHtml(usersList) {
   const list = usersList?.users ?? [];
 
