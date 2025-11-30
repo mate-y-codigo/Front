@@ -1,8 +1,8 @@
 import { authHelper } from "../helpers/authHelper.js";
 
-/* ===============================================
-   SPINNER HTML (reutilizable dentro de metricasHtml)
-   =============================================== */
+
+//   SPINNER HTML (reutilizable dentro de metricasHtml)
+
 function spinnerHTML() {
     return `
         <div style="
@@ -49,9 +49,9 @@ function spinnerHTML() {
     `;
 }
 
-/* ===============================================
-   MÉTRICAS HTML (incluye spinner si no hay data)
-   =============================================== */
+
+//   MÉTRICAS HTML(incluye spinner si no hay data)
+
 export function metricasHtml(data = null) {
 
     if (!data) {
@@ -120,7 +120,7 @@ export function metricasHtml(data = null) {
 
         <select id="select-rango" style="
             padding:10px 14px;border-radius:8px;
-            background:#111827;border:1px solid #374151;
+            background:#111827;border:1px solid #424953ff;
             color:#e5e7eb;cursor:pointer;min-width:150px;
         ">
             <option value="7">7 días</option>
@@ -289,9 +289,8 @@ export function metricasHtml(data = null) {
 }
 
 
-/* ===============================================
-   EJECUTAR LOS SCRIPTS
-   =============================================== */
+
+//   EJECUTAR LOS SCRIPTS
 export function executeDynamicScripts(container) {
 
     const scripts = container.querySelectorAll("script[data-dynamic-script='true']");
@@ -305,9 +304,9 @@ export function executeDynamicScripts(container) {
 }
 
 
-/* ===============================================
-   LISTENERS
-   =============================================== */
+
+//  LISTENERS
+
 function attachFilterListeners() {
     const alumno = document.getElementById("select-alumno");
     const rango = document.getElementById("select-rango");
@@ -324,9 +323,9 @@ function attachFilterListeners() {
 }
 
 
-/* ===============================================
-   RENDER PRINCIPAL (con spinner incorporado)
-   =============================================== */
+
+//   render
+
 export async function renderMetricas(rango) {
     const containerMain = document.getElementById("container-main");
 
@@ -353,7 +352,7 @@ export async function renderMetricas(rango) {
     // Render de la vista completa
     containerMain.innerHTML = metricasHtml(d);
 
-    // ⭐⭐⭐ RESTAURAR EL VALOR SELECCIONADO — LÍNEA CLAVE ⭐⭐⭐
+    // Seteo del select de rango
     document.getElementById("select-rango").value = valorRango;
 
     executeDynamicScripts(containerMain);
