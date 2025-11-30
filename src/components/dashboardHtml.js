@@ -101,7 +101,7 @@ export function dashboardHtml(cardInfo, cardActivity, cardNextSession) {
                     <div class="card-activity-title p-2">
                         <h3 class="flex items-center gap-2">
                             <span class="material-symbols-outlined">earthquake</span>
-                            Actividad Reciente
+                            Planes Activos
                         </h3>
                     </div>
                     <div class="flex flex-col">
@@ -128,9 +128,13 @@ export function dashboardHtml(cardInfo, cardActivity, cardNextSession) {
                             <span class="material-symbols-outlined">calendar_today</span>
                             Ver Agenda
                         </div>
+                        <div id="quick-action-add-exercise" class="button flex items-center justify-center">
+                            <span class="material-symbols-outlined">fitness_center</span>
+                            Crear Ejercicio
+                        </div>
                         <div id="quick-action-add-payment" class="button flex items-center justify-center">
                             <span class="material-symbols-outlined">attach_money</span>
-                            Registrar Pago
+                            Registrar pago
                         </div>
                     </div>
                 </div>
@@ -144,7 +148,8 @@ export function dashboardHtml(cardInfo, cardActivity, cardNextSession) {
                 </div>
 
                 <div class="flex justify-center gap-6 m-2 p-6 pt-2">
-                    ${cardNextSession.map((info, index) => cardNextSessionInfo(info.name, info.hour, info.type)).join('')}
+                     ${cardNextSession.length > 0 ? cardNextSession.map(info => cardNextSessionInfo(info.name, info.hour, info.type)).join('')
+                    : `<p class="text-muted-foreground">No hay sesiones programadas para hoy.</p>`}
                 </div>
             </div>
         </div > `;

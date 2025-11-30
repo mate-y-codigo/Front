@@ -6,6 +6,7 @@ import { planPreviewHtml, planSessionHtml, sessionExcerciseHtml, previewSessionC
 import { comboBoxRender, comboBoxUpdateOptions, comboBoxReset } from '../views/comboBox.js';
 import { authHelper } from '../helpers/authHelper.js'
 import { AppModal } from '../views/modalNotice.js'
+import { showToast } from '../views/toast.js'
 
 /* --- datos de prueba (tu JSON) --- */
 const testTemplateJson = {
@@ -658,12 +659,12 @@ export function addPlanListener() {
                 comboBoxRender('plan-template-combobox', [{ id: 0, name: "No hay plantillas definidas" }]);
             }
 
-            AppModal.open({
+            /*AppModal.open({
                 iconHTML: '<span class="material-symbols-outlined text-green-600 text-5xl">check</span>',
                 titleText: "Plan guardado",
                 messageText: "El plan se guardo correctamente."
-            });
-
+            });*/
+            showToast('Plan guardado correctamente');
             resetPlanForm();
         }
     });

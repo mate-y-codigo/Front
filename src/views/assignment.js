@@ -5,6 +5,103 @@ import { inputSuggestionIcon, inputSuggestion } from '../views/inputSuggestion.j
 import { assignmentNewRender } from '../views/modalAssignmentNew.js'
 
 const assignmentTypeList = ['Activo', 'Completado'];
+/*
+[
+    {
+        "id": "bd6011c6-bd73-477b-87b4-6d738f7c663c",
+        "email": "admin@fitcode.com",
+        "nombre": "Admin",
+        "apellido": "FitCode",
+        "celular": "0000000000",
+        "rolId": 1,
+        "rol": "Admin",
+        "creadoEn": "2025-11-25T16:02:54.12242+00:00"
+    },
+    {
+        "id": "9a3ffd2c-1384-4574-b0ec-0b18e4c1d0be",
+        "email": "entrenador@test.com",
+        "nombre": "Carlos",
+        "apellido": "Maestro",
+        "celular": "1122334455",
+        "rolId": 2,
+        "rol": "Entrenador",
+        "creadoEn": "2025-11-25T16:02:54.490493+00:00"
+    },
+    {
+        "id": "a8f3e9c2-1d2b-4f3a-8e2f-1a9c3d7e1a08",
+        "email": "nicolas.molina@gmail.com",
+        "nombre": "Nicolás",
+        "apellido": "Molina",
+        "peso": 90.00,
+        "altura": 1.82,
+        "celular": "+54 9 11 9900 1122",
+        "rolId": 3,
+        "rol": "Alumno",
+        "creadoEn": "2025-11-25T23:58:07.521988+00:00"
+    },
+    {
+        "id": "a7f3e9c2-1d2b-4f3a-8e2f-1a9c3d7e1a07",
+        "email": "valentina.lopez@gmail.com",
+        "nombre": "Valentina",
+        "apellido": "López",
+        "peso": 58.00,
+        "altura": 1.68,
+        "celular": "+54 9 11 8899 0011",
+        "rolId": 3,
+        "rol": "Alumno",
+        "creadoEn": "2025-11-25T23:58:07.521988+00:00"
+    },
+    {
+        "id": "a6f3e9c2-1d2b-4f3a-8e2f-1a9c3d7e1a06",
+        "email": "diego.sanchez@gmail.com",
+        "nombre": "Diego",
+        "apellido": "Sánchez",
+        "peso": 72.50,
+        "altura": 1.75,
+        "celular": "+54 9 11 7788 9900",
+        "rolId": 3,
+        "rol": "Alumno",
+        "creadoEn": "2025-11-25T23:58:07.521988+00:00"
+    },
+    {
+        "id": "a5f3e9c2-1d2b-4f3a-8e2f-1a9c3d7e1a05",
+        "email": "carla.rodriguez@gmail.com",
+        "nombre": "Carla",
+        "apellido": "Rodríguez",
+        "peso": 60.00,
+        "altura": 1.70,
+        "celular": "+54 9 11 6677 8899",
+        "rolId": 3,
+        "rol": "Alumno",
+        "creadoEn": "2025-11-25T23:58:07.521988+00:00"
+    },
+    {
+        "id": "a4f3e9c2-1d2b-4f3a-8e2f-1a9c3d7e1a04",
+        "email": "marcos.fernandez@gmail.com",
+        "nombre": "Marcos",
+        "apellido": "Fernández",
+        "peso": 85.00,
+        "altura": 1.78,
+        "celular": "+54 9 11 5566 7788",
+        "rolId": 3,
+        "rol": "Alumno",
+        "creadoEn": "2025-11-25T23:58:07.521988+00:00"
+    },
+    {
+        "id": "c30c8c4a-204b-40c8-bd98-0a2ec4a640d4",
+        "email": "alumno@test.com",
+        "nombre": "Juan",
+        "apellido": "Perez",
+        "peso": 75.00,
+        "altura": 180.00,
+        "celular": "5544332211",
+        "rolId": 3,
+        "rol": "Alumno",
+        "creadoEn": "2025-11-25T16:02:54.749071+00:00"
+    }
+]
+
+*/
 
 const jsonTestAssignment = [
 

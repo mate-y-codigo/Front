@@ -67,7 +67,6 @@ export async function exerciseEditRender(exercise) {
     const muscleGroups = mapFromApiMuscleGroups(apiMuscleGroups);
     const categories = mapFromApiCategories(apiCategories);
 
-    // calcular grupo muscular seleccionado a partir del músculo actual
     const selectedMuscle = muscles.find(
       (m) => m.id === (exercise.musculoId ?? null)
     );
@@ -99,7 +98,6 @@ function initExerciseEditEvents(originalExercise) {
 
   const selectedMuscleId = originalExercise.musculoId ?? null;
 
-  // Guardamos todas las opciones de músculos para poder filtrarlas por grupo
   const allOptions = Array.from(muscleSelect.querySelectorAll("option")).filter(
     (opt) => opt.getAttribute("data-group-id")
   );
@@ -120,7 +118,6 @@ function initExerciseEditEvents(originalExercise) {
       }
     });
 
-    // intentar mantener el músculo seleccionado si pertenece al grupo
     if (selectedMuscleId) {
       const exists = Array.from(muscleSelect.options).some(
         (o) => Number(o.value) === Number(selectedMuscleId)
@@ -133,7 +130,6 @@ function initExerciseEditEvents(originalExercise) {
 
   groupSelect.addEventListener("change", rebuildMuscleOptions);
 
-  // Primera pasada para respetar el grupo muscular inicial
   rebuildMuscleOptions();
 
   btnCancel.addEventListener("click", () => {
@@ -150,7 +146,7 @@ function initExerciseEditEvents(originalExercise) {
       await exercisesRender();
     } catch (err) {
       console.error(err);
-      // acá podrías mostrar un toast de error
+      // poner toast
     }
   });
 }

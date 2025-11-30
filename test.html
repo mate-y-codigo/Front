@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="./src/styles/planCreate.css" />
   <link rel="stylesheet" href="./src/styles/assignment.css" />
   <link rel="stylesheet" href="./src/styles/modalPlanDetail.css" />
-
+  <link rel="stylesheet" href="./src/styles/payment.css" />
   <link rel="stylesheet" href="./src/styles/modalAssignmentNew.css" />
   <link rel="stylesheet" href="./src/styles/modalStatics.css" />
   <link rel="stylesheet" href="./src/styles/statistics.css" />
@@ -33,6 +33,7 @@
     href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
   <style>
@@ -43,261 +44,218 @@
 
 
 <body>
-  <div class="w-full h-full flex flex-col gap-6">
-
-    <div class="plan-new-header flex gap-4 items-center pl-20 pr-20">
-      <div class="w-64 flex-auto">
-        <div class="flex flex-col flex-auto w-full">
-          <div>
-            <h1>Detalles de un Plan de Entrenamiento</h1>
+  <main class="flex flex-col pt-6 pb-6 pl-20 pr-20">
+    <div class="grid grid-cols-4 gap-6 mb-8">
+      <div class="payment-card payment-card-info-total">
+        <div class="p-6">
+          <div class="flex items-center gap-3">
+            <div class="payment-card-info-icon payment-card-info-icon-total flex items-center justify-center">
+              <span class="material-symbols-outlined">attach_money</span>
+            </div>
+            <div>
+              <p class="payment-card-info-title">Ingresos del Mes</p>
+              <p class="payment-card-info-detail">$45,000</p>
+            </div>
           </div>
         </div>
       </div>
-      <div>
-        <div class="flex flex-row gap-4 items-center">
-          <button class="button" id="btn-save-plan"><span
-              class="material-symbols-outlined">keyboard_arrow_left</span>Atras</button>
+      <div class="payment-card payment-card-info-cash">
+        <div class="p-6">
+          <div class="flex items-center gap-3">
+            <div class="payment-card-info-icon payment-card-info-icon-cash flex items-center justify-center">
+              <span class="material-symbols-outlined">universal_currency_alt</span>
+            </div>
+            <div>
+              <p class="payment-card-info-title">Pagos en Efectivo</p>
+              <p class="payment-card-info-detail">10</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="payment-card payment-card-info-credit-card">
+        <div class="p-6">
+          <div class="flex items-center gap-3">
+            <div class="payment-card-info-icon payment-card-info-icon-credit-card flex items-center justify-center">
+              <span class="material-symbols-outlined">credit_card</span>
+            </div>
+            <div>
+              <p class="payment-card-info-title">Pagos con Tarjeta</p>
+              <p class="payment-card-info-detail">10</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="payment-card payment-card-info-transfer">
+        <div class="p-6">
+          <div class="flex items-center gap-3">
+            <div class="payment-card-info-icon payment-card-info-icon-transfer flex items-center justify-center">
+              <span class="material-symbols-outlined">currency_exchange</span>
+            </div>
+            <div>
+              <p class="payment-card-info-title">Pagos con Tarjeta</p>
+              <p class="payment-card-info-detail">10</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-
-    <div id="plan-view-detail" class="plan-view-detail pl-20 pr-20" data-state="close">
-      <div class="space-y-6">
-        <div class="space-y-2">
-          <div class="flex items-start items-center justify-between">
-            <h2 class="plan-view-detail-name">Hipertrofia Inicial</h2>
-            <div class="plan-view-detail-type">Plantilla</div>
+    <div class="payment-card">
+      <div class="flex flex-col space-y-1.5 p-6">
+        <h3 class="payment-card-add-title flex items-center gap-2">
+          <span class="material-symbols-outlined">add</span>Registrar Nuevo Pago
+        </h3>
+      </div>
+      <div class="p-6 pt-0">
+        <div class="grid grid-cols-5 gap-4">
+          <div class="space-y-2 col-span-3">
+            <label>Alumno *</label>
+            <input class="input" id="plan-name" placeholder="Ana María Gonzales" maxlength="80" autocomplete="off">
+          </div>
+          <div class="space-y-2">
+            <label>Monto *</label>
+            <input type="number" class="input" placeholder="15000" value="" autocomplete="off">
+          </div>
+          <div class="space-y-2">
+            <label>Medio de Pago *</label>
+            <input type="number" class="input" placeholder="15000" value="" autocomplete="off">
           </div>
         </div>
-        <div class="description">
-          <h3>Descripción</h3>
-          <p>Programa enfocado en ganancia de masa muscular para principiantes</p>
+        <div class="flex flex-row justify-end pt-4">
+          <div class="w-40"><button class="button-small"><span class="material-symbols-outlined">add</span>Ingresar
+              Pago</button></div>
         </div>
-        <div class="grid grid-cols-3 gap-12">
-          <div class="summary-session">
-            <div class="p-4 text-center">
-              <div class="summary-session-number">4</div>
-              <div class="summary-session-txt text-sm text-muted-foreground">Sesiones</div>
-            </div>
+      </div>
+    </div>
+    <div class="payment-card">
+      <div class="flex flex-col space-y-1.5 p-6">
+        <div class="flex items-center justify-between">
+          <h3 class="payment-card-student-statement flex items-center gap-2">
+            <span class="material-symbols-outlined">list_alt_check</span>Estado de Cuenta de Alumnos
+          </h3>
+
+          <div id="payment-card-student-search" class="relative col-span-2">
+            <span class="material-symbols-outlined input-icon">search</span>
+            <input class="input-with-icon" placeholder="Buscar nombre..." value="" maxlength="100" autocomplete="off" />
           </div>
-          <div class="summary-exercise">
-            <div class="p-4 text-center">
-              <div class="summary-exercise-number">15</div>
-              <div class="summary-exercise-txt text-sm text-muted-foreground">Ejercicios</div>
-            </div>
-          </div>
-          <div class="summary-student">
-            <div class="p-4 text-center">
-              <div class="summary-student-number  text-2xl font-bold text-success">11/12/1977</div>
-              <div class="summary-student-txt text-sm text-muted-foreground">Ultima Modificación</div>
-            </div>
-          </div>
-        </div>
-        <div id="plan-view-sessions-details">
-
-
-
-
-          <div class="plan-view-session-detail pb-6">
-            <h3 class="text-lg font-semibold flex items-center gap-2 mb-6">
-              <span class="material-symbols-outlined">list_alt</span>Sesión 1: Calentamiento
-            </h3>
-            <div id="plan-view-sessions-cards" class="grid grid-cols-4 gap-4">
-
-              <div class="plan-view-excercise-detail">
-                <div class="flex flex-col">
-                  <div class="plan-view-excercise-detail-header p-2 pl-4 pr-4">
-                    <div class="flex flex-row justify-between items-center gap-2">
-                      <div class="plan-view-excercise-detail-name">Curl</div>
-                      <div class="index flex justify-center items-center">Orden: 1</div>
-                    </div>
-                  </div>
-                  <div class="plan-view-excercise-detail-body p-2 pl-4 pr-4">
-                    <div class="flex flex-row justify-between items-center pt-2">
-                      <div class="plan-view-excercise-detail-set">Series:</div>
-                      <div class="plan-view-excercise-detail-number">4</div>
-                    </div>
-                    <div class="flex flex-row justify-between items-center">
-                      <div class="plan-view-excercise-detail-rep">Repeticiones:</div>
-                      <div class="plan-view-excercise-detail-number">10</div>
-                    </div>
-                    <div class="flex flex-row justify-between items-center">
-                      <div class="plan-view-excercise-detail-weight">Peso:</div>
-                      <div class="plan-view-excercise-detail-number">40Kg</div>
-                    </div>
-                    <div class="flex flex-row justify-between items-center">
-                      <div class="plan-view-excercise-detail-rest">Descanso:</div>
-                      <div class="plan-view-excercise-detail-number">5min</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="plan-view-excercise-detail">
-                <div class="flex flex-col">
-                  <div class="plan-view-excercise-detail-header p-2">
-                    <div class="flex flex-row justify-between items-center gap-2">
-                      <div class="plan-view-excercise-detail-name">Curl</div>
-                      <div class="index flex justify-center items-center">Orden: 1</div>
-                    </div>
-                  </div>
-                  <div class="plan-view-excercise-detail-body p-2">
-                    <div class="flex flex-row justify-between items-center pt-2">
-                      <div class="plan-view-excercise-detail-set">Series:</div>
-                      <div class="plan-view-excercise-detail-number">4</div>
-                    </div>
-                    <div class="flex flex-row justify-between items-center">
-                      <div class="plan-view-excercise-detail-rep">Repeticiones:</div>
-                      <div class="plan-view-excercise-detail-number">10</div>
-                    </div>
-                    <div class="flex flex-row justify-between items-center">
-                      <div class="plan-view-excercise-detail-weight">Peso:</div>
-                      <div class="plan-view-excercise-detail-number">40Kg</div>
-                    </div>
-                    <div class="flex flex-row justify-between items-center">
-                      <div class="plan-view-excercise-detail-rest">Descanso:</div>
-                      <div class="plan-view-excercise-detail-number">5min</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="plan-view-excercise-detail">
-                <div class="flex flex-col">
-                  <div class="plan-view-excercise-detail-header p-2">
-                    <div class="flex flex-row justify-between items-center gap-2">
-                      <div class="plan-view-excercise-detail-name">Curl</div>
-                      <div class="index flex justify-center items-center">Orden: 1</div>
-                    </div>
-                  </div>
-                  <div class="plan-view-excercise-detail-body p-2">
-                    <div class="flex flex-row justify-between items-center pt-2">
-                      <div class="plan-view-excercise-detail-set">Series:</div>
-                      <div class="plan-view-excercise-detail-number">4</div>
-                    </div>
-                    <div class="flex flex-row justify-between items-center">
-                      <div class="plan-view-excercise-detail-rep">Repeticiones:</div>
-                      <div class="plan-view-excercise-detail-number">10</div>
-                    </div>
-                    <div class="flex flex-row justify-between items-center">
-                      <div class="plan-view-excercise-detail-weight">Peso:</div>
-                      <div class="plan-view-excercise-detail-number">40Kg</div>
-                    </div>
-                    <div class="flex flex-row justify-between items-center">
-                      <div class="plan-view-excercise-detail-rest">Descanso:</div>
-                      <div class="plan-view-excercise-detail-number">5min</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="plan-view-excercise-detail">
-                <div class="flex flex-col">
-                  <div class="plan-view-excercise-detail-header p-2">
-                    <div class="flex flex-row justify-between items-center gap-2">
-                      <div class="plan-view-excercise-detail-name">Curl</div>
-                      <div class="index flex justify-center items-center">Orden: 1</div>
-                    </div>
-                  </div>
-                  <div class="plan-view-excercise-detail-body p-2">
-                    <div class="flex flex-row justify-between items-center pt-2">
-                      <div class="plan-view-excercise-detail-set">Series:</div>
-                      <div class="plan-view-excercise-detail-number">4</div>
-                    </div>
-                    <div class="flex flex-row justify-between items-center">
-                      <div class="plan-view-excercise-detail-rep">Repeticiones:</div>
-                      <div class="plan-view-excercise-detail-number">10</div>
-                    </div>
-                    <div class="flex flex-row justify-between items-center">
-                      <div class="plan-view-excercise-detail-weight">Peso:</div>
-                      <div class="plan-view-excercise-detail-number">40Kg</div>
-                    </div>
-                    <div class="flex flex-row justify-between items-center">
-                      <div class="plan-view-excercise-detail-rest">Descanso:</div>
-                      <div class="plan-view-excercise-detail-number">5min</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="plan-view-excercise-detail">
-                <div class="flex flex-col">
-                  <div class="plan-view-excercise-detail-header p-2">
-                    <div class="flex flex-row justify-between items-center gap-2">
-                      <div class="plan-view-excercise-detail-name">Curl</div>
-                      <div class="index flex justify-center items-center">Orden: 1</div>
-                    </div>
-                  </div>
-                  <div class="plan-view-excercise-detail-body p-2">
-                    <div class="flex flex-row justify-between items-center pt-2">
-                      <div class="plan-view-excercise-detail-set">Series:</div>
-                      <div class="plan-view-excercise-detail-number">4</div>
-                    </div>
-                    <div class="flex flex-row justify-between items-center">
-                      <div class="plan-view-excercise-detail-rep">Repeticiones:</div>
-                      <div class="plan-view-excercise-detail-number">10</div>
-                    </div>
-                    <div class="flex flex-row justify-between items-center">
-                      <div class="plan-view-excercise-detail-weight">Peso:</div>
-                      <div class="plan-view-excercise-detail-number">40Kg</div>
-                    </div>
-                    <div class="flex flex-row justify-between items-center">
-                      <div class="plan-view-excercise-detail-rest">Descanso:</div>
-                      <div class="plan-view-excercise-detail-number">5min</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="plan-view-excercise-detail">
-                <div class="flex flex-col">
-                  <div class="plan-view-excercise-detail-header p-2">
-                    <div class="flex flex-row justify-between items-center gap-2">
-                      <div class="plan-view-excercise-detail-name">Curl</div>
-                      <div class="index flex justify-center items-center">Orden: 1</div>
-                    </div>
-                  </div>
-                  <div class="plan-view-excercise-detail-body p-2">
-                    <div class="flex flex-row justify-between items-center pt-2">
-                      <div class="plan-view-excercise-detail-set">Series:</div>
-                      <div class="plan-view-excercise-detail-number">4</div>
-                    </div>
-                    <div class="flex flex-row justify-between items-center">
-                      <div class="plan-view-excercise-detail-rep">Repeticiones:</div>
-                      <div class="plan-view-excercise-detail-number">10</div>
-                    </div>
-                    <div class="flex flex-row justify-between items-center">
-                      <div class="plan-view-excercise-detail-weight">Peso:</div>
-                      <div class="plan-view-excercise-detail-number">40Kg</div>
-                    </div>
-                    <div class="flex flex-row justify-between items-center">
-                      <div class="plan-view-excercise-detail-rest">Descanso:</div>
-                      <div class="plan-view-excercise-detail-number">5min</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-
-
-
-
-
-          
-
 
         </div>
       </div>
+
+
+      <div class="p-6 pt-0">
+        <div class="space-y-3">
+
+          <div class="payment-card-student flex flex-row items-center justify-between p-4 gap-4">
+            <div class="flex items-center gap-3">
+              <div class="payment-card-student-icon flex items-center justify-center">
+                <span class="material-symbols-outlined">user_attributes</span>
+              </div>
+              <div>
+                <p class="payment-card-student-name">María González</p>
+                <p class="payment-card-student-last-payment-date">29/2/2024</p>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-4">
+              <div class="text-right">
+                <p class="payment-card-student-last-payment">$15.000</p>
+                <p class="payment-card-student-last-payment-method">Transferencia</p>
+              </div>
+              <div class="text-right">
+                <div class="flex items-center payment-card-student-coverage-date"><span
+                    class="material-symbols-outlined">calendar_today</span>29-feb - 30-mar</div>
+                <p class="payment-card-student-coverage-title">Cobertura</p>
+              </div>
+              <div class="payment-card-student-status payment-card-student-status-ok inline-flex items-center">Al Día
+              </div>
+            </div>
+
+          </div>
+
+
+
+          <div class="payment-card-student flex flex-row items-center justify-between p-4 gap-4">
+            <div class="flex items-center gap-3">
+              <div class="payment-card-student-icon flex items-center justify-center">
+                <span class="material-symbols-outlined">user_attributes</span>
+              </div>
+              <div>
+                <p class="payment-card-student-name">María González</p>
+                <p class="payment-card-student-last-payment-date">29/2/2024</p>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-4">
+              <div class="text-right">
+                <p class="payment-card-student-last-payment">$15.000</p>
+                <p class="payment-card-student-last-payment-method">Transferencia</p>
+              </div>
+              <div class="text-right">
+                <div class="flex items-center payment-card-student-coverage-date"><span
+                    class="material-symbols-outlined">calendar_today</span>29-feb - 30-mar</div>
+                <p class="payment-card-student-coverage-title">Cobertura</p>
+              </div>
+              <div class="payment-card-student-status payment-card-student-status-debt inline-flex items-center">Vencido
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
     </div>
 
 
 
 
-  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   <!-- Filtros + botón Nuevo Alumno -->
   <script>

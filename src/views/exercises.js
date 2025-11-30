@@ -25,36 +25,58 @@ export async function exercisesRender() {
   const container = document.getElementById("container-main");
   if (!container) return;
 
+  container.classList.add("opacity-0", "scale-95", "transition-all", "duration-300");
+  container.classList.remove("opacity-100", "scale-100");
+
+  // Header
   const headerH1 = document.getElementById("header-h1");
   const headerP = document.getElementById("header-p");
-  if (headerH1 && headerP && headerTxt.exercises){
+  if (headerH1 && headerP && headerTxt.exercises) {
     headerH1.textContent = headerTxt.exercises.h1;
     headerP.textContent = headerTxt.exercises.p;
   }
 
-  try {
-    const [apiExercisesActivos, apiExercisesInactivos, apiMuscles, apiCategories, apiMuscleGroups] = await Promise.all([
-      getExercises({ activo: true}),
-      getExercises({ activo: false }),
-      getMuscles({}),
-      getCategories(),
-      getMuscleGroups()
-    ]);
+  setTimeout(async () => {
+    try {
+      const [
+        apiExercisesActivos,
+        apiExercisesInactivos,
+        apiMuscles,
+        apiCategories,
+        apiMuscleGroups,
+      ] = await Promise.all([
+        getExercises({ activo: true }),
+        getExercises({ activo: false }),
+        getMuscles({}),
+        getCategories(),
+        getMuscleGroups(),
+      ]);
 
-    const apiExercises = [...(apiExercisesActivos ?? []), ...(apiExercisesInactivos ?? [])];
+      const apiExercises = [
+        ...(apiExercisesActivos ?? []),
+        ...(apiExercisesInactivos ?? []),
+      ];
 
-    exerciseState.muscles = mapFromApiMuscles(apiMuscles);
-    exerciseState.categories = mapFromApiCategories(apiCategories);
-    exerciseState.exercises = mapFromApiExercises(apiExercises);
-    exerciseState.muscleGroups = mapFromApiMuscleGroups(apiMuscleGroups);
+      exerciseState.muscles = mapFromApiMuscles(apiMuscles);
+      exerciseState.categories = mapFromApiCategories(apiCategories);
+      exerciseState.exercises = mapFromApiExercises(apiExercises);
+      exerciseState.muscleGroups = mapFromApiMuscleGroups(apiMuscleGroups);
 
-    renderExercisesView();
-  } catch (err) {
-    console.error(err);
-    container.innerHTML =
-      "<p style='color: #fff; padding: 1rem;'>Error cargando ejercicios. Revisá la consola.</p>";
-  }
+      renderExercisesView();
+
+      container.classList.remove("opacity-0", "scale-95");
+      container.classList.add("opacity-100", "scale-100");
+    } catch (err) {
+      console.error(err);
+      container.innerHTML =
+        "<p style='color: #fff; padding: 1rem;'>Error cargando ejercicios. Revisá la consola.</p>";
+
+      container.classList.remove("opacity-0", "scale-95");
+      container.classList.add("opacity-100", "scale-100");
+    }
+  }, 100);
 }
+
 
 function renderExercisesView() {
   const container = document.getElementById("container-main");
@@ -325,9 +347,7 @@ function openEditExerciseModal(modalHost, exercise) {
 /* =====================  MODAL: ELIMINAR  ===================== */
 
 function openDeleteExerciseModal(modalHost, exercise) {
-  modalHost.innerHTML = modalExerciseDeleteHtml({
-    exercise,
-  });
+  modalHost.innerHTML = modalExerciseDeleteHtml(exercise);
 
   const overlay = document.getElementById("modal-overlay-exercise-delete");
   const modal = document.getElementById("modal-exercise-delete");

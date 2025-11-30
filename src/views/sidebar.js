@@ -8,6 +8,7 @@ import { usersRender } from "../views/users.js"
 import { exercisesRender } from "../views/exercises.js"
 import { loginRender } from '../views/login.js'
 import { authHelper } from "../helpers/authHelper.js"
+import { paymentRender } from "../views/payment.js"
 
 
 // switch page
@@ -44,7 +45,7 @@ function itemsAddListener() {
     document.getElementById('page-calendars').addEventListener('click', () => switchPage('page-calendars', headerTxt['calendars']['h1'], headerTxt['calendars']['p'], console.log('Calendario')));
     document.getElementById('page-statistics').addEventListener('click', () => test());
 
-    document.getElementById('page-payments').addEventListener('click', () => switchPage('page-payments', headerTxt['payments']['h1'], headerTxt['payments']['p'], console.log('Pagos')));
+    document.getElementById('page-payments').addEventListener('click', () => switchPage('page-payments', headerTxt['payments']['h1'], headerTxt['payments']['p'], paymentRender()));
 
     document.getElementById('logout-btn').addEventListener('click', () => { authHelper.clearTokens(); loginRender(); });
 

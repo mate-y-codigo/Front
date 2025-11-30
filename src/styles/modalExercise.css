@@ -149,3 +149,10 @@
   gap: 1rem;
   margin-top: 2rem;
 }
+
+#modal-exercise-delete.modal-exercise {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: auto;
+}
