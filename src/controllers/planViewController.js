@@ -2,6 +2,7 @@ import { plansRender } from '../views/plans.js'
 import { AppModalQuery } from '../views/modalQuery.js'
 import { deletePlanById } from '../services/planApi.js'
 import { AppModal } from '../views/modalNotice.js'
+import { showToast } from '../views/toast.js'
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
    listener
@@ -25,6 +26,7 @@ export function addPlanViewListener(plan) {
                     console.log("Confirmado para el ID:", id);
                     const result = await deletePlanById(id);
                     if (result.success) {
+                        showToast('Plan borrado correctamente');
                         plansRender();
                     }
                     else {
