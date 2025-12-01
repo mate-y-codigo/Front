@@ -309,7 +309,7 @@ function validateSession(sessionDiv, sessionIndex) {
     // returns { valid: bool, errors: [] , sessionObj? }
     clearSessionError(sessionDiv);
     const errors = [];
-    const sesionesEjercicio = [];
+    const ejercicioSesiones = [];
 
     const exerciseRows = Array.from(sessionDiv.querySelectorAll('.session-excercise-row'));
     exerciseRows.forEach((rowEl, exIndex) => {
@@ -344,7 +344,7 @@ function validateSession(sessionDiv, sessionIndex) {
         } else clearFieldError(repsEl);
 
         // build exercise object (even if invalid, to report)        
-        sesionesEjercicio.push({
+        ejercicioSesiones.push({
             id: idSessionExcercise,
             idEjercicio: idExcercise,
             seriesObjetivo: steps,
@@ -361,9 +361,9 @@ function validateSession(sessionDiv, sessionIndex) {
         valid: errors.length === 0,
         errors,
         sessionObj: {
-            id: headerSession.dataset.idTrainingSession,
+            idSesionEntrenamiento: headerSession.dataset.idTrainingSession,
             orden: sessionIndex + 1,
-            sesionesEjercicio
+            ejercicioSesiones
         }
     };
 }
@@ -401,9 +401,7 @@ export function validateAndBuildEditPlanJson() {
     }
 
     const payload = {
-        "sesionesEntrenamiento": [
-            sesionesEntrenamiento
-        ]
+        "sesionEntrenamientos": sesionesEntrenamiento        
     }
 
     result.valid = true;
@@ -419,6 +417,9 @@ export function addPlanListener(plan) {
     document.getElementById("btn-save-edit-plan").addEventListener("click", async () => {
         const res = validateAndBuildEditPlanJson();
         if (res.valid) {
+
+            console.log(res.payload);
+
             const answer = await editPlan(plan.id, res.payload);
             if (!answer.success) {
 
