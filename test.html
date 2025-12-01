@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="./src/styles/cardAssignment.css" />
   <link rel="stylesheet" href="./src/styles/plan.css" />
   <link rel="stylesheet" href="./src/styles/planCreate.css" />
+    <link rel="stylesheet" href="./src/styles/planEdit.css" />
   <link rel="stylesheet" href="./src/styles/assignment.css" />
   <link rel="stylesheet" href="./src/styles/modalPlanDetail.css" />
   <link rel="stylesheet" href="./src/styles/payment.css" />
@@ -45,180 +46,223 @@
 
 <body>
   <main class="flex flex-col pt-6 pb-6 pl-20 pr-20">
-    <div class="grid grid-cols-4 gap-6 mb-8">
-      <div class="payment-card payment-card-info-total">
-        <div class="p-6">
-          <div class="flex items-center gap-3">
-            <div class="payment-card-info-icon payment-card-info-icon-total flex items-center justify-center">
-              <span class="material-symbols-outlined">attach_money</span>
-            </div>
-            <div>
-              <p class="payment-card-info-title">Ingresos del Mes</p>
-              <p class="payment-card-info-detail">$45,000</p>
-            </div>
+
+
+ <!--
+    <div class="flex flex-col space-y-1.5 p-6 pb-2">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <div class="session-card-title inline-flex items-center">Sesión ${id}</div>
+          <h3 class="session-card-name">Nombre de la sesión</h3>
+        </div>
+        <span class="material-symbols-outlined"></span>
+      </div>
+    </div>
+
+    <div class="p-6 pt-0">
+      <div class="session-card-detail space-y-1"></div>
+    </div>
+  -->
+
+
+    <div class="plan-edit-header flex gap-4 items-center pl-20 pr-20">
+      <div class="w-64 flex-auto">
+        <div class="flex flex-col flex-auto w-full">
+          <div>
+            <h1>Editar Plan de Entrenamiento</h1>
           </div>
         </div>
       </div>
-      <div class="payment-card payment-card-info-cash">
-        <div class="p-6">
-          <div class="flex items-center gap-3">
-            <div class="payment-card-info-icon payment-card-info-icon-cash flex items-center justify-center">
-              <span class="material-symbols-outlined">universal_currency_alt</span>
-            </div>
-            <div>
-              <p class="payment-card-info-title">Pagos en Efectivo</p>
-              <p class="payment-card-info-detail">10</p>
-            </div>
-          </div>
+      <div>
+        <div class="flex flex-row gap-4 items-center">
+          <button class="button-cancel" id="btn-cancel-plan">Cancelar</button>
+          <button class="button" id="btn-save-plan"><span class="material-symbols-outlined">save</span>Guardar Cambios</button>
         </div>
       </div>
-      <div class="payment-card payment-card-info-credit-card">
-        <div class="p-6">
-          <div class="flex items-center gap-3">
-            <div class="payment-card-info-icon payment-card-info-icon-credit-card flex items-center justify-center">
-              <span class="material-symbols-outlined">credit_card</span>
+    </div>
+    <div class="flex flex-row w-full">
+      <div class="plan-edit-main">
+        <div id="plan-edit-preview-container" class="pl-20 pt-6 pb-6 pr-10 space-y-6">
+
+
+
+
+
+          <div class="">
+            <h2><span class="material-symbols-outlined">article</span> Vista Previa del Plan</h2>
+            <div class="general-info">
+              <div class="flex flex-col space-y-1.5 p-6 pb-3">
+                <div class="flex items-start justify-between">
+                  <div class="flex-1">
+                    <h3 id="plan-edit-preview-name">Nombre del plan</h3>
+                    <p id="plan-edit-preview-description"> Descripción del plan...
+                    </p>
+                  </div>
+                  <div class="transition-opacity duration-300 ease-in-out" id="plan-edit-preview-type">Plantilla</div>
+                </div>
+              </div>
+              <div class="p-6 pt-0 space-y-4">
+                <div class="grid grid-cols-2 gap-3">
+                  <div class="session flex items-center justify-center gap-2">
+                    <span class="session-icon material-symbols-outlined">format_list_bulleted</span>
+                    <p class="session-title">Sesiones</p>
+                    <p class="session-text" id="plan-session-preview-amount">0</p>
+                  </div>
+
+                  <div class="excercise flex items-center justify-center gap-2">
+                    <span class="excercise-icon material-symbols-outlined">exercise</span>
+                    <p class="excercise-title">Ejercicios</p>
+                    <p class="excercise-text" id="plan-excercise-preview-amount">0</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div>
-              <p class="payment-card-info-title">Pagos con Tarjeta</p>
-              <p class="payment-card-info-detail">10</p>
+            <div class="session-detail pt-6 space-y-3">
+              <h3 class="title">Sesiones</h3>
+              <div id="session-cards-container" class="space-y-4 mt-4"></div>
             </div>
           </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </div>
-      </div>
-      <div class="payment-card payment-card-info-transfer">
-        <div class="p-6">
-          <div class="flex items-center gap-3">
-            <div class="payment-card-info-icon payment-card-info-icon-transfer flex items-center justify-center">
-              <span class="material-symbols-outlined">currency_exchange</span>
+        <div class="plan-edit-create pr-20 pt-6 pb-6 pl-10  space-y-6">
+
+          <div class="plan-edit-create-general">
+            <div class="flex flex-row justify-between items-center space-y-1.5 p-6">
+              <h3 class="flex items-center gap-2">Información General</h3>
             </div>
-            <div>
-              <p class="payment-card-info-title">Pagos con Tarjeta</p>
-              <p class="payment-card-info-detail">10</p>
+            <div class="p-6 pt-0 space-y-4">
+              <div class="space-y-1">
+                <label>Nombre del Plan:</label>
+                <div id="plan-edit-name">Test</div>
+              </div>
+              <div class="space-y-1">
+                <label>Descripción:</label>
+                <div id="plan-edit-description">descripocion</div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <div class="plan-edit-create-sessions">
+            <div class="flex flex-row justify-between items-center space-y-1.5 p-6">
+              <h3 class="flex items-center gap-2">Sesiones de Entrenamiento</h3>
+            </div>
+            <div class="p-6 pt-0">
+              <div class="space-y-4">
+                <div id="plan-sessions-container" class="space-y-4"></div>
+
+
+
+
+
+                <div class="plan-session" data-session-id="${sid}">
+                  <div class="plan-session-header flex items-center justify-between p-2 cursor-pointer"
+                    data-session-id="${sid}">
+                    <div class="flex items-center space-x-3">
+                      <div class="plan-session-pill">Sesión ${sessionCount}</div>
+                      <h2 class="plan-session-name">Nombre de la sesión</h2>
+                    </div>
+                    <div class="flex items-center">
+                      <span class="plan-session-excercise-number">0 ejercicios</span>
+                      <span
+                        class="plan-session-header-icon material-symbols-outlined ml-2 transition-transform duration-300">keyboard_arrow_down</span>
+                    </div>
+                  </div>
+
+                  <div class="plan-session-accordion" data-session-id="${sid}">
+                    <div class="grid grid-cols-3 gap-4 p-4">
+                      <div class="col-span-2">
+                        <label>Nombre de la sesión:</label>
+                        <div class="plan-session-name-input">Test Sesion</div>
+                      </div>
+                      <div>
+                        <label>Orden</label>
+                        <input type="number" class="input session-order" value="${sessionCount}" autocomplete="off">
+                      </div>
+                    </div>
+
+                    <div class="flex items-center justify-between pt-3">
+                      <h4 class="font-medium pl-4">Ejercicios</h4>
+                    </div>
+
+                    <div class="session-excercises pt-3 space-y-4"></div>
+
+
+
+
+
+                    <div class="flex flex-col session-excercise-row gap-4">
+                      <div class="pb-2">
+                        <label>Ejercicio</label>
+                        <div id="session-excercise-name-${excerciseTotalCount}"></div>
+                      </div>
+                      <div class="grid grid-cols-4 justify-stretch gap-4 items-center">
+                        <div>
+                          <label>Series</label>
+                          <input class="session-excercise-steps input" type="text"
+                            id="session-excercise-steps-${excerciseTotalCount}" value="4" autocomplete="off">
+                        </div>
+
+                        <div>
+                          <label>Repeticiones</label>
+                          <input class="session-excercise-reps input" type="text"
+                            id="session-excercise-reps-${excerciseTotalCount}" value="8" autocomplete="off">
+                        </div>
+
+                        <div>
+                          <label>Peso (kg)</label>
+                          <input class="session-excercise-weight input" type="text"
+                            id="session-excercise-weight-${excerciseTotalCount}" value="0" autocomplete="off">
+                        </div>
+
+                        <div>
+                          <label>Descanso (min)</label>
+                          <input class="session-excercise-rest input" type="text"
+                            id="session-excercise-rest-${excerciseTotalCount}" value="1" autocomplete="off">
+                        </div>
+                      </div>
+                    </div>
+
+
+
+
+
+                  </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="payment-card">
-      <div class="flex flex-col space-y-1.5 p-6">
-        <h3 class="payment-card-add-title flex items-center gap-2">
-          <span class="material-symbols-outlined">add</span>Registrar Nuevo Pago
-        </h3>
-      </div>
-      <div class="p-6 pt-0">
-        <div class="grid grid-cols-5 gap-4">
-          <div class="space-y-2 col-span-3">
-            <label>Alumno *</label>
-            <input class="input" id="plan-name" placeholder="Ana María Gonzales" maxlength="80" autocomplete="off">
-          </div>
-          <div class="space-y-2">
-            <label>Monto *</label>
-            <input type="number" class="input" placeholder="15000" value="" autocomplete="off">
-          </div>
-          <div class="space-y-2">
-            <label>Medio de Pago *</label>
-            <input type="number" class="input" placeholder="15000" value="" autocomplete="off">
-          </div>
-        </div>
-        <div class="flex flex-row justify-end pt-4">
-          <div class="w-40"><button class="button-small"><span class="material-symbols-outlined">add</span>Ingresar
-              Pago</button></div>
-        </div>
-      </div>
-    </div>
-    <div class="payment-card">
-      <div class="flex flex-col space-y-1.5 p-6">
-        <div class="flex items-center justify-between">
-          <h3 class="payment-card-student-statement flex items-center gap-2">
-            <span class="material-symbols-outlined">list_alt_check</span>Estado de Cuenta de Alumnos
-          </h3>
-
-          <div id="payment-card-student-search" class="relative col-span-2">
-            <span class="material-symbols-outlined input-icon">search</span>
-            <input class="input-with-icon" placeholder="Buscar nombre..." value="" maxlength="100" autocomplete="off" />
-          </div>
-
-        </div>
-      </div>
-
-
-      <div class="p-6 pt-0">
-        <div class="space-y-3">
-
-          <div class="payment-card-student flex flex-row items-center justify-between p-4 gap-4">
-            <div class="flex items-center gap-3">
-              <div class="payment-card-student-icon flex items-center justify-center">
-                <span class="material-symbols-outlined">user_attributes</span>
-              </div>
-              <div>
-                <p class="payment-card-student-name">María González</p>
-                <p class="payment-card-student-last-payment-date">29/2/2024</p>
-              </div>
-            </div>
-
-            <div class="flex flex-wrap items-center gap-4">
-              <div class="text-right">
-                <p class="payment-card-student-last-payment">$15.000</p>
-                <p class="payment-card-student-last-payment-method">Transferencia</p>
-              </div>
-              <div class="text-right">
-                <div class="flex items-center payment-card-student-coverage-date"><span
-                    class="material-symbols-outlined">calendar_today</span>29-feb - 30-mar</div>
-                <p class="payment-card-student-coverage-title">Cobertura</p>
-              </div>
-              <div class="payment-card-student-status payment-card-student-status-ok inline-flex items-center">Al Día
-              </div>
-            </div>
-
-          </div>
-
-
-
-          <div class="payment-card-student flex flex-row items-center justify-between p-4 gap-4">
-            <div class="flex items-center gap-3">
-              <div class="payment-card-student-icon flex items-center justify-center">
-                <span class="material-symbols-outlined">user_attributes</span>
-              </div>
-              <div>
-                <p class="payment-card-student-name">María González</p>
-                <p class="payment-card-student-last-payment-date">29/2/2024</p>
-              </div>
-            </div>
-
-            <div class="flex flex-wrap items-center gap-4">
-              <div class="text-right">
-                <p class="payment-card-student-last-payment">$15.000</p>
-                <p class="payment-card-student-last-payment-method">Transferencia</p>
-              </div>
-              <div class="text-right">
-                <div class="flex items-center payment-card-student-coverage-date"><span
-                    class="material-symbols-outlined">calendar_today</span>29-feb - 30-mar</div>
-                <p class="payment-card-student-coverage-title">Cobertura</p>
-              </div>
-              <div class="payment-card-student-status payment-card-student-status-debt inline-flex items-center">Vencido
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
 
 
 
