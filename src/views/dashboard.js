@@ -36,7 +36,7 @@ function dashboardButtonAddListener() {
 
         console.log(statistics.total);
        return statistics.total ? statistics.total : 0;
-
+ //cambio
     }
 }
 
