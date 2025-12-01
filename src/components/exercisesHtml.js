@@ -94,19 +94,23 @@ function buildGroupSections(exercises, muscles) {
 
           return `
             <article
-              class="exercise-card"
+              class="exercise-card flex flex-col justify-between"
               data-name="${dataName}"
               data-muscle="${dataMuscle}"
               data-category="${dataCategory}"
               data-active="${activo ? "true" : "false"}"
               data-group="${dataGroup}"
             >
-              <div class="exercise-card-main">
-                <div class="exercise-card-info">
-                  <h3 class="exercise-name">${nombre}</h3>
-                  <p class="exercise-muscle-text">${musculo || "-"}</p>
+              <div class="exercise-card-main flex items-start justify-between gap-3">
+                <div class="exercise-card-info flex-1 min-w-0">
+                  <h3 class="exercise-name break-words">
+                    ${nombre}
+                  </h3>
+                  <p class="exercise-muscle-text">
+                    ${musculo || "-"}
+                  </p>
                 </div>
-                <div class="exercise-card-meta">
+                <div class="exercise-card-meta flex flex-col items-end gap-1 flex-shrink-0">
                   <span class="exercise-pill exercise-pill--state ${
                     activo
                       ? "exercise-pill--state-active"
@@ -119,6 +123,7 @@ function buildGroupSections(exercises, muscles) {
                   </span>
                 </div>
               </div>
+
 
               <div class="exercise-card-actions">
                 <button
@@ -155,7 +160,7 @@ function buildGroupSections(exercises, muscles) {
       return `
         <section class="exercise-group" data-group-section="${groupName.toLowerCase()}">
           <h2 class="exercise-group-title">${groupName}</h2>
-          <div class="exercise-cards-row">
+          <div class="exercise-cards-row lg:grid-cols-3 xl:grid-cols-4 gap-6">
             ${cards}
           </div>
         </section>

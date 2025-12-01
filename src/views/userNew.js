@@ -2,6 +2,8 @@ import { userNewHtml } from "../components/userNewHtml.js";
 import { createUser } from "../services/userApi.js";
 import { usersRender } from "./users.js";
 import { headerTxt } from "../config/headerTxt.js";
+import { showToast } from "./toast.js";
+import { AppModal } from "./modalNotice.js"
 
 export async function userNewRender() {
   const container = document.getElementById("container-main");
@@ -35,15 +37,6 @@ export async function userNewRender() {
     } else {
       card.appendChild(errorBox);
     }
-  }
-
-  function showError(msg) {
-    if (!errorBox) {
-      alert(msg);
-      return;
-    }
-    errorBox.textContent = msg;
-    errorBox.style.display = "block";
   }
 
   function clearError() {
@@ -100,11 +93,16 @@ export async function userNewRender() {
       }
 
       await createUser(dto);
+      showToast("Alumno creado correctamente");
 
       await goBack();
     } catch (err) {
-      console.error("Error creando usuario:", err);
-      showError(err.message || "No se pudo crear el alumno. Intentalo de nuevo.");
+      console.error("Error creando alumno:", err);
+      AppModal.open({
+        iconHTML: '<span class="material-symbols-outlined text-red-600 text-5xl">error</span>',
+        titleText: "Error al crear alumno",
+        messageText: err?.message || "No se pudo crear el alumno. Revisá los datos e intentá de nuevo."
+      });
       btnSave.disabled = false;
       btnSave.textContent = originalText;
     }

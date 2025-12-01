@@ -110,7 +110,7 @@
 
 .exercise-create-header p {
   font-size: 0.875rem;
-  color: var(--text-secondary, #9ca3af);
+  color: var(--text-primary);
   margin-bottom: 1.5rem;
 }
 
@@ -136,7 +136,7 @@
 
 .exercise-form-field label {
   font-size: 0.875rem;
-  color: var(--text-secondary, #9ca3af);
+  color: var(--text-primary);
 }
 
 .exercise-form-field .input {

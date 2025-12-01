@@ -5,6 +5,8 @@ import { modalStudentDeleteHtml } from "../components/modalStudentDeleteHtml.js"
 import { getUserAll } from "../services/userApi.js";
 import { headerTxt } from "../config/headerTxt.js";
 import { updateUser } from "../services/userApi.js";
+import { showToast } from "./toast.js";
+import { AppModal } from "./modalNotice.js";
 
 const usersState = {
   users: [],
@@ -214,12 +216,17 @@ function openStudentStatusModal(modalHost, user, newActive) {
       };
 
       await updateUser(user.id, dto);
+      showToast(newActive ? "Alumno activado correctamente" : "Alumno desactivado correctamente");
 
       await usersRender(); // recargar lista con estado actualizado
       closeWithAnimation();
     } catch (err) {
       console.error("Error actualizando estado del alumno:", err);
-      alert(err.message || "No se pudo actualizar el alumno.");
+      AppModal.open({
+        iconHTML: '<span class="material-symbols-outlined text-red-600 text-5xl">error</span>',
+        titleText: "Error al actualizar estado del alumno",
+        messageText: err?.message || "No se pudo cambiar el estado del alumno. Intentalo de nuevo"
+      });
       btnConfirm.disabled = false;
       btnConfirm.textContent = newActive ? "Reactivar" : "Eliminar";
     }

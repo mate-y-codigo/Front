@@ -160,6 +160,26 @@
     --credit-card: oklch(0.705 0.213 47.604);
     --cash: oklch(0.723 0.219 149.579);
     --transfer: oklch(0.558 0.288 302.321);
+
+    /* Pills generales */
+    --pill-bg: oklch(0.929 0.013 255.508);
+    --pill-text: var(--text-primary);
+
+    /* Pills de estado (Activo/Inactivo) */
+    --pill-active-bg: var(--success);
+    --pill-active-text: #022c22; 
+    --pill-inactive-bg: var(--destructive);
+    --pill-inactive-text: oklch(0.985 0.002 247.839);
+
+    /* Pills de categoría (Fuerza, Hipertrofia, etc.) */
+    --pill-category-bg: var(--hover-bg);
+    --pill-category-text: var(--text-primary);
+
+    /* Filtros de grupos musculares */
+    --chip-bg: var(--hover-bg);
+    --chip-text: var(--text-primary);
+    --chip-active-bg: var(--primary);
+    --chip-active-text: white;
 }
 
 .dark {
@@ -245,6 +265,22 @@
     --credit-card: oklch(0.705 0.213 47.604);
     --cash: oklch(0.723 0.219 149.579);
     --transfer: oklch(0.558 0.288 302.321);
+
+    --pill-bg: oklch(0.372 0.044 257.287);
+    --pill-text: var(--text-primary);
+
+    --pill-active-bg: color-mix(in oklch, var(--success) 45%, #020617 55%);
+    --pill-active-text: #1dd45d;
+    --pill-inactive-bg: var(--destructive);
+    --pill-inactive-text: white;
+
+    --pill-category-bg: var(--hover-bg);
+    --pill-category-text: var(--text-primary);
+
+    --chip-bg: var(--hover-bg);
+    --chip-text: var(--text-primary);
+    --chip-active-bg: var(--primary);
+    --chip-active-text: white;
 }
 
 html,

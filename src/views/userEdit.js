@@ -2,6 +2,8 @@ import { userEditHtml } from "../components/userEditHtml.js";
 import { usersRender } from "./users.js";
 import { headerTxt } from "../config/headerTxt.js";
 import { updateUser } from "../services/userApi.js";
+import { showToast } from "./toast.js";
+import { AppModal } from "./modalNotice.js";
 
 export async function userEditRender(user) {
   const container = document.getElementById("container-main");
@@ -87,11 +89,16 @@ export async function userEditRender(user) {
         console.log("DTO a enviar en updateUser:", dto);
 
         await updateUser(user.id, dto);
+        showToast("Alumno editado correctamente");
 
         goBack();
       } catch (err) {
         console.error("Error actualizando usuario:", err);
-        alert(err.message || "No se pudo actualizar el alumno.");
+        AppModal.open({
+          iconHTML: '<span class="material-symbols-outlined text-red-600 text-5xl">error</span>',
+          titleText: "Error al modificar los datos del alumno",
+          messageText: err?.message || "No se pudo modificar el alumno."
+        });
         btnSave.disabled = false;
         btnSave.textContent = originalText;
       }

@@ -41,7 +41,7 @@
 
 .page-exercises .filter-label {
   font-size: 0.85rem;
-  color: var(--text-muted);
+  color: var(--text-primary);
 }
 
 .page-exercises #btn-new-exercise {
@@ -92,8 +92,8 @@
 }
 
 .page-exercises .exercise-card:hover {
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-        0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 .page-exercises .exercise-card-main {
@@ -126,26 +126,30 @@
   gap: 0.25rem;
 }
 
+/* 🔹 Pills adaptados a tema */
 .page-exercises .exercise-pill {
   border-radius: 999px;
   padding: 0.1rem 0.7rem;
   font-size: 0.78rem;
   font-weight: 500;
+  border: 1px solid color-mix(in oklch, var(--border) 60%, transparent);
+  background-color: color-mix(in oklch, var(--hover-bg) 80%, transparent);
+  color: var(--text-primary);
 }
 
 .page-exercises .exercise-pill--state-active {
-  background-color: rgba(16, 185, 129, 0.18);
-  color: #6ee7b7;
+  background-color: color-mix(in oklch, var(--pill-active-bg) 30%, transparent);
+  color: var(--pill-active-text);
 }
 
 .page-exercises .exercise-pill--state-inactive {
-  background-color: rgba(248, 113, 113, 0.16);
-  color: #fecaca;
+  background-color: color-mix(in oklch, var(--destructive) 18%, transparent);
+  color: var(--destructive);
 }
 
 .page-exercises .exercise-pill--category {
-  background-color: rgba(223, 225, 228, 0.18);
-  color: #ffffff;
+  background-color: color-mix(in oklch, var(--hover-bg) 90%, transparent);
+  color: var(--text-primary);
 }
 
 .page-exercises .exercise-card-actions {
@@ -195,18 +199,18 @@
 }
 
 .btn-primary {
-    background-color: #6a0dad;
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.15s ease;
+  background-color: #6a0dad;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.15s ease;
 }
 
 .btn-primary:hover {
-    background-color: #7d17c8;
+  background-color: #7d17c8;
 }
 
 .exercise-group-filter {
@@ -219,27 +223,37 @@
 .group-chip {
   padding: 0.35rem 0.9rem;
   border-radius: 999px;
-  border: 1px solid var(--border, #374151);
-  background: transparent;
-  color: var(--text-secondary, #9ca3af);
+  border: 1px solid color-mix(in oklch, var(--border) 60%, transparent);
+  background: color-mix(in oklch, var(--hover-bg) 75%, transparent);
+  color: var(--muted-foreground);
   font-size: 0.9rem;
   cursor: pointer;
   transition: 0.15s ease;
 }
 
 .group-chip:hover {
-  border-color: #6a0dad;
-  color: #e5e7eb;
+  border-color: color-mix(in oklch, var(--primary) 60%, var(--border) 40%);
+  background-color: color-mix(in oklch, var(--hover-bg) 55%, transparent);
+  color: var(--text-primary);
 }
 
 .group-chip.active {
-  background-color: #6a0dad;
-  border-color: #6a0dad;
-  color: #ffffff;
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: var(--primary-foreground, #ffffff);
 }
 
 .button {
   width: auto;
 }
 
+.exercise-card-main {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
 
+.exercise-card-info {
+  min-width: 0;
+}
