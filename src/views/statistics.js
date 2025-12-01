@@ -485,7 +485,7 @@ export async function renderMetricas() {
     const prevAlumno = document.getElementById("select-alumno")?.value || "";
 
 
-    const urlUsers = `${getUrlUserApi()}/api/Usuarios`;
+    const urlUsers = `${getUrlUserApi()}/api/Usuarios/actives`;
 
     const respUsers = await authHelper.fetchWithAuth(urlUsers, { method: "GET" });
     let usuarios = await respUsers.json();
