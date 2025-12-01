@@ -1,35 +1,35 @@
 #card-info-student {
-    border-width: 0.0625rem;
+    border-width: 1px;
     border-radius: 0.5rem;
     border-color: color-mix(in oklch, var(--card-info-border-student) 30%, transparent);
-    background-color: var(--card-info-bg-student);
+    background-color: color-mix(in oklch, var(--card-info-bg-student) 10%, transparent);
     box-shadow: 0 -1px -1px 0 var(--shadow-color);
     transition: box-shadow 0.3s ease;
 }
 
 #card-info-plans {    
-    border-width: 0.0625rem;
+    border-width: 1px;
     border-radius: 0.5rem;
     border-color: color-mix(in oklch, var(--card-info-border-plans) 30%, transparent);
-    background-color: var(--card-info-bg-plans);
+    background-color: color-mix(in oklch, var(--card-info-bg-plans) 10%, transparent);
     box-shadow: 0 -1px -1px 0 var(--shadow-color);
     transition: box-shadow 0.3s ease;
 }
 
 #card-info-income {
-    border-width: 0.0625rem;
+    border-width: 1px;
     border-radius: 0.5rem;
     border-color: color-mix(in oklch, var(--card-info-border-income) 30%, transparent);
-    background-color: var(--card-info-bg-income);
+    background-color: color-mix(in oklch, var(--card-info-bg-income) 10%, transparent);
     box-shadow: 0 -1px -1px 0 var(--shadow-color);
     transition: box-shadow 0.3s ease;
 }
 
 #card-info-session {
-    border-width: 0.0625rem;
+    border-width: 1px;
     border-radius: 0.5rem;
     border-color: color-mix(in oklch, var(--card-info-border-session) 30%, transparent);
-    background-color: var(--card-info-bg-session);
+    background-color: color-mix(in oklch, var(--card-info-bg-session) 10%, transparent);
     box-shadow: 0 -1px -1px 0 var(--shadow-color);
     transition: box-shadow 0.3s ease;
 }
@@ -45,10 +45,10 @@
 #card-info-student .title,
 #card-info-plans .title,
 #card-info-income .title,
-#card-info-session .title {
+#card-info-session .title {    
     font-size: 0.875rem;
     font-weight: 500;
-    color: oklch(0.551 0.027 264.364);
+    color: var(--text-primary);/*oklch(0.551 0.027 264.364);*/
 }
 
 #card-info-student .number,
@@ -57,7 +57,7 @@
 #card-info-session .number {
     font-size: 1.5rem;
     font-weight: 700;
-    color: oklch(0.21 0.034 264.665);
+    color: var(--accent);/*oklch(0.21 0.034 264.665);*/
 }
 
 #card-info-student .percentage,
@@ -66,7 +66,7 @@
 #card-info-session .percentage {
     font-size: 0.75rem;
     font-weight: 500;
-    color: var(--success);
+    color: var(--accent-hover);
 }
 
 #card-info-student .icon {

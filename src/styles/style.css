@@ -201,7 +201,7 @@
     --primary-dark: oklch(0.291 0.149 302.717);
     /* === Acentos === */
     --accent: oklch(0.855 0.138 181.071);
-    --accent-hover: oklch(0.52 0.13 30);
+    --accent-hover: oklch(0.6 0.118 184.704);
     /* === Estados === */
     --success: oklch(0.765 0.177 163.223);
     --warning: oklch(0.75 0.183 55.934);
