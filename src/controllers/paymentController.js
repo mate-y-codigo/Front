@@ -68,7 +68,7 @@ export async function getStatistics() {
     const token = authHelper.getAccessToken();
     const coachId = authHelper.parseTokens(token).sub;
 
-    const result = await getPaymentByFilter(`${today.getMonth() + 1}-29-${today.getFullYear()}`, `${today.getMonth() + 1}-${daysInMonth}-${today.getFullYear()}`, coachId);
+    const result = await getPaymentByFilter(`${today.getMonth() + 1}-01-${today.getFullYear()}`, `${today.getMonth() + 1}-${daysInMonth}-${today.getFullYear()}`, coachId);
 
     if(result.success){
         const statistics = calculateTotals(result.data);
