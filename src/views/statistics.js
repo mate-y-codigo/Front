@@ -343,6 +343,7 @@ export function metricasHtml(
                 <thead>
                     <tr>
                         <th style="text-align:left;padding:10px 0;color:#oklch;font-weight:500;font-size:14px;">Alumno</th>
+                        <th style="text-align:left;padding:10px 0;color:#oklch;font-weight:500;font-size:14px;">Plan</th>
                         <th style="text-align:left;padding:10px 0;color:#oklch;font-weight:500;font-size:14px;">Inicio</th>
                         <th style="text-align:left;padding:10px 0;color:#oklch;font-weight:500;font-size:14px;">Progreso</th>
                         <th style="text-align:left;padding:10px 0;color:#oklch;font-weight:500;font-size:14px;">Adherencia</th>
@@ -353,6 +354,7 @@ export function metricasHtml(
                     ${planesFiltrados.map((p, i) => `
                         <tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
                             <td style="padding:10px 0;color:#oklch;">${p.nombreAlumno}</td>
+                            <td style="padding:10px 0;color:#oklch;">${p.nombrePlan}</td>
                             <td style="padding:10px 0;color:#oklch;">${p.fechaInicio?.slice(0, 10)}</td>
                             <td style="padding:10px 0;color:#3b82f6;font-weight:500;">${p.progresoPorcentaje}%</td>
                             <td style="padding:10px 0;color:#bc4ed8;font-weight:500;">${p.adherenciaPorcentaje}%</td>
@@ -484,7 +486,7 @@ export async function renderMetricas() {
 
 
     const urlUsers = `${getUrlUserApi()}/api/Usuarios`;
-    console.log(urlUsers);
+
     const respUsers = await authHelper.fetchWithAuth(urlUsers, { method: "GET" });
     let usuarios = await respUsers.json();
     usuarios = usuarios.filter(n => n.rolId == 3);
@@ -621,7 +623,7 @@ export async function renderMetricas() {
 
     // alumnos = lista completa (rolId=3)
     const alumnosSinEntrenar = usuarios.filter(u => !alumnosQueEntrenaron.has(u.id));
-    console.log(alumnosSinEntrenar)
+
     const porcentajeSinEntrenar =
         usuarios.length > 0
             ? (alumnosSinEntrenar.length / usuarios.length) * 100
