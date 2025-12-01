@@ -77,6 +77,7 @@ export function planViewHtml(plan, planIsInUse) {
                     <button class="button" id="btn-back-plan"><span class="material-symbols-outlined">keyboard_arrow_left</span>Atras</button>
                 </div>
                 ${(!planIsInUse ? `<div class="flex flex-row gap-4 items-center">
+                    <button class="button" id="btn-edit-plan"><span class="material-symbols-outlined">edit_note</span>Editar Plan</button>
                     <button class="button-cancel" id="btn-delete-plan"><span class="material-symbols-outlined">delete</span>Borrar Plan</button>
                 </div>` : ``)}                
             </div>

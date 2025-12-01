@@ -3,6 +3,7 @@ import { AppModalQuery } from '../views/modalQuery.js'
 import { deletePlanById } from '../services/planApi.js'
 import { AppModal } from '../views/modalNotice.js'
 import { showToast } from '../views/toast.js'
+import { planEditRender } from '../views/planEdit.js'
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
    listener
@@ -13,6 +14,13 @@ export function addPlanViewListener(plan) {
     document.getElementById('btn-back-plan').addEventListener('click', () => {
         plansRender();
     });
+
+    const btnEdit = document.getElementById('btn-edit-plan')
+    if (btnEdit) {
+        btnEdit.addEventListener('click', () => {
+            planEditRender(plan);
+        }); 
+    }
 
     const btnDelete = document.getElementById('btn-delete-plan')
     if (btnDelete) {

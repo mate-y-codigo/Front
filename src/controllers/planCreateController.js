@@ -498,7 +498,7 @@ export function createSession() {
                 comboBoxRender(comboContainerId, listExcercises);
             }
             else {
-                comboBoxRender(comboContainerId, [{ id: 0, name: "No hay ejerccios definidos" }]);
+                comboBoxRender(comboContainerId, [{ id: 0, name: "No hay ejercicios definidos" }]);
             }
 
             // apply input restrictions
