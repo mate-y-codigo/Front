@@ -180,7 +180,7 @@ export async function renderTareas() {
 
 
     const respTareas = await authHelper.fetchWithAuth(
-        `http://localhost:5098/api/EventoCalendario?${params.toString()}`
+        `${urlAsigncionApi}/api/EventoCalendario?${params.toString()}`
     );
     const tareas = await respTareas.json();
 
