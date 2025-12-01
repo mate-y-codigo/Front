@@ -141,7 +141,9 @@ export function metricasHtml(
         
         <!-- Progreso -->
         <div style="background:#oklch;border:none;border-radius:14px;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.25);">
-            <span style="font-size:14px;color:#oklch;">Progreso Promedio</span>
+            <span style="font-size:14px;color:#oklch; display:flex; align-items:center; gap:6px;">
+    <span class="material-symbols-outlined">trending_up</span> Progreso Promedio
+</span>
             <div style="font-size:32px;font-weight:bold;margin-top:5px;color:#3b82f6;">
                 ${promedioProgresoGlobal.toFixed(1)}%
             </div>
@@ -149,7 +151,9 @@ export function metricasHtml(
 
         <!-- Adherencia -->
         <div style="background:#oklch;border:1px solid #oklch;border-radius:14px;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.25);">
-            <span style="font-size:14px;color:#oklch;">Adherencia Promedio</span>
+           <span style="font-size:14px;color:#oklch; display:flex; align-items:center; gap:6px;">
+                <span class="material-symbols-outlined">check_circle</span> Adherencia Promedio
+            </span>
             <div style="font-size:32px;font-weight:bold;margin-top:5px;color:#bc4ed8;">
                 ${promedioAdherenciaGlobal.toFixed(1)}%
             </div>
@@ -157,7 +161,9 @@ export function metricasHtml(
 
         <!-- Records -->
         <div style="background:#oklch;border:1px solid #oklch;border-radius:14px;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.25);">
-            <span style="font-size:14px;color:#oklch;">Total Records Personales</span>
+            <span style="font-size:14px;color:#oklch; display:flex;align-items:center;gap:6px;">
+                <span class="material-symbols-outlined">military_tech</span> Total Records Personales
+            </span>
             <div style="font-size:32px;font-weight:bold;margin-top:5px;color:#ec4899;">
                 ${cantidadRecordsPersonales}
             </div>
@@ -169,7 +175,9 @@ export function metricasHtml(
             border:1px solid #oklch;
             border-radius:14px;
             padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.25);">
-        <span style="font-size:14px;color:#oklch;">Total planes</span>
+        <span style="font-size:14px;color:#oklch; display:flex;align-items:center;gap:6px;">
+            <span class="material-symbols-outlined">list_alt</span> Total Planes
+        </span>
         <div style="font-size:32px;font-weight:600;margin-top:5px;color:#fb923c;">
             ${planesFiltrados.length}
         </div>
@@ -181,7 +189,10 @@ export function metricasHtml(
             border:1px solid #oklch;
             border-radius:14px;
             padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.25);">
-            <span style="font-size:14px;color:#oklch;">Fuerza Relativa Promedio</span>
+            <span style="font-size:14px;color:#oklch; display:flex;align-items:center;gap:6px;">
+                <span class="material-symbols-outlined">fitness_center</span> Fuerza Relativa Promedio
+            </span>
+
             <div style="
                 font-size:28px;
                 font-weight:bold;
@@ -201,7 +212,9 @@ export function metricasHtml(
             border:1px solid #oklch;
             border-radius:14px;
             padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.25);">
-            <span style="font-size:14px;color:#oklch;">Alumnos en riesgo</span>
+            <span style="font-size:14px;color:#oklch; display:flex;align-items:center;gap:6px;">
+                <span class="material-symbols-outlined">warning</span> Alumnos en riesgo
+            </span>
 
             <div style="
                 font-size:32px;
@@ -229,8 +242,8 @@ export function metricasHtml(
             box-shadow:0 2px 6px rgba(0,0,0,0.25);
         ">
 
-            <h3 style="margin-bottom:20px;font-size:22px;font-weight:600;color:#oklch;">
-                Planes Encontrados   ${planesFiltrados.length}
+            <h3 style="margin-bottom:20px;font-size:22px;font-weight:600;color:#oklch; display:flex;align-items:center;gap:8px;">
+                <span class="material-symbols-outlined">assignment</span> Planes Encontrados ${planesFiltrados.length}
             </h3>
 
             <table style="width:100%;border-collapse:collapse;">
@@ -269,7 +282,9 @@ export function metricasHtml(
             max-height:400px;
             overflow-y:auto;box-shadow:0 4px 12px rgba(0,0,0,0.25);
         ">
-            <h3 style="font-size:20px;margin-bottom:15px;">Alumnos sin registros en 14 días</h3>
+            <h3 style="font-size:20px;margin-bottom:15px; display:flex;align-items:center;gap:6px;">
+                <span class="material-symbols-outlined">person_off</span> Alumnos sin registros en 14 días
+            </h3>
 
             ${alumnosSinEntrenar.length === 0 ? `
                 <div style="
