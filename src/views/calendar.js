@@ -167,7 +167,7 @@ export async function renderTareas() {
     container.innerHTML = spinnerHTML();
 
 
-    const respUsers = await authHelper.fetchWithAuth("http://localhost:5099/api/Usuarios");
+    const respUsers = await authHelper.fetchWithAuth(`${urlUserApi}/api/Usuarios`);
     let usuarios = await respUsers.json();
     usuarios = usuarios.filter(u => u.rolId === 3);
 
