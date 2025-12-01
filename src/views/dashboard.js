@@ -1,6 +1,6 @@
 import { dashboardHtml } from '../components/dashboardHtml.js'
 import { getUserAll } from '../services/userApi.js';
-import { planCreateRender } from './planCreate.js'; 
+import { planCreateRender } from './planCreate.js';
 import { getAllAlumnoPlan } from '../services/asignacionApi.js';
 import { getAllSesionesRealizadas } from '../services/asignacionApi.js';
 import { getAllSesionesEntrenamiento } from '../services/planApi.js';
@@ -11,12 +11,12 @@ import { paymentRender } from './payment.js';
 import { calculateTotals } from '../controllers/paymentController.js';
 import { authHelper } from '../helpers/authHelper.js';
 import { getPaymentByFilter } from '../services/paymentApi.js';
-
+import { renderTareas } from './calendar.js';
 
 function dashboardButtonAddListener() {
     document.getElementById('quick-action-add-student').addEventListener('click', () => userNewRender());
     document.getElementById('quick-action-new-plan').addEventListener('click', () => planCreateRender());
-    document.getElementById('quick-action-see-calendar').addEventListener('click', () => console.log('ver calendario'));
+    document.getElementById('quick-action-see-calendar').addEventListener('click', () => renderTareas());
     document.getElementById('quick-action-add-exercise').addEventListener('click', () => exerciseCreateRender());
     document.getElementById('quick-action-add-payment').addEventListener('click', () => paymentRender());
 }
@@ -116,34 +116,34 @@ function formatFechaHora(isoString) {
 
 
 
-function porcentajeActivos(usuarios){
- const activos = usuarios.filter(u => u.activo && u.rolId === 3 ).length;
- const total = usuarios.filter(u => u.rolId === 3).length;
+function porcentajeActivos(usuarios) {
+    const activos = usuarios.filter(u => u.activo && u.rolId === 3).length;
+    const total = usuarios.filter(u => u.rolId === 3).length;
 
-    let porcentaje = ((activos/total) * 100).toFixed(2);
+    let porcentaje = ((activos / total) * 100).toFixed(2);
 
-    return {activos,porcentaje};
+    return { activos, porcentaje };
 }
 
-function porcentajeAsignados(planes){   
-    const asignados = planes.filter(p => p.estado === 1 ).length;
+function porcentajeAsignados(planes) {
+    const asignados = planes.filter(p => p.estado === 1).length;
     const total = planes.length;
 
-    let porcentaje = ((asignados/total)*100).toFixed(2);
+    let porcentaje = ((asignados / total) * 100).toFixed(2);
 
-    return {asignados,porcentaje};
+    return { asignados, porcentaje };
 
 }
 
-function porcentajeSesionesRealizadas(sesionesRealizadas,sesionesEntrenamiento){
-    
+function porcentajeSesionesRealizadas(sesionesRealizadas, sesionesEntrenamiento) {
+
 
     const realizadas = sesionesRealizadas.length;
     const totalSesiones = sesionesEntrenamiento.length;
 
-    let porcentaje = ((realizadas/totalSesiones)*100).toFixed(2);
+    let porcentaje = ((realizadas / totalSesiones) * 100).toFixed(2);
 
-    return {realizadas,porcentaje};
+    return { realizadas, porcentaje };
 }
 
 /** render */
@@ -170,22 +170,22 @@ setTimeout(() => {
     const sesionesRealizadas = await getAllSesionesRealizadas();
     const sesionesEntrenamiento = await getAllSesionesEntrenamiento();
     const EventosCalendarios = (await getEventosCalendario({
-    Estado: 1,
-    Desde: startOfDay.toISOString(),
-    Hasta: endOfDay.toISOString()
+        Estado: 1,
+        Desde: startOfDay.toISOString(),
+        Hasta: endOfDay.toISOString()
     })) || []; // si no trae nada devuelve vacio para renderice
 
-   
-    cardNextSession.length = 0; 
+
+    cardNextSession.length = 0;
 
     EventosCalendarios.slice(0, 3).forEach(evento => {
-    const hora = formatFechaHora(evento.fechaProgramada);
-    cardNextSession.push({
-        name: evento.nombreAlumno,
-        hour: hora,
-        type: evento.nombreSesion
+        const hora = formatFechaHora(evento.fechaProgramada);
+        cardNextSession.push({
+            name: evento.nombreAlumno,
+            hour: hora,
+            type: evento.nombreSesion
+        });
     });
-});
 
     const statsUser = porcentajeActivos(usuarios);
     const statsPlanes = porcentajeAsignados(planesAsignados);
@@ -213,6 +213,6 @@ setTimeout(() => {
     });
 
     containerMain.innerHTML = dashboardHtml(cardInfo, cardActivity, cardNextSession);
-    
+
     dashboardButtonAddListener();
 }
