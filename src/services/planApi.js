@@ -87,7 +87,7 @@ export async function getPlanIsInUse(id) {
 export async function getAllSesionesEntrenamiento() {
     try {
         const sesiones = await fetch(getUrlPlanApi() + '/api/TrainingSession');
-        console.log(sesiones)
+
         var data = await sesiones.json();
 
         return data;

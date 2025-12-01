@@ -124,7 +124,7 @@ export function metricasHtml(
             padding:10px 14px;
             border-radius:10px;
             border:1px solid var(--oklch-border);
-            background:var(--oklch-bg);
+            background:var(--background);
             color:var(--oklch-text);
             box-shadow: 0 4px 12px rgba(0,0,0,0.25);
             font-weight:500;
@@ -209,7 +209,7 @@ export function metricasHtml(
             border:1px solid #oklch;
             border-radius:14px;
             padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.25);">
-            <span style="font-size:14px;color:#oklch;">Alumnos sin entrenar (7 días)</span>
+            <span style="font-size:14px;color:#oklch;">Alumnos sin entrenar (14 días)</span>
 
             <div style="
                 font-size:32px;
@@ -277,7 +277,7 @@ export function metricasHtml(
             max-height:400px;
             overflow-y:auto;box-shadow:0 4px 12px rgba(0,0,0,0.25);
         ">
-            <h3 style="font-size:20px;margin-bottom:15px;">Alumnos sin entrenar (últimos 7 días)</h3>
+            <h3 style="font-size:20px;margin-bottom:15px;">Alumnos sin entrenar (últimos 14 días)</h3>
 
             ${alumnosSinEntrenar.length === 0 ? `
                 <div style="
@@ -288,18 +288,8 @@ export function metricasHtml(
             ` :
             alumnosSinEntrenar.map(a => `
                 <div style="margin-bottom:16px;">
-                    <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
-                        <span>${a.nombre} ${a.apellido}</span>
-                        <span style="color:#ef4444;font-weight:bold">0 sesiones</span>
-                    </div>
-
-                    <div style="height:8px;background:#4a536b;;border-radius:6px;">
-                        <div style="
-                            height:100%;
-                            width:0%;
-                            background:linear-gradient(90deg,#ef4444,#b91c1c);
-                            border-radius:6px;">
-                        </div>
+                    <div style="display:flex;justify-content:space-between;align-items: center;margin-bottom:4px;">
+                        <span style="display:flex;align-items: center;"><div style="margin-right:5px" class="icon material-symbols-outlined">assignment</div><span> ${a.nombre} ${a.apellido}</span></span>
                     </div>
                 </div>
             `).join("")}
@@ -445,7 +435,7 @@ export async function renderMetricas() {
 
     // Hoy → Últimos 7 días
     const hoy = new Date();
-    const hace7dias = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+    const hace7dias = new Date(Date.now() - 14 * 24 * 60 * 60 * 1000);
 
     const paramsSR = new URLSearchParams();
     paramsSR.append("Desde", hace7dias.toISOString().slice(0, 10) + "Z");
@@ -556,7 +546,7 @@ export async function renderMetricas() {
 
     // alumnos = lista completa (rolId=3)
     const alumnosSinEntrenar = usuarios.filter(u => !alumnosQueEntrenaron.has(u.id));
-
+    console.log(alumnosSinEntrenar)
     const porcentajeSinEntrenar =
         usuarios.length > 0
             ? (alumnosSinEntrenar.length / usuarios.length) * 100
