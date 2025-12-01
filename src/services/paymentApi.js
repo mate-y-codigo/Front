@@ -14,6 +14,7 @@ export async function getUserAll() {
     }
 }
 
+
 export async function getPaymentByUserId(id) {
     try {
         const response = await authHelper.fetchWithAuth(getUrlPagosApi() + `/api/payment/student/${id}`);

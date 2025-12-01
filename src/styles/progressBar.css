@@ -1,7 +1,8 @@
 .progress-container {
+  margin-top: 0.5rem;
   position: relative;
   width: 100%;
-  max-width: 26rem;
+  max-width: 100rem;
   height: 1rem;
   background-color: color-mix(in oklch, var(--text-muted) 30%, transparent);
   border-radius: 0.625rem;
@@ -15,12 +16,17 @@
   background-color: var(--exercise-color);
   width: 0%;
   transition: width 0.4s ease;
+  position: relative;
 }
 
 .progress-label {
   position: absolute;
-  right: 12rem;
-  font-size: .875rem;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: .75rem;
   font-weight: bold;
-  color: color-mix(in oklch, var(--text-primary) 60%, transparent);
+  color: white;
+  z-index: 2;
+  pointer-events: none;
 }

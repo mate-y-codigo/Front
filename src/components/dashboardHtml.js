@@ -54,7 +54,7 @@ function cardInfoSession(data) {
         </div>`;
 }
 
-function cardActivityDetail(name, activity, time) {
+function cardActivityDetail(name, nameAlumno, time) {
     return `
         <div class="card-activity-detail">
             <div class="flex items-center justify-between">
@@ -64,7 +64,7 @@ function cardActivityDetail(name, activity, time) {
                     </div>
                     <div>
                         <p class="font-medium">${name}</p>
-                        <p class="text-sm text-muted-foreground">${activity}</p>
+                        <p class="text-sm text-muted-foreground">${nameAlumno}</p>
                     </div>
                 </div>
                 <span class="text-xs text-muted-foreground">${time}</span>
@@ -93,8 +93,8 @@ export function dashboardHtml(cardInfo, cardActivity, cardNextSession) {
             <div class="flex justify-center gap-6 m-2">
                 ${cardInfoStudent(cardInfo[0])}
                 ${cardInfoPlans(cardInfo[1])}
-                ${cardInfoIncome(cardInfo[0].number, cardInfo[0].percentage)} 
-                ${cardInfoSession(cardInfo[2])}
+                ${cardInfoIncome(cardInfo[2])} 
+                ${cardInfoSession(cardInfo[3])}
             </div>
             
             <div class="flex justify-center gap-6 m-2">
@@ -102,11 +102,11 @@ export function dashboardHtml(cardInfo, cardActivity, cardNextSession) {
                     <div class="card-activity-title p-2">
                         <h3 class="flex items-center gap-2">
                             <span class="material-symbols-outlined">earthquake</span>
-                            Planes Activos
+                            Planes Recientes 
                         </h3>
                     </div>
                     <div class="flex flex-col">
-                        ${cardActivity.map((info, index) => cardActivityDetail(info.name, info.activity, info.time)).join('')}
+                        ${cardActivity.map((info, index) => cardActivityDetail(info.name, info.nameAlumno, info.time)).join('')}
                     </div>
                 </div>
                 <div id="card-quick-action" class="basis-1/3 pb-6">

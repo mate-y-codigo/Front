@@ -15,6 +15,19 @@ export async function getUserAll() {
     }
 }
 
+export async function getStudentsActivesAll() {
+    try {
+        const usuarios = await authHelper.fetchWithAuth( getUrlUserApi() + "/api/Usuarios/actives");
+        
+        const response = await usuarios.json();
+
+        return response;
+    } catch (err) {
+        console.error("Error accediendo a la API:", err.message);
+        return[];
+    }
+}
+
 /*
 // ID que quieres consultar
 const userId = "9a3ffd2c-1384-4574-b0ec-0b18e4c1d0be";
@@ -93,8 +106,7 @@ export async function createUser(dto) {
 
 export async function updateUser(id, dto) {
   try {
-    const res = await authHelper.fetchWithAuth(
-      getUrlUserApi() + `/api/Usuarios/${id}`,
+    const res = await authHelper.fetchWithAuth(getUrlUserApi() + `/api/Usuarios/${id}`,
       {
         method: "PUT",
         headers: {
@@ -121,6 +133,32 @@ export async function updateUser(id, dto) {
     }
 
     return null;
+  } catch (err) {
+    console.error("Error accediendo a la API:", err.message);
+    throw err;
+  }
+}
+
+export async function deleteUser(id) {
+  try {
+    const res = await authHelper.fetchWithAuth(getUrlUserApi() + `/api/Usuarios/${id}`,
+      {
+        method: "DELETE",
+      }
+    );
+
+    if (!res.ok) {
+      let errorText = "";
+      try {
+        errorText = await res.text();
+      } catch {
+        // ignore
+      }
+      console.error("Error HTTP deleteUser:", res.status, errorText);
+      throw new Error("No se pudo eliminar el usuario");
+    }
+
+    return true;
   } catch (err) {
     console.error("Error accediendo a la API:", err.message);
     throw err;

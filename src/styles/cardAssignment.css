@@ -47,7 +47,6 @@
     font-size: 0.875rem;
 }
 
-.card-assignment-date-info,
 .card-assignment-progress-info {
     color: var(--text-primary);
     font-size: 1rem;
@@ -56,6 +55,18 @@
 
 .card-assignment-date-icon {
     font-size: 1rem;
+}
+
+.card-assignment-date {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.card-assignment-date-info {
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    font-weight: 600;
 }
 
 .card-assignment-status {

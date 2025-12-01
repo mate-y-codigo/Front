@@ -27,7 +27,7 @@ export function filterStudent(data) {
 }
 
 
-function calculateTotals(payments) {
+export function calculateTotals(payments) {
     return payments.reduce(
         (acc, payments) => {
             const monto = Number(payments.monto) || 0;
@@ -78,7 +78,7 @@ export async function getStatistics() {
         document.querySelector('#payment-card-info-card').textContent = '$' + statistics.tarjeta;
         document.querySelector('#payment-card-info-transfer').textContent = '$' + statistics.transferencia;
 
-        //console.log(statistics);
+       
     }
 }
 
