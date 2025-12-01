@@ -1,3 +1,4 @@
+import { getUrlAsignacionApi, getUrlUserApi } from "../config/urlApi.js";
 import { authHelper } from "../helpers/authHelper.js";
 
 
@@ -369,27 +370,27 @@ export function metricasHtml(
 
 </div>`;
 }
-/* ====================================================
-   RENDER PRINCIPAL
-   ==================================================== */
+
 export async function renderMetricas() {
 
     const containerMain = document.getElementById("container-main");
 
-    /* === valores previos === */
+
     const prevDesde = document.getElementById("select-desde")?.value || null;
     const prevHasta = document.getElementById("select-hasta")?.value || null;
     const prevAlumno = document.getElementById("select-alumno")?.value || "";
 
-    /* === fetch usuarios === */
-    const respUsers = await authHelper.fetchWithAuth("http://localhost:5099/api/Usuarios");
-    let usuarios = await respUsers.json();
-    usuarios = usuarios.filter(n => n.rolId == 3); // solo alumnos
 
-    /* === primer render === */
+    const urlUsers = `${getUrlUserApi()}/api/Usuarios`;
+    console.log(urlUsers);
+    const respUsers = await authHelper.fetchWithAuth(urlUsers, { method: "GET" });
+    let usuarios = await respUsers.json();
+    usuarios = usuarios.filter(n => n.rolId == 3);
+
+
     containerMain.innerHTML = metricasHtml(null, usuarios);
 
-    /* === asignar inputs === */
+
     const inputDesde = document.getElementById("select-desde");
     const inputHasta = document.getElementById("select-hasta");
     const inputAlumno = document.getElementById("select-alumno");
@@ -401,26 +402,22 @@ export async function renderMetricas() {
     inputHasta.value = hasta;
     inputAlumno.value = prevAlumno;
 
-    /* ==========================================================
-       FETCH PLANES
-    ========================================================== */
+
     const params = new URLSearchParams();
     params.append("desde", desde + "Z");
     params.append("hasta", hasta + "Z");
     if (prevAlumno !== "") params.append("idAlumno", prevAlumno);
 
-    const respPlanes = await authHelper.fetchWithAuth(
-        "http://localhost:5098/api/AlumnoPlan/?" + params.toString()
-    );
+    const url1 = `${getUrlAsignacionApi()}/api/AlumnoPlan?${params.toString()}`;
+    const respPlanes = await authHelper.fetchWithAuth(url1, { method: "GET" });
     const planes = await respPlanes.json();
 
 
     const paramsRP = new URLSearchParams();
     if (prevAlumno !== "") paramsRP.append("idAlumno", prevAlumno);
 
-    const respRecords = await authHelper.fetchWithAuth(
-        "http://localhost:5098/api/RecordPersonal/?" + paramsRP.toString()
-    );
+    const url2 = `${getUrlAsignacionApi()}/api/RecordPersonal?${paramsRP.toString()}`;
+    const respRecords = await authHelper.fetchWithAuth(url2, { method: "GET" });
     const records = await respRecords.json();
 
 
@@ -431,12 +428,9 @@ export async function renderMetricas() {
     paramsSR.append("Desde", hace7dias.toISOString().slice(0, 10) + "Z");
     paramsSR.append("Hasta", hoy.toISOString().slice(0, 10) + "Z");
 
-    const respSesiones = await authHelper.fetchWithAuth(
-        "http://localhost:5098/api/SesionRealizada?" + paramsSR.toString()
-    );
+    const url3 = `${getUrlAsignacionApi()}/api/SesionRealizada?${paramsSR.toString()}`;
+    const respSesiones = await authHelper.fetchWithAuth(url3, { method: "GET" });
     const sesiones = await respSesiones.json();
-
-
 
     const planesFiltrados = planes;
 

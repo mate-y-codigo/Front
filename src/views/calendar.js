@@ -1,3 +1,4 @@
+import { getUrlAsignacionApi, getUrlUserApi } from "../config/urlApi.js";
 import { authHelper } from "../helpers/authHelper.js";
 
 
@@ -167,7 +168,8 @@ export async function renderTareas() {
     container.innerHTML = spinnerHTML();
 
 
-    const respUsers = await authHelper.fetchWithAuth(`${urlUserApi}/api/Usuarios`);
+    const urlUsers = `${getUrlUserApi()}/api/Usuarios`;
+    const respUsers = await authHelper.fetchWithAuth(urlUsers, { method: "GET" });
     let usuarios = await respUsers.json();
     usuarios = usuarios.filter(u => u.rolId === 3);
 
@@ -179,9 +181,8 @@ export async function renderTareas() {
     params.append("Hasta", prevHasta + "Z");
 
 
-    const respTareas = await authHelper.fetchWithAuth(
-        `${urlAsigncionApi}/api/EventoCalendario?${params.toString()}`
-    );
+    const urlAsigncionApi = `${getUrlAsignacionApi()}/api/AlumnoPlan?${params.toString()}`;
+    const respTareas = await authHelper.fetchWithAuth(urlAsigncionApi, { method: "GET" });
     const tareas = await respTareas.json();
 
 
