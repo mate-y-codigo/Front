@@ -15,6 +15,19 @@ export async function getUserAll() {
     }
 }
 
+export async function getStudentsActivesAll() {
+    try {
+        const usuarios = await authHelper.fetchWithAuth( getUrlUserApi() + "/api/Usuarios/actives");
+        
+        const response = await usuarios.json();
+
+        return response;
+    } catch (err) {
+        console.error("Error accediendo a la API:", err.message);
+        return[];
+    }
+}
+
 /*
 // ID que quieres consultar
 const userId = "9a3ffd2c-1384-4574-b0ec-0b18e4c1d0be";

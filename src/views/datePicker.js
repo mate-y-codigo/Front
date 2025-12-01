@@ -4,7 +4,6 @@ function datePickerBulid() {
     document.querySelectorAll("[date-picker]").forEach(initDatePicker);
 
     function initDatePicker(wrapper) {
-        console.log(wrapper);
         const input = wrapper.querySelector(".input-date");
         const calendar = wrapper.querySelector(".calendar");
         const daysContainer = wrapper.querySelector(".days-month");
@@ -88,168 +87,168 @@ function datePickerBulid() {
     }
 }
 
-function datePickerRangeBulid() {
-    document.querySelectorAll("[date-picker-range]").forEach(initRangePicker);
+function initSpecificRangePicker(wrapper, onChangeCallback = null) {    
+    const inputStart = wrapper.querySelector(".input-start");
+    const inputEnd = wrapper.querySelector(".input-end");
+    const calendar = wrapper.querySelector(".calendar");
+    const daysContainer = wrapper.querySelector(".days-month");
+    const monthLabel = wrapper.querySelector(".month-label");
+    const prevBtn = wrapper.querySelector(".prev-month");
+    const nextBtn = wrapper.querySelector(".next-month");
 
-    function initRangePicker(wrapper) {
-        const inputStart = wrapper.querySelector(".input-start");
-        const inputEnd = wrapper.querySelector(".input-end");
-        const calendar = wrapper.querySelector(".calendar");
-        const daysContainer = wrapper.querySelector(".days-month");
-        const monthLabel = wrapper.querySelector(".month-label");
-        const prevBtn = wrapper.querySelector(".prev-month");
-        const nextBtn = wrapper.querySelector(".next-month");
+    let currentDate = new Date();
+    let startDate = null;
+    let endDate = null;
+    let selectingStart = true;
 
-        // Opcionales: rango permitido
-        const minDate = null;           // new Date(2025, 0, 1)
-        const maxDate = null;           // new Date(2025, 11, 31)
+    // ----- Abrir y cerrar -----
+    const openCalendar = () => {
+        calendar.classList.remove("hidden", "fade-out");
+        calendar.classList.add("fade-in");
+    };
 
-        let currentDate = new Date();
-        let startDate = null;
-        let endDate = null;
-        let selectingStart = true;
+    const closeCalendar = () => {
+        calendar.classList.remove("fade-in");
+        calendar.classList.add("fade-out");
+        setTimeout(() => calendar.classList.add("hidden"), 150);
+    };
 
-        // ----- Abrir y cerrar -----
-        const openCalendar = () => {
-            calendar.classList.remove("hidden", "fade-out");
-            calendar.classList.add("fade-in");
-        };
+    // ----- Render del calendario -----
+    function renderCalendar() {
+        daysContainer.innerHTML = "";
 
-        const closeCalendar = () => {
-            calendar.classList.remove("fade-in");
-            calendar.classList.add("fade-out");
-            setTimeout(() => calendar.classList.add("hidden"), 150);
-        };
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
+        const firstDay = new Date(year, month, 1);
+        const lastDay = new Date(year, month + 1, 0);
 
-        // ----- Render del calendario -----
-        function renderCalendar() {
-            daysContainer.innerHTML = "";
+        const startIndex = (firstDay.getDay() + 6) % 7;
 
-            const year = currentDate.getFullYear();
-            const month = currentDate.getMonth();
-            const firstDay = new Date(year, month, 1);
-            const lastDay = new Date(year, month + 1, 0);
+        monthLabel.textContent = currentDate.toLocaleString("es-ES", {
+            month: "long",
+            year: "numeric",
+        });
 
-            const startIndex = (firstDay.getDay() + 6) % 7;
+        // Espacios vacíos
+        for (let i = 0; i < startIndex; i++)
+            daysContainer.appendChild(document.createElement("div"));
 
-            monthLabel.textContent = currentDate.toLocaleString("es-ES", {
-                month: "long",
-                year: "numeric",
+        // Crear días
+        for (let d = 1; d <= lastDay.getDate(); d++) {
+            const dateObj = new Date(year, month, d);
+            const dayEl = document.createElement("div");
+
+            dayEl.textContent = d;
+            dayEl.className = "py-1 rounded cursor-pointer select-none text-sm transition day-of-month";
+
+            // Detectar selección
+            if (startDate && dateObj.toDateString() === startDate?.toDateString()) {
+                dayEl.classList.add("day-of-month-start");
+            }
+
+            if (endDate && dateObj.toDateString() === endDate?.toDateString()) {
+                dayEl.classList.add("day-of-month-end");
+            }
+
+            // Rango visual intermedio
+            if (startDate && endDate && dateObj > startDate && dateObj < endDate) {
+                dayEl.classList.add("day-range");
+            }
+
+            // Click
+            dayEl.addEventListener("click", () => {
+                
+                if (selectingStart) {
+                    startDate = dateObj;
+                    endDate = null;
+                    selectingStart = false;
+                } else {
+                    if (dateObj < startDate) {
+                        endDate = startDate;
+                        startDate = dateObj;
+                    } else {
+                        endDate = dateObj;
+                    }
+                    selectingStart = true;
+                    closeCalendar();
+                }
+
+                updateInputs();
+                renderCalendar();
             });
 
-            // Espacios vacíos
-            for (let i = 0; i < startIndex; i++)
-                daysContainer.appendChild(document.createElement("div"));
-
-            // Crear días
-            for (let d = 1; d <= lastDay.getDate(); d++) {
-                const dateObj = new Date(year, month, d);
-                const dayEl = document.createElement("div");
-
-                // Deshabilitar por rango min/max
-                const disabled =
-                    (minDate && dateObj < minDate) ||
-                    (maxDate && dateObj > maxDate);
-
-                dayEl.textContent = d;
-                dayEl.className =
-                    "py-1 rounded cursor-pointer select-none text-sm transition";
-
-                if (disabled) {
-                    dayEl.classList.add("opacity-40", "cursor-not-allowed");
-                } else {
-                    dayEl.classList.add("day-of-month");
-                }
-
-                // Detectar selección
-                if (startDate && dateObj.toDateString() === startDate?.toDateString()) {
-                    dayEl.classList.add("day-of-month-start");
-                }
-
-                if (endDate && dateObj.toDateString() === endDate?.toDateString()) {
-                    dayEl.classList.add("day-of-month-end");
-                }
-
-                // Rango visual intermedio
-                if (
-                    startDate && endDate &&
-                    dateObj > startDate &&
-                    dateObj < endDate
-                ) {
-                    dayEl.classList.add("day-range");
-                }
-
-                // Click
-                if (!disabled) {
-                    dayEl.addEventListener("click", () => {
-                        if (selectingStart) {
-                            startDate = dateObj;
-                            endDate = null;
-                            selectingStart = false;
-                        } else {
-                            if (dateObj < startDate) {
-                                // Si la fecha fin es menor a la inicio → intercambia
-                                endDate = startDate;
-                                startDate = dateObj;
-                            } else {
-                                endDate = dateObj;
-                            }
-                            selectingStart = true;
-                            closeCalendar();
-                        }
-
-                        updateInputs();
-                        renderCalendar();
-                    });
-                }
-
-                daysContainer.appendChild(dayEl);
-            }
+            daysContainer.appendChild(dayEl);
         }
-
-        // ----- Actualizar inputs ----- 
-        function updateInputs() {
-            const format = (d) =>
-                `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
-
-            inputStart.value = startDate ? format(startDate) : "";
-            inputEnd.value = endDate ? format(endDate) : "";
-        }
-
-        // Navegación meses
-        prevBtn.onclick = () => {
-            currentDate.setMonth(currentDate.getMonth() - 1);
-            renderCalendar();
-        };
-
-        nextBtn.onclick = () => {
-            currentDate.setMonth(currentDate.getMonth() + 1);
-            renderCalendar();
-        };
-
-        // Abrir
-        inputStart.addEventListener("click", (e) => {
-            selectingStart = true;
-            e.stopPropagation();
-            openCalendar();
-            renderCalendar();
-        });
-
-        inputEnd.addEventListener("click", (e) => {
-            selectingStart = false;
-            e.stopPropagation();
-            openCalendar();
-            renderCalendar();
-        });
-
-        // Cerrar si se hace click afuera
-        document.addEventListener("click", (e) => {
-            if (!calendar.contains(e.target) && !wrapper.contains(e.target)) {
-                closeCalendar();
-            }
-        });
     }
+
+    function updateInputs() {
+        const format = (d) => `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
+
+        const startValue = startDate ? format(startDate) : "";
+        const endValue = endDate ? format(endDate) : "";
+
+        inputStart.value = startValue;
+        inputEnd.value = endValue;
+        
+        if (onChangeCallback) {
+            onChangeCallback(startValue, endValue);
+        }
+    }
+
+    // Navegación meses
+    prevBtn.onclick = () => {
+        currentDate.setMonth(currentDate.getMonth() - 1);
+        renderCalendar();
+    };
+
+    nextBtn.onclick = () => {
+        currentDate.setMonth(currentDate.getMonth() + 1);
+        renderCalendar();
+    };
+
+    // Abrir
+    inputStart.addEventListener("click", (e) => {
+        selectingStart = true;
+        e.stopPropagation();
+        openCalendar();
+        renderCalendar();
+    });
+
+    inputEnd.addEventListener("click", (e) => {
+        selectingStart = false;
+        e.stopPropagation();
+        openCalendar();
+        renderCalendar();
+    });
+
+    inputStart.addEventListener("change", () => {
+        if (onChangeCallback) {
+            onChangeCallback(inputStart.value, inputEnd.value);
+        }
+    });
+
+    inputEnd.addEventListener("change", () => {
+        if (onChangeCallback) {
+            onChangeCallback(inputStart.value, inputEnd.value);
+        }
+    });
+
+    document.addEventListener("click", (e) => {
+        if (!calendar.contains(e.target) && !wrapper.contains(e.target)) {
+            closeCalendar();
+        }
+    });
+
+    renderCalendar();
 }
+
+// function datePickerRangeBulid() {
+//     document.querySelectorAll("[date-picker-range]").forEach(initRangePicker);
+
+//     function initRangePicker(wrapper) {
+//         initSpecificRangePicker(wrapper);
+//     }
+// }
 
 /** datePicker render */
 export function datePickerRender(id) {
@@ -258,8 +257,19 @@ export function datePickerRender(id) {
     datePickerBulid();
 }
 
-export function datePickerRangeRender(id){
+/** datePickerRange render CON CALLBACK */
+export function datePickerRangeRender(id, onChangeCallback = null){
     const datePickerRange = document.getElementById(id);
+    if (!datePickerRange) {
+        console.error('No se encontró el date picker range con id:', id);
+        return;
+    }
+    
     datePickerRange.innerHTML = datePickerRangeHtml();
-    datePickerRangeBulid();
+        
+    if (onChangeCallback) {
+        initSpecificRangePicker(datePickerRange, onChangeCallback);
+    } else {
+        initSpecificRangePicker(datePickerRange);
+    }
 }
