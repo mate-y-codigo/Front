@@ -23,22 +23,44 @@ function dashboardButtonAddListener() {
 
 
 
- async function getStatisticsA() {
+ async function getStatisticsActual() {
     const today = new Date();
     const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
     const token = authHelper.getAccessToken();
     const coachId = authHelper.parseTokens(token).sub;
 
-    const result = await getPaymentByFilter(`${today.getMonth() + 1}-29-${today.getFullYear()}`, `${today.getMonth() + 1}-${daysInMonth}-${today.getFullYear()}`, coachId);
+    const result = await getPaymentByFilter(`${today.getMonth() - 1}-01-${today.getFullYear()}`, `${today.getMonth() + 1}-${daysInMonth}-${today.getFullYear()}`, coachId);
 
     if(result.success){
         const statistics = calculateTotals(result.data);
 
         console.log(statistics.total);
        return statistics.total ? statistics.total : 0;
- //cambio
+ 
     }
 }
+
+
+
+
+ async function getStatisticsAnterior() {
+    const today = new Date();
+    const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
+    const token = authHelper.getAccessToken();
+    const coachId = authHelper.parseTokens(token).sub;
+
+    const result = await getPaymentByFilter(`${today.getMonth() - 1}-01-${today.getFullYear()}`, `${today.getMonth() - 1 }-${daysInMonth}-${today.getFullYear()}`, coachId);
+
+    if(result.success){
+        const statistics = calculateTotals(result.data);
+
+        console.log(statistics.total);
+       return statistics.total ? statistics.total : 0;
+ 
+    }
+}
+
+
 
 
 
@@ -190,12 +212,14 @@ setTimeout(() => {
     const statsUser = porcentajeActivos(usuarios);
     const statsPlanes = porcentajeAsignados(planesAsignados);
     const statsSesiones = porcentajeSesionesRealizadas(sesionesRealizadas,sesionesEntrenamiento);
-    const statsPlata = getStatisticsA();
-    console.log(statsPlata);
+    const statsPlata = await getStatisticsActual();
+    const statsPlataMesPasado = await getStatisticsAnterior();
+    
+    let porcentaje = (((statsPlata-statsPlataMesPasado)/statsPlata)*100).toFixed(2);
 
     cardInfo.push({number: statsUser.activos, percentage : statsUser.porcentaje});
     cardInfo.push({number: statsPlanes.asignados, percentage : statsPlanes.porcentaje})
-    cardInfo.push({number: statsPlata.total});
+    cardInfo.push({number: statsPlata, percentage:porcentaje});
     cardInfo.push({number: statsSesiones.realizadas, percentage : statsSesiones.porcentaje }) 
 
    let asignadosActivos = await getAllAlumnoPlan({Estado : 1});

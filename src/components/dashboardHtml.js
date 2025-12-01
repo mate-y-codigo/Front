@@ -26,14 +26,14 @@ function cardInfoPlans(data) {
         </div>`;
 }
 
-function cardInfoIncome(number, percentage) {
+function cardInfoIncome(data) {
     return `
         <div id="card-info-income" class="flex-auto p-6">
             <div class="flex items-start justify-between">
                 <div class="space-y-1">
                     <p class="title">Ingresos del Mes</p>
-                    <p class="number">$${number}</p>
-                    <p class="percentage">${percentage}%</p>
+                    <p class="number">$${data.number}</p>
+                    <p class="percentage">${data.percentage}%</p>
                 </div>
                 <div class="icon material-symbols-outlined">attach_money</div>
             </div>
