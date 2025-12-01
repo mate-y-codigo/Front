@@ -34,7 +34,7 @@ function dashboardButtonAddListener() {
     if(result.success){
         const statistics = calculateTotals(result.data);
 
-        console.log(statistics.total);
+        
        return statistics.total ? statistics.total : 0;
  
     }
@@ -54,7 +54,7 @@ function dashboardButtonAddListener() {
     if(result.success){
         const statistics = calculateTotals(result.data);
 
-        console.log(statistics.total);
+        
        return statistics.total ? statistics.total : 0;
  
     }
