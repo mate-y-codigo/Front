@@ -98,9 +98,9 @@ export async function getAllSesionesEntrenamiento() {
     }
 }
 
-export async function getPlanActive() {
+export async function getPlanActive(couchId) {
     try {
-        const response = await authHelper.fetchWithAuth(getUrlPlanApi() + `/api/TrainingPlan?Active=true`);
+        const response = await authHelper.fetchWithAuth(getUrlPlanApi() + `/api/TrainingPlan?Active=true&TrainerId=${couchId}`);
         return response.json();
     } catch (err) {
         console.error("Error accediendo a la API:", err.message);
