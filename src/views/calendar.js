@@ -94,7 +94,7 @@ function tareasHtml(usuarios, tareasAgrupadas, alumno, desde, hasta) {
 >
     ${Object.keys(tareasAgrupadas).length === 0
             ? `<div style="padding:20px;border:1px dashed #374151;border-radius:8px;color:#9ca3af;">
-               No hay tareas en este rango de fechas.
+               No hay Sesiones Pendientes en este rango de fechas.
            </div>`
 
             : Object.entries(tareasAgrupadas)
