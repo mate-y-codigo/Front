@@ -7,6 +7,8 @@ import {
 } from "../services/exerciseApi.js";
 import { exercisesRender } from "./exercises.js";
 import { headerTxt } from "../config/headerTxt.js";
+import { showToast } from "./toast.js";
+import { AppModal } from "./modalNotice.js";
 
 export async function exerciseCreateRender() {
   const container = document.getElementById("container-main");
@@ -106,9 +108,17 @@ function initExerciseCreateEvents() {
 
     try {
       await createExercise(dto);
+
+      showToast("Ejercicio creado correctamente");
+
       await exercisesRender();
     } catch (err) {
       console.error(err);
+      AppModal.open({
+        iconHTML: '<span class="material-symbols-outlined text-red-600 text-5xl">error</span>',
+        titleText: "Error al crear ejercicio",
+        messageText: err?.message || "No se pudo crear el ejercicio."
+      });
     }
   });
 }

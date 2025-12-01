@@ -3,6 +3,7 @@ import { exerciseCreateRender } from "./exerciseCreate.js";
 import { exerciseEditRender } from "./exerciseEdit.js";
 import { modalExerciseDeleteHtml } from "../components/modalExerciseDeleteHtml.js";
 import { headerTxt } from "../config/headerTxt.js";
+import { AppModal } from "./modalNotice.js";
 
 import {
   getExercises,
@@ -13,6 +14,7 @@ import {
   updateExercise,
   deleteExercise,
 } from "../services/exerciseApi.js";
+import { showToast } from "./toast.js";
 
 const exerciseState = {
   exercises: [],
@@ -247,10 +249,7 @@ function initExercisesEvents() {
       if (url && url.trim() !== "") {
         window.open(url, "_blank", "noopener,noreferrer");
       } else {
-        showExerciseToast(
-          "Este ejercicio no tiene video de demostración.",
-          toastContainer
-        );
+        showToast("Este ejercicio no tiene video de demostración");
       }
     });
   });
@@ -275,25 +274,6 @@ function initExercisesEvents() {
       openDeleteExerciseModal(modalHost, ex);
     });
   });
-}
-
-/* =====================  TOAST  ===================== */
-
-function showExerciseToast(message, container) {
-  if (!container) return;
-
-  container.innerHTML = "";
-
-  const div = document.createElement("div");
-  div.className = "exercise-toast";
-  div.textContent = message;
-  container.appendChild(div);
-
-  setTimeout(() => {
-    div.style.opacity = "0";
-    div.style.transform = "translateY(8px)";
-    setTimeout(() => div.remove(), 200);
-  }, 2000);
 }
 
 /* =====================  MODAL: EDITAR  ===================== */
@@ -376,8 +356,15 @@ function openDeleteExerciseModal(modalHost, exercise) {
 
       close();
       renderExercisesView();
+
+      showToast("Ejercicio eliminado correctamente");
     } catch (err) {
       console.error(err);
+      AppModal.open({
+        iconHTML: '<span class="material-symbols-outlined text-red-600 text-5xl">error</span>',
+        titleText: "Error al eliminar ejercicio",
+        messageText: err?.message || "No se pudo eliminar el ejercicio."
+      });
     }
   });
 }

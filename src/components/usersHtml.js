@@ -34,7 +34,7 @@ function userRowHtml(user) {
     ? `
       <!-- Botón eliminar / desactivar -->
       <button
-        class="button-small-icon-red user-action-button btn-disable-student"
+        class="button-small-cancel user-action-button btn-disable-student"
         title="Desactivar alumno"
         data-user='${JSON.stringify(user)}'
       >
@@ -68,9 +68,6 @@ function userRowHtml(user) {
           <div class="user-name-text">
             <div class="user-name-main">
               ${escapeHtml(nombre)}
-            </div>
-            <div class="user-name-subtitle">
-              Alumno
             </div>
           </div>
         </div>

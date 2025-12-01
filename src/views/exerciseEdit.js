@@ -7,6 +7,8 @@ import {
 } from "../services/exerciseApi.js";
 import { exercisesRender } from "./exercises.js";
 import { headerTxt } from "../config/headerTxt.js";
+import { showToast } from "./toast.js";
+import { AppModal } from "./modalNotice.js";
 
 function mapFromApiMuscles(apiMuscles) {
   return apiMuscles.map((m) => ({
@@ -143,10 +145,17 @@ function initExerciseEditEvents(originalExercise) {
 
     try {
       await updateExercise(originalExercise.id, dto);
+
+      showToast("Ejercicio actualizado correctamente");
+
       await exercisesRender();
     } catch (err) {
       console.error(err);
-      // poner toast
+      AppModal.open({
+        iconHTML: '<span class="material-symbols-outlined text-red-600 text-5xl">error</span>',
+        titleText: "Error al actualizar ejercicio",
+        messageText: err?.message || "No se pudo actualizar el ejercicio."
+      });
     }
   });
 }
