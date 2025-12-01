@@ -70,15 +70,14 @@ export async function getStatistics() {
 
     const result = await getPaymentByFilter(`${today.getMonth() + 1}-01-${today.getFullYear()}`, `${today.getMonth() + 1}-${daysInMonth}-${today.getFullYear()}`, coachId);
 
+    console.log(result);
+
     if(result.success){
         const statistics = calculateTotals(result.data);
-
         document.querySelector('#payment-card-info-total').textContent = '$' + statistics.total;
         document.querySelector('#payment-card-info-cash').textContent = '$' + statistics.efectivo;
         document.querySelector('#payment-card-info-card').textContent = '$' + statistics.tarjeta;
         document.querySelector('#payment-card-info-transfer').textContent = '$' + statistics.transferencia;
-
-       
     }
 }
 
