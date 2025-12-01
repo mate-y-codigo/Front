@@ -157,7 +157,7 @@ export async function renderTareas() {
 
     const container = document.getElementById("container-main");
 
-    /* === LEER ESTADO PREVIO === */
+
     const prevAlumno = document.getElementById("select-alumno-tareas")?.value || "";
     const prevDesde = document.getElementById("select-desde-tareas")?.value ||
         new Date(Date.now() - 7 * 86400000).toISOString().slice(0, 10);
@@ -166,25 +166,25 @@ export async function renderTareas() {
 
     container.innerHTML = spinnerHTML();
 
-    /* === FETCH ALUMNOS === */
+
     const respUsers = await authHelper.fetchWithAuth("http://localhost:5099/api/Usuarios");
     let usuarios = await respUsers.json();
     usuarios = usuarios.filter(u => u.rolId === 3);
 
-    /* === ARMAR QUERY === */
+
     const params = new URLSearchParams();
 
     if (prevAlumno !== "") params.append("idAlumno", prevAlumno);
     params.append("Desde", prevDesde + "Z");
     params.append("Hasta", prevHasta + "Z");
 
-    /* === FETCH TAREAS FILTRADAS === */
+
     const respTareas = await authHelper.fetchWithAuth(
         `http://localhost:5098/api/EventoCalendario?${params.toString()}`
     );
     const tareas = await respTareas.json();
 
-    /* === AGRUPAR POR DÍA === */
+
     const tareasAgrupadas = tareas.reduce((acc, t) => {
         const fecha = t.fechaProgramada.slice(0, 10);
         if (!acc[fecha]) acc[fecha] = [];
@@ -192,15 +192,15 @@ export async function renderTareas() {
         return acc;
     }, {});
 
-    /* === RENDER HTML === */
+
     container.innerHTML = tareasHtml(usuarios, tareasAgrupadas, prevAlumno, prevDesde, prevHasta);
 
-    /* === RESTAURAR ESTADO === */
+
     document.getElementById("select-alumno-tareas").value = prevAlumno;
     document.getElementById("select-desde-tareas").value = prevDesde;
     document.getElementById("select-hasta-tareas").value = prevHasta;
 
-    /* === REACTIVAR LISTENERS === */
+
     attachListeners(usuarios);
 }
 
