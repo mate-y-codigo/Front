@@ -48,9 +48,7 @@ function spinnerHTML() {
     `;
 }
 
-/* ====================================================
-   HTML PRINCIPAL
-   ==================================================== */
+
 export function metricasHtml(
     data = null,
     usuarios = [],
@@ -61,9 +59,7 @@ export function metricasHtml(
         return `
         <div style="padding:50px 70px;background:#oklch;min-height:100vh;color:#oklch;font-family:Arial;">
 
-            <h2 style="font-size:25px;margin-bottom:15px;color:#oklch">
-                Dashboard de planes
-            </h2>
+
 
             <div style="display:flex;gap:10px;margin-bottom:25px;">
 
@@ -113,9 +109,6 @@ export function metricasHtml(
     return `
 <div style="padding:50px 70px;background:#oklch;min-height:100vh;color:#oklch;font-family:Arial;">
 
-    <h2 style="font-size:25px;margin-bottom:15px;color:#oklch">
-        Dashboard de planes
-    </h2>
 
     <!-- Selectores -->
     <div style="display:flex;gap:10px;margin-bottom:25px;">
@@ -148,7 +141,7 @@ export function metricasHtml(
         
         <!-- Progreso -->
         <div style="background:#oklch;border:none;border-radius:14px;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.25);">
-            <span style="font-size:14px;color:#oklch;">Progreso global</span>
+            <span style="font-size:14px;color:#oklch;">Progreso Promedio</span>
             <div style="font-size:32px;font-weight:bold;margin-top:5px;color:#3b82f6;">
                 ${promedioProgresoGlobal.toFixed(1)}%
             </div>
@@ -156,7 +149,7 @@ export function metricasHtml(
 
         <!-- Adherencia -->
         <div style="background:#oklch;border:1px solid #oklch;border-radius:14px;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.25);">
-            <span style="font-size:14px;color:#oklch;">Adherencia global</span>
+            <span style="font-size:14px;color:#oklch;">Adherencia Promedio</span>
             <div style="font-size:32px;font-weight:bold;margin-top:5px;color:#bc4ed8;">
                 ${promedioAdherenciaGlobal.toFixed(1)}%
             </div>
@@ -164,7 +157,7 @@ export function metricasHtml(
 
         <!-- Records -->
         <div style="background:#oklch;border:1px solid #oklch;border-radius:14px;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.25);">
-            <span style="font-size:14px;color:#oklch;">Records Personales</span>
+            <span style="font-size:14px;color:#oklch;">Total Records Personales</span>
             <div style="font-size:32px;font-weight:bold;margin-top:5px;color:#ec4899;">
                 ${cantidadRecordsPersonales}
             </div>
@@ -176,7 +169,7 @@ export function metricasHtml(
             border:1px solid #oklch;
             border-radius:14px;
             padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.25);">
-        <span style="font-size:14px;color:#oklch;">Cantidad de planes</span>
+        <span style="font-size:14px;color:#oklch;">Total planes</span>
         <div style="font-size:32px;font-weight:600;margin-top:5px;color:#fb923c;">
             ${planesFiltrados.length}
         </div>
@@ -188,7 +181,7 @@ export function metricasHtml(
             border:1px solid #oklch;
             border-radius:14px;
             padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.25);">
-            <span style="font-size:14px;color:#oklch;">Fuerza Relativa</span>
+            <span style="font-size:14px;color:#oklch;">Fuerza Relativa Promedio</span>
             <div style="
                 font-size:28px;
                 font-weight:bold;
@@ -208,7 +201,7 @@ export function metricasHtml(
             border:1px solid #oklch;
             border-radius:14px;
             padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.25);">
-            <span style="font-size:14px;color:#oklch;">Alumnos sin entrenar (14 días)</span>
+            <span style="font-size:14px;color:#oklch;">Alumnos en riesgo</span>
 
             <div style="
                 font-size:32px;
@@ -237,7 +230,7 @@ export function metricasHtml(
         ">
 
             <h3 style="margin-bottom:20px;font-size:22px;font-weight:600;color:#oklch;">
-                Planes Encontrados (${planesFiltrados.length})
+                Planes Encontrados   ${planesFiltrados.length}
             </h3>
 
             <table style="width:100%;border-collapse:collapse;">
@@ -267,7 +260,7 @@ export function metricasHtml(
         </div>
 
 
-        <!-- 📌 ALUMNOS SIN ENTRENAR -->
+        <!--  ALUMNOS SIN ENTRENAR -->
         <div style="
             background:#oklch;
             border-radius:10px;
@@ -276,7 +269,7 @@ export function metricasHtml(
             max-height:400px;
             overflow-y:auto;box-shadow:0 4px 12px rgba(0,0,0,0.25);
         ">
-            <h3 style="font-size:20px;margin-bottom:15px;">Alumnos sin entrenar (últimos 14 días)</h3>
+            <h3 style="font-size:20px;margin-bottom:15px;">Alumnos sin registros en 14 días</h3>
 
             ${alumnosSinEntrenar.length === 0 ? `
                 <div style="
@@ -308,7 +301,7 @@ export function metricasHtml(
             background:#oklch;border-radius:10px;
             border:1px solid #oklch;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.25);">
             
-            <h3 style="font-size:20px;margin-bottom:10px;">Progreso de Fuerza (1RM)</h3>
+            <h3 style="font-size:20px;margin-bottom:10px;">Evolutivo - Progreso de Fuerza (1RM) </h3>
 
             <canvas id="chartFuerza"></canvas>
         </div>`}
@@ -319,7 +312,7 @@ export function metricasHtml(
             background:#oklch;border-radius:10px;
             border:1px solid #oklch;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.25);">
             
-            <h3 style="font-size:20px;margin-bottom:15px;">PRs por ejercicio</h3>
+            <h3 style="font-size:20px;margin-bottom:15px;">Records Personales por ejercicio</h3>
 
             ${prs.length === 0 ? `
                 <div style="
@@ -482,7 +475,7 @@ export async function renderMetricas() {
     let fuerzaRelativaAlumno = null;
 
     const recordsValidos = records.filter(
-        r => r.pesoMax > 0 && r.calculo1RM > 0
+        r => r.pesoCorporalAlumno > 0 && r.calculo1RM > 0
     );
 
     if (prevAlumno !== "") {
@@ -493,7 +486,7 @@ export async function renderMetricas() {
         if (recordsAlumno.length > 0) {
             fuerzaRelativaAlumno =
                 recordsAlumno.reduce(
-                    (acc, r) => acc + (r.calculo1RM / r.pesoMax),
+                    (acc, r) => acc + (r.calculo1RM / r.pesoCorporalAlumno),
                     0
                 ) / recordsAlumno.length;
         }
@@ -550,6 +543,10 @@ export async function renderMetricas() {
 
     attachListeners();
 
+    const tickColor = getComputedStyle(document.documentElement)
+        .getPropertyValue('--text-primary')
+        .trim();
+
     /* === Render gráfico === */
     if (prevAlumno !== "" && fuerzaData.length > 0) {
         const ctx = document.getElementById("chartFuerza");
@@ -568,8 +565,8 @@ export async function renderMetricas() {
                 options: {
                     plugins: { legend: { display: false } },
                     scales: {
-                        x: { ticks: { color: "#oklch" } },
-                        y: { ticks: { color: "#oklch" } }
+                        x: { ticks: { color: tickColor } },
+                        y: { ticks: { color: tickColor } }
                     }
                 }
             });
