@@ -9,7 +9,7 @@ function spinnerHTML() {
             align-items:center;
             height:200px;
             font-size:18px;
-            color:#e5e7eb;">
+            color:#oklch;">
             
             <div class="lds-ring">
                 <div></div><div></div><div></div><div></div>
@@ -52,14 +52,8 @@ function spinnerHTML() {
 function tareasHtml(usuarios, tareasAgrupadas, alumno, desde, hasta) {
 
     return `
-<div style="padding:40px;background:#0a0f1c;min-height:100vh;color:#e5e7eb;font-family:Arial;">
+<div style="padding:40px;background:#oklch;min-height:100vh;color:#oklch;font-family:Arial;">
 
-    <h1 style="
-        font-size:32px;font-weight:bold;margin-bottom:25px;
-        background:linear-gradient(90deg,#8b5cf6,#06b6d4);
-        -webkit-background-clip:text;color:transparent;">
-        Tareas programadas
-    </h1>
 
     <!-- SELECTORES -->
     <div style="display:flex;gap:10px;margin-bottom:25px;">
@@ -109,36 +103,39 @@ function tareasHtml(usuarios, tareasAgrupadas, alumno, desde, hasta) {
                 <!-- CARD DEL DÍA -->
                 <div style="
                     width:300px;
-                    background:#111827;
+                    background:#oklch;
                     border-radius:12px;
-                    border:1px solid #1f2937;
-                    padding:20px;
+                    border:1px solid #oklch;
+                    padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.25);
                 ">
 
                     <h2 style="
                         margin:0 0 12px;
                         font-size:20px;
                         font-weight:bold;
-                        color:#06b6d4;">
+                        color:#bc4ed8;">
                         📅 ${fecha}
                     </h2>
+
 
                     ${items.map(t => `
                         <div style="
                             padding:12px 14px;
                             margin-bottom:10px;
-                            background:#1a2130;
+                            background:var(--card-bg);
                             border-radius:8px;
-                            border:1px solid #2a3344;
+                            border:1px solid #777c85ff;
                         ">
                             
-                            <div style="font-size:16px;font-weight:bold;color:#06b6d4;">
+                            <div style="font-size:16px;font-weight:bold;color:#fb923c;">
+                            <h2 class="plan-name">
                                 ${t.nombreSesion}
+                            </h2>
                             </div>
 
-                            <div style="font-size:14px;color:#9ca3af;">${t.nombreAlumno}</div>
+                            <div style="font-size:15px;color:var(--oklch-text);">${t.nombreAlumno}</div>
 
-                            <div style="font-size:14px;color:#9ca3af;">
+                            <div style="font-size:14px;color:var(--oklch-text);">
                                 Estado: ${t.estado === 1 ? "Pendiente" : "Realizada"}
                             </div>
                         </div>
@@ -208,9 +205,6 @@ export async function renderTareas() {
 }
 
 
-/* ====================================================
-   LISTENERS
-==================================================== */
 function attachListeners(usuarios) {
     const alumno = document.getElementById("select-alumno-tareas");
     const desde = document.getElementById("select-desde-tareas");

@@ -1,8 +1,6 @@
 import { authHelper } from "../helpers/authHelper.js";
 
-/* ====================================================
-   SPINNER
-   ==================================================== */
+
 function spinnerHTML() {
     return `
         <div style="
@@ -417,9 +415,6 @@ export async function renderMetricas() {
     const planes = await respPlanes.json();
 
 
-    /* ==========================================================
-       FETCH RECORD PERSONAL
-    ========================================================== */
     const paramsRP = new URLSearchParams();
     if (prevAlumno !== "") paramsRP.append("idAlumno", prevAlumno);
 
@@ -429,11 +424,6 @@ export async function renderMetricas() {
     const records = await respRecords.json();
 
 
-    /* ==========================================================
-       FETCH SESIONES REALIZADAS (últimos 7 días SIEMPRE)
-    ========================================================== */
-
-    // Hoy → Últimos 7 días
     const hoy = new Date();
     const hace7dias = new Date(Date.now() - 14 * 24 * 60 * 60 * 1000);
 
@@ -447,13 +437,10 @@ export async function renderMetricas() {
     const sesiones = await respSesiones.json();
 
 
-    /* =====================================================================
-       PROCESS DATA
-    ===================================================================== */
 
     const planesFiltrados = planes;
 
-    /* === Progreso / Adherencia === */
+
     const progresos = planesFiltrados.map(p => Number(p.progresoPorcentaje) || 0);
     const adherencias = planesFiltrados.map(p => Number(p.adherenciaPorcentaje) || 0);
 
@@ -464,9 +451,7 @@ export async function renderMetricas() {
         adherencias.length ? adherencias.reduce((a, b) => a + b, 0) / adherencias.length : 0;
 
 
-    /* =====================================================================
-       Fuerza (1RM vs Fecha)
-    ===================================================================== */
+
     let fuerzaData = [];
     if (prevAlumno !== "") {
         fuerzaData = records
@@ -483,9 +468,7 @@ export async function renderMetricas() {
     }
 
 
-    /* =====================================================================
-       PRs por ejercicio
-    ===================================================================== */
+
     const prMap = {};
     records.forEach(r => {
         if (!r.nombreEjercicio) return;
@@ -500,9 +483,7 @@ export async function renderMetricas() {
     const totalPRs = prs.reduce((acc, x) => acc + x.prs, 0);
 
 
-    /* =====================================================================
-       Fuerza Relativa (1RM / peso)
-    ===================================================================== */
+
     let fuerzaRelativaGlobal = 0;
     let fuerzaRelativaAlumno = null;
 
@@ -535,9 +516,7 @@ export async function renderMetricas() {
     }
 
 
-    /* =====================================================================
-       NUEVO KPI — Alumnos SIN ENTRENAR en 7 días
-    ===================================================================== */
+
 
     // IDs que entrenaron
     const alumnosQueEntrenaron = new Set(
@@ -553,9 +532,7 @@ export async function renderMetricas() {
             : 0;
 
 
-    /* =====================================================================
-       RESULTADO
-    ===================================================================== */
+
     const result = {
         planesFiltrados,
         promedioProgresoGlobal,
@@ -570,9 +547,6 @@ export async function renderMetricas() {
         porcentajeSinEntrenar
     };
 
-    /* =====================================================================
-       RENDER FINAL
-    ===================================================================== */
     containerMain.innerHTML = metricasHtml(result, usuarios, prevAlumno);
 
     /* === restaurar valores === */
@@ -608,9 +582,7 @@ export async function renderMetricas() {
         }
     }
 }
-/* ====================================================
-   LISTENERS (se vuelven a conectar en cada render)
-   ==================================================== */
+
 function attachListeners() {
     const desde = document.getElementById("select-desde");
     const hasta = document.getElementById("select-hasta");
@@ -618,25 +590,21 @@ function attachListeners() {
 
     if (!desde || !hasta || !alumno) return;
 
-    // Cada cambio vuelve a ejecutar renderMetricas()
+
     desde.addEventListener("change", () => renderMetricas());
     hasta.addEventListener("change", () => renderMetricas());
     alumno.addEventListener("change", () => renderMetricas());
 }
 
 
-/* ====================================================
-   SCRIPT CLEANUP — elimina scripts viejos del gráfico
-   ==================================================== */
+
 function cleanupDynamicScripts() {
     const oldScripts = document.querySelectorAll("script[data-dynamic-script]");
     oldScripts.forEach(s => s.remove());
 }
 
-// Se ejecuta antes de cada render dinámico
+
 cleanupDynamicScripts();
 
 
-/* ====================================================
-   FIN DEL ARCHIVO
-   ==================================================== */
+
