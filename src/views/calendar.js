@@ -60,26 +60,28 @@ function tareasHtml(usuarios, tareasAgrupadas, alumno, desde, hasta) {
     <div style="display:flex;gap:10px;margin-bottom:25px;">
 
         <!-- Alumno -->
-        <select id="select-alumno-tareas" style="
-            padding:12px 14px;border-radius:10px;
-            background:#111827;border:1px solid #374151;color:#e5e7eb;min-width:200px;">
+       <select id="select-alumno-tareas" style="
+            padding:10px 14px;
+            border-radius:10px;
+            border:1px solid var(--oklch-border);
+            background:var(--background);
+            color:var(--oklch-text);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            font-weight:500;
+        ">
             <option value="">Todos los alumnos</option>
             ${usuarios.map(u => `
-                <option value="${u.id}" ${u.id == alumno ? "selected" : ""}>
-                    ${u.nombre} ${u.apellido}
-                </option>
+                <option value="${u.id}">${u.nombre} ${u.apellido}</option>
             `).join("")}
         </select>
 
-        <!-- Fecha desde -->
-        <input id="select-desde-tareas" type="date" value="${desde}" style="
-            padding:12px 14px;border-radius:10px;
-            background:#111827;border:1px solid #374151;color:#e5e7eb;">
+        <input type="date" id="select-desde-tareas" style="
+            padding:10px 14px;border-radius:8px;
+            background:var(--oklch-bg);border:1px solid var(--oklch-border);color:var(--oklch-text);box-shadow: 0 4px 12px rgba(0,0,0,0.25);">
 
-        <!-- Fecha hasta -->
-        <input id="select-hasta-tareas" type="date" value="${hasta}" style="
-            padding:12px 14px;border-radius:10px;
-            background:#111827;border:1px solid #374151;color:#e5e7eb;">
+        <input type="date" id="select-hasta-tareas" style="
+            padding:10px 14px;border-radius:8px;
+            background:var(--oklch-bg);border:1px solid var(--oklch-border);color:var(--oklch-text);box-shadow: 0 4px 12px rgba(0,0,0,0.25);">
     </div>
 
 

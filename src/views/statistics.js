@@ -139,100 +139,189 @@ export function metricasHtml(
     <!-- KPIs -->
     <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:20px;margin-bottom:25px;">
         
-        <!-- Progreso -->
-        <div style="background:#oklch;border:none;border-radius:14px;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.25);">
-            <span style="font-size:14px;color:#oklch; display:flex; align-items:center; gap:6px;">
-    <span class="material-symbols-outlined">trending_up</span> Progreso Promedio
-</span>
-            <div style="font-size:32px;font-weight:bold;margin-top:5px;color:#3b82f6;">
-                ${promedioProgresoGlobal.toFixed(1)}%
-            </div>
-        </div>
-
-        <!-- Adherencia -->
-        <div style="background:#oklch;border:1px solid #oklch;border-radius:14px;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.25);">
-           <span style="font-size:14px;color:#oklch; display:flex; align-items:center; gap:6px;">
-                <span class="material-symbols-outlined">check_circle</span> Adherencia Promedio
-            </span>
-            <div style="font-size:32px;font-weight:bold;margin-top:5px;color:#bc4ed8;">
-                ${promedioAdherenciaGlobal.toFixed(1)}%
-            </div>
-        </div>
-
-        <!-- Records -->
-        <div style="background:#oklch;border:1px solid #oklch;border-radius:14px;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.25);">
-            <span style="font-size:14px;color:#oklch; display:flex;align-items:center;gap:6px;">
-                <span class="material-symbols-outlined">military_tech</span> Total Records Personales
-            </span>
-            <div style="font-size:32px;font-weight:bold;margin-top:5px;color:#ec4899;">
-                ${cantidadRecordsPersonales}
-            </div>
-        </div>
-
-        <!-- Cantidad de planes -->
+    <!-- Progreso -->
+   <div style="
+    background:#oklch;
+    border-radius:16px;
+    padding:20px;
+    box-shadow:0 4px 14px rgba(0,0,0,0.22);
+    border:1px solid rgba(255,255,255,0.05);
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+">
+    <div style="display:flex; align-items:center; gap:10px;">
         <div style="
-            background:#oklch;
-            border:1px solid #oklch;
-            border-radius:14px;
-            padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.25);">
-        <span style="font-size:14px;color:#oklch; display:flex;align-items:center;gap:6px;">
-            <span class="material-symbols-outlined">list_alt</span> Total Planes
-        </span>
-        <div style="font-size:32px;font-weight:600;margin-top:5px;color:#fb923c;">
-            ${planesFiltrados.length}
+            width:32px;height:32px;
+            border-radius:50%;
+            background:rgba(59,130,246,0.15);
+            display:flex;align-items:center;justify-content:center;
+        ">
+            <span class="material-symbols-outlined" style="color:#3b82f6;">trending_up</span>
         </div>
-        </div>
-
-        <!-- Fuerza Relativa -->
-        <div style="
-            background:#oklch;
-            border:1px solid #oklch;
-            border-radius:14px;
-            padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.25);">
-            <span style="font-size:14px;color:#oklch; display:flex;align-items:center;gap:6px;">
-                <span class="material-symbols-outlined">fitness_center</span> Fuerza Relativa Promedio
-            </span>
-
-            <div style="
-                font-size:28px;
-                font-weight:bold;
-                margin-top:5px;
-                color:#06b6d4;">
-                ${fuerzaRelativaGlobal.toFixed(2)}
-            </div>
-
-            <div style="color:#oklch;font-size:12px;margin-top:4px;">
-                Alumno: ${fuerzaRelativaAlumno !== null ? fuerzaRelativaAlumno.toFixed(2) : "-"}
-            </div>
-        </div>
-
-        <!--  KPI NUEVO: Alumnos sin entrenar últimos 7 días -->
-        <div style="
-            background:#oklch;
-            border:1px solid #oklch;
-            border-radius:14px;
-            padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.25);">
-            <span style="font-size:14px;color:#oklch; display:flex;align-items:center;gap:6px;">
-                <span class="material-symbols-outlined">warning</span> Alumnos en riesgo
-            </span>
-
-            <div style="
-                font-size:32px;
-                font-weight:bold;
-                margin-top:5px;
-                color:#ef4444;">
-                ${porcentajeSinEntrenar.toFixed(1)}%
-            </div>
-
-            <div style="color:#oklch;font-size:12px;margin-top:4px;">
-                ${alumnosSinEntrenar.length} de ${usuarios.length}
-            </div>
-        </div>
-
+        <span style="font-size:14px;color:#oklch;">Progreso Promedio</span>
     </div>
 
+    <div style="font-size:34px;font-weight:700;color:#3b82f6;">
+        ${promedioProgresoGlobal.toFixed(1)}%
+    </div>
+</div>
+
+
+    <!-- Adherencia -->
+   <div style="
+    background:#oklch;
+    border-radius:16px;
+    padding:20px;
+    box-shadow:0 4px 14px rgba(0,0,0,0.22);
+    border:1px solid rgba(255,255,255,0.05);
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+">
+    <div style="display:flex; align-items:center; gap:10px;">
+        <div style="
+            width:32px;height:32px;
+            border-radius:50%;
+            background:rgba(188,78,216,0.15);
+            display:flex;align-items:center;justify-content:center;
+        ">
+            <span class="material-symbols-outlined" style="color:#bc4ed8;">check_circle</span>
+        </div>
+        <span style="font-size:14px;color:#oklch;">Adherencia Promedio</span>
+    </div>
+
+    <div style="font-size:34px;font-weight:700;color:#bc4ed8;">
+        ${promedioAdherenciaGlobal.toFixed(1)}%
+    </div>
+</div>
+
+
+    <!-- Records -->
+    <div style="
+    background:#oklch;
+    border-radius:16px;
+    padding:20px;
+    box-shadow:0 4px 14px rgba(0,0,0,0.22);
+    border:1px solid rgba(255,255,255,0.05);
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+">
+    <div style="display:flex; align-items:center; gap:10px;">
+        <div style="
+            width:32px;height:32px;
+            border-radius:50%;
+            background:rgba(236,72,153,0.15);
+            display:flex;align-items:center;justify-content:center;
+        ">
+            <span class="material-symbols-outlined" style="color:#ec4899;">military_tech</span>
+        </div>
+        <span style="font-size:14px;color:#oklch;">Records Personales</span>
+    </div>
+
+    <div style="font-size:34px;font-weight:700;color:#ec4899;">
+        ${cantidadRecordsPersonales}
+    </div>
+</div>
+
+
+    <!-- Cantidad de planes -->
+    <div style="
+    background:#oklch;
+    border-radius:16px;
+    padding:20px;
+    box-shadow:0 4px 14px rgba(0,0,0,0.22);
+    border:1px solid rgba(255,255,255,0.05);
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+">
+    <div style="display:flex; align-items:center; gap:10px;">
+        <div style="
+            width:32px;height:32px;
+            border-radius:50%;
+            background:rgba(251,146,60,0.15);
+            display:flex;align-items:center;justify-content:center;
+        ">
+            <span class="material-symbols-outlined" style="color:#fb923c;">list_alt</span>
+        </div>
+        <span style="font-size:14px;color:#oklch;">Total Planes</span>
+    </div>
+
+    <div style="font-size:34px;font-weight:700;color:#fb923c;">
+        ${planesFiltrados.length}
+    </div>
+</div>
+
+
+    <!-- Fuerza Relativa -->
+    <div style="
+    background:#oklch;
+    border-radius:16px;
+    padding:20px;
+    box-shadow:0 4px 14px rgba(0,0,0,0.22);
+    border:1px solid rgba(255,255,255,0.05);
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+">
+    <div style="display:flex; align-items:center; gap:10px;">
+        <div style="
+            width:32px;height:32px;
+            border-radius:50%;
+            background:rgba(6,182,212,0.15);
+            display:flex;align-items:center;justify-content:center;
+        ">
+            <span class="material-symbols-outlined" style="color:#06b6d4;">fitness_center</span>
+        </div>
+        <span style="font-size:14px;color:#oklch;">Fuerza Relativa</span>
+    </div>
+
+    <div style="font-size:32px;font-weight:700;color:#06b6d4;">
+        ${fuerzaRelativaGlobal.toFixed(2)}
+    </div>
+
+    <div style="font-size:12px;color:#oklch;">Alumno: ${fuerzaRelativaAlumno !== null ? fuerzaRelativaAlumno.toFixed(2) : "-"}</div>
+</div>
+
+
+    <!-- Alumnos sin entrenar / riesgo -->
+ <div style="
+    background:#oklch;
+    border-radius:16px;
+    padding:20px;
+    box-shadow:0 4px 14px rgba(0,0,0,0.22);
+    border:1px solid rgba(255,255,255,0.05);
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+">
+    <div style="display:flex; align-items:center; gap:10px;">
+        <div style="
+            width:32px;height:32px;
+            border-radius:50%;
+            background:rgba(239,68,68,0.15);
+            display:flex;align-items:center;justify-content:center;
+        ">
+            <span class="material-symbols-outlined" style="color:#ef4444;">warning</span>
+        </div>
+        <span style="font-size:14px;color:#oklch;">Alumnos en Riesgo</span>
+    </div>
+
+    <div style="font-size:32px;font-weight:700;color:#ef4444;">
+        ${porcentajeSinEntrenar.toFixed(1)}%
+    </div>
+
+    <div style="font-size:12px;color:#oklch;">${alumnosSinEntrenar.length} de ${usuarios.length}</div>
+</div>
+
+
+</div>
+
+
 <!-- Zona de informes rápidos: PLANES + SIN ENTRENAR -->
-<div style="display:grid; grid-template-columns: 2fr 1fr; gap:25px; margin-bottom:30px;">
+<div style="display:grid; grid-template-columns: 2fr 1fr; gap:25px; margin-bottom:30px;align-items: stretch;">
 
     <!-- 📌 PLANES -->
         <div style="
@@ -240,6 +329,9 @@ export function metricasHtml(
             padding:24px;
             border-radius:14px;
             box-shadow:0 2px 6px rgba(0,0,0,0.25);
+             height:100%;             /* <-- clave */
+    display:flex;            /* permite que el contenido se ordene bien */
+    flex-direction:column;
         ">
 
             <h3 style="margin-bottom:20px;font-size:22px;font-weight:600;color:#oklch; display:flex;align-items:center;gap:8px;">
@@ -279,8 +371,10 @@ export function metricasHtml(
             border-radius:10px;
             border:1px solid #oklch;
             padding:20px;
-            max-height:400px;
             overflow-y:auto;box-shadow:0 4px 12px rgba(0,0,0,0.25);
+               height:100%;            /* <-- clave */
+    display:flex;
+    flex-direction:column;
         ">
             <h3 style="font-size:20px;margin-bottom:15px; display:flex;align-items:center;gap:6px;">
                 <span class="material-symbols-outlined">person_off</span> Alumnos sin registros en 14 días
