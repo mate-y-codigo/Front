@@ -181,7 +181,7 @@ export async function renderTareas() {
     params.append("Hasta", prevHasta + "Z");
 
 
-    const urlAsigncionApi = `${getUrlAsignacionApi()}/api/AlumnoPlan?${params.toString()}`;
+    const urlAsigncionApi = `${getUrlAsignacionApi()}/api/EventoCalendario?${params.toString()}`;
     const respTareas = await authHelper.fetchWithAuth(urlAsigncionApi, { method: "GET" });
     const tareas = await respTareas.json();
 
