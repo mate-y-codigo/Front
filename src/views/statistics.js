@@ -107,7 +107,7 @@ export function metricasHtml(
        TEMPLATE COMPLETO
     ======================================================== */
     return `
-<div style="padding:50px 70px;background:#oklch;min-height:100vh;color:#oklch;font-family:Arial;">
+<div style="padding:50px;background:#oklch;min-height:100vh;color:#oklch;font-family:Arial;">
 
 
     <!-- Selectores -->
@@ -282,7 +282,7 @@ export function metricasHtml(
         ${fuerzaRelativaGlobal.toFixed(2)}
     </div>
 
-    <div style="font-size:12px;color:#oklch;">Alumno: ${fuerzaRelativaAlumno !== null ? fuerzaRelativaAlumno.toFixed(2) : "-"}</div>
+   
 </div>
 
 
@@ -500,7 +500,7 @@ export async function renderMetricas() {
     const inputAlumno = document.getElementById("select-alumno");
 
     let desde = prevDesde || new Date(Date.now() - 7 * 86400000).toISOString().slice(0, 10);
-    let hasta = prevHasta || new Date().toISOString().slice(0, 10);
+    let hasta = prevHasta || new Date(Date.now() + 30 * 86400000).toISOString().split('T')[0];
 
     inputDesde.value = desde;
     inputHasta.value = hasta;

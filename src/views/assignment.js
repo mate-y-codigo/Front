@@ -313,8 +313,16 @@ function formatSingleAssignment(assignment) {
 }
 
 function getStatus(backendStatus, progress) {
+  // Si el backend ya envía el estado (1 o 2), usar eso
   if (backendStatus === 1) return "Activo";
   if (backendStatus === 2) return "Finalizado";
+  
+  // Si no hay estado del backend, determinar basado en progreso y fecha
+  if (progress >= 100) {
+    return "Finalizado";
+  }
+  
+  // Por defecto, activo
   return "Activo";
 }
 
